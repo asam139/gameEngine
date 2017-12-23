@@ -116,7 +116,7 @@ gameEngine_EXTERNAL_OBJECTS =
 gameEngine: CMakeFiles/gameEngine.dir/src/deps/glad/glad.c.o
 gameEngine: CMakeFiles/gameEngine.dir/src/main.cpp.o
 gameEngine: CMakeFiles/gameEngine.dir/build.make
-gameEngine: glfw/src/libglfw3.a
+gameEngine: glm/src/libglfw3.a
 gameEngine: CMakeFiles/gameEngine.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable gameEngine"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gameEngine.dir/link.txt --verbose=$(VERBOSE)

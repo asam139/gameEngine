@@ -27,7 +27,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
+  "/Users/Sau/gameEngine/cmake-build-debug/glm/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 add_subdirectory(
         glfw
+        glm
 )
 
 include_directories(
@@ -15,10 +16,6 @@ include_directories(
 file (GLOB_RECURSE HEADER_FILES
         include/glad/*.h
         include/KHR/*.h
-
-        include/glm/*.h
-        include/glm/*.hpp
-        include/glm/*.inl
 )
 
 file (GLOB_RECURSE DEPS_SRC_FILES

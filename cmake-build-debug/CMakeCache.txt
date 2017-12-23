@@ -202,7 +202,7 @@ CORE_VIDEO_FRAMEWORK:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platfor
 DOXYGEN_EXECUTABLE:FILEPATH=DOXYGEN_EXECUTABLE-NOTFOUND
 
 //Value Computed by CMake
-GLFW_BINARY_DIR:STATIC=/Users/Sau/gameEngine/cmake-build-debug/glfw
+GLFW_BINARY_DIR:STATIC=/Users/Sau/gameEngine/cmake-build-debug/glm
 
 //Build the GLFW documentation
 GLFW_BUILD_DOCS:BOOL=ON

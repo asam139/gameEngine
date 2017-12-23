@@ -29,7 +29,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/Sau/gameEngine/cmake-build-debug/glfw/cmake_install.cmake")
+  include("/Users/Sau/gameEngine/cmake-build-debug/glm/cmake_install.cmake")
 
 endif()
 
