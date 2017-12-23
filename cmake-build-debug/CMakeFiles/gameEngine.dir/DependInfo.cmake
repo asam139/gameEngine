@@ -4,16 +4,19 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/Sau/gameEngine/main.cpp" "/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles/gameEngine.dir/main.cpp.o"
+  "/Users/Sau/gameEngine/src/main.cpp" "/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles/gameEngine.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../include"
+  "../glfw/include"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
