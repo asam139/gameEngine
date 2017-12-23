@@ -9,7 +9,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/Sau/gameEngine/glfw/deps/tinycthread.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/CMakeFiles/particles.dir/__/deps/tinycthread.c.o"
   "/Users/Sau/gameEngine/glfw/examples/particles.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/CMakeFiles/particles.dir/particles.c.o"
   )
-set(CMAKE_C_COMPILER_ID "AppleClang")
+set(CMAKE_C_COMPILER_ID "Clang")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH

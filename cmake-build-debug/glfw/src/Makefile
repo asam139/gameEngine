@@ -333,6 +333,33 @@ context.c.s:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/context.c.s
 .PHONY : context.c.s
 
+egl_context.o: egl_context.c.o
+
+.PHONY : egl_context.o
+
+# target to build an object file
+egl_context.c.o:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/egl_context.c.o
+.PHONY : egl_context.c.o
+
+egl_context.i: egl_context.c.i
+
+.PHONY : egl_context.i
+
+# target to preprocess a source file
+egl_context.c.i:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/egl_context.c.i
+.PHONY : egl_context.c.i
+
+egl_context.s: egl_context.c.s
+
+.PHONY : egl_context.s
+
+# target to generate assembly for a file
+egl_context.c.s:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/egl_context.c.s
+.PHONY : egl_context.c.s
+
 init.o: init.c.o
 
 .PHONY : init.o
@@ -441,32 +468,59 @@ nsgl_context.m.s:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/nsgl_context.m.s
 .PHONY : nsgl_context.m.s
 
-posix_tls.o: posix_tls.c.o
+osmesa_context.o: osmesa_context.c.o
 
-.PHONY : posix_tls.o
+.PHONY : osmesa_context.o
 
 # target to build an object file
-posix_tls.c.o:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o
-.PHONY : posix_tls.c.o
+osmesa_context.c.o:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o
+.PHONY : osmesa_context.c.o
 
-posix_tls.i: posix_tls.c.i
+osmesa_context.i: osmesa_context.c.i
 
-.PHONY : posix_tls.i
+.PHONY : osmesa_context.i
 
 # target to preprocess a source file
-posix_tls.c.i:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/posix_tls.c.i
-.PHONY : posix_tls.c.i
+osmesa_context.c.i:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.i
+.PHONY : osmesa_context.c.i
 
-posix_tls.s: posix_tls.c.s
+osmesa_context.s: osmesa_context.c.s
 
-.PHONY : posix_tls.s
+.PHONY : osmesa_context.s
 
 # target to generate assembly for a file
-posix_tls.c.s:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/posix_tls.c.s
-.PHONY : posix_tls.c.s
+osmesa_context.c.s:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.s
+.PHONY : osmesa_context.c.s
+
+posix_thread.o: posix_thread.c.o
+
+.PHONY : posix_thread.o
+
+# target to build an object file
+posix_thread.c.o:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o
+.PHONY : posix_thread.c.o
+
+posix_thread.i: posix_thread.c.i
+
+.PHONY : posix_thread.i
+
+# target to preprocess a source file
+posix_thread.c.i:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/posix_thread.c.i
+.PHONY : posix_thread.c.i
+
+posix_thread.s: posix_thread.c.s
+
+.PHONY : posix_thread.s
+
+# target to generate assembly for a file
+posix_thread.c.s:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/posix_thread.c.s
+.PHONY : posix_thread.c.s
 
 vulkan.o: vulkan.c.o
 
@@ -553,6 +607,9 @@ help:
 	@echo "... context.o"
 	@echo "... context.i"
 	@echo "... context.s"
+	@echo "... egl_context.o"
+	@echo "... egl_context.i"
+	@echo "... egl_context.s"
 	@echo "... init.o"
 	@echo "... init.i"
 	@echo "... init.s"
@@ -565,9 +622,12 @@ help:
 	@echo "... nsgl_context.o"
 	@echo "... nsgl_context.i"
 	@echo "... nsgl_context.s"
-	@echo "... posix_tls.o"
-	@echo "... posix_tls.i"
-	@echo "... posix_tls.s"
+	@echo "... osmesa_context.o"
+	@echo "... osmesa_context.i"
+	@echo "... osmesa_context.s"
+	@echo "... posix_thread.o"
+	@echo "... posix_thread.i"
+	@echo "... posix_thread.s"
 	@echo "... vulkan.o"
 	@echo "... vulkan.i"
 	@echo "... vulkan.s"

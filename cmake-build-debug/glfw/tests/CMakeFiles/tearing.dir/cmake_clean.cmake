@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/tearing.dir/tearing.c.o"
-  "CMakeFiles/tearing.dir/__/deps/getopt.c.o"
   "CMakeFiles/tearing.dir/__/deps/glad.c.o"
   "tearing.pdb"
   "tearing.app/Contents/MacOS/tearing"

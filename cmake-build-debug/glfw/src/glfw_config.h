@@ -1,7 +1,7 @@
 //========================================================================
-// GLFW 3.2 - www.glfw.org
+// GLFW 3.3 - www.glfw.org
 //------------------------------------------------------------------------
-// Copyright (c) 2010-2016 Camilla Berglund <elmindreda@glfw.org>
+// Copyright (c) 2010-2016 Camilla Löwy <elmindreda@glfw.org>
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -44,6 +44,8 @@
 /* #undef _GLFW_WAYLAND */
 // Define this to 1 if building GLFW for Mir
 /* #undef _GLFW_MIR */
+// Define this to 1 if building GLFW for OSMesa
+/* #undef _GLFW_OSMESA */
 
 // Define this to 1 if building as a shared library / dynamic library / DLL
 /* #undef _GLFW_BUILD_DLL */
@@ -53,13 +55,6 @@
 // Define this to 1 to force use of high-performance GPU on hybrid systems
 /* #undef _GLFW_USE_HYBRID_HPG */
 
-// Define this to 1 if the Xxf86vm X11 extension is available
-/* #undef _GLFW_HAS_XF86VM */
-
-// Define this to 1 if glfwInit should change the current directory
-#define _GLFW_USE_CHDIR
-// Define this to 1 if glfwCreateWindow should populate the menu bar
-#define _GLFW_USE_MENUBAR
-// Define this to 1 if windows should use full resolution on Retina displays
-#define _GLFW_USE_RETINA
+// Define this to 1 if xkbcommon supports the compose key
+/* #undef HAVE_XKBCOMMON_COMPOSE_H */
 

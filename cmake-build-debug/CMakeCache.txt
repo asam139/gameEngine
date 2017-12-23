@@ -228,6 +228,9 @@ GLFW_USE_CHDIR:BOOL=ON
 //Populate the menu bar on first window creation
 GLFW_USE_MENUBAR:BOOL=ON
 
+//Use OSMesa for offscreen context creation
+GLFW_USE_OSMESA:BOOL=OFF
+
 //Use the full resolution of Retina displays
 GLFW_USE_RETINA:BOOL=ON
 
@@ -252,6 +255,9 @@ VULKAN_INCLUDE_DIR:PATH=VULKAN_INCLUDE_DIR-NOTFOUND
 
 //Path to a library.
 VULKAN_LIBRARY:FILEPATH=VULKAN_LIBRARY-NOTFOUND
+
+//Path to a library.
+VULKAN_STATIC_LIBRARY:FILEPATH=VULKAN_STATIC_LIBRARY-NOTFOUND
 
 //Value Computed by CMake
 gameEngine_BINARY_DIR:STATIC=/Users/Sau/gameEngine/cmake-build-debug
@@ -452,5 +458,7 @@ ProcessorCount_cmd_sysctl-ADVANCED:INTERNAL=1
 VULKAN_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: VULKAN_LIBRARY
 VULKAN_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: VULKAN_STATIC_LIBRARY
+VULKAN_STATIC_LIBRARY-ADVANCED:INTERNAL=1
 __pkg_config_checked_GLFW:INTERNAL=1
 

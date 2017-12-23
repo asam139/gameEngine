@@ -81,33 +81,9 @@ glfw/tests/CMakeFiles/gamma.dir/gamma.c.o.provides: glfw/tests/CMakeFiles/gamma.
 glfw/tests/CMakeFiles/gamma.dir/gamma.c.o.provides.build: glfw/tests/CMakeFiles/gamma.dir/gamma.c.o
 
 
-glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o: glfw/tests/CMakeFiles/gamma.dir/flags.make
-glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o: ../glfw/deps/getopt.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/gamma.dir/__/deps/getopt.c.o   -c /Users/Sau/gameEngine/glfw/deps/getopt.c
-
-glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/gamma.dir/__/deps/getopt.c.i"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/deps/getopt.c > CMakeFiles/gamma.dir/__/deps/getopt.c.i
-
-glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/gamma.dir/__/deps/getopt.c.s"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/deps/getopt.c -o CMakeFiles/gamma.dir/__/deps/getopt.c.s
-
-glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o.requires:
-
-.PHONY : glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o.requires
-
-glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o.provides: glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o.requires
-	$(MAKE) -f glfw/tests/CMakeFiles/gamma.dir/build.make glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o.provides.build
-.PHONY : glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o.provides
-
-glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o.provides.build: glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o
-
-
 glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.o: glfw/tests/CMakeFiles/gamma.dir/flags.make
 glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.o: ../glfw/deps/glad.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.o"
 	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/gamma.dir/__/deps/glad.c.o   -c /Users/Sau/gameEngine/glfw/deps/glad.c
 
 glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.i: cmake_force
@@ -132,28 +108,25 @@ glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.o.provides.build: glfw/tests/CMak
 # Object files for target gamma
 gamma_OBJECTS = \
 "CMakeFiles/gamma.dir/gamma.c.o" \
-"CMakeFiles/gamma.dir/__/deps/getopt.c.o" \
 "CMakeFiles/gamma.dir/__/deps/glad.c.o"
 
 # External object files for target gamma
 gamma_EXTERNAL_OBJECTS =
 
-glfw/tests/gamma: glfw/tests/CMakeFiles/gamma.dir/gamma.c.o
-glfw/tests/gamma: glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o
-glfw/tests/gamma: glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.o
-glfw/tests/gamma: glfw/tests/CMakeFiles/gamma.dir/build.make
-glfw/tests/gamma: glfw/src/libglfw3.a
-glfw/tests/gamma: glfw/tests/CMakeFiles/gamma.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable gamma"
+glfw/tests/gamma.app/Contents/MacOS/gamma: glfw/tests/CMakeFiles/gamma.dir/gamma.c.o
+glfw/tests/gamma.app/Contents/MacOS/gamma: glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.o
+glfw/tests/gamma.app/Contents/MacOS/gamma: glfw/tests/CMakeFiles/gamma.dir/build.make
+glfw/tests/gamma.app/Contents/MacOS/gamma: glfw/src/libglfw3.a
+glfw/tests/gamma.app/Contents/MacOS/gamma: glfw/tests/CMakeFiles/gamma.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable gamma.app/Contents/MacOS/gamma"
 	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gamma.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-glfw/tests/CMakeFiles/gamma.dir/build: glfw/tests/gamma
+glfw/tests/CMakeFiles/gamma.dir/build: glfw/tests/gamma.app/Contents/MacOS/gamma
 
 .PHONY : glfw/tests/CMakeFiles/gamma.dir/build
 
 glfw/tests/CMakeFiles/gamma.dir/requires: glfw/tests/CMakeFiles/gamma.dir/gamma.c.o.requires
-glfw/tests/CMakeFiles/gamma.dir/requires: glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o.requires
 glfw/tests/CMakeFiles/gamma.dir/requires: glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.o.requires
 
 .PHONY : glfw/tests/CMakeFiles/gamma.dir/requires

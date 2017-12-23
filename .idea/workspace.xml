@@ -17,6 +17,7 @@
       <config projectName="gameEngine" targetName="gamma" />
       <config projectName="gameEngine" targetName="monitors" />
       <config projectName="gameEngine" targetName="gameEngine" />
+      <config projectName="gameEngine" targetName="opacity" />
       <config projectName="gameEngine" targetName="threads" />
       <config projectName="gameEngine" targetName="glfwinfo" />
       <config projectName="gameEngine" targetName="uninstall" />
@@ -24,7 +25,9 @@
       <config projectName="gameEngine" targetName="boing" />
       <config projectName="gameEngine" targetName="timeout" />
       <config projectName="gameEngine" targetName="joysticks" />
+      <config projectName="gameEngine" targetName="offscreen" />
       <config projectName="gameEngine" targetName="splitview" />
+      <config projectName="gameEngine" targetName="inputlag" />
       <config projectName="gameEngine" targetName="heightmap" />
       <config projectName="gameEngine" targetName="simple" />
       <config projectName="gameEngine" targetName="particles" />
@@ -53,8 +56,8 @@
       <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="34" column="20" lean-forward="false" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+            <state relative-caret-position="405">
+              <caret line="27" column="28" lean-forward="false" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -214,6 +217,9 @@
     <configuration name="iconify" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="gameEngine" TARGET_NAME="iconify" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gameEngine" RUN_TARGET_NAME="iconify">
       <envs />
     </configuration>
+    <configuration name="inputlag" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="gameEngine" TARGET_NAME="inputlag" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gameEngine" RUN_TARGET_NAME="inputlag">
+      <envs />
+    </configuration>
     <configuration name="joysticks" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="gameEngine" TARGET_NAME="joysticks" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gameEngine" RUN_TARGET_NAME="joysticks">
       <envs />
     </configuration>
@@ -221,6 +227,12 @@
       <envs />
     </configuration>
     <configuration name="msaa" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="gameEngine" TARGET_NAME="msaa" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gameEngine" RUN_TARGET_NAME="msaa">
+      <envs />
+    </configuration>
+    <configuration name="offscreen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="gameEngine" TARGET_NAME="offscreen" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gameEngine" RUN_TARGET_NAME="offscreen">
+      <envs />
+    </configuration>
+    <configuration name="opacity" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="gameEngine" TARGET_NAME="opacity" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gameEngine" RUN_TARGET_NAME="opacity">
       <envs />
     </configuration>
     <configuration name="particles" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="gameEngine" TARGET_NAME="particles" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gameEngine" RUN_TARGET_NAME="particles">
@@ -259,36 +271,39 @@
     <configuration name="windows" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="gameEngine" TARGET_NAME="windows" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gameEngine" RUN_TARGET_NAME="windows">
       <envs />
     </configuration>
-    <list size="29">
+    <list size="32">
       <item index="0" class="java.lang.String" itemvalue="Application.Build All" />
       <item index="1" class="java.lang.String" itemvalue="Application.gameEngine" />
       <item index="2" class="java.lang.String" itemvalue="Application.uninstall" />
       <item index="3" class="java.lang.String" itemvalue="Application.boing" />
       <item index="4" class="java.lang.String" itemvalue="Application.gears" />
       <item index="5" class="java.lang.String" itemvalue="Application.heightmap" />
-      <item index="6" class="java.lang.String" itemvalue="Application.particles" />
-      <item index="7" class="java.lang.String" itemvalue="Application.simple" />
-      <item index="8" class="java.lang.String" itemvalue="Application.splitview" />
-      <item index="9" class="java.lang.String" itemvalue="Application.wave" />
-      <item index="10" class="java.lang.String" itemvalue="Application.glfw" />
-      <item index="11" class="java.lang.String" itemvalue="Application.clipboard" />
-      <item index="12" class="java.lang.String" itemvalue="Application.cursor" />
-      <item index="13" class="java.lang.String" itemvalue="Application.empty" />
-      <item index="14" class="java.lang.String" itemvalue="Application.events" />
-      <item index="15" class="java.lang.String" itemvalue="Application.gamma" />
-      <item index="16" class="java.lang.String" itemvalue="Application.glfwinfo" />
-      <item index="17" class="java.lang.String" itemvalue="Application.icon" />
-      <item index="18" class="java.lang.String" itemvalue="Application.iconify" />
-      <item index="19" class="java.lang.String" itemvalue="Application.joysticks" />
-      <item index="20" class="java.lang.String" itemvalue="Application.monitors" />
-      <item index="21" class="java.lang.String" itemvalue="Application.msaa" />
-      <item index="22" class="java.lang.String" itemvalue="Application.reopen" />
-      <item index="23" class="java.lang.String" itemvalue="Application.sharing" />
-      <item index="24" class="java.lang.String" itemvalue="Application.tearing" />
-      <item index="25" class="java.lang.String" itemvalue="Application.threads" />
-      <item index="26" class="java.lang.String" itemvalue="Application.timeout" />
-      <item index="27" class="java.lang.String" itemvalue="Application.title" />
-      <item index="28" class="java.lang.String" itemvalue="Application.windows" />
+      <item index="6" class="java.lang.String" itemvalue="Application.offscreen" />
+      <item index="7" class="java.lang.String" itemvalue="Application.particles" />
+      <item index="8" class="java.lang.String" itemvalue="Application.simple" />
+      <item index="9" class="java.lang.String" itemvalue="Application.splitview" />
+      <item index="10" class="java.lang.String" itemvalue="Application.wave" />
+      <item index="11" class="java.lang.String" itemvalue="Application.glfw" />
+      <item index="12" class="java.lang.String" itemvalue="Application.clipboard" />
+      <item index="13" class="java.lang.String" itemvalue="Application.cursor" />
+      <item index="14" class="java.lang.String" itemvalue="Application.empty" />
+      <item index="15" class="java.lang.String" itemvalue="Application.events" />
+      <item index="16" class="java.lang.String" itemvalue="Application.gamma" />
+      <item index="17" class="java.lang.String" itemvalue="Application.glfwinfo" />
+      <item index="18" class="java.lang.String" itemvalue="Application.icon" />
+      <item index="19" class="java.lang.String" itemvalue="Application.iconify" />
+      <item index="20" class="java.lang.String" itemvalue="Application.inputlag" />
+      <item index="21" class="java.lang.String" itemvalue="Application.joysticks" />
+      <item index="22" class="java.lang.String" itemvalue="Application.monitors" />
+      <item index="23" class="java.lang.String" itemvalue="Application.msaa" />
+      <item index="24" class="java.lang.String" itemvalue="Application.opacity" />
+      <item index="25" class="java.lang.String" itemvalue="Application.reopen" />
+      <item index="26" class="java.lang.String" itemvalue="Application.sharing" />
+      <item index="27" class="java.lang.String" itemvalue="Application.tearing" />
+      <item index="28" class="java.lang.String" itemvalue="Application.threads" />
+      <item index="29" class="java.lang.String" itemvalue="Application.timeout" />
+      <item index="30" class="java.lang.String" itemvalue="Application.title" />
+      <item index="31" class="java.lang.String" itemvalue="Application.windows" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -302,12 +317,12 @@
       <option name="presentableId" value="Default" />
       <updated>1514030126141</updated>
       <workItem from="1514030127854" duration="7000" />
-      <workItem from="1514030149944" duration="7576000" />
+      <workItem from="1514030149944" duration="7805000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7583000" />
+    <option name="totallyTimeSpent" value="7812000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1054" y="226" width="1400" height="1000" extended-state="0" />
@@ -317,7 +332,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -366,8 +381,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="34" column="20" lean-forward="false" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+        <state relative-caret-position="405">
+          <caret line="27" column="28" lean-forward="false" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
           <folding />
         </state>
       </provider>

@@ -35,6 +35,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-D_GLFW_USE_CONFIG_H"/>
+					<Add option="-D_XOPEN_SOURCE=600"/>
 					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
 					<Add directory="/Users/Sau/gameEngine/glfw/src"/>
 					<Add directory="/Users/Sau/gameEngine/cmake-build-debug/glfw/src"/>
@@ -60,6 +61,7 @@
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add option="-D_GLFW_USE_CONFIG_H"/>
+					<Add option="-D_XOPEN_SOURCE=600"/>
 					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
 					<Add directory="/Users/Sau/gameEngine/glfw/src"/>
 					<Add directory="/Users/Sau/gameEngine/cmake-build-debug/glfw/src"/>
@@ -75,52 +77,6 @@
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/src/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/src/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="heightmap">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/heightmap.app/Contents/MacOS/heightmap" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
-				<Option object_output="./"/>
-				<Option type="0"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 heightmap"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="heightmap/fast">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/heightmap.app/Contents/MacOS/heightmap" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
-				<Option object_output="./"/>
-				<Option type="0"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 heightmap/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="wave">
@@ -164,52 +120,6 @@
 				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 wave/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="splitview">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/splitview.app/Contents/MacOS/splitview" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
-				<Option object_output="./"/>
-				<Option type="0"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 splitview"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="splitview/fast">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/splitview.app/Contents/MacOS/splitview" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
-				<Option object_output="./"/>
-				<Option type="0"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 splitview/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
@@ -261,6 +171,52 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="sharing">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/sharing.app/Contents/MacOS/sharing" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 sharing"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sharing/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/sharing.app/Contents/MacOS/sharing" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 sharing/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="particles">
 				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/particles.app/Contents/MacOS/particles" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
@@ -302,6 +258,144 @@
 				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 particles/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="heightmap">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/heightmap.app/Contents/MacOS/heightmap" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 heightmap"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="heightmap/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/heightmap.app/Contents/MacOS/heightmap" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 heightmap/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="splitview">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/splitview.app/Contents/MacOS/splitview" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 splitview"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="splitview/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/splitview.app/Contents/MacOS/splitview" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 splitview/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="offscreen">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/offscreen" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 offscreen"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="offscreen/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/offscreen" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/examples"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 offscreen/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/examples/Makefile&quot;  VERBOSE=1 clean"/>
@@ -491,52 +585,6 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="windows">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/windows.app/Contents/MacOS/windows" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
-				<Option object_output="./"/>
-				<Option type="0"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 windows"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="windows/fast">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/windows.app/Contents/MacOS/windows" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
-				<Option object_output="./"/>
-				<Option type="0"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 windows/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 			<Target title="timeout">
 				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/timeout.app/Contents/MacOS/timeout" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
@@ -629,11 +677,57 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="gamma">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/gamma" prefix_auto="0" extension_auto="0"/>
+			<Target title="opacity">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/opacity.app/Contents/MacOS/opacity" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
 				<Option object_output="./"/>
-				<Option type="1"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 opacity"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="opacity/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/opacity.app/Contents/MacOS/opacity" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 opacity/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gamma">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/gamma.app/Contents/MacOS/gamma" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
@@ -653,10 +747,10 @@
 				</MakeCommands>
 			</Target>
 			<Target title="gamma/fast">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/gamma" prefix_auto="0" extension_auto="0"/>
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/gamma.app/Contents/MacOS/gamma" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
 				<Option object_output="./"/>
-				<Option type="1"/>
+				<Option type="0"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
@@ -721,11 +815,11 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="icon">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/icon.app/Contents/MacOS/icon" prefix_auto="0" extension_auto="0"/>
+			<Target title="iconify">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/iconify" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
 				<Option object_output="./"/>
-				<Option type="0"/>
+				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
@@ -738,14 +832,37 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 icon"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 iconify"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="icon/fast">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/icon.app/Contents/MacOS/icon" prefix_auto="0" extension_auto="0"/>
+			<Target title="iconify/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/iconify" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 iconify/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="joysticks">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/joysticks.app/Contents/MacOS/joysticks" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
 				<Option object_output="./"/>
 				<Option type="0"/>
@@ -761,7 +878,122 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 icon/fast"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 joysticks"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="joysticks/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/joysticks.app/Contents/MacOS/joysticks" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 joysticks/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="windows">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/windows.app/Contents/MacOS/windows" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 windows"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="windows/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/windows.app/Contents/MacOS/windows" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 windows/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="inputlag">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/inputlag.app/Contents/MacOS/inputlag" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 inputlag"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="inputlag/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/inputlag.app/Contents/MacOS/inputlag" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 inputlag/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
@@ -813,8 +1045,8 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="glfwinfo">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/glfwinfo" prefix_auto="0" extension_auto="0"/>
+			<Target title="reopen">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/reopen" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -830,14 +1062,14 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 glfwinfo"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 reopen"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="glfwinfo/fast">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/glfwinfo" prefix_auto="0" extension_auto="0"/>
+			<Target title="reopen/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/reopen" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -853,7 +1085,7 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 glfwinfo/fast"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 reopen/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
@@ -951,11 +1183,11 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="sharing">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/sharing.app/Contents/MacOS/sharing" prefix_auto="0" extension_auto="0"/>
+			<Target title="glfwinfo">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/glfwinfo" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
 				<Option object_output="./"/>
-				<Option type="0"/>
+				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
@@ -968,17 +1200,17 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 sharing"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 glfwinfo"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="sharing/fast">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/sharing.app/Contents/MacOS/sharing" prefix_auto="0" extension_auto="0"/>
+			<Target title="glfwinfo/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/glfwinfo" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
 				<Option object_output="./"/>
-				<Option type="0"/>
+				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
@@ -991,7 +1223,7 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 sharing/fast"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 glfwinfo/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
@@ -1043,144 +1275,6 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="reopen">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/reopen" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 reopen"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="reopen/fast">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/reopen" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 reopen/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="iconify">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/iconify" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 iconify"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="iconify/fast">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/iconify" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 iconify/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="joysticks">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/joysticks" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 joysticks"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="joysticks/fast">
-				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/joysticks" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
-					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 joysticks/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 			<Target title="events">
 				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/events" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
@@ -1227,6 +1321,52 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="icon">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/icon.app/Contents/MacOS/icon" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 icon"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="icon/fast">
+				<Option output="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/icon.app/Contents/MacOS/icon" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Sau/gameEngine/cmake-build-debug/glfw/tests"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Sau/gameEngine/glfw/deps"/>
+					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 icon/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 		</Build>
 		<Unit filename="/Users/Sau/gameEngine/cmake-build-debug/glfw/src/glfw_config.h">
 			<Option target="glfw"/>
@@ -1234,80 +1374,84 @@
 		<Unit filename="/Users/Sau/gameEngine/glfw/deps/getopt.c">
 			<Option target="particles"/>
 			<Option target="clipboard"/>
-			<Option target="windows"/>
-			<Option target="gamma"/>
-			<Option target="tearing"/>
-			<Option target="glfwinfo"/>
-			<Option target="msaa"/>
-			<Option target="monitors"/>
 			<Option target="iconify"/>
+			<Option target="windows"/>
+			<Option target="inputlag"/>
+			<Option target="msaa"/>
+			<Option target="glfwinfo"/>
+			<Option target="monitors"/>
 			<Option target="events"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/deps/getopt.h">
 			<Option target="particles"/>
 			<Option target="clipboard"/>
-			<Option target="windows"/>
-			<Option target="gamma"/>
-			<Option target="tearing"/>
-			<Option target="glfwinfo"/>
-			<Option target="msaa"/>
-			<Option target="monitors"/>
 			<Option target="iconify"/>
+			<Option target="windows"/>
+			<Option target="inputlag"/>
+			<Option target="msaa"/>
+			<Option target="glfwinfo"/>
+			<Option target="monitors"/>
 			<Option target="events"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/deps/glad.c">
-			<Option target="heightmap"/>
 			<Option target="wave"/>
-			<Option target="splitview"/>
 			<Option target="simple"/>
+			<Option target="sharing"/>
 			<Option target="particles"/>
+			<Option target="heightmap"/>
+			<Option target="splitview"/>
+			<Option target="offscreen"/>
 			<Option target="gears"/>
 			<Option target="boing"/>
 			<Option target="clipboard"/>
 			<Option target="title"/>
-			<Option target="windows"/>
 			<Option target="timeout"/>
 			<Option target="threads"/>
+			<Option target="opacity"/>
 			<Option target="gamma"/>
 			<Option target="tearing"/>
-			<Option target="icon"/>
-			<Option target="empty"/>
-			<Option target="glfwinfo"/>
-			<Option target="msaa"/>
-			<Option target="cursor"/>
-			<Option target="sharing"/>
-			<Option target="monitors"/>
-			<Option target="reopen"/>
 			<Option target="iconify"/>
 			<Option target="joysticks"/>
+			<Option target="windows"/>
+			<Option target="inputlag"/>
+			<Option target="empty"/>
+			<Option target="reopen"/>
+			<Option target="msaa"/>
+			<Option target="cursor"/>
+			<Option target="glfwinfo"/>
+			<Option target="monitors"/>
 			<Option target="events"/>
+			<Option target="icon"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/deps/glad/glad.h">
-			<Option target="heightmap"/>
 			<Option target="wave"/>
-			<Option target="splitview"/>
 			<Option target="simple"/>
+			<Option target="sharing"/>
 			<Option target="particles"/>
+			<Option target="heightmap"/>
+			<Option target="splitview"/>
+			<Option target="offscreen"/>
 			<Option target="gears"/>
 			<Option target="boing"/>
 			<Option target="clipboard"/>
 			<Option target="title"/>
-			<Option target="windows"/>
 			<Option target="timeout"/>
 			<Option target="threads"/>
+			<Option target="opacity"/>
 			<Option target="gamma"/>
 			<Option target="tearing"/>
-			<Option target="icon"/>
-			<Option target="empty"/>
-			<Option target="glfwinfo"/>
-			<Option target="msaa"/>
-			<Option target="cursor"/>
-			<Option target="sharing"/>
-			<Option target="monitors"/>
-			<Option target="reopen"/>
 			<Option target="iconify"/>
 			<Option target="joysticks"/>
+			<Option target="windows"/>
+			<Option target="inputlag"/>
+			<Option target="empty"/>
+			<Option target="reopen"/>
+			<Option target="msaa"/>
+			<Option target="cursor"/>
+			<Option target="glfwinfo"/>
+			<Option target="monitors"/>
 			<Option target="events"/>
+			<Option target="icon"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/deps/tinycthread.c">
 			<Option target="particles"/>
@@ -1326,19 +1470,27 @@
 			<Option target="gears"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/examples/glfw.icns">
-			<Option target="heightmap"/>
 			<Option target="wave"/>
-			<Option target="splitview"/>
 			<Option target="simple"/>
+			<Option target="sharing"/>
 			<Option target="particles"/>
+			<Option target="heightmap"/>
+			<Option target="splitview"/>
+			<Option target="offscreen"/>
 			<Option target="gears"/>
 			<Option target="boing"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/examples/heightmap.c">
 			<Option target="heightmap"/>
 		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/examples/offscreen.c">
+			<Option target="offscreen"/>
+		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/examples/particles.c">
 			<Option target="particles"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/examples/sharing.c">
+			<Option target="sharing"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/examples/simple.c">
 			<Option target="simple"/>
@@ -1379,6 +1531,12 @@
 		<Unit filename="/Users/Sau/gameEngine/glfw/src/context.c">
 			<Option target="glfw"/>
 		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/src/egl_context.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/src/egl_context.h">
+			<Option target="glfw"/>
+		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/src/init.c">
 			<Option target="glfw"/>
 		</Unit>
@@ -1386,6 +1544,9 @@
 			<Option target="glfw"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/src/internal.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/src/mappings.h">
 			<Option target="glfw"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/src/monitor.c">
@@ -1397,10 +1558,16 @@
 		<Unit filename="/Users/Sau/gameEngine/glfw/src/nsgl_context.m">
 			<Option target="glfw"/>
 		</Unit>
-		<Unit filename="/Users/Sau/gameEngine/glfw/src/posix_tls.c">
+		<Unit filename="/Users/Sau/gameEngine/glfw/src/osmesa_context.c">
 			<Option target="glfw"/>
 		</Unit>
-		<Unit filename="/Users/Sau/gameEngine/glfw/src/posix_tls.h">
+		<Unit filename="/Users/Sau/gameEngine/glfw/src/osmesa_context.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/src/posix_thread.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/src/posix_thread.h">
 			<Option target="glfw"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/src/vulkan.c">
@@ -1433,6 +1600,9 @@
 		<Unit filename="/Users/Sau/gameEngine/glfw/tests/iconify.c">
 			<Option target="iconify"/>
 		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/tests/inputlag.c">
+			<Option target="inputlag"/>
+		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/tests/joysticks.c">
 			<Option target="joysticks"/>
 		</Unit>
@@ -1442,11 +1612,11 @@
 		<Unit filename="/Users/Sau/gameEngine/glfw/tests/msaa.c">
 			<Option target="msaa"/>
 		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/tests/opacity.c">
+			<Option target="opacity"/>
+		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/tests/reopen.c">
 			<Option target="reopen"/>
-		</Unit>
-		<Unit filename="/Users/Sau/gameEngine/glfw/tests/sharing.c">
-			<Option target="sharing"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/tests/tearing.c">
 			<Option target="tearing"/>
@@ -1477,6 +1647,30 @@
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/cmake_uninstall.cmake.in">
 			<Option virtualFolder="CMake Files\glfw\"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/CMake/MacOSXBundleInfo.plist.in">
+			<Option virtualFolder="CMake Files\glfw\CMake\"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/CMake/MacOSXBundleInfo.plist.in">
+			<Option virtualFolder="CMake Files\glfw\CMake\"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/CMake/MacOSXBundleInfo.plist.in">
+			<Option virtualFolder="CMake Files\glfw\CMake\"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/CMake/MacOSXBundleInfo.plist.in">
+			<Option virtualFolder="CMake Files\glfw\CMake\"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/CMake/MacOSXBundleInfo.plist.in">
+			<Option virtualFolder="CMake Files\glfw\CMake\"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/CMake/MacOSXBundleInfo.plist.in">
+			<Option virtualFolder="CMake Files\glfw\CMake\"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/CMake/MacOSXBundleInfo.plist.in">
+			<Option virtualFolder="CMake Files\glfw\CMake\"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/glfw/CMake/MacOSXBundleInfo.plist.in">
+			<Option virtualFolder="CMake Files\glfw\CMake\"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/glfw/CMake/MacOSXBundleInfo.plist.in">
 			<Option virtualFolder="CMake Files\glfw\CMake\"/>

@@ -60,15 +60,15 @@ include glfw/src/CMakeFiles/glfw.dir/flags.make
 glfw/src/CMakeFiles/glfw.dir/context.c.o: glfw/src/CMakeFiles/glfw.dir/flags.make
 glfw/src/CMakeFiles/glfw.dir/context.c.o: ../glfw/src/context.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object glfw/src/CMakeFiles/glfw.dir/context.c.o"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/context.c.o   -c /Users/Sau/gameEngine/glfw/src/context.c
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/context.c.o   -c /Users/Sau/gameEngine/glfw/src/context.c
 
 glfw/src/CMakeFiles/glfw.dir/context.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/context.c.i"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/src/context.c > CMakeFiles/glfw.dir/context.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /Users/Sau/gameEngine/glfw/src/context.c > CMakeFiles/glfw.dir/context.c.i
 
 glfw/src/CMakeFiles/glfw.dir/context.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/context.c.s"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/src/context.c -o CMakeFiles/glfw.dir/context.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /Users/Sau/gameEngine/glfw/src/context.c -o CMakeFiles/glfw.dir/context.c.s
 
 glfw/src/CMakeFiles/glfw.dir/context.c.o.requires:
 
@@ -84,15 +84,15 @@ glfw/src/CMakeFiles/glfw.dir/context.c.o.provides.build: glfw/src/CMakeFiles/glf
 glfw/src/CMakeFiles/glfw.dir/init.c.o: glfw/src/CMakeFiles/glfw.dir/flags.make
 glfw/src/CMakeFiles/glfw.dir/init.c.o: ../glfw/src/init.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object glfw/src/CMakeFiles/glfw.dir/init.c.o"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/init.c.o   -c /Users/Sau/gameEngine/glfw/src/init.c
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/init.c.o   -c /Users/Sau/gameEngine/glfw/src/init.c
 
 glfw/src/CMakeFiles/glfw.dir/init.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/init.c.i"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/src/init.c > CMakeFiles/glfw.dir/init.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /Users/Sau/gameEngine/glfw/src/init.c > CMakeFiles/glfw.dir/init.c.i
 
 glfw/src/CMakeFiles/glfw.dir/init.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/init.c.s"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/src/init.c -o CMakeFiles/glfw.dir/init.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /Users/Sau/gameEngine/glfw/src/init.c -o CMakeFiles/glfw.dir/init.c.s
 
 glfw/src/CMakeFiles/glfw.dir/init.c.o.requires:
 
@@ -108,15 +108,15 @@ glfw/src/CMakeFiles/glfw.dir/init.c.o.provides.build: glfw/src/CMakeFiles/glfw.d
 glfw/src/CMakeFiles/glfw.dir/input.c.o: glfw/src/CMakeFiles/glfw.dir/flags.make
 glfw/src/CMakeFiles/glfw.dir/input.c.o: ../glfw/src/input.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object glfw/src/CMakeFiles/glfw.dir/input.c.o"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/input.c.o   -c /Users/Sau/gameEngine/glfw/src/input.c
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/input.c.o   -c /Users/Sau/gameEngine/glfw/src/input.c
 
 glfw/src/CMakeFiles/glfw.dir/input.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/input.c.i"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/src/input.c > CMakeFiles/glfw.dir/input.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /Users/Sau/gameEngine/glfw/src/input.c > CMakeFiles/glfw.dir/input.c.i
 
 glfw/src/CMakeFiles/glfw.dir/input.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/input.c.s"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/src/input.c -o CMakeFiles/glfw.dir/input.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /Users/Sau/gameEngine/glfw/src/input.c -o CMakeFiles/glfw.dir/input.c.s
 
 glfw/src/CMakeFiles/glfw.dir/input.c.o.requires:
 
@@ -132,15 +132,15 @@ glfw/src/CMakeFiles/glfw.dir/input.c.o.provides.build: glfw/src/CMakeFiles/glfw.
 glfw/src/CMakeFiles/glfw.dir/monitor.c.o: glfw/src/CMakeFiles/glfw.dir/flags.make
 glfw/src/CMakeFiles/glfw.dir/monitor.c.o: ../glfw/src/monitor.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object glfw/src/CMakeFiles/glfw.dir/monitor.c.o"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/monitor.c.o   -c /Users/Sau/gameEngine/glfw/src/monitor.c
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/monitor.c.o   -c /Users/Sau/gameEngine/glfw/src/monitor.c
 
 glfw/src/CMakeFiles/glfw.dir/monitor.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/monitor.c.i"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/src/monitor.c > CMakeFiles/glfw.dir/monitor.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /Users/Sau/gameEngine/glfw/src/monitor.c > CMakeFiles/glfw.dir/monitor.c.i
 
 glfw/src/CMakeFiles/glfw.dir/monitor.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/monitor.c.s"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/src/monitor.c -o CMakeFiles/glfw.dir/monitor.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /Users/Sau/gameEngine/glfw/src/monitor.c -o CMakeFiles/glfw.dir/monitor.c.s
 
 glfw/src/CMakeFiles/glfw.dir/monitor.c.o.requires:
 
@@ -156,15 +156,15 @@ glfw/src/CMakeFiles/glfw.dir/monitor.c.o.provides.build: glfw/src/CMakeFiles/glf
 glfw/src/CMakeFiles/glfw.dir/vulkan.c.o: glfw/src/CMakeFiles/glfw.dir/flags.make
 glfw/src/CMakeFiles/glfw.dir/vulkan.c.o: ../glfw/src/vulkan.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object glfw/src/CMakeFiles/glfw.dir/vulkan.c.o"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/vulkan.c.o   -c /Users/Sau/gameEngine/glfw/src/vulkan.c
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/vulkan.c.o   -c /Users/Sau/gameEngine/glfw/src/vulkan.c
 
 glfw/src/CMakeFiles/glfw.dir/vulkan.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/vulkan.c.i"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/src/vulkan.c > CMakeFiles/glfw.dir/vulkan.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /Users/Sau/gameEngine/glfw/src/vulkan.c > CMakeFiles/glfw.dir/vulkan.c.i
 
 glfw/src/CMakeFiles/glfw.dir/vulkan.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/vulkan.c.s"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/src/vulkan.c -o CMakeFiles/glfw.dir/vulkan.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /Users/Sau/gameEngine/glfw/src/vulkan.c -o CMakeFiles/glfw.dir/vulkan.c.s
 
 glfw/src/CMakeFiles/glfw.dir/vulkan.c.o.requires:
 
@@ -180,15 +180,15 @@ glfw/src/CMakeFiles/glfw.dir/vulkan.c.o.provides.build: glfw/src/CMakeFiles/glfw
 glfw/src/CMakeFiles/glfw.dir/window.c.o: glfw/src/CMakeFiles/glfw.dir/flags.make
 glfw/src/CMakeFiles/glfw.dir/window.c.o: ../glfw/src/window.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object glfw/src/CMakeFiles/glfw.dir/window.c.o"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/window.c.o   -c /Users/Sau/gameEngine/glfw/src/window.c
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/window.c.o   -c /Users/Sau/gameEngine/glfw/src/window.c
 
 glfw/src/CMakeFiles/glfw.dir/window.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/window.c.i"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/src/window.c > CMakeFiles/glfw.dir/window.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /Users/Sau/gameEngine/glfw/src/window.c > CMakeFiles/glfw.dir/window.c.i
 
 glfw/src/CMakeFiles/glfw.dir/window.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/window.c.s"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/src/window.c -o CMakeFiles/glfw.dir/window.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /Users/Sau/gameEngine/glfw/src/window.c -o CMakeFiles/glfw.dir/window.c.s
 
 glfw/src/CMakeFiles/glfw.dir/window.c.o.requires:
 
@@ -321,28 +321,28 @@ glfw/src/CMakeFiles/glfw.dir/cocoa_time.c.o.provides: glfw/src/CMakeFiles/glfw.d
 glfw/src/CMakeFiles/glfw.dir/cocoa_time.c.o.provides.build: glfw/src/CMakeFiles/glfw.dir/cocoa_time.c.o
 
 
-glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o: glfw/src/CMakeFiles/glfw.dir/flags.make
-glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o: ../glfw/src/posix_tls.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/posix_tls.c.o   -c /Users/Sau/gameEngine/glfw/src/posix_tls.c
+glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o: glfw/src/CMakeFiles/glfw.dir/flags.make
+glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o: ../glfw/src/posix_thread.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o"
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/posix_thread.c.o   -c /Users/Sau/gameEngine/glfw/src/posix_thread.c
 
-glfw/src/CMakeFiles/glfw.dir/posix_tls.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/posix_tls.c.i"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/src/posix_tls.c > CMakeFiles/glfw.dir/posix_tls.c.i
+glfw/src/CMakeFiles/glfw.dir/posix_thread.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/posix_thread.c.i"
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/src/posix_thread.c > CMakeFiles/glfw.dir/posix_thread.c.i
 
-glfw/src/CMakeFiles/glfw.dir/posix_tls.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/posix_tls.c.s"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/src/posix_tls.c -o CMakeFiles/glfw.dir/posix_tls.c.s
+glfw/src/CMakeFiles/glfw.dir/posix_thread.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/posix_thread.c.s"
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/src/posix_thread.c -o CMakeFiles/glfw.dir/posix_thread.c.s
 
-glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o.requires:
+glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o.requires:
 
-.PHONY : glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o.requires
+.PHONY : glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o.requires
 
-glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o.provides: glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o.requires
-	$(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o.provides.build
-.PHONY : glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o.provides
+glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o.provides: glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o.requires
+	$(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o.provides.build
+.PHONY : glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o.provides
 
-glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o.provides.build: glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o
+glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o.provides.build: glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o
 
 
 glfw/src/CMakeFiles/glfw.dir/nsgl_context.m.o: glfw/src/CMakeFiles/glfw.dir/flags.make
@@ -369,6 +369,54 @@ glfw/src/CMakeFiles/glfw.dir/nsgl_context.m.o.provides: glfw/src/CMakeFiles/glfw
 glfw/src/CMakeFiles/glfw.dir/nsgl_context.m.o.provides.build: glfw/src/CMakeFiles/glfw.dir/nsgl_context.m.o
 
 
+glfw/src/CMakeFiles/glfw.dir/egl_context.c.o: glfw/src/CMakeFiles/glfw.dir/flags.make
+glfw/src/CMakeFiles/glfw.dir/egl_context.c.o: ../glfw/src/egl_context.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object glfw/src/CMakeFiles/glfw.dir/egl_context.c.o"
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/egl_context.c.o   -c /Users/Sau/gameEngine/glfw/src/egl_context.c
+
+glfw/src/CMakeFiles/glfw.dir/egl_context.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/egl_context.c.i"
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/src/egl_context.c > CMakeFiles/glfw.dir/egl_context.c.i
+
+glfw/src/CMakeFiles/glfw.dir/egl_context.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/egl_context.c.s"
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/src/egl_context.c -o CMakeFiles/glfw.dir/egl_context.c.s
+
+glfw/src/CMakeFiles/glfw.dir/egl_context.c.o.requires:
+
+.PHONY : glfw/src/CMakeFiles/glfw.dir/egl_context.c.o.requires
+
+glfw/src/CMakeFiles/glfw.dir/egl_context.c.o.provides: glfw/src/CMakeFiles/glfw.dir/egl_context.c.o.requires
+	$(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/egl_context.c.o.provides.build
+.PHONY : glfw/src/CMakeFiles/glfw.dir/egl_context.c.o.provides
+
+glfw/src/CMakeFiles/glfw.dir/egl_context.c.o.provides.build: glfw/src/CMakeFiles/glfw.dir/egl_context.c.o
+
+
+glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o: glfw/src/CMakeFiles/glfw.dir/flags.make
+glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o: ../glfw/src/osmesa_context.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o"
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/osmesa_context.c.o   -c /Users/Sau/gameEngine/glfw/src/osmesa_context.c
+
+glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/osmesa_context.c.i"
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/src/osmesa_context.c > CMakeFiles/glfw.dir/osmesa_context.c.i
+
+glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/osmesa_context.c.s"
+	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/src/osmesa_context.c -o CMakeFiles/glfw.dir/osmesa_context.c.s
+
+glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o.requires:
+
+.PHONY : glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o.requires
+
+glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o.provides: glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o.requires
+	$(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o.provides.build
+.PHONY : glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o.provides
+
+glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o.provides.build: glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o
+
+
 # Object files for target glfw
 glfw_OBJECTS = \
 "CMakeFiles/glfw.dir/context.c.o" \
@@ -382,8 +430,10 @@ glfw_OBJECTS = \
 "CMakeFiles/glfw.dir/cocoa_monitor.m.o" \
 "CMakeFiles/glfw.dir/cocoa_window.m.o" \
 "CMakeFiles/glfw.dir/cocoa_time.c.o" \
-"CMakeFiles/glfw.dir/posix_tls.c.o" \
-"CMakeFiles/glfw.dir/nsgl_context.m.o"
+"CMakeFiles/glfw.dir/posix_thread.c.o" \
+"CMakeFiles/glfw.dir/nsgl_context.m.o" \
+"CMakeFiles/glfw.dir/egl_context.c.o" \
+"CMakeFiles/glfw.dir/osmesa_context.c.o"
 
 # External object files for target glfw
 glfw_EXTERNAL_OBJECTS =
@@ -399,11 +449,13 @@ glfw/src/libglfw3.a: glfw/src/CMakeFiles/glfw.dir/cocoa_joystick.m.o
 glfw/src/libglfw3.a: glfw/src/CMakeFiles/glfw.dir/cocoa_monitor.m.o
 glfw/src/libglfw3.a: glfw/src/CMakeFiles/glfw.dir/cocoa_window.m.o
 glfw/src/libglfw3.a: glfw/src/CMakeFiles/glfw.dir/cocoa_time.c.o
-glfw/src/libglfw3.a: glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o
+glfw/src/libglfw3.a: glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o
 glfw/src/libglfw3.a: glfw/src/CMakeFiles/glfw.dir/nsgl_context.m.o
+glfw/src/libglfw3.a: glfw/src/CMakeFiles/glfw.dir/egl_context.c.o
+glfw/src/libglfw3.a: glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o
 glfw/src/libglfw3.a: glfw/src/CMakeFiles/glfw.dir/build.make
 glfw/src/libglfw3.a: glfw/src/CMakeFiles/glfw.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking C static library libglfw3.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking C static library libglfw3.a"
 	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && $(CMAKE_COMMAND) -P CMakeFiles/glfw.dir/cmake_clean_target.cmake
 	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/glfw.dir/link.txt --verbose=$(VERBOSE)
 
@@ -423,8 +475,10 @@ glfw/src/CMakeFiles/glfw.dir/requires: glfw/src/CMakeFiles/glfw.dir/cocoa_joysti
 glfw/src/CMakeFiles/glfw.dir/requires: glfw/src/CMakeFiles/glfw.dir/cocoa_monitor.m.o.requires
 glfw/src/CMakeFiles/glfw.dir/requires: glfw/src/CMakeFiles/glfw.dir/cocoa_window.m.o.requires
 glfw/src/CMakeFiles/glfw.dir/requires: glfw/src/CMakeFiles/glfw.dir/cocoa_time.c.o.requires
-glfw/src/CMakeFiles/glfw.dir/requires: glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o.requires
+glfw/src/CMakeFiles/glfw.dir/requires: glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o.requires
 glfw/src/CMakeFiles/glfw.dir/requires: glfw/src/CMakeFiles/glfw.dir/nsgl_context.m.o.requires
+glfw/src/CMakeFiles/glfw.dir/requires: glfw/src/CMakeFiles/glfw.dir/egl_context.c.o.requires
+glfw/src/CMakeFiles/glfw.dir/requires: glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o.requires
 
 .PHONY : glfw/src/CMakeFiles/glfw.dir/requires
 

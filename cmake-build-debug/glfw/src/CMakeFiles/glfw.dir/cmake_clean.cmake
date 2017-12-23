@@ -10,8 +10,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/glfw.dir/cocoa_monitor.m.o"
   "CMakeFiles/glfw.dir/cocoa_window.m.o"
   "CMakeFiles/glfw.dir/cocoa_time.c.o"
-  "CMakeFiles/glfw.dir/posix_tls.c.o"
+  "CMakeFiles/glfw.dir/posix_thread.c.o"
   "CMakeFiles/glfw.dir/nsgl_context.m.o"
+  "CMakeFiles/glfw.dir/egl_context.c.o"
+  "CMakeFiles/glfw.dir/osmesa_context.c.o"
   "libglfw3.pdb"
   "libglfw3.a"
 )

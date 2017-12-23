@@ -10,19 +10,22 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/Sau/gameEngine/glfw/src/cocoa_time.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/cocoa_time.c.o"
   "/Users/Sau/gameEngine/glfw/src/cocoa_window.m" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/cocoa_window.m.o"
   "/Users/Sau/gameEngine/glfw/src/context.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/context.c.o"
+  "/Users/Sau/gameEngine/glfw/src/egl_context.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/egl_context.c.o"
   "/Users/Sau/gameEngine/glfw/src/init.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/init.c.o"
   "/Users/Sau/gameEngine/glfw/src/input.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/input.c.o"
   "/Users/Sau/gameEngine/glfw/src/monitor.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/monitor.c.o"
   "/Users/Sau/gameEngine/glfw/src/nsgl_context.m" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/nsgl_context.m.o"
-  "/Users/Sau/gameEngine/glfw/src/posix_tls.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o"
+  "/Users/Sau/gameEngine/glfw/src/osmesa_context.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o"
+  "/Users/Sau/gameEngine/glfw/src/posix_thread.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o"
   "/Users/Sau/gameEngine/glfw/src/vulkan.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/vulkan.c.o"
   "/Users/Sau/gameEngine/glfw/src/window.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/src/CMakeFiles/glfw.dir/window.c.o"
   )
-set(CMAKE_C_COMPILER_ID "AppleClang")
+set(CMAKE_C_COMPILER_ID "Clang")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_C
   "_GLFW_USE_CONFIG_H"
+  "_XOPEN_SOURCE=600"
   )
 
 # The include file search paths:

@@ -7,7 +7,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/Sau/gameEngine/glfw/deps/glad.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/CMakeFiles/icon.dir/__/deps/glad.c.o"
   "/Users/Sau/gameEngine/glfw/tests/icon.c" "/Users/Sau/gameEngine/cmake-build-debug/glfw/tests/CMakeFiles/icon.dir/icon.c.o"
   )
-set(CMAKE_C_COMPILER_ID "AppleClang")
+set(CMAKE_C_COMPILER_ID "Clang")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH

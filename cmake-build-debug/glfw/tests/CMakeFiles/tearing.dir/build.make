@@ -81,33 +81,9 @@ glfw/tests/CMakeFiles/tearing.dir/tearing.c.o.provides: glfw/tests/CMakeFiles/te
 glfw/tests/CMakeFiles/tearing.dir/tearing.c.o.provides.build: glfw/tests/CMakeFiles/tearing.dir/tearing.c.o
 
 
-glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o: glfw/tests/CMakeFiles/tearing.dir/flags.make
-glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o: ../glfw/deps/getopt.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/tearing.dir/__/deps/getopt.c.o   -c /Users/Sau/gameEngine/glfw/deps/getopt.c
-
-glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/tearing.dir/__/deps/getopt.c.i"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/Sau/gameEngine/glfw/deps/getopt.c > CMakeFiles/tearing.dir/__/deps/getopt.c.i
-
-glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/tearing.dir/__/deps/getopt.c.s"
-	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/Sau/gameEngine/glfw/deps/getopt.c -o CMakeFiles/tearing.dir/__/deps/getopt.c.s
-
-glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o.requires:
-
-.PHONY : glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o.requires
-
-glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o.provides: glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o.requires
-	$(MAKE) -f glfw/tests/CMakeFiles/tearing.dir/build.make glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o.provides.build
-.PHONY : glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o.provides
-
-glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o.provides.build: glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o
-
-
 glfw/tests/CMakeFiles/tearing.dir/__/deps/glad.c.o: glfw/tests/CMakeFiles/tearing.dir/flags.make
 glfw/tests/CMakeFiles/tearing.dir/__/deps/glad.c.o: ../glfw/deps/glad.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object glfw/tests/CMakeFiles/tearing.dir/__/deps/glad.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object glfw/tests/CMakeFiles/tearing.dir/__/deps/glad.c.o"
 	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/tearing.dir/__/deps/glad.c.o   -c /Users/Sau/gameEngine/glfw/deps/glad.c
 
 glfw/tests/CMakeFiles/tearing.dir/__/deps/glad.c.i: cmake_force
@@ -132,19 +108,17 @@ glfw/tests/CMakeFiles/tearing.dir/__/deps/glad.c.o.provides.build: glfw/tests/CM
 # Object files for target tearing
 tearing_OBJECTS = \
 "CMakeFiles/tearing.dir/tearing.c.o" \
-"CMakeFiles/tearing.dir/__/deps/getopt.c.o" \
 "CMakeFiles/tearing.dir/__/deps/glad.c.o"
 
 # External object files for target tearing
 tearing_EXTERNAL_OBJECTS =
 
 glfw/tests/tearing.app/Contents/MacOS/tearing: glfw/tests/CMakeFiles/tearing.dir/tearing.c.o
-glfw/tests/tearing.app/Contents/MacOS/tearing: glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o
 glfw/tests/tearing.app/Contents/MacOS/tearing: glfw/tests/CMakeFiles/tearing.dir/__/deps/glad.c.o
 glfw/tests/tearing.app/Contents/MacOS/tearing: glfw/tests/CMakeFiles/tearing.dir/build.make
 glfw/tests/tearing.app/Contents/MacOS/tearing: glfw/src/libglfw3.a
 glfw/tests/tearing.app/Contents/MacOS/tearing: glfw/tests/CMakeFiles/tearing.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable tearing.app/Contents/MacOS/tearing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable tearing.app/Contents/MacOS/tearing"
 	cd /Users/Sau/gameEngine/cmake-build-debug/glfw/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tearing.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -153,7 +127,6 @@ glfw/tests/CMakeFiles/tearing.dir/build: glfw/tests/tearing.app/Contents/MacOS/t
 .PHONY : glfw/tests/CMakeFiles/tearing.dir/build
 
 glfw/tests/CMakeFiles/tearing.dir/requires: glfw/tests/CMakeFiles/tearing.dir/tearing.c.o.requires
-glfw/tests/CMakeFiles/tearing.dir/requires: glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o.requires
 glfw/tests/CMakeFiles/tearing.dir/requires: glfw/tests/CMakeFiles/tearing.dir/__/deps/glad.c.o.requires
 
 .PHONY : glfw/tests/CMakeFiles/tearing.dir/requires

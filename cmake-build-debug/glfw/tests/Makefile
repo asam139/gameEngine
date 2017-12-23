@@ -68,6 +68,17 @@ install/strip/fast: preinstall/fast
 	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -79,17 +90,6 @@ install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
 	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # Special rule for the target install
 install: preinstall
@@ -187,21 +187,6 @@ title/fast:
 .PHONY : title/fast
 
 # Convenience name for target.
-glfw/tests/CMakeFiles/windows.dir/rule:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/windows.dir/rule
-.PHONY : glfw/tests/CMakeFiles/windows.dir/rule
-
-# Convenience name for target.
-windows: glfw/tests/CMakeFiles/windows.dir/rule
-
-.PHONY : windows
-
-# fast build rule for target.
-windows/fast:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/build
-.PHONY : windows/fast
-
-# Convenience name for target.
 glfw/tests/CMakeFiles/timeout.dir/rule:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/timeout.dir/rule
 .PHONY : glfw/tests/CMakeFiles/timeout.dir/rule
@@ -230,6 +215,21 @@ threads: glfw/tests/CMakeFiles/threads.dir/rule
 threads/fast:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/threads.dir/build.make glfw/tests/CMakeFiles/threads.dir/build
 .PHONY : threads/fast
+
+# Convenience name for target.
+glfw/tests/CMakeFiles/opacity.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/opacity.dir/rule
+.PHONY : glfw/tests/CMakeFiles/opacity.dir/rule
+
+# Convenience name for target.
+opacity: glfw/tests/CMakeFiles/opacity.dir/rule
+
+.PHONY : opacity
+
+# fast build rule for target.
+opacity/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/opacity.dir/build.make glfw/tests/CMakeFiles/opacity.dir/build
+.PHONY : opacity/fast
 
 # Convenience name for target.
 glfw/tests/CMakeFiles/gamma.dir/rule:
@@ -262,19 +262,64 @@ tearing/fast:
 .PHONY : tearing/fast
 
 # Convenience name for target.
-glfw/tests/CMakeFiles/icon.dir/rule:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/icon.dir/rule
-.PHONY : glfw/tests/CMakeFiles/icon.dir/rule
+glfw/tests/CMakeFiles/iconify.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/iconify.dir/rule
+.PHONY : glfw/tests/CMakeFiles/iconify.dir/rule
 
 # Convenience name for target.
-icon: glfw/tests/CMakeFiles/icon.dir/rule
+iconify: glfw/tests/CMakeFiles/iconify.dir/rule
 
-.PHONY : icon
+.PHONY : iconify
 
 # fast build rule for target.
-icon/fast:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/icon.dir/build.make glfw/tests/CMakeFiles/icon.dir/build
-.PHONY : icon/fast
+iconify/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/iconify.dir/build.make glfw/tests/CMakeFiles/iconify.dir/build
+.PHONY : iconify/fast
+
+# Convenience name for target.
+glfw/tests/CMakeFiles/joysticks.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/joysticks.dir/rule
+.PHONY : glfw/tests/CMakeFiles/joysticks.dir/rule
+
+# Convenience name for target.
+joysticks: glfw/tests/CMakeFiles/joysticks.dir/rule
+
+.PHONY : joysticks
+
+# fast build rule for target.
+joysticks/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/joysticks.dir/build.make glfw/tests/CMakeFiles/joysticks.dir/build
+.PHONY : joysticks/fast
+
+# Convenience name for target.
+glfw/tests/CMakeFiles/windows.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/windows.dir/rule
+.PHONY : glfw/tests/CMakeFiles/windows.dir/rule
+
+# Convenience name for target.
+windows: glfw/tests/CMakeFiles/windows.dir/rule
+
+.PHONY : windows
+
+# fast build rule for target.
+windows/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/build
+.PHONY : windows/fast
+
+# Convenience name for target.
+glfw/tests/CMakeFiles/inputlag.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/inputlag.dir/rule
+.PHONY : glfw/tests/CMakeFiles/inputlag.dir/rule
+
+# Convenience name for target.
+inputlag: glfw/tests/CMakeFiles/inputlag.dir/rule
+
+.PHONY : inputlag
+
+# fast build rule for target.
+inputlag/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/inputlag.dir/build.make glfw/tests/CMakeFiles/inputlag.dir/build
+.PHONY : inputlag/fast
 
 # Convenience name for target.
 glfw/tests/CMakeFiles/empty.dir/rule:
@@ -292,19 +337,19 @@ empty/fast:
 .PHONY : empty/fast
 
 # Convenience name for target.
-glfw/tests/CMakeFiles/glfwinfo.dir/rule:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/glfwinfo.dir/rule
-.PHONY : glfw/tests/CMakeFiles/glfwinfo.dir/rule
+glfw/tests/CMakeFiles/reopen.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/reopen.dir/rule
+.PHONY : glfw/tests/CMakeFiles/reopen.dir/rule
 
 # Convenience name for target.
-glfwinfo: glfw/tests/CMakeFiles/glfwinfo.dir/rule
+reopen: glfw/tests/CMakeFiles/reopen.dir/rule
 
-.PHONY : glfwinfo
+.PHONY : reopen
 
 # fast build rule for target.
-glfwinfo/fast:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/build
-.PHONY : glfwinfo/fast
+reopen/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/reopen.dir/build.make glfw/tests/CMakeFiles/reopen.dir/build
+.PHONY : reopen/fast
 
 # Convenience name for target.
 glfw/tests/CMakeFiles/msaa.dir/rule:
@@ -337,19 +382,19 @@ cursor/fast:
 .PHONY : cursor/fast
 
 # Convenience name for target.
-glfw/tests/CMakeFiles/sharing.dir/rule:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/sharing.dir/rule
-.PHONY : glfw/tests/CMakeFiles/sharing.dir/rule
+glfw/tests/CMakeFiles/glfwinfo.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/glfwinfo.dir/rule
+.PHONY : glfw/tests/CMakeFiles/glfwinfo.dir/rule
 
 # Convenience name for target.
-sharing: glfw/tests/CMakeFiles/sharing.dir/rule
+glfwinfo: glfw/tests/CMakeFiles/glfwinfo.dir/rule
 
-.PHONY : sharing
+.PHONY : glfwinfo
 
 # fast build rule for target.
-sharing/fast:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/sharing.dir/build.make glfw/tests/CMakeFiles/sharing.dir/build
-.PHONY : sharing/fast
+glfwinfo/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/build
+.PHONY : glfwinfo/fast
 
 # Convenience name for target.
 glfw/tests/CMakeFiles/monitors.dir/rule:
@@ -367,51 +412,6 @@ monitors/fast:
 .PHONY : monitors/fast
 
 # Convenience name for target.
-glfw/tests/CMakeFiles/reopen.dir/rule:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/reopen.dir/rule
-.PHONY : glfw/tests/CMakeFiles/reopen.dir/rule
-
-# Convenience name for target.
-reopen: glfw/tests/CMakeFiles/reopen.dir/rule
-
-.PHONY : reopen
-
-# fast build rule for target.
-reopen/fast:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/reopen.dir/build.make glfw/tests/CMakeFiles/reopen.dir/build
-.PHONY : reopen/fast
-
-# Convenience name for target.
-glfw/tests/CMakeFiles/iconify.dir/rule:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/iconify.dir/rule
-.PHONY : glfw/tests/CMakeFiles/iconify.dir/rule
-
-# Convenience name for target.
-iconify: glfw/tests/CMakeFiles/iconify.dir/rule
-
-.PHONY : iconify
-
-# fast build rule for target.
-iconify/fast:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/iconify.dir/build.make glfw/tests/CMakeFiles/iconify.dir/build
-.PHONY : iconify/fast
-
-# Convenience name for target.
-glfw/tests/CMakeFiles/joysticks.dir/rule:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/joysticks.dir/rule
-.PHONY : glfw/tests/CMakeFiles/joysticks.dir/rule
-
-# Convenience name for target.
-joysticks: glfw/tests/CMakeFiles/joysticks.dir/rule
-
-.PHONY : joysticks
-
-# fast build rule for target.
-joysticks/fast:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/joysticks.dir/build.make glfw/tests/CMakeFiles/joysticks.dir/build
-.PHONY : joysticks/fast
-
-# Convenience name for target.
 glfw/tests/CMakeFiles/events.dir/rule:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/events.dir/rule
 .PHONY : glfw/tests/CMakeFiles/events.dir/rule
@@ -426,6 +426,21 @@ events/fast:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/events.dir/build.make glfw/tests/CMakeFiles/events.dir/build
 .PHONY : events/fast
 
+# Convenience name for target.
+glfw/tests/CMakeFiles/icon.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/icon.dir/rule
+.PHONY : glfw/tests/CMakeFiles/icon.dir/rule
+
+# Convenience name for target.
+icon: glfw/tests/CMakeFiles/icon.dir/rule
+
+.PHONY : icon
+
+# fast build rule for target.
+icon/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/icon.dir/build.make glfw/tests/CMakeFiles/icon.dir/build
+.PHONY : icon/fast
+
 __/deps/getopt.o: __/deps/getopt.c.o
 
 .PHONY : __/deps/getopt.o
@@ -433,13 +448,12 @@ __/deps/getopt.o: __/deps/getopt.c.o
 # target to build an object file
 __/deps/getopt.c.o:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/clipboard.dir/build.make glfw/tests/CMakeFiles/clipboard.dir/__/deps/getopt.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/getopt.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/gamma.dir/build.make glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/tearing.dir/build.make glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/getopt.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/getopt.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/getopt.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/iconify.dir/build.make glfw/tests/CMakeFiles/iconify.dir/__/deps/getopt.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/getopt.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/inputlag.dir/build.make glfw/tests/CMakeFiles/inputlag.dir/__/deps/getopt.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/getopt.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/getopt.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/getopt.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/events.dir/build.make glfw/tests/CMakeFiles/events.dir/__/deps/getopt.c.o
 .PHONY : __/deps/getopt.c.o
 
@@ -450,13 +464,12 @@ __/deps/getopt.i: __/deps/getopt.c.i
 # target to preprocess a source file
 __/deps/getopt.c.i:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/clipboard.dir/build.make glfw/tests/CMakeFiles/clipboard.dir/__/deps/getopt.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/getopt.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/gamma.dir/build.make glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/tearing.dir/build.make glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/getopt.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/getopt.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/getopt.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/iconify.dir/build.make glfw/tests/CMakeFiles/iconify.dir/__/deps/getopt.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/getopt.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/inputlag.dir/build.make glfw/tests/CMakeFiles/inputlag.dir/__/deps/getopt.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/getopt.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/getopt.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/getopt.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/events.dir/build.make glfw/tests/CMakeFiles/events.dir/__/deps/getopt.c.i
 .PHONY : __/deps/getopt.c.i
 
@@ -467,13 +480,12 @@ __/deps/getopt.s: __/deps/getopt.c.s
 # target to generate assembly for a file
 __/deps/getopt.c.s:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/clipboard.dir/build.make glfw/tests/CMakeFiles/clipboard.dir/__/deps/getopt.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/getopt.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/gamma.dir/build.make glfw/tests/CMakeFiles/gamma.dir/__/deps/getopt.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/tearing.dir/build.make glfw/tests/CMakeFiles/tearing.dir/__/deps/getopt.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/getopt.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/getopt.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/getopt.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/iconify.dir/build.make glfw/tests/CMakeFiles/iconify.dir/__/deps/getopt.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/getopt.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/inputlag.dir/build.make glfw/tests/CMakeFiles/inputlag.dir/__/deps/getopt.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/getopt.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/getopt.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/getopt.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/events.dir/build.make glfw/tests/CMakeFiles/events.dir/__/deps/getopt.c.s
 .PHONY : __/deps/getopt.c.s
 
@@ -485,22 +497,23 @@ __/deps/glad.o: __/deps/glad.c.o
 __/deps/glad.c.o:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/clipboard.dir/build.make glfw/tests/CMakeFiles/clipboard.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/title.dir/build.make glfw/tests/CMakeFiles/title.dir/__/deps/glad.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/timeout.dir/build.make glfw/tests/CMakeFiles/timeout.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/threads.dir/build.make glfw/tests/CMakeFiles/threads.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/opacity.dir/build.make glfw/tests/CMakeFiles/opacity.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/gamma.dir/build.make glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/tearing.dir/build.make glfw/tests/CMakeFiles/tearing.dir/__/deps/glad.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/icon.dir/build.make glfw/tests/CMakeFiles/icon.dir/__/deps/glad.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/empty.dir/build.make glfw/tests/CMakeFiles/empty.dir/__/deps/glad.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/glad.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/glad.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/cursor.dir/build.make glfw/tests/CMakeFiles/cursor.dir/__/deps/glad.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/sharing.dir/build.make glfw/tests/CMakeFiles/sharing.dir/__/deps/glad.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/glad.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/reopen.dir/build.make glfw/tests/CMakeFiles/reopen.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/iconify.dir/build.make glfw/tests/CMakeFiles/iconify.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/joysticks.dir/build.make glfw/tests/CMakeFiles/joysticks.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/inputlag.dir/build.make glfw/tests/CMakeFiles/inputlag.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/empty.dir/build.make glfw/tests/CMakeFiles/empty.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/reopen.dir/build.make glfw/tests/CMakeFiles/reopen.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/cursor.dir/build.make glfw/tests/CMakeFiles/cursor.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/events.dir/build.make glfw/tests/CMakeFiles/events.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/icon.dir/build.make glfw/tests/CMakeFiles/icon.dir/__/deps/glad.c.o
 .PHONY : __/deps/glad.c.o
 
 __/deps/glad.i: __/deps/glad.c.i
@@ -511,22 +524,23 @@ __/deps/glad.i: __/deps/glad.c.i
 __/deps/glad.c.i:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/clipboard.dir/build.make glfw/tests/CMakeFiles/clipboard.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/title.dir/build.make glfw/tests/CMakeFiles/title.dir/__/deps/glad.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/timeout.dir/build.make glfw/tests/CMakeFiles/timeout.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/threads.dir/build.make glfw/tests/CMakeFiles/threads.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/opacity.dir/build.make glfw/tests/CMakeFiles/opacity.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/gamma.dir/build.make glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/tearing.dir/build.make glfw/tests/CMakeFiles/tearing.dir/__/deps/glad.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/icon.dir/build.make glfw/tests/CMakeFiles/icon.dir/__/deps/glad.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/empty.dir/build.make glfw/tests/CMakeFiles/empty.dir/__/deps/glad.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/glad.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/glad.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/cursor.dir/build.make glfw/tests/CMakeFiles/cursor.dir/__/deps/glad.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/sharing.dir/build.make glfw/tests/CMakeFiles/sharing.dir/__/deps/glad.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/glad.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/reopen.dir/build.make glfw/tests/CMakeFiles/reopen.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/iconify.dir/build.make glfw/tests/CMakeFiles/iconify.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/joysticks.dir/build.make glfw/tests/CMakeFiles/joysticks.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/inputlag.dir/build.make glfw/tests/CMakeFiles/inputlag.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/empty.dir/build.make glfw/tests/CMakeFiles/empty.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/reopen.dir/build.make glfw/tests/CMakeFiles/reopen.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/cursor.dir/build.make glfw/tests/CMakeFiles/cursor.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/events.dir/build.make glfw/tests/CMakeFiles/events.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/icon.dir/build.make glfw/tests/CMakeFiles/icon.dir/__/deps/glad.c.i
 .PHONY : __/deps/glad.c.i
 
 __/deps/glad.s: __/deps/glad.c.s
@@ -537,22 +551,23 @@ __/deps/glad.s: __/deps/glad.c.s
 __/deps/glad.c.s:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/clipboard.dir/build.make glfw/tests/CMakeFiles/clipboard.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/title.dir/build.make glfw/tests/CMakeFiles/title.dir/__/deps/glad.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/timeout.dir/build.make glfw/tests/CMakeFiles/timeout.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/threads.dir/build.make glfw/tests/CMakeFiles/threads.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/opacity.dir/build.make glfw/tests/CMakeFiles/opacity.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/gamma.dir/build.make glfw/tests/CMakeFiles/gamma.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/tearing.dir/build.make glfw/tests/CMakeFiles/tearing.dir/__/deps/glad.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/icon.dir/build.make glfw/tests/CMakeFiles/icon.dir/__/deps/glad.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/empty.dir/build.make glfw/tests/CMakeFiles/empty.dir/__/deps/glad.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/glad.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/glad.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/cursor.dir/build.make glfw/tests/CMakeFiles/cursor.dir/__/deps/glad.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/sharing.dir/build.make glfw/tests/CMakeFiles/sharing.dir/__/deps/glad.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/glad.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/reopen.dir/build.make glfw/tests/CMakeFiles/reopen.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/iconify.dir/build.make glfw/tests/CMakeFiles/iconify.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/joysticks.dir/build.make glfw/tests/CMakeFiles/joysticks.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/windows.dir/build.make glfw/tests/CMakeFiles/windows.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/inputlag.dir/build.make glfw/tests/CMakeFiles/inputlag.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/empty.dir/build.make glfw/tests/CMakeFiles/empty.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/reopen.dir/build.make glfw/tests/CMakeFiles/reopen.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/cursor.dir/build.make glfw/tests/CMakeFiles/cursor.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/events.dir/build.make glfw/tests/CMakeFiles/events.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/icon.dir/build.make glfw/tests/CMakeFiles/icon.dir/__/deps/glad.c.s
 .PHONY : __/deps/glad.c.s
 
 __/deps/tinycthread.o: __/deps/tinycthread.c.o
@@ -801,6 +816,33 @@ iconify.c.s:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/iconify.dir/build.make glfw/tests/CMakeFiles/iconify.dir/iconify.c.s
 .PHONY : iconify.c.s
 
+inputlag.o: inputlag.c.o
+
+.PHONY : inputlag.o
+
+# target to build an object file
+inputlag.c.o:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/inputlag.dir/build.make glfw/tests/CMakeFiles/inputlag.dir/inputlag.c.o
+.PHONY : inputlag.c.o
+
+inputlag.i: inputlag.c.i
+
+.PHONY : inputlag.i
+
+# target to preprocess a source file
+inputlag.c.i:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/inputlag.dir/build.make glfw/tests/CMakeFiles/inputlag.dir/inputlag.c.i
+.PHONY : inputlag.c.i
+
+inputlag.s: inputlag.c.s
+
+.PHONY : inputlag.s
+
+# target to generate assembly for a file
+inputlag.c.s:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/inputlag.dir/build.make glfw/tests/CMakeFiles/inputlag.dir/inputlag.c.s
+.PHONY : inputlag.c.s
+
 joysticks.o: joysticks.c.o
 
 .PHONY : joysticks.o
@@ -882,6 +924,33 @@ msaa.c.s:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/msaa.c.s
 .PHONY : msaa.c.s
 
+opacity.o: opacity.c.o
+
+.PHONY : opacity.o
+
+# target to build an object file
+opacity.c.o:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/opacity.dir/build.make glfw/tests/CMakeFiles/opacity.dir/opacity.c.o
+.PHONY : opacity.c.o
+
+opacity.i: opacity.c.i
+
+.PHONY : opacity.i
+
+# target to preprocess a source file
+opacity.c.i:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/opacity.dir/build.make glfw/tests/CMakeFiles/opacity.dir/opacity.c.i
+.PHONY : opacity.c.i
+
+opacity.s: opacity.c.s
+
+.PHONY : opacity.s
+
+# target to generate assembly for a file
+opacity.c.s:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/opacity.dir/build.make glfw/tests/CMakeFiles/opacity.dir/opacity.c.s
+.PHONY : opacity.c.s
+
 reopen.o: reopen.c.o
 
 .PHONY : reopen.o
@@ -908,33 +977,6 @@ reopen.s: reopen.c.s
 reopen.c.s:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/reopen.dir/build.make glfw/tests/CMakeFiles/reopen.dir/reopen.c.s
 .PHONY : reopen.c.s
-
-sharing.o: sharing.c.o
-
-.PHONY : sharing.o
-
-# target to build an object file
-sharing.c.o:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/sharing.dir/build.make glfw/tests/CMakeFiles/sharing.dir/sharing.c.o
-.PHONY : sharing.c.o
-
-sharing.i: sharing.c.i
-
-.PHONY : sharing.i
-
-# target to preprocess a source file
-sharing.c.i:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/sharing.dir/build.make glfw/tests/CMakeFiles/sharing.dir/sharing.c.i
-.PHONY : sharing.c.i
-
-sharing.s: sharing.c.s
-
-.PHONY : sharing.s
-
-# target to generate assembly for a file
-sharing.c.s:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/tests/CMakeFiles/sharing.dir/build.make glfw/tests/CMakeFiles/sharing.dir/sharing.c.s
-.PHONY : sharing.c.s
 
 tearing.o: tearing.c.o
 
@@ -1078,29 +1120,30 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
+	@echo "... edit_cache"
+	@echo "... install/local"
 	@echo "... clipboard"
 	@echo "... title"
-	@echo "... install/local"
-	@echo "... edit_cache"
-	@echo "... windows"
 	@echo "... install"
 	@echo "... timeout"
 	@echo "... rebuild_cache"
 	@echo "... threads"
+	@echo "... opacity"
 	@echo "... gamma"
 	@echo "... tearing"
-	@echo "... icon"
-	@echo "... empty"
-	@echo "... glfwinfo"
-	@echo "... msaa"
-	@echo "... cursor"
-	@echo "... sharing"
-	@echo "... monitors"
-	@echo "... reopen"
 	@echo "... list_install_components"
 	@echo "... iconify"
 	@echo "... joysticks"
+	@echo "... windows"
+	@echo "... inputlag"
+	@echo "... empty"
+	@echo "... reopen"
+	@echo "... msaa"
+	@echo "... cursor"
+	@echo "... glfwinfo"
+	@echo "... monitors"
 	@echo "... events"
+	@echo "... icon"
 	@echo "... __/deps/getopt.o"
 	@echo "... __/deps/getopt.i"
 	@echo "... __/deps/getopt.s"
@@ -1134,6 +1177,9 @@ help:
 	@echo "... iconify.o"
 	@echo "... iconify.i"
 	@echo "... iconify.s"
+	@echo "... inputlag.o"
+	@echo "... inputlag.i"
+	@echo "... inputlag.s"
 	@echo "... joysticks.o"
 	@echo "... joysticks.i"
 	@echo "... joysticks.s"
@@ -1143,12 +1189,12 @@ help:
 	@echo "... msaa.o"
 	@echo "... msaa.i"
 	@echo "... msaa.s"
+	@echo "... opacity.o"
+	@echo "... opacity.i"
+	@echo "... opacity.s"
 	@echo "... reopen.o"
 	@echo "... reopen.i"
 	@echo "... reopen.s"
-	@echo "... sharing.o"
-	@echo "... sharing.i"
-	@echo "... sharing.s"
 	@echo "... tearing.o"
 	@echo "... tearing.i"
 	@echo "... tearing.s"

@@ -68,27 +68,6 @@ install/strip/fast: preinstall/fast
 	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -101,17 +80,6 @@ install/fast: preinstall/fast
 	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -123,6 +91,38 @@ install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
 	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -157,21 +157,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-glfw/examples/CMakeFiles/heightmap.dir/rule:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/examples/CMakeFiles/heightmap.dir/rule
-.PHONY : glfw/examples/CMakeFiles/heightmap.dir/rule
-
-# Convenience name for target.
-heightmap: glfw/examples/CMakeFiles/heightmap.dir/rule
-
-.PHONY : heightmap
-
-# fast build rule for target.
-heightmap/fast:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/heightmap.dir/build.make glfw/examples/CMakeFiles/heightmap.dir/build
-.PHONY : heightmap/fast
-
-# Convenience name for target.
 glfw/examples/CMakeFiles/wave.dir/rule:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/examples/CMakeFiles/wave.dir/rule
 .PHONY : glfw/examples/CMakeFiles/wave.dir/rule
@@ -185,21 +170,6 @@ wave: glfw/examples/CMakeFiles/wave.dir/rule
 wave/fast:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/wave.dir/build.make glfw/examples/CMakeFiles/wave.dir/build
 .PHONY : wave/fast
-
-# Convenience name for target.
-glfw/examples/CMakeFiles/splitview.dir/rule:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/examples/CMakeFiles/splitview.dir/rule
-.PHONY : glfw/examples/CMakeFiles/splitview.dir/rule
-
-# Convenience name for target.
-splitview: glfw/examples/CMakeFiles/splitview.dir/rule
-
-.PHONY : splitview
-
-# fast build rule for target.
-splitview/fast:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/splitview.dir/build.make glfw/examples/CMakeFiles/splitview.dir/build
-.PHONY : splitview/fast
 
 # Convenience name for target.
 glfw/examples/CMakeFiles/simple.dir/rule:
@@ -217,6 +187,21 @@ simple/fast:
 .PHONY : simple/fast
 
 # Convenience name for target.
+glfw/examples/CMakeFiles/sharing.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/examples/CMakeFiles/sharing.dir/rule
+.PHONY : glfw/examples/CMakeFiles/sharing.dir/rule
+
+# Convenience name for target.
+sharing: glfw/examples/CMakeFiles/sharing.dir/rule
+
+.PHONY : sharing
+
+# fast build rule for target.
+sharing/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/sharing.dir/build.make glfw/examples/CMakeFiles/sharing.dir/build
+.PHONY : sharing/fast
+
+# Convenience name for target.
 glfw/examples/CMakeFiles/particles.dir/rule:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/examples/CMakeFiles/particles.dir/rule
 .PHONY : glfw/examples/CMakeFiles/particles.dir/rule
@@ -230,6 +215,51 @@ particles: glfw/examples/CMakeFiles/particles.dir/rule
 particles/fast:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/particles.dir/build.make glfw/examples/CMakeFiles/particles.dir/build
 .PHONY : particles/fast
+
+# Convenience name for target.
+glfw/examples/CMakeFiles/heightmap.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/examples/CMakeFiles/heightmap.dir/rule
+.PHONY : glfw/examples/CMakeFiles/heightmap.dir/rule
+
+# Convenience name for target.
+heightmap: glfw/examples/CMakeFiles/heightmap.dir/rule
+
+.PHONY : heightmap
+
+# fast build rule for target.
+heightmap/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/heightmap.dir/build.make glfw/examples/CMakeFiles/heightmap.dir/build
+.PHONY : heightmap/fast
+
+# Convenience name for target.
+glfw/examples/CMakeFiles/splitview.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/examples/CMakeFiles/splitview.dir/rule
+.PHONY : glfw/examples/CMakeFiles/splitview.dir/rule
+
+# Convenience name for target.
+splitview: glfw/examples/CMakeFiles/splitview.dir/rule
+
+.PHONY : splitview
+
+# fast build rule for target.
+splitview/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/splitview.dir/build.make glfw/examples/CMakeFiles/splitview.dir/build
+.PHONY : splitview/fast
+
+# Convenience name for target.
+glfw/examples/CMakeFiles/offscreen.dir/rule:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 glfw/examples/CMakeFiles/offscreen.dir/rule
+.PHONY : glfw/examples/CMakeFiles/offscreen.dir/rule
+
+# Convenience name for target.
+offscreen: glfw/examples/CMakeFiles/offscreen.dir/rule
+
+.PHONY : offscreen
+
+# fast build rule for target.
+offscreen/fast:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/offscreen.dir/build.make glfw/examples/CMakeFiles/offscreen.dir/build
+.PHONY : offscreen/fast
 
 # Convenience name for target.
 glfw/examples/CMakeFiles/gears.dir/rule:
@@ -294,11 +324,13 @@ __/deps/glad.o: __/deps/glad.c.o
 
 # target to build an object file
 __/deps/glad.c.o:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/heightmap.dir/build.make glfw/examples/CMakeFiles/heightmap.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/wave.dir/build.make glfw/examples/CMakeFiles/wave.dir/__/deps/glad.c.o
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/splitview.dir/build.make glfw/examples/CMakeFiles/splitview.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/simple.dir/build.make glfw/examples/CMakeFiles/simple.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/sharing.dir/build.make glfw/examples/CMakeFiles/sharing.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/particles.dir/build.make glfw/examples/CMakeFiles/particles.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/heightmap.dir/build.make glfw/examples/CMakeFiles/heightmap.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/splitview.dir/build.make glfw/examples/CMakeFiles/splitview.dir/__/deps/glad.c.o
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/offscreen.dir/build.make glfw/examples/CMakeFiles/offscreen.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/gears.dir/build.make glfw/examples/CMakeFiles/gears.dir/__/deps/glad.c.o
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/boing.dir/build.make glfw/examples/CMakeFiles/boing.dir/__/deps/glad.c.o
 .PHONY : __/deps/glad.c.o
@@ -309,11 +341,13 @@ __/deps/glad.i: __/deps/glad.c.i
 
 # target to preprocess a source file
 __/deps/glad.c.i:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/heightmap.dir/build.make glfw/examples/CMakeFiles/heightmap.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/wave.dir/build.make glfw/examples/CMakeFiles/wave.dir/__/deps/glad.c.i
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/splitview.dir/build.make glfw/examples/CMakeFiles/splitview.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/simple.dir/build.make glfw/examples/CMakeFiles/simple.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/sharing.dir/build.make glfw/examples/CMakeFiles/sharing.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/particles.dir/build.make glfw/examples/CMakeFiles/particles.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/heightmap.dir/build.make glfw/examples/CMakeFiles/heightmap.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/splitview.dir/build.make glfw/examples/CMakeFiles/splitview.dir/__/deps/glad.c.i
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/offscreen.dir/build.make glfw/examples/CMakeFiles/offscreen.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/gears.dir/build.make glfw/examples/CMakeFiles/gears.dir/__/deps/glad.c.i
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/boing.dir/build.make glfw/examples/CMakeFiles/boing.dir/__/deps/glad.c.i
 .PHONY : __/deps/glad.c.i
@@ -324,11 +358,13 @@ __/deps/glad.s: __/deps/glad.c.s
 
 # target to generate assembly for a file
 __/deps/glad.c.s:
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/heightmap.dir/build.make glfw/examples/CMakeFiles/heightmap.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/wave.dir/build.make glfw/examples/CMakeFiles/wave.dir/__/deps/glad.c.s
-	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/splitview.dir/build.make glfw/examples/CMakeFiles/splitview.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/simple.dir/build.make glfw/examples/CMakeFiles/simple.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/sharing.dir/build.make glfw/examples/CMakeFiles/sharing.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/particles.dir/build.make glfw/examples/CMakeFiles/particles.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/heightmap.dir/build.make glfw/examples/CMakeFiles/heightmap.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/splitview.dir/build.make glfw/examples/CMakeFiles/splitview.dir/__/deps/glad.c.s
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/offscreen.dir/build.make glfw/examples/CMakeFiles/offscreen.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/gears.dir/build.make glfw/examples/CMakeFiles/gears.dir/__/deps/glad.c.s
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/boing.dir/build.make glfw/examples/CMakeFiles/boing.dir/__/deps/glad.c.s
 .PHONY : __/deps/glad.c.s
@@ -441,6 +477,33 @@ heightmap.c.s:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/heightmap.dir/build.make glfw/examples/CMakeFiles/heightmap.dir/heightmap.c.s
 .PHONY : heightmap.c.s
 
+offscreen.o: offscreen.c.o
+
+.PHONY : offscreen.o
+
+# target to build an object file
+offscreen.c.o:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/offscreen.dir/build.make glfw/examples/CMakeFiles/offscreen.dir/offscreen.c.o
+.PHONY : offscreen.c.o
+
+offscreen.i: offscreen.c.i
+
+.PHONY : offscreen.i
+
+# target to preprocess a source file
+offscreen.c.i:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/offscreen.dir/build.make glfw/examples/CMakeFiles/offscreen.dir/offscreen.c.i
+.PHONY : offscreen.c.i
+
+offscreen.s: offscreen.c.s
+
+.PHONY : offscreen.s
+
+# target to generate assembly for a file
+offscreen.c.s:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/offscreen.dir/build.make glfw/examples/CMakeFiles/offscreen.dir/offscreen.c.s
+.PHONY : offscreen.c.s
+
 particles.o: particles.c.o
 
 .PHONY : particles.o
@@ -467,6 +530,33 @@ particles.s: particles.c.s
 particles.c.s:
 	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/particles.dir/build.make glfw/examples/CMakeFiles/particles.dir/particles.c.s
 .PHONY : particles.c.s
+
+sharing.o: sharing.c.o
+
+.PHONY : sharing.o
+
+# target to build an object file
+sharing.c.o:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/sharing.dir/build.make glfw/examples/CMakeFiles/sharing.dir/sharing.c.o
+.PHONY : sharing.c.o
+
+sharing.i: sharing.c.i
+
+.PHONY : sharing.i
+
+# target to preprocess a source file
+sharing.c.i:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/sharing.dir/build.make glfw/examples/CMakeFiles/sharing.dir/sharing.c.i
+.PHONY : sharing.c.i
+
+sharing.s: sharing.c.s
+
+.PHONY : sharing.s
+
+# target to generate assembly for a file
+sharing.c.s:
+	cd /Users/Sau/gameEngine/cmake-build-debug && $(MAKE) -f glfw/examples/CMakeFiles/sharing.dir/build.make glfw/examples/CMakeFiles/sharing.dir/sharing.c.s
+.PHONY : sharing.c.s
 
 simple.o: simple.c.o
 
@@ -556,16 +646,18 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... heightmap"
-	@echo "... list_install_components"
-	@echo "... rebuild_cache"
 	@echo "... install"
 	@echo "... wave"
-	@echo "... edit_cache"
-	@echo "... splitview"
 	@echo "... install/local"
 	@echo "... simple"
+	@echo "... rebuild_cache"
+	@echo "... sharing"
 	@echo "... particles"
+	@echo "... list_install_components"
+	@echo "... heightmap"
+	@echo "... edit_cache"
+	@echo "... splitview"
+	@echo "... offscreen"
 	@echo "... gears"
 	@echo "... boing"
 	@echo "... __/deps/getopt.o"
@@ -586,9 +678,15 @@ help:
 	@echo "... heightmap.o"
 	@echo "... heightmap.i"
 	@echo "... heightmap.s"
+	@echo "... offscreen.o"
+	@echo "... offscreen.i"
+	@echo "... offscreen.s"
 	@echo "... particles.o"
 	@echo "... particles.i"
 	@echo "... particles.s"
+	@echo "... sharing.o"
+	@echo "... sharing.i"
+	@echo "... sharing.s"
 	@echo "... simple.o"
 	@echo "... simple.i"
 	@echo "... simple.s"
