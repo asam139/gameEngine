@@ -44,8 +44,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/include"/>
 					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Users/Sau/gameEngine/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
@@ -67,8 +67,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/Sau/gameEngine/include"/>
 					<Add directory="/Users/Sau/gameEngine/glfw/include"/>
+					<Add directory="/Users/Sau/gameEngine/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
@@ -2353,6 +2353,9 @@
 			<Option target="gameEngine"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/include/glm/vector_relational.hpp">
+			<Option target="gameEngine"/>
+		</Unit>
+		<Unit filename="/Users/Sau/gameEngine/src/deps/glad/glad.c">
 			<Option target="gameEngine"/>
 		</Unit>
 		<Unit filename="/Users/Sau/gameEngine/src/main.cpp">

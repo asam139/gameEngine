@@ -520,6 +520,33 @@ events/fast:
 	$(MAKE) -f glfw/tests/CMakeFiles/events.dir/build.make glfw/tests/CMakeFiles/events.dir/build
 .PHONY : events/fast
 
+src/deps/glad/glad.o: src/deps/glad/glad.c.o
+
+.PHONY : src/deps/glad/glad.o
+
+# target to build an object file
+src/deps/glad/glad.c.o:
+	$(MAKE) -f CMakeFiles/gameEngine.dir/build.make CMakeFiles/gameEngine.dir/src/deps/glad/glad.c.o
+.PHONY : src/deps/glad/glad.c.o
+
+src/deps/glad/glad.i: src/deps/glad/glad.c.i
+
+.PHONY : src/deps/glad/glad.i
+
+# target to preprocess a source file
+src/deps/glad/glad.c.i:
+	$(MAKE) -f CMakeFiles/gameEngine.dir/build.make CMakeFiles/gameEngine.dir/src/deps/glad/glad.c.i
+.PHONY : src/deps/glad/glad.c.i
+
+src/deps/glad/glad.s: src/deps/glad/glad.c.s
+
+.PHONY : src/deps/glad/glad.s
+
+# target to generate assembly for a file
+src/deps/glad/glad.c.s:
+	$(MAKE) -f CMakeFiles/gameEngine.dir/build.make CMakeFiles/gameEngine.dir/src/deps/glad/glad.c.s
+.PHONY : src/deps/glad/glad.c.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -587,6 +614,9 @@ help:
 	@echo "... iconify"
 	@echo "... joysticks"
 	@echo "... events"
+	@echo "... src/deps/glad/glad.o"
+	@echo "... src/deps/glad/glad.i"
+	@echo "... src/deps/glad/glad.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

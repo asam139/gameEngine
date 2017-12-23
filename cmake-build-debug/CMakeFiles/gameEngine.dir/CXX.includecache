@@ -74,26 +74,6 @@ stdint.h
 inttypes.h
 -
 
-/Users/Sau/gameEngine/include/glad/glad.h
-windows.h
--
-stddef.h
--
-KHR/khrplatform.h
--
-inttypes.h
--
-inttypes.h
--
-inttypes.h
--
-stdint.h
--
-stdint.h
--
-inttypes.h
--
-
 /Users/Sau/gameEngine/src/main.cpp
 glad/glad.h
 -
@@ -101,8 +81,6 @@ GLFW/glfw3.h
 -
 iostream
 -
-../include/glad/glad.h
-/Users/Sau/gameEngine/include/glad/glad.h
 iostream
 -
 

@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /Users/Sau/gameEngine/cmake-build-debug
 CMakeFiles/gameEngine.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f CMakeFiles/gameEngine.dir/build.make CMakeFiles/gameEngine.dir/depend
 	$(MAKE) -f CMakeFiles/gameEngine.dir/build.make CMakeFiles/gameEngine.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=18,19 "Built target gameEngine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=18,19,20 "Built target gameEngine"
 .PHONY : CMakeFiles/gameEngine.dir/all
 
 # Include target in all.
@@ -76,7 +76,7 @@ all: CMakeFiles/gameEngine.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/gameEngine.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 16
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 17
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/gameEngine.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/gameEngine.dir/rule
@@ -178,7 +178,7 @@ glfw/src/preinstall:
 glfw/src/CMakeFiles/glfw.dir/all:
 	$(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/depend
 	$(MAKE) -f glfw/src/CMakeFiles/glfw.dir/build.make glfw/src/CMakeFiles/glfw.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=26,27,28,29,30,31,32,33,34,35,36,37,38,39 "Built target glfw"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=27,28,29,30,31,32,33,34,35,36,37,38,39,40 "Built target glfw"
 .PHONY : glfw/src/CMakeFiles/glfw.dir/all
 
 # Include target in all.
@@ -319,7 +319,7 @@ clean: glfw/examples/CMakeFiles/wave.dir/clean
 glfw/examples/CMakeFiles/splitview.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f glfw/examples/CMakeFiles/splitview.dir/build.make glfw/examples/CMakeFiles/splitview.dir/depend
 	$(MAKE) -f glfw/examples/CMakeFiles/splitview.dir/build.make glfw/examples/CMakeFiles/splitview.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=77,78,79 "Built target splitview"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=78,79,80 "Built target splitview"
 .PHONY : glfw/examples/CMakeFiles/splitview.dir/all
 
 # Include target in all.
@@ -356,7 +356,7 @@ clean: glfw/examples/CMakeFiles/splitview.dir/clean
 glfw/examples/CMakeFiles/simple.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f glfw/examples/CMakeFiles/simple.dir/build.make glfw/examples/CMakeFiles/simple.dir/depend
 	$(MAKE) -f glfw/examples/CMakeFiles/simple.dir/build.make glfw/examples/CMakeFiles/simple.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=75,76 "Built target simple"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=75,76,77 "Built target simple"
 .PHONY : glfw/examples/CMakeFiles/simple.dir/all
 
 # Include target in all.
@@ -366,7 +366,7 @@ all: glfw/examples/CMakeFiles/simple.dir/all
 
 # Build rule for subdir invocation for target.
 glfw/examples/CMakeFiles/simple.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 16
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 17
 	$(MAKE) -f CMakeFiles/Makefile2 glfw/examples/CMakeFiles/simple.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 0
 .PHONY : glfw/examples/CMakeFiles/simple.dir/rule
@@ -430,7 +430,7 @@ clean: glfw/examples/CMakeFiles/particles.dir/clean
 glfw/examples/CMakeFiles/gears.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f glfw/examples/CMakeFiles/gears.dir/build.make glfw/examples/CMakeFiles/gears.dir/depend
 	$(MAKE) -f glfw/examples/CMakeFiles/gears.dir/build.make glfw/examples/CMakeFiles/gears.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=24,25 "Built target gears"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=24,25,26 "Built target gears"
 .PHONY : glfw/examples/CMakeFiles/gears.dir/all
 
 # Include target in all.
@@ -440,7 +440,7 @@ all: glfw/examples/CMakeFiles/gears.dir/all
 
 # Build rule for subdir invocation for target.
 glfw/examples/CMakeFiles/gears.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 16
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 17
 	$(MAKE) -f CMakeFiles/Makefile2 glfw/examples/CMakeFiles/gears.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 0
 .PHONY : glfw/examples/CMakeFiles/gears.dir/rule
@@ -741,7 +741,7 @@ clean: glfw/tests/CMakeFiles/threads.dir/clean
 glfw/tests/CMakeFiles/gamma.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f glfw/tests/CMakeFiles/gamma.dir/build.make glfw/tests/CMakeFiles/gamma.dir/depend
 	$(MAKE) -f glfw/tests/CMakeFiles/gamma.dir/build.make glfw/tests/CMakeFiles/gamma.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=20,21,22,23 "Built target gamma"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=21,22,23 "Built target gamma"
 .PHONY : glfw/tests/CMakeFiles/gamma.dir/all
 
 # Include target in all.
@@ -751,7 +751,7 @@ all: glfw/tests/CMakeFiles/gamma.dir/all
 
 # Build rule for subdir invocation for target.
 glfw/tests/CMakeFiles/gamma.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 17
 	$(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/gamma.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 0
 .PHONY : glfw/tests/CMakeFiles/gamma.dir/rule
@@ -778,7 +778,7 @@ clean: glfw/tests/CMakeFiles/gamma.dir/clean
 glfw/tests/CMakeFiles/tearing.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f glfw/tests/CMakeFiles/tearing.dir/build.make glfw/tests/CMakeFiles/tearing.dir/depend
 	$(MAKE) -f glfw/tests/CMakeFiles/tearing.dir/build.make glfw/tests/CMakeFiles/tearing.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=80,81,82,83 "Built target tearing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=81,82,83 "Built target tearing"
 .PHONY : glfw/tests/CMakeFiles/tearing.dir/all
 
 # Include target in all.
@@ -788,7 +788,7 @@ all: glfw/tests/CMakeFiles/tearing.dir/all
 
 # Build rule for subdir invocation for target.
 glfw/tests/CMakeFiles/tearing.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 17
 	$(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/tearing.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 0
 .PHONY : glfw/tests/CMakeFiles/tearing.dir/rule
@@ -889,7 +889,7 @@ clean: glfw/tests/CMakeFiles/empty.dir/clean
 glfw/tests/CMakeFiles/glfwinfo.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/depend
 	$(MAKE) -f glfw/tests/CMakeFiles/glfwinfo.dir/build.make glfw/tests/CMakeFiles/glfwinfo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=40,41,42,43 "Built target glfwinfo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=41,42,43 "Built target glfwinfo"
 .PHONY : glfw/tests/CMakeFiles/glfwinfo.dir/all
 
 # Include target in all.
@@ -899,7 +899,7 @@ all: glfw/tests/CMakeFiles/glfwinfo.dir/all
 
 # Build rule for subdir invocation for target.
 glfw/tests/CMakeFiles/glfwinfo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 17
 	$(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/glfwinfo.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 0
 .PHONY : glfw/tests/CMakeFiles/glfwinfo.dir/rule
@@ -926,7 +926,7 @@ clean: glfw/tests/CMakeFiles/glfwinfo.dir/clean
 glfw/tests/CMakeFiles/msaa.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/depend
 	$(MAKE) -f glfw/tests/CMakeFiles/msaa.dir/build.make glfw/tests/CMakeFiles/msaa.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=60,61,62,63 "Built target msaa"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=61,62,63 "Built target msaa"
 .PHONY : glfw/tests/CMakeFiles/msaa.dir/all
 
 # Include target in all.
@@ -936,7 +936,7 @@ all: glfw/tests/CMakeFiles/msaa.dir/all
 
 # Build rule for subdir invocation for target.
 glfw/tests/CMakeFiles/msaa.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 17
 	$(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/msaa.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 0
 .PHONY : glfw/tests/CMakeFiles/msaa.dir/rule
@@ -1037,7 +1037,7 @@ clean: glfw/tests/CMakeFiles/sharing.dir/clean
 glfw/tests/CMakeFiles/monitors.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/depend
 	$(MAKE) -f glfw/tests/CMakeFiles/monitors.dir/build.make glfw/tests/CMakeFiles/monitors.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=56,57,58,59 "Built target monitors"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=57,58,59,60 "Built target monitors"
 .PHONY : glfw/tests/CMakeFiles/monitors.dir/all
 
 # Include target in all.
@@ -1111,7 +1111,7 @@ clean: glfw/tests/CMakeFiles/reopen.dir/clean
 glfw/tests/CMakeFiles/iconify.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f glfw/tests/CMakeFiles/iconify.dir/build.make glfw/tests/CMakeFiles/iconify.dir/depend
 	$(MAKE) -f glfw/tests/CMakeFiles/iconify.dir/build.make glfw/tests/CMakeFiles/iconify.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=50,51,52 "Built target iconify"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=50,51,52,53 "Built target iconify"
 .PHONY : glfw/tests/CMakeFiles/iconify.dir/all
 
 # Include target in all.
@@ -1121,7 +1121,7 @@ all: glfw/tests/CMakeFiles/iconify.dir/all
 
 # Build rule for subdir invocation for target.
 glfw/tests/CMakeFiles/iconify.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 17
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 18
 	$(MAKE) -f CMakeFiles/Makefile2 glfw/tests/CMakeFiles/iconify.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Sau/gameEngine/cmake-build-debug/CMakeFiles 0
 .PHONY : glfw/tests/CMakeFiles/iconify.dir/rule
@@ -1148,7 +1148,7 @@ clean: glfw/tests/CMakeFiles/iconify.dir/clean
 glfw/tests/CMakeFiles/joysticks.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f glfw/tests/CMakeFiles/joysticks.dir/build.make glfw/tests/CMakeFiles/joysticks.dir/depend
 	$(MAKE) -f glfw/tests/CMakeFiles/joysticks.dir/build.make glfw/tests/CMakeFiles/joysticks.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=53,54,55 "Built target joysticks"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles --progress-num=54,55,56 "Built target joysticks"
 .PHONY : glfw/tests/CMakeFiles/joysticks.dir/all
 
 # Include target in all.

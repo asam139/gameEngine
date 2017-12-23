@@ -1,9 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-
 #include <iostream>
-#include "../include/glad/glad.h"
 
 void onChangeFramebufferSize(GLFWwindow* window, const int32_t width, const int32_t height) {
     glViewport(0, 0, width, height);
@@ -40,7 +38,9 @@ int main (int argc, char *argv[]) {
     }
     glfwMakeContextCurrent(window);  //Make the window's context current
 
+
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {  //Init GLAD
+
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
