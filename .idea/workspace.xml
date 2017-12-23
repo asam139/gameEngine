@@ -56,8 +56,8 @@
       <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+            <state relative-caret-position="180">
+              <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -66,9 +66,11 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-              <folding />
+            <state relative-caret-position="285">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#22#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -121,11 +123,6 @@
             <path>
               <item name="gameEngine" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
               <item name="gameEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gameEngine" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
-              <item name="gameEngine" type="462c0819:PsiDirectoryNode" />
               <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -173,7 +170,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.gameEngine">
+  <component name="RunManager" selected="Application.Build All">
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="gameEngine" RUN_TARGET_NAME="gameEngine" EXPLICIT_BUILD_TARGET_NAME="all">
       <envs />
     </configuration>
@@ -279,25 +276,25 @@
       <item index="5" class="java.lang.String" itemvalue="Application.heightmap" />
       <item index="6" class="java.lang.String" itemvalue="Application.offscreen" />
       <item index="7" class="java.lang.String" itemvalue="Application.particles" />
-      <item index="8" class="java.lang.String" itemvalue="Application.simple" />
-      <item index="9" class="java.lang.String" itemvalue="Application.splitview" />
-      <item index="10" class="java.lang.String" itemvalue="Application.wave" />
-      <item index="11" class="java.lang.String" itemvalue="Application.glfw" />
-      <item index="12" class="java.lang.String" itemvalue="Application.clipboard" />
-      <item index="13" class="java.lang.String" itemvalue="Application.cursor" />
-      <item index="14" class="java.lang.String" itemvalue="Application.empty" />
-      <item index="15" class="java.lang.String" itemvalue="Application.events" />
-      <item index="16" class="java.lang.String" itemvalue="Application.gamma" />
-      <item index="17" class="java.lang.String" itemvalue="Application.glfwinfo" />
-      <item index="18" class="java.lang.String" itemvalue="Application.icon" />
-      <item index="19" class="java.lang.String" itemvalue="Application.iconify" />
-      <item index="20" class="java.lang.String" itemvalue="Application.inputlag" />
-      <item index="21" class="java.lang.String" itemvalue="Application.joysticks" />
-      <item index="22" class="java.lang.String" itemvalue="Application.monitors" />
-      <item index="23" class="java.lang.String" itemvalue="Application.msaa" />
-      <item index="24" class="java.lang.String" itemvalue="Application.opacity" />
-      <item index="25" class="java.lang.String" itemvalue="Application.reopen" />
-      <item index="26" class="java.lang.String" itemvalue="Application.sharing" />
+      <item index="8" class="java.lang.String" itemvalue="Application.sharing" />
+      <item index="9" class="java.lang.String" itemvalue="Application.simple" />
+      <item index="10" class="java.lang.String" itemvalue="Application.splitview" />
+      <item index="11" class="java.lang.String" itemvalue="Application.wave" />
+      <item index="12" class="java.lang.String" itemvalue="Application.glfw" />
+      <item index="13" class="java.lang.String" itemvalue="Application.clipboard" />
+      <item index="14" class="java.lang.String" itemvalue="Application.cursor" />
+      <item index="15" class="java.lang.String" itemvalue="Application.empty" />
+      <item index="16" class="java.lang.String" itemvalue="Application.events" />
+      <item index="17" class="java.lang.String" itemvalue="Application.gamma" />
+      <item index="18" class="java.lang.String" itemvalue="Application.glfwinfo" />
+      <item index="19" class="java.lang.String" itemvalue="Application.icon" />
+      <item index="20" class="java.lang.String" itemvalue="Application.iconify" />
+      <item index="21" class="java.lang.String" itemvalue="Application.inputlag" />
+      <item index="22" class="java.lang.String" itemvalue="Application.joysticks" />
+      <item index="23" class="java.lang.String" itemvalue="Application.monitors" />
+      <item index="24" class="java.lang.String" itemvalue="Application.msaa" />
+      <item index="25" class="java.lang.String" itemvalue="Application.opacity" />
+      <item index="26" class="java.lang.String" itemvalue="Application.reopen" />
       <item index="27" class="java.lang.String" itemvalue="Application.tearing" />
       <item index="28" class="java.lang.String" itemvalue="Application.threads" />
       <item index="29" class="java.lang.String" itemvalue="Application.timeout" />
@@ -316,12 +313,12 @@
       <option name="presentableId" value="Default" />
       <updated>1514030126141</updated>
       <workItem from="1514030127854" duration="7000" />
-      <workItem from="1514030149944" duration="8537000" />
+      <workItem from="1514030149944" duration="9162000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8544000" />
+    <option name="totallyTimeSpent" value="9169000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1054" y="226" width="1400" height="1000" extended-state="0" />
@@ -331,7 +328,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15409483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15409483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -372,16 +369,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-          <folding />
+        <state relative-caret-position="285">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+        <state relative-caret-position="180">
+          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
           <folding />
         </state>
       </provider>

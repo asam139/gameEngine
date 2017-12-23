@@ -14,7 +14,6 @@ include_directories(
 
 file (GLOB_RECURSE HEADER_FILES
         include/glad/*.h
-        include/KHR/*.h
 )
 
 file (GLOB_RECURSE DEPS_SRC_FILES
