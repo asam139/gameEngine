@@ -9,7 +9,6 @@ add_subdirectory(
 )
 
 include_directories(
-        glfw/include
         include
 )
 

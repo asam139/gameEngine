@@ -11,8 +11,8 @@ set(CMAKE_C_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
-  "../glfw/include"
   "../include"
+  "../glfw/include"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/Sau/gameEngine/src/main.cpp" "/Users/Sau/gameEngine/cmake-build-debug/CMakeFiles/gameEngine.dir/src/main.cpp.o"
@@ -21,8 +21,8 @@ set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../glfw/include"
   "../include"
+  "../glfw/include"
   )
 
 # Targets to which this target links.
