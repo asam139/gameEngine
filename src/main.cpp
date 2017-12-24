@@ -158,6 +158,13 @@ int main (int argc, char *argv[]) {
     uint32_t VAO = createVertexData(&VBO, &EVO);
     uint32_t program = createProgram();
 
+    // To draw only the lines
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    // Enable Culling
+    glEnable(GL_CULL_FACE);
+    // To not draw back faces
+    glCullFace(GL_BACK);
 
     while (!glfwWindowShouldClose(window)) { //Loop until user closes the window
         // Handle Input
