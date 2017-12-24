@@ -156,13 +156,14 @@ int main (int argc, char *argv[]) {
 
     uint32_t VBO, EVO;
     uint32_t VAO = createVertexData(&VBO, &EVO);
-    uint32_t shader = createProgram();
+    uint32_t program = createProgram();
+
 
     while (!glfwWindowShouldClose(window)) { //Loop until user closes the window
         // Handle Input
         handleInput(window);
         //Render Here
-        render(VAO, shader);
+        render(VAO, program);
         //Swap front and back buffers
         glfwSwapBuffers(window);
         // Poll for and process events
@@ -172,6 +173,8 @@ int main (int argc, char *argv[]) {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EVO);
+
+    glDeleteProgram(program);
 
     glfwTerminate();
     return 0;
