@@ -19,14 +19,18 @@ void render(uint32_t VAO, uint32_t shader) {
 
     glUseProgram(shader);
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 uint32_t createVertexData(uint32_t* VBO) {
     float vertices[] = {
-            -0.5f, -0.5f, 0.f,
+            0.5f, 0.5f, 0.f,
             0.5f, -0.5f, 0.f,
-            0.f, 0.5f, 0.f
+            -0.5f, 0.5f, 0.f,
+
+            0.5f, -0.5f, 0.f,
+            -0.5f, -0.5f, 0.f,
+            -0.5f, 0.5f, 0.f
     };
 
     uint32_t VAO;
