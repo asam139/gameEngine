@@ -13,10 +13,10 @@ void handleInput(GLFWwindow* window) {
     }
 }
 
-void render(uint32_t VAO, uint32_t shader) {
+void render(uint32_t VAO, uint size,  uint32_t shader) {
     glUseProgram(shader);
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawArrays(GL_TRIANGLES, 0, size);
 }
 
 uint32_t createVertexData(uint32_t* VBO, float vertices[], uint size) {
@@ -178,9 +178,9 @@ int main (int argc, char *argv[]) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         //Render the two VAOs
-        render(triangle1_VAO, program);
+        render(triangle1_VAO, 3, program);
 
-        render(triangle2_VAO, program);
+        render(triangle2_VAO, 3, program);
 
         //Swap front and back buffers
         glfwSwapBuffers(window);
