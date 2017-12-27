@@ -14,24 +14,12 @@ void handleInput(GLFWwindow* window) {
 }
 
 void render(uint32_t VAO, uint32_t shader) {
-    glClearColor(0.6f, 0.f, 0.6f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
     glUseProgram(shader);
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
-uint32_t createVertexData(uint32_t* VBO) {
-    float vertices[] = {
-            0.8f, -0.4f, 0.f,
-            0.4f, 0.6f, 0.f,
-            0.f, -0.4f, 0.f,
-            0.f, -0.4f, 0.f,
-            -0.4f, 0.6f, 0.f,
-            -0.8f, -0.4f, 0.f
-    };
-
+uint32_t createVertexData(uint32_t* VBO, float vertices[], uint size) {
     uint32_t VAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, VBO);
@@ -39,10 +27,9 @@ uint32_t createVertexData(uint32_t* VBO) {
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, *VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, size * sizeof(float), vertices, GL_STATIC_DRAW);
 
-
-    glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+    glVertexAttribPointer(0, size/3,  GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -147,9 +134,31 @@ int main (int argc, char *argv[]) {
 
     glfwSetFramebufferSizeCallback(window, &onChangeFramebufferSize);
 
+    ///////////////////////////
+    // Create VBOs and VAOs
+    ///////////////////////////
+    // Triangle 1
+    float triangle1_vertices[] = {
+            0.8f, -0.4f, 0.f,
+            0.4f, 0.6f, 0.f,
+            0.f, -0.4f, 0.f
+    };
+    uint32_t triangle1_VBO;
+    uint32_t triangle1_VAO = createVertexData(&triangle1_VBO, triangle1_vertices, 9);
 
-    uint32_t VBO;
-    uint32_t VAO = createVertexData(&VBO);
+    // Triangle 2
+    float triangle2_vertices[] = {
+            0.f, -0.4f, 0.f,
+            -0.4f, 0.6f, 0.f,
+            -0.8f, -0.4f, 0.f
+    };
+
+    uint32_t triangle2_VBO;
+    uint32_t triangle2_VAO = createVertexData(&triangle2_VBO, triangle2_vertices, 9);
+    ///////////////////////////
+
+
+    // Create program
     uint32_t program = createProgram();
 
     // To draw only the lines
@@ -163,17 +172,36 @@ int main (int argc, char *argv[]) {
     while (!glfwWindowShouldClose(window)) { //Loop until user closes the window
         // Handle Input
         handleInput(window);
-        //Render Here
-        render(VAO, program);
+
+        // Clear
+        glClearColor(0.6f, 0.f, 0.6f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        //Render the two VAOs
+        render(triangle1_VAO, program);
+
+        render(triangle2_VAO, program);
+
         //Swap front and back buffers
         glfwSwapBuffers(window);
+
         // Poll for and process events
         glfwPollEvents();
     }
 
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    ////////////////////////////
+    // Delete VAOs and VBOs
+    ///////////////////////////
+    // Triangle 1
+    glDeleteVertexArrays(1, &triangle1_VAO);
+    glDeleteBuffers(1, &triangle1_VBO);
 
+    //Triangle 2
+    glDeleteVertexArrays(1, &triangle2_VAO);
+    glDeleteBuffers(1, &triangle2_VBO);
+    ///////////////////////////
+
+    // Delete program
     glDeleteProgram(program);
 
     glfwTerminate();
