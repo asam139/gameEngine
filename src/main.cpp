@@ -16,18 +16,22 @@ void handleInput(GLFWwindow* window) {
 void render(uint32_t VAO, uint size,  uint32_t shader) {
     glUseProgram(shader);
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, size);
+    glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, nullptr);
 }
 
-uint32_t createVertexData(uint32_t* VBO, float vertices[], uint size) {
+uint32_t createVertexData(float* vertices, uint vSize, uint32_t* indices, uint iSize,  uint32_t* VBO, uint32_t* EBO) {
     uint32_t VAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, VBO);
+    glGenBuffers(1, EBO);
 
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, *VBO);
-    glBufferData(GL_ARRAY_BUFFER, size * sizeof(float), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vSize * sizeof(float), vertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize * sizeof(uint32_t), indices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
     glEnableVertexAttribArray(0);
@@ -138,25 +142,20 @@ int main (int argc, char *argv[]) {
     // Create VBOs and VAOs
     ///////////////////////////
     // Triangle 1
-    float triangle1_vertices[] = {
+    float triangles_vertices[] = {
             0.8f, -0.4f, 0.f,
             0.4f, 0.6f, 0.f,
-            0.f, -0.4f, 0.f
-    };
-    uint32_t triangle1_VBO;
-    uint32_t triangle1_VAO = createVertexData(&triangle1_VBO, triangle1_vertices, 9);
-
-    // Triangle 2
-    float triangle2_vertices[] = {
             0.f, -0.4f, 0.f,
             -0.4f, 0.6f, 0.f,
             -0.8f, -0.4f, 0.f
     };
-
-    uint32_t triangle2_VBO;
-    uint32_t triangle2_VAO = createVertexData(&triangle2_VBO, triangle2_vertices, 9);
+    uint32_t triangles_indices[] = {
+            0, 1, 2,
+            2, 3, 4
+    };
+    uint32_t triangles_VBO, triangles_EBO;
+    uint32_t triangles_VAO = createVertexData(triangles_vertices, 15, triangles_indices, 6,  &triangles_VBO, &triangles_EBO);
     ///////////////////////////
-
 
     // Create program
     uint32_t program = createProgram();
@@ -177,10 +176,8 @@ int main (int argc, char *argv[]) {
         glClearColor(0.6f, 0.f, 0.6f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        //Render the two VAOs
-        render(triangle1_VAO, 3, program);
-
-        render(triangle2_VAO, 3, program);
+        //Render VAO
+        render(triangles_VAO, 6, program);
 
         //Swap front and back buffers
         glfwSwapBuffers(window);
@@ -190,15 +187,10 @@ int main (int argc, char *argv[]) {
     }
 
     ////////////////////////////
-    // Delete VAOs and VBOs
-    ///////////////////////////
-    // Triangle 1
-    glDeleteVertexArrays(1, &triangle1_VAO);
-    glDeleteBuffers(1, &triangle1_VBO);
-
-    //Triangle 2
-    glDeleteVertexArrays(1, &triangle2_VAO);
-    glDeleteBuffers(1, &triangle2_VBO);
+    // Delete VAO and VBO
+    glDeleteVertexArrays(1, &triangles_VAO);
+    glDeleteBuffers(1, &triangles_VBO);
+    glDeleteBuffers(1, &triangles_EBO);
     ///////////////////////////
 
     // Delete program
