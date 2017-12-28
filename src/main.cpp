@@ -108,7 +108,7 @@ int main (int argc, char *argv[]) {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  //Core Profile
 
     GLFWwindow *window;    //Create a windowed mode window and its OpenGL context
-    window = glfwCreateWindow(800, 600, "New Window", nullptr, nullptr);
+    window = glfwCreateWindow(800, 800, "New Window", nullptr, nullptr);
     if (!window) {
         std::cout << "Failed To Create GLFW Window" << std::endl;
         glfwTerminate();
@@ -129,20 +129,19 @@ int main (int argc, char *argv[]) {
     // Create VBOs and VAOs
     ///////////////////////////
     // Hexagon
-    GLfloat hexagon_vertices[] = {
-            0.5f, 0.f, 0.f,
-            0.25f, 0.433f, 0.f,
-           - 0.25f, 0.433f, 0.f,
-            -0.5f, 0.f, 0.f,
-            -0.25f, -0.433f, 0.f,
-            0.25f, -0.433f, 0.f
-    };
+    GLfloat hexagon_vertices[18] = {0.f};
+    GLfloat radius = 0.5;
+    for (int i = 0; i < 6; ++i) {
+        hexagon_vertices[3 * i] = radius * cosf(i * 60 * M_PI/180);
+        hexagon_vertices[3 * i + 1] = radius * sinf(i * 60 * M_PI/180);
+        hexagon_vertices[3 * i +2] = 0.f;
+    }
+
     GLuint hexagon_indices[] = {
             0, 1, 2,
             0, 2, 3,
             0, 3, 4,
             0, 4, 5
-
     };
     GLuint hexagon_VBO, hexagon_EBO;
     GLuint hexagon_VAO = createVertexData(hexagon_vertices, 18, hexagon_indices, 12,  &hexagon_VBO, &hexagon_EBO);
