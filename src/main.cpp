@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-void onChangeFramebufferSize(GLFWwindow* window, const int32_t width, const int32_t height) {
+void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_t height) {
     glViewport(0, 0, width, height);
 }
 
@@ -13,14 +13,14 @@ void handleInput(GLFWwindow* window) {
     }
 }
 
-void render(uint32_t VAO, uint size,  uint32_t shader) {
-    glUseProgram(shader);
+void render(GLuint VAO, uint size, const void * indices, GLuint program) {
+    glUseProgram(program);
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, indices);
 }
 
-uint32_t createVertexData(float* vertices, uint vSize, uint32_t* indices, uint iSize,  uint32_t* VBO, uint32_t* EBO) {
-    uint32_t VAO;
+GLuint createVertexData(GLfloat* vertices, GLuint vSize, GLuint* indices, GLuint iSize,  GLuint* VBO, GLuint* EBO) {
+    GLuint VAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, VBO);
     glGenBuffers(1, EBO);
@@ -28,12 +28,12 @@ uint32_t createVertexData(float* vertices, uint vSize, uint32_t* indices, uint i
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, *VBO);
-    glBufferData(GL_ARRAY_BUFFER, vSize * sizeof(float), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vSize * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize * sizeof(uint32_t), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize * sizeof(GLuint), indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+    glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -45,8 +45,8 @@ uint32_t createVertexData(float* vertices, uint vSize, uint32_t* indices, uint i
     return VAO;
 }
 
-bool checkShader(uint32_t shader) {
-    int success;
+bool checkShader(GLuint shader) {
+    GLint success;
     char infoLog[512];
     glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
     if (!success) {
@@ -58,8 +58,8 @@ bool checkShader(uint32_t shader) {
     return true;
 }
 
-bool checkProgram(uint32_t program) {
-    int success;
+bool checkProgram(GLuint program) {
+    GLint success;
     char infoLog[512];
     glGetProgramiv(program, GL_LINK_STATUS, &success);
     if (!success) {
@@ -71,32 +71,18 @@ bool checkProgram(uint32_t program) {
     return true;
 }
 
-uint32_t createProgram() {
-    const char *vertexShaderSource =
-            "#version 330core\n"
-            "layout (location = 0) in vec3 aPos;\n"
-            "void main() {\n"
-            "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.f);\n"
-            "}\0";
-
-    const char *fragmentShaderSource =
-            "#version 330core\n"
-            "out vec4 fragColor;\n"
-            "void main() {\n"
-            "   fragColor = vec4(0.2f, 0.7f, 0.2f, 1.f);\n"
-            "}\0";
-
-    uint32_t vertexShader = glCreateShader(GL_VERTEX_SHADER);
+GLuint createProgram(const char *vertexShaderSource, const char *fragmentShaderSource) {
+    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
     glCompileShader(vertexShader);
     checkShader(vertexShader);
 
-    uint32_t fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
     glCompileShader(fragmentShader);
     checkShader(fragmentShader);
 
-    uint32_t shaderProgram = glCreateProgram();
+    GLuint shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
@@ -142,23 +128,45 @@ int main (int argc, char *argv[]) {
     // Create VBOs and VAOs
     ///////////////////////////
     // Triangle 1
-    float triangles_vertices[] = {
+    GLfloat triangles_vertices[] = {
             0.8f, -0.4f, 0.f,
             0.4f, 0.6f, 0.f,
             0.f, -0.4f, 0.f,
             -0.4f, 0.6f, 0.f,
             -0.8f, -0.4f, 0.f
     };
-    uint32_t triangles_indices[] = {
+    GLuint triangles_indices[] = {
             0, 1, 2,
             2, 3, 4
     };
-    uint32_t triangles_VBO, triangles_EBO;
-    uint32_t triangles_VAO = createVertexData(triangles_vertices, 15, triangles_indices, 6,  &triangles_VBO, &triangles_EBO);
+    GLuint triangles_VBO, triangles_EBO;
+    GLuint triangles_VAO = createVertexData(triangles_vertices, 15, triangles_indices, 6,  &triangles_VBO, &triangles_EBO);
     ///////////////////////////
 
+    // Create Vertex and Fragment Shader sources
+    const char *vertexShaderSource =
+            "#version 330core\n"
+                    "layout (location = 0) in vec3 aPos;\n"
+                    "void main() {\n"
+                    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.f);\n"
+                    "}\0";
+
+    const char *blueFragmentShaderSource =
+            "#version 330core\n"
+                    "out vec4 fragColor;\n"
+                    "void main() {\n"
+                    "   fragColor = vec4(0.f, 0.f, 1.0f, 1.f);\n"
+                    "}\0";
+    const char *pinkFragmentShaderSource =
+            "#version 330core\n"
+                    "out vec4 fragColor;\n"
+                    "void main() {\n"
+                    "   fragColor = vec4(1.f, 0.f, 1.0f, 1.f);\n"
+                    "}\0";
+
     // Create program
-    uint32_t program = createProgram();
+    GLuint blueProgram = createProgram(vertexShaderSource, blueFragmentShaderSource);
+    GLuint pinkProgram = createProgram(vertexShaderSource, pinkFragmentShaderSource);
 
     // To draw only the lines
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -173,11 +181,13 @@ int main (int argc, char *argv[]) {
         handleInput(window);
 
         // Clear
-        glClearColor(0.6f, 0.f, 0.6f, 1.0f);
+        glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         //Render VAO
-        render(triangles_VAO, 6, program);
+        render(triangles_VAO, 3, nullptr, blueProgram);
+        render(triangles_VAO, 3, (void *)(3 * sizeof(GLuint)), pinkProgram);
+
 
         //Swap front and back buffers
         glfwSwapBuffers(window);
@@ -194,7 +204,8 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
 
     // Delete program
-    glDeleteProgram(program);
+    glDeleteProgram(blueProgram);
+    glDeleteProgram(pinkProgram);
 
     glfwTerminate();
     return 0;
