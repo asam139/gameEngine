@@ -8,15 +8,16 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
 
 add_subdirectory(
         glfw
-        glm
 )
 
 include_directories(
         include
+        glm/glm/
 )
 
 file (GLOB_RECURSE HEADER_FILES
         include/glad/*.h
+        glm/glm/*.hpp
 )
 
 file (GLOB_RECURSE DEPS_SRC_FILES
