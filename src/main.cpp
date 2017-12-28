@@ -128,20 +128,24 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
     // Create VBOs and VAOs
     ///////////////////////////
-    // Triangle 1
-    GLfloat triangles_vertices[] = {
-            0.8f, -0.4f, 0.f,
-            0.4f, 0.6f, 0.f,
-            0.f, -0.4f, 0.f,
-            -0.4f, 0.6f, 0.f,
-            -0.8f, -0.4f, 0.f
+    // Hexagon
+    GLfloat hexagon_vertices[] = {
+            0.5f, 0.f, 0.f,
+            0.25f, 0.433f, 0.f,
+           - 0.25f, 0.433f, 0.f,
+            -0.5f, 0.f, 0.f,
+            -0.25f, -0.433f, 0.f,
+            0.25f, -0.433f, 0.f
     };
-    GLuint triangles_indices[] = {
+    GLuint hexagon_indices[] = {
             0, 1, 2,
-            2, 3, 4
+            0, 2, 3,
+            0, 3, 4,
+            0, 4, 5
+
     };
-    GLuint triangles_VBO, triangles_EBO;
-    GLuint triangles_VAO = createVertexData(triangles_vertices, 15, triangles_indices, 6,  &triangles_VBO, &triangles_EBO);
+    GLuint hexagon_VBO, hexagon_EBO;
+    GLuint hexagon_VAO = createVertexData(hexagon_vertices, 18, hexagon_indices, 12,  &hexagon_VBO, &hexagon_EBO);
     ///////////////////////////
 
     // Create Vertex and Fragment Shader sources
@@ -158,16 +162,9 @@ int main (int argc, char *argv[]) {
                     "void main() {\n"
                     "   fragColor = vec4(0.f, 0.f, 1.0f, 1.f);\n"
                     "}\0";
-    const char *pinkFragmentShaderSource =
-            "#version 330core\n"
-                    "out vec4 fragColor;\n"
-                    "void main() {\n"
-                    "   fragColor = vec4(1.f, 0.f, 1.0f, 1.f);\n"
-                    "}\0";
 
     // Create program
     GLuint blueProgram = createProgram(vertexShaderSource, blueFragmentShaderSource);
-    GLuint pinkProgram = createProgram(vertexShaderSource, pinkFragmentShaderSource);
 
     // To draw only the lines
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -186,9 +183,7 @@ int main (int argc, char *argv[]) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         //Render VAO
-        render(triangles_VAO, 3, nullptr, blueProgram);
-        render(triangles_VAO, 3, (void *)(3 * sizeof(GLuint)), pinkProgram);
-
+        render(hexagon_VAO, 12, nullptr, blueProgram);
 
         //Swap front and back buffers
         glfwSwapBuffers(window);
@@ -199,14 +194,13 @@ int main (int argc, char *argv[]) {
 
     ////////////////////////////
     // Delete VAO and VBO
-    glDeleteVertexArrays(1, &triangles_VAO);
-    glDeleteBuffers(1, &triangles_VBO);
-    glDeleteBuffers(1, &triangles_EBO);
+    glDeleteVertexArrays(1, &hexagon_VAO);
+    glDeleteBuffers(1, &hexagon_VBO);
+    glDeleteBuffers(1, &hexagon_EBO);
     ///////////////////////////
 
     // Delete program
     glDeleteProgram(blueProgram);
-    glDeleteProgram(pinkProgram);
 
     glfwTerminate();
     return 0;
