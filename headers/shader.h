@@ -20,11 +20,11 @@ class  Shader {
     void use() const;
 
     void set(const char* name, const bool value) const;
-    void set(const char* name, const int value) const;
-    void set(const char* name, const float value) const;
-    void set(const char* name, const float value0, const float value1) const;
-    void set(const char* name, const float value0, const float value1, const float value2) const;
-    void set(const char* name, const float value0, const float value1, const float value2, const float value3) const;
+    void set(const char* name, const GLint value) const;
+    void set(const char* name, const GLfloat value) const;
+    void set(const char* name, const GLfloat value0, const GLfloat value1) const;
+    void set(const char* name, const GLfloat value0, const GLfloat value1, const GLfloat value2) const;
+    void set(const char* name, const GLfloat value0, const GLfloat value1, const GLfloat value2, const GLfloat value3) const;
 
     void set(const char* name, const glm::vec2& value) const;
     void set(const char* name, const glm::vec3& value) const;
@@ -46,7 +46,7 @@ class  Shader {
         void checkError(const GLuint shader, const Type type) const;
         void loadShader(const char* path, std::string* code);
 
-        uint32_t id_;
+        GLuint id_;
 };
 
 

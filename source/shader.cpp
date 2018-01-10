@@ -128,23 +128,23 @@ void Shader::set(const char* name, const bool value) const {
     glUniform1i(glGetUniformLocation(id_, name), value);
 }
 
-void Shader::set(const char* name, const int value) const {
+void Shader::set(const char* name, const GLint value) const {
     glUniform1i(glGetUniformLocation(id_, name),  value);
 }
 
-void Shader::set(const char* name, const float value) const {
+void Shader::set(const char* name, const GLfloat value) const {
     glUniform1f(glGetUniformLocation(id_, name), value);
 }
 
-void Shader::set(const char* name, const float value0, const float value1) const {
+void Shader::set(const char* name, const GLfloat value0, const GLfloat value1) const {
     glUniform2f(glGetUniformLocation(id_, name), value0, value1);
 }
 
-void Shader::set(const char* name, const float value0, const float value1, const float value2) const {
+void Shader::set(const char* name, const GLfloat value0, const GLfloat value1, const GLfloat value2) const {
     glUniform3f(glGetUniformLocation(id_, name), value0, value1, value2);
 }
 
-void Shader::set(const char* name, const float value0, const float value1, const float value2, const float value3) const {
+void Shader::set(const char* name, const GLfloat value0, const GLfloat value1, const GLfloat value2, const GLfloat value3) const {
     glUniform4f(glGetUniformLocation(id_, name), value0, value1, value2, value3);
 }
 
