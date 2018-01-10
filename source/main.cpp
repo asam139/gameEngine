@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+#include "../headers/shader.h"
+
 void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_t height) {
     glViewport(0, 0, width, height);
 }
@@ -14,8 +16,8 @@ void handleInput(GLFWwindow* window) {
     }
 }
 
-void render(GLuint VAO, uint size, const void * indices, GLuint program) {
-    glUseProgram(program);
+void render(GLuint VAO, uint size, const void * indices, Shader& shader) {
+    shader.use();
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, indices);
 }
@@ -45,56 +47,6 @@ GLuint createVertexData(GLfloat* vertices, GLuint vSize, GLuint* indices, GLuint
 
     return VAO;
 }
-
-bool checkShader(GLuint shader) {
-    GLint success;
-    char infoLog[512];
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        glGetShaderInfoLog(shader, 512, nullptr, infoLog);
-        std::cout << "Error Compiling Shader" << std::endl << infoLog << std::endl;
-        return false;
-    }
-
-    return true;
-}
-
-bool checkProgram(GLuint program) {
-    GLint success;
-    char infoLog[512];
-    glGetProgramiv(program, GL_LINK_STATUS, &success);
-    if (!success) {
-        glGetProgramInfoLog(program, 512, nullptr, infoLog);
-        std::cout << "Error Linking Program" << std::endl << infoLog << std::endl;
-        return false;
-    }
-
-    return true;
-}
-
-GLuint createProgram(const char *vertexShaderSource, const char *fragmentShaderSource) {
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-    glCompileShader(vertexShader);
-    checkShader(vertexShader);
-
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
-    glCompileShader(fragmentShader);
-    checkShader(fragmentShader);
-
-    GLuint shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-    checkProgram(shaderProgram);
-
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-
-    return shaderProgram;
-}
-
 
 int main (int argc, char *argv[]) {
 
@@ -147,23 +99,8 @@ int main (int argc, char *argv[]) {
     GLuint hexagon_VAO = createVertexData(hexagon_vertices, 18, hexagon_indices, 12,  &hexagon_VBO, &hexagon_EBO);
     ///////////////////////////
 
-    // Create Vertex and Fragment Shader sources
-    const char *vertexShaderSource =
-            "#version 330core\n"
-                    "layout (location = 0) in vec3 aPos;\n"
-                    "void main() {\n"
-                    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.f);\n"
-                    "}\0";
-
-    const char *blueFragmentShaderSource =
-            "#version 330core\n"
-                    "out vec4 fragColor;\n"
-                    "void main() {\n"
-                    "   fragColor = vec4(0.f, 0.f, 1.0f, 1.f);\n"
-                    "}\0";
-
     // Create program
-    GLuint blueProgram = createProgram(vertexShaderSource, blueFragmentShaderSource);
+    Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
 
     // To draw only the lines
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -182,7 +119,7 @@ int main (int argc, char *argv[]) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         //Render VAO
-        render(hexagon_VAO, 12, nullptr, blueProgram);
+        render(hexagon_VAO, 12, nullptr, shader);
 
         //Swap front and back buffers
         glfwSwapBuffers(window);
@@ -198,17 +135,6 @@ int main (int argc, char *argv[]) {
     glDeleteBuffers(1, &hexagon_EBO);
     ///////////////////////////
 
-    // Delete program
-    glDeleteProgram(blueProgram);
-
     glfwTerminate();
     return 0;
 }
-
-/*
-#external_headers <iostream>
-
-int main (int argc, char *argv[]) {
-    std::cout << "Hello World" << std::endl;
-    return 0;
-}*/
