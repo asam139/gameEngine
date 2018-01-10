@@ -36,8 +36,10 @@ GLuint createVertexData(GLfloat* vertices, GLuint vSize, GLuint* indices, GLuint
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize * sizeof(GLuint), indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
+    glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), nullptr);
     glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3,  GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *) (3 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -80,23 +82,20 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
     // Create VBOs and VAOs
     ///////////////////////////
-    // Hexagon
-    GLfloat hexagon_vertices[18] = {0.f};
-    GLfloat radius = 0.5;
-    for (int i = 0; i < 6; ++i) {
-        hexagon_vertices[3 * i] = radius * cosf(i * 60 * M_PI/180);
-        hexagon_vertices[3 * i + 1] = radius * sinf(i * 60 * M_PI/180);
-        hexagon_vertices[3 * i +2] = 0.f;
-    }
-
-    GLuint hexagon_indices[] = {
-            0, 1, 2,
-            0, 2, 3,
-            0, 3, 4,
-            0, 4, 5
+    // Triangle
+    GLfloat triangle_vertices[] = {
+        .5f,   -.5f, 0.f,       1.f, 0.f, 0.f,
+        -.5f,  -.5f, 0.f,       0.f, 1.f, 0.f,
+        0.f,    .5f, 0.f,       0.f, 0.f, 1.0f,
     };
-    GLuint hexagon_VBO, hexagon_EBO;
-    GLuint hexagon_VAO = createVertexData(hexagon_vertices, 18, hexagon_indices, 12,  &hexagon_VBO, &hexagon_EBO);
+
+
+    GLuint triangle_indices[] = {
+        0, 2, 1
+    };
+
+    GLuint triangle_VBO, triangle_EBO;
+    GLuint triangle_VAO = createVertexData(triangle_vertices, 18, triangle_indices, 3,  &triangle_VBO, &triangle_EBO);
     ///////////////////////////
 
     // Create program
@@ -119,7 +118,7 @@ int main (int argc, char *argv[]) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         //Render VAO
-        render(hexagon_VAO, 12, nullptr, shader);
+        render(triangle_VAO, 12, nullptr, shader);
 
         //Swap front and back buffers
         glfwSwapBuffers(window);
@@ -130,9 +129,9 @@ int main (int argc, char *argv[]) {
 
     ////////////////////////////
     // Delete VAO and VBO
-    glDeleteVertexArrays(1, &hexagon_VAO);
-    glDeleteBuffers(1, &hexagon_VBO);
-    glDeleteBuffers(1, &hexagon_EBO);
+    glDeleteVertexArrays(1, &triangle_VAO);
+    glDeleteBuffers(1, &triangle_VBO);
+    glDeleteBuffers(1, &triangle_EBO);
     ///////////////////////////
 
     glfwTerminate();
