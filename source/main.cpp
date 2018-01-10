@@ -206,7 +206,7 @@ int main (int argc, char *argv[]) {
 }
 
 /*
-#include <iostream>
+#external_headers <iostream>
 
 int main (int argc, char *argv[]) {
     std::cout << "Hello World" << std::endl;
