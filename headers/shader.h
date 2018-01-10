@@ -12,13 +12,6 @@
 
 
 class  Shader {
-    enum class Type {
-        Vertex = 0,
-        Fragment = 1,
-        Geometry = 2,
-        Program = 3
-    };
-
     public:
     Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr);
     ~Shader();
@@ -27,6 +20,14 @@ class  Shader {
 
     private:
         Shader() {};
+
+        enum class Type {
+            Vertex = 0,
+            Fragment = 1,
+            Geometry = 2,
+            Program = 3
+        };
+        static const char* typeToString (const Type type);
         void checkError(const uint32_t shader, const Type type) const;
         void loadShader(const char* path, std::string* code);
 

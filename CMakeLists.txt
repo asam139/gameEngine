@@ -18,6 +18,7 @@ include_directories(
 file (GLOB_RECURSE HEADER_FILES
         external_headers/glad/*.h
         glm/glm/*.hpp
+        headers/*
 )
 
 file (GLOB_RECURSE DEPS_SRC_FILES
@@ -25,14 +26,14 @@ file (GLOB_RECURSE DEPS_SRC_FILES
 )
 
 file (GLOB_RECURSE SRC_FILES
-        source/main.cpp
+        source/*
 )
 
 add_executable(gameEngine
         ${HEADER_FILES}
         ${DEPS_SRC_FILES}
         ${SRC_FILES}
-        headers/shader.h)
+        headers/shader.h source/shader.cpp)
 
 target_link_libraries(gameEngine
         glfw ${GLFW_LIBRARIES}
