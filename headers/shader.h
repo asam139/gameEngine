@@ -5,6 +5,7 @@
 #ifndef GAMEENGINE_SHADER_H
 #define GAMEENGINE_SHADER_H
 
+#include <glad/glad.h>
 #include <glm.hpp>
 
 #include <cstdint>
@@ -28,10 +29,10 @@ class  Shader {
             Program = 3
         };
         static const char* typeToString (const Type type);
-        void checkError(const uint32_t shader, const Type type) const;
+        void checkError(const GLuint shader, const Type type) const;
         void loadShader(const char* path, std::string* code);
 
-        uint32_t id_;
+        GLuint id_;
 };
 
 

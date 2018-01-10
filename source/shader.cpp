@@ -29,17 +29,17 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geo
     const char* vertexCode = sVertexCode.c_str();
     const char* fragmentCode = sFragmentCode.c_str();
 
-    uint32_t vertex = glCreateShader(GL_VERTEX_SHADER);
+    GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex, 1, &vertexCode, nullptr);
     glCompileShader(vertex);
     checkError(vertex, Type::Vertex);
 
-    uint32_t fragment = glCreateShader(GL_FRAGMENT_SHADER);
+    GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragment, 1, &fragmentCode, nullptr);
     glCompileShader(fragment);
     checkError(vertex, Type::Fragment);
 
-    uint32_t geometry;
+    GLuint geometry;
     if (geometryPath) {
         const char *geometryCode = sFragmentCode.c_str();
 
@@ -86,7 +86,7 @@ const char* Shader::typeToString (const Shader::Type type) {
     return "";
 }
 
-void Shader::checkError(const uint32_t shader, const Type type) const {
+void Shader::checkError(const GLuint shader, const Type type) const {
     int success;
     char log[1024];
     if (type != Type::Program) {
