@@ -13,5 +13,9 @@ out vec3 myColor;
 
 void main() {
     gl_Position = vec4(aPos.x + refPoint.x, aPos.y + refPoint.y, aPos.z + refPoint.z, 1.f);
-    myColor = vec3(sin(time * aColor.r), sin(time * aColor.g + HALF_PI/2.f) ,  cos(time * aColor.b));
+
+    //To debug paint pos as color.
+    //Use abs because it does not exist negative values
+    myColor =  abs(aPos);
+    //myColor = vec3(sin(time * aColor.r), sin(time * aColor.g + HALF_PI/2.f) ,  cos(time * aColor.b));
 }
