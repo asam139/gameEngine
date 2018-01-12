@@ -19,6 +19,10 @@ void handleInput(GLFWwindow* window) {
 void render(GLuint VAO, uint size, const void * indices, Shader& shader) {
     shader.use();
     glBindVertexArray(VAO);
+
+    GLfloat time = (float)glfwGetTime();
+    shader.set("uniformTime", time);
+
     glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, indices);
 }
 
