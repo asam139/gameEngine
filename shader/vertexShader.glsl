@@ -3,7 +3,8 @@
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aColor;
 
-uniform float uniformTime;
+uniform float time;
+uniform vec3 refPoint;
 
 out vec3 myColor;
 
@@ -11,6 +12,6 @@ out vec3 myColor;
 #define HALF_PI 1.5707963267948966
 
 void main() {
-    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.f);
-    myColor = vec3(sin(uniformTime * aColor.r), sin(uniformTime * aColor.g + HALF_PI/2.f) ,  cos(uniformTime * aColor.b));
+    gl_Position = vec4(aPos.x + refPoint.x, aPos.y + refPoint.y, aPos.z + refPoint.z, 1.f);
+    myColor = vec3(sin(time * aColor.r), sin(time * aColor.g + HALF_PI/2.f) ,  cos(time * aColor.b));
 }

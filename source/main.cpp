@@ -21,7 +21,10 @@ void render(GLuint VAO, uint size, const void * indices, Shader& shader) {
     glBindVertexArray(VAO);
 
     GLfloat time = (float)glfwGetTime();
-    shader.set("uniformTime", time);
+    shader.set("time", time);
+
+    GLfloat radius = 0.25f;
+    shader.set("refPoint", glm::vec3(radius * cosf(time), radius * sinf(time), 0));
 
     glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, indices);
 }
