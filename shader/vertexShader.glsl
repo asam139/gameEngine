@@ -6,6 +6,7 @@ layout (location = 1) in vec3 aColor;
 out vec3 myColor;
 
 void main() {
-    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.f);
+    //It is necessary to invert both axis because if not the indexes are not in anticlockwise
+    gl_Position = vec4(-aPos.x, -aPos.y, -aPos.z, 1.f);
     myColor = aColor;
 }
