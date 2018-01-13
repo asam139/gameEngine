@@ -2,6 +2,9 @@
 #include <GLFW/glfw3.h>
 #include <glm.hpp>
 
+#define  STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+
 #include <iostream>
 
 #include "../headers/shader.h"
@@ -16,9 +19,10 @@ void handleInput(GLFWwindow* window) {
     }
 }
 
-void render(GLuint VAO, uint size, const void * indices, Shader& shader) {
+void render(const GLuint VAO, const uint size, const void * indices, const Shader& shader, const GLuint text) {
     shader.use();
     glBindVertexArray(VAO);
+    glBindTexture(GL_TEXTURE_2D, text);
 
     GLfloat time = (float)glfwGetTime();
     shader.set("time", time);
@@ -45,8 +49,10 @@ GLuint createVertexData(GLfloat* vertices, GLuint vSize, GLuint* indices, GLuint
 
     glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), nullptr);
     glEnableVertexAttribArray(0);
+
     glVertexAttribPointer(1, 3,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *) (3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
+
     glVertexAttribPointer(2, 2,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *) (6 * sizeof(GLfloat)));
     glEnableVertexAttribArray(2);
 
@@ -57,6 +63,29 @@ GLuint createVertexData(GLfloat* vertices, GLuint vSize, GLuint* indices, GLuint
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
     return VAO;
+}
+
+GLuint createTexture (const char* path) {
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    GLint width, height, nChannels;
+    unsigned char* data = stbi_load(path, &width, &height, &nChannels, 0);
+    if (data) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    } else {
+        std::cout << "Failed To Load Texture" << path << std::endl;
+    }
+
+    return texture;
 }
 
 int main (int argc, char *argv[]) {
@@ -114,6 +143,7 @@ int main (int argc, char *argv[]) {
     // Create program
     Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
 
+    uint32_t text = createTexture("../textures/texture.jpg");
     // To draw only the lines
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -131,7 +161,7 @@ int main (int argc, char *argv[]) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         //Render VAO
-        render(triangle_VAO, verticesSize, nullptr, shader);
+        render(triangle_VAO, verticesSize, nullptr, shader, text);
 
         //Swap front and back buffers
         glfwSwapBuffers(window);
