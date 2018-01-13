@@ -16,6 +16,6 @@ void main() {
 
     //To debug paint pos as color.
     //Use abs because it does not exist negative values
-    myColor =  abs(aPos);
-    //myColor = vec3(sin(time * aColor.r), sin(time * aColor.g + HALF_PI/2.f) ,  cos(time * aColor.b));
+    //myColor =  abs(aPos);
+    myColor = vec3(sin(time * aColor.r), sin(time * aColor.g + HALF_PI/2.f) ,  cos(time * aColor.b));
 }

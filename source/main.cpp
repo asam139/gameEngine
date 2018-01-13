@@ -43,10 +43,12 @@ GLuint createVertexData(GLfloat* vertices, GLuint vSize, GLuint* indices, GLuint
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize * sizeof(GLuint), indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), nullptr);
+    glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), nullptr);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3,  GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *) (3 * sizeof(GLfloat)));
+    glVertexAttribPointer(1, 3,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *) (3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
+    glVertexAttribPointer(2, 2,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *) (6 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -90,19 +92,23 @@ int main (int argc, char *argv[]) {
     // Create VBOs and VAOs
     ///////////////////////////
     // Triangle
+    GLint verticesSize = 32;
     GLfloat triangle_vertices[] = {
-        .5f,   -.5f, 0.f,       1.f, 0.f, 0.f,
-        -.5f,  -.5f, 0.f,       0.f, 1.f, 0.f,
-        0.f,    .5f, 0.f,       0.f, 0.f, 1.0f,
+        .5f,    .5f,    0.f,        1.f,    0.f,    0.f,        1.f,    1.f,
+        .5f,    -.5f,   0.f,        0.f,    1.f,    0.f,        1.f,    0.f,
+        -0.5f,  -.5f,   0.f,        0.f,    0.f,    1.0f,       0.f,    0.f,
+        -0.5f,  .5f,    0.f,        1.f,    1.f,    0.f,        0.f,    1.f
     };
 
 
+    GLint  indicesSize = 6;
     GLuint triangle_indices[] = {
-        0, 2, 1
+        0,  3,  1,
+        1,  3,  2
     };
 
     GLuint triangle_VBO, triangle_EBO;
-    GLuint triangle_VAO = createVertexData(triangle_vertices, 18, triangle_indices, 3,  &triangle_VBO, &triangle_EBO);
+    GLuint triangle_VAO = createVertexData(triangle_vertices, verticesSize, triangle_indices, indicesSize,  &triangle_VBO, &triangle_EBO);
     ///////////////////////////
 
     // Create program
@@ -125,7 +131,7 @@ int main (int argc, char *argv[]) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         //Render VAO
-        render(triangle_VAO, 12, nullptr, shader);
+        render(triangle_VAO, verticesSize, nullptr, shader);
 
         //Swap front and back buffers
         glfwSwapBuffers(window);
