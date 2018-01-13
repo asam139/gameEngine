@@ -19,10 +19,13 @@ void handleInput(GLFWwindow* window) {
     }
 }
 
-void render(const GLuint VAO, const uint size, const void * indices, const Shader& shader, const GLuint text) {
-    shader.use();
+void render(const GLuint VAO, const uint size, const void * indices, const Shader& shader, const GLuint text0, const GLuint text1) {
     glBindVertexArray(VAO);
-    glBindTexture(GL_TEXTURE_2D, text);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, text0);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, text1);
 
     GLfloat time = (float)glfwGetTime();
     shader.set("time", time);
@@ -143,7 +146,13 @@ int main (int argc, char *argv[]) {
     // Create program
     Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
 
-    uint32_t text = createTexture("../textures/texture.jpg");
+    uint32_t text0 = createTexture("../textures/texture0.jpg");
+    uint32_t text1 = createTexture("../textures/texture1.png");
+
+    shader.use();
+    shader.set("texture1", 0);
+    shader.set("texture2", 1);
+
     // To draw only the lines
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -161,7 +170,7 @@ int main (int argc, char *argv[]) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         //Render VAO
-        render(triangle_VAO, verticesSize, nullptr, shader, text);
+        render(triangle_VAO, verticesSize, nullptr, shader, text0, text1);
 
         //Swap front and back buffers
         glfwSwapBuffers(window);

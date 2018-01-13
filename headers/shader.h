@@ -21,6 +21,7 @@ class  Shader {
 
     void set(const char* name, const bool value) const;
     void set(const char* name, const GLint value) const;
+    void set(const char* name, const GLuint value) const;
     void set(const char* name, const GLfloat value) const;
     void set(const char* name, const GLfloat value0, const GLfloat value1) const;
     void set(const char* name, const GLfloat value0, const GLfloat value1, const GLfloat value2) const;

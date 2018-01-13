@@ -130,6 +130,11 @@ void Shader::set(const char* name, const bool value) const {
 
 void Shader::set(const char* name, const GLint value) const {
     glUniform1i(glGetUniformLocation(id_, name),  value);
+
+}
+
+void Shader::set(const char* name, const GLuint value) const {
+    glUniform1ui(glGetUniformLocation(id_, name), value);
 }
 
 void Shader::set(const char* name, const GLfloat value) const {
