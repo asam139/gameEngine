@@ -10,14 +10,20 @@ add_subdirectory(
         glfw
 )
 
+add_subdirectory(
+        glm
+)
+
 include_directories(
         external_headers
         glm/glm/
+        stb
 )
 
 file (GLOB_RECURSE HEADER_FILES
         external_headers/glad/*.h
         glm/glm/*.hpp
+        stb/stb_image.h
         headers/*
 )
 
