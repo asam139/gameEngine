@@ -84,6 +84,8 @@ GLuint createTexture (const char* path) {
     if (data) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
+
+        stbi_image_free(data);
     } else {
         std::cout << "Failed To Load Texture" << path << std::endl;
     }
@@ -146,8 +148,8 @@ int main (int argc, char *argv[]) {
     // Create program
     Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
 
-    uint32_t text0 = createTexture("../textures/texture0.jpg");
-    uint32_t text1 = createTexture("../textures/texture1.png");
+    GLuint text0 = createTexture("../textures/texture0.jpg");
+    GLuint text1 = createTexture("../textures/texture1.png");
 
     shader.use();
     shader.set("texture1", 0);
@@ -185,6 +187,11 @@ int main (int argc, char *argv[]) {
     glDeleteBuffers(1, &triangle_VBO);
     glDeleteBuffers(1, &triangle_EBO);
     ///////////////////////////
+
+    ////////////////////////////
+    // Delete Textures
+    glDeleteTextures(1, &text0);
+    glDeleteTextures(1, &text1);
 
     glfwTerminate();
     return 0;
