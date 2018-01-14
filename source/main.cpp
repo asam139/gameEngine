@@ -176,9 +176,32 @@ int main (int argc, char *argv[]) {
     // To not draw back faces
     glCullFace(GL_BACK);
 
+
+    //Configure gainput
+    enum Button
+    {
+        ButtonConfirm
+    };
+
+    gainput::InputManager manager;
+    manager.SetDisplaySize(displayWidth, displayHeight);
+    const gainput::DeviceId keyboardId = manager.CreateDevice<gainput::InputDeviceKeyboard>();
+    const gainput::DeviceId mouseId = manager.CreateDevice<gainput::InputDeviceMouse>();
+    const gainput::DeviceId padId = manager.CreateDevice<gainput::InputDevicePad>();
+    const gainput::DeviceId touchId = manager.CreateDevice<gainput::InputDeviceTouch>();
+
+    gainput::InputMap map(manager);
+    map.MapBool(ButtonConfirm, keyboardId, gainput::KeyReturn);
+    map.MapBool(ButtonConfirm, mouseId, gainput::MouseButtonLeft);
+    map.MapBool(ButtonConfirm, padId, gainput::PadButtonA);
+    map.MapBool(ButtonConfirm, touchId, gainput::Touch0Down);
+
+
     while (!glfwWindowShouldClose(window)) { //Loop until user closes the window
         // Handle Input
         handleInput(window);
+
+
 
         // Clear
         glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
