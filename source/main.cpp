@@ -27,11 +27,11 @@ void render(const GLuint VAO, const uint size, const void * indices, const Shade
     //glActiveTexture(GL_TEXTURE1);
     //glBindTexture(GL_TEXTURE_2D, text1);
 
-    GLfloat time = (float)glfwGetTime();
-    shader.set("time", time);
+    //GLfloat time = (float)glfwGetTime();
+    //shader.set("time", time);
 
-    GLfloat radius = 0.25f;
-    shader.set("refPoint", glm::vec3(radius * cosf(time), radius * sinf(time), 0));
+    //GLfloat radius = 0.25f;
+    //shader.set("refPoint", glm::vec3(radius * cosf(time), radius * sinf(time), 0));
 
     glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, indices);
 }
@@ -76,7 +76,7 @@ GLuint createTexture (const char* path, GLenum type) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     GLint width, height, nChannels;
@@ -135,10 +135,10 @@ int main (int argc, char *argv[]) {
     // Triangle
     GLint verticesSize = 32;
     GLfloat triangle_vertices[] = {
-        .5f,    .5f,    0.f,        1.f,    0.f,    0.f,        0.75f,    0.75f,
-        .5f,    -.5f,   0.f,        0.f,    1.f,    0.f,        0.75f,    0.25f,
+        .5f,    .5f,    0.f,        1.f,    0.f,    0.f,        0.5f,    0.5f,
+        .5f,    -.5f,   0.f,        0.f,    1.f,    0.f,        0.5f,    0.25f,
         -0.5f,  -.5f,   0.f,        0.f,    0.f,    1.0f,       0.25f,    0.25f,
-        -0.5f,  .5f,    0.f,        1.f,    1.f,    0.f,        0.25f,    0.75f
+        -0.5f,  .5f,    0.f,        1.f,    1.f,    0.f,        0.25f,    0.5f
     };
 
 
@@ -161,7 +161,6 @@ int main (int argc, char *argv[]) {
     shader.use();
     shader.set("texture1", 0);
     //shader.set("texture2", 1);
-
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
