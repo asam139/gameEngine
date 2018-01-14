@@ -2,38 +2,38 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="gameEngine" targetName="glfw" />
-      <config projectName="gameEngine" targetName="title" />
-      <config projectName="gameEngine" targetName="cursor" />
-      <config projectName="gameEngine" targetName="tearing" />
+      <config projectName="gameEngine" targetName="monitors" />
+      <config projectName="gameEngine" targetName="splitview" />
+      <config projectName="gameEngine" targetName="iconify" />
       <config projectName="gameEngine" targetName="icon" />
+      <config projectName="gameEngine" targetName="simple" />
+      <config projectName="gameEngine" targetName="cursor" />
+      <config projectName="gameEngine" targetName="timeout" />
+      <config projectName="gameEngine" targetName="glfw" />
+      <config projectName="gameEngine" targetName="gears" />
+      <config projectName="gameEngine" targetName="clipboard" />
+      <config projectName="gameEngine" targetName="glm_dummy" />
+      <config projectName="gameEngine" targetName="boing" />
       <config projectName="gameEngine" targetName="wave" />
       <config projectName="gameEngine" targetName="empty" />
-      <config projectName="gameEngine" targetName="windows" />
-      <config projectName="gameEngine" targetName="clipboard" />
-      <config projectName="gameEngine" targetName="iconify" />
+      <config projectName="gameEngine" targetName="title" />
       <config projectName="gameEngine" targetName="reopen" />
-      <config projectName="gameEngine" targetName="msaa" />
-      <config projectName="gameEngine" targetName="gamma" />
-      <config projectName="gameEngine" targetName="monitors" />
-      <config projectName="gameEngine" targetName="opacity" />
-      <config projectName="gameEngine" targetName="gameEngine" />
-      <config projectName="gameEngine" targetName="threads" />
-      <config projectName="gameEngine" targetName="glfwinfo" />
-      <config projectName="gameEngine" targetName="uninstall" />
-      <config projectName="gameEngine" targetName="glm_dummy" />
-      <config projectName="gameEngine" targetName="sharing" />
-      <config projectName="gameEngine" targetName="boing" />
-      <config projectName="gameEngine" targetName="timeout" />
-      <config projectName="gameEngine" targetName="joysticks" />
-      <config projectName="gameEngine" targetName="offscreen" />
-      <config projectName="gameEngine" targetName="splitview" />
-      <config projectName="gameEngine" targetName="inputlag" />
-      <config projectName="gameEngine" targetName="simple" />
       <config projectName="gameEngine" targetName="heightmap" />
-      <config projectName="gameEngine" targetName="particles" />
-      <config projectName="gameEngine" targetName="gears" />
+      <config projectName="gameEngine" targetName="offscreen" />
       <config projectName="gameEngine" targetName="events" />
+      <config projectName="gameEngine" targetName="sharing" />
+      <config projectName="gameEngine" targetName="opacity" />
+      <config projectName="gameEngine" targetName="joysticks" />
+      <config projectName="gameEngine" targetName="windows" />
+      <config projectName="gameEngine" targetName="glfwinfo" />
+      <config projectName="gameEngine" targetName="msaa" />
+      <config projectName="gameEngine" targetName="tearing" />
+      <config projectName="gameEngine" targetName="uninstall" />
+      <config projectName="gameEngine" targetName="inputlag" />
+      <config projectName="gameEngine" targetName="threads" />
+      <config projectName="gameEngine" targetName="gameEngine" />
+      <config projectName="gameEngine" targetName="gamma" />
+      <config projectName="gameEngine" targetName="particles" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -64,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="87" column="8" lean-forward="true" selection-start-line="87" selection-start-column="8" selection-end-line="87" selection-end-column="30" />
+            <state relative-caret-position="331">
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
                 <element signature="e#101#123#0" expanded="true" />
@@ -87,7 +87,7 @@
       <file leaf-file-name="glad.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/external_headers/glad/glad.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="965">
+            <state relative-caret-position="1875">
               <caret line="125" column="21" lean-forward="false" selection-start-line="125" selection-start-column="21" selection-end-line="125" selection-end-column="21" />
               <folding>
                 <element signature="e#2321#3102#0" expanded="true" />
@@ -130,11 +130,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragmentShader.glsl" pinned="false" current-in-tab="false">
+      <file leaf-file-name="fragmentShader.glsl" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shader/fragmentShader.glsl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+            <state relative-caret-position="195">
+              <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -205,13 +205,14 @@
         <option value="$PROJECT_DIR$/shader/vertexShader.glsl" />
         <option value="$PROJECT_DIR$/headers/shader.h" />
         <option value="$PROJECT_DIR$/source/shader.cpp" />
-        <option value="$PROJECT_DIR$/shader/fragmentShader.glsl" />
         <option value="$PROJECT_DIR$/source/main.cpp" />
+        <option value="$PROJECT_DIR$/shader/fragmentShader.glsl" />
       </list>
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
+    <option name="x" value="1280" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="1417" />
@@ -454,12 +455,13 @@
       <workItem from="1515777351792" duration="5934000" />
       <workItem from="1515793926771" duration="44000" />
       <workItem from="1515863316890" duration="1763000" />
-      <workItem from="1515866673770" duration="3235000" />
+      <workItem from="1515866673770" duration="3325000" />
+      <workItem from="1515922728003" duration="306000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48092000" />
+    <option name="totallyTimeSpent" value="48488000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -471,20 +473,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="1417" extended-state="0" />
+    <frame x="1280" y="23" width="1280" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23344104" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753405" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32829046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21785174" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23021002" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2753404" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -493,18 +494,12 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/source/main.cpp</url>
-          <line>24</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
@@ -841,22 +836,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shader/fragmentShader.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shader/vertexShader.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/shader.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -869,7 +848,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/external_headers/glad/glad.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="965">
+        <state relative-caret-position="1875">
           <caret line="125" column="21" lean-forward="false" selection-start-line="125" selection-start-column="21" selection-end-line="125" selection-end-column="21" />
           <folding>
             <element signature="e#2321#3102#0" expanded="true" />
@@ -889,12 +868,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/source/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="87" column="8" lean-forward="true" selection-start-line="87" selection-start-column="8" selection-end-line="87" selection-end-column="30" />
+        <state relative-caret-position="331">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
             <element signature="e#101#123#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shader/vertexShader.glsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shader/fragmentShader.glsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
