@@ -54,11 +54,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="109" column="65" lean-forward="true" selection-start-line="109" selection-start-column="65" selection-end-line="109" selection-end-column="65" />
+            <state relative-caret-position="481">
+              <caret line="132" column="53" lean-forward="false" selection-start-line="132" selection-start-column="53" selection-end-line="132" selection-end-column="53" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
                 <element signature="e#101#123#0" expanded="true" />
@@ -113,11 +113,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragmentShader.glsl" pinned="false" current-in-tab="true">
+      <file leaf-file-name="fragmentShader.glsl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shader/fragmentShader.glsl">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+              <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -181,8 +181,8 @@
         <option value="$PROJECT_DIR$/shader/vertexShader.glsl" />
         <option value="$PROJECT_DIR$/headers/shader.h" />
         <option value="$PROJECT_DIR$/source/shader.cpp" />
-        <option value="$PROJECT_DIR$/source/main.cpp" />
         <option value="$PROJECT_DIR$/shader/fragmentShader.glsl" />
+        <option value="$PROJECT_DIR$/source/main.cpp" />
       </list>
     </option>
   </component>
@@ -431,12 +431,12 @@
       <workItem from="1515793926771" duration="44000" />
       <workItem from="1515863316890" duration="1763000" />
       <workItem from="1515866673770" duration="3325000" />
-      <workItem from="1515922728003" duration="1648000" />
+      <workItem from="1515922728003" duration="1874000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49830000" />
+    <option name="totallyTimeSpent" value="50056000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -838,17 +838,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="109" column="65" lean-forward="true" selection-start-line="109" selection-start-column="65" selection-end-line="109" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <element signature="e#101#123#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/textures/texture1.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -857,8 +846,19 @@
     <entry file="file://$PROJECT_DIR$/shader/fragmentShader.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="132" column="53" lean-forward="false" selection-start-line="132" selection-start-column="53" selection-end-line="132" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+            <element signature="e#101#123#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

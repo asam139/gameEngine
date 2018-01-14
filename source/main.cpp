@@ -128,10 +128,10 @@ int main (int argc, char *argv[]) {
     // Triangle
     GLint verticesSize = 32;
     GLfloat triangle_vertices[] = {
-        .5f,    .5f,    0.f,        1.f,    0.f,    0.f,        1.f,    1.f,
-        .5f,    -.5f,   0.f,        0.f,    1.f,    0.f,        1.f,    0.f,
+        .5f,    .5f,    0.f,        1.f,    0.f,    0.f,        8.f,    8.f,
+        .5f,    -.5f,   0.f,        0.f,    1.f,    0.f,        8.f,    0.f,
         -0.5f,  -.5f,   0.f,        0.f,    0.f,    1.0f,       0.f,    0.f,
-        -0.5f,  .5f,    0.f,        1.f,    1.f,    0.f,        0.f,    1.f
+        -0.5f,  .5f,    0.f,        1.f,    1.f,    0.f,        0.f,    8.f
     };
 
 
