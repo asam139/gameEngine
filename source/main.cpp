@@ -24,8 +24,8 @@ void render(const GLuint VAO, const uint size, const void * indices, const Shade
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, text0);
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, text1);
+    //glActiveTexture(GL_TEXTURE1);
+    //glBindTexture(GL_TEXTURE_2D, text1);
 
     GLfloat time = (float)glfwGetTime();
     shader.set("time", time);
@@ -82,7 +82,7 @@ GLuint createTexture (const char* path) {
     GLint width, height, nChannels;
     unsigned char* data = stbi_load(path, &width, &height, &nChannels, 0);
     if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 
         stbi_image_free(data);
@@ -148,12 +148,16 @@ int main (int argc, char *argv[]) {
     // Create program
     Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
 
-    GLuint text0 = createTexture("../textures/texture0.jpg");
-    GLuint text1 = createTexture("../textures/texture1.png");
+    GLuint text0 = createTexture("../textures/catTexture.png");
+    //GLuint text1 = createTexture("../textures/texture1.png");
 
     shader.use();
     shader.set("texture1", 0);
-    shader.set("texture2", 1);
+    //shader.set("texture2", 1);
+
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // To draw only the lines
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -172,7 +176,7 @@ int main (int argc, char *argv[]) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         //Render VAO
-        render(triangle_VAO, verticesSize, nullptr, shader, text0, text1);
+        render(triangle_VAO, verticesSize, nullptr, shader, text0, 0);
 
         //Swap front and back buffers
         glfwSwapBuffers(window);
@@ -191,7 +195,7 @@ int main (int argc, char *argv[]) {
     ////////////////////////////
     // Delete Textures
     glDeleteTextures(1, &text0);
-    glDeleteTextures(1, &text1);
+    //glDeleteTextures(1, &text1);
 
     glfwTerminate();
     return 0;
