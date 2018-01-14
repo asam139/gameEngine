@@ -135,10 +135,10 @@ int main (int argc, char *argv[]) {
     // Triangle
     GLint verticesSize = 32;
     GLfloat triangle_vertices[] = {
-        .5f,    .5f,    0.f,        1.f,    0.f,    0.f,        1.f,    1.f,
-        .5f,    -.5f,   0.f,        0.f,    1.f,    0.f,        1.f,    0.f,
-        -0.5f,  -.5f,   0.f,        0.f,    0.f,    1.0f,       0.f,    0.f,
-        -0.5f,  .5f,    0.f,        1.f,    1.f,    0.f,        0.f,    1.f
+        .5f,    .5f,    0.f,        1.f,    0.f,    0.f,        0.75f,    0.75f,
+        .5f,    -.5f,   0.f,        0.f,    1.f,    0.f,        0.75f,    0.25f,
+        -0.5f,  -.5f,   0.f,        0.f,    0.f,    1.0f,       0.25f,    0.25f,
+        -0.5f,  .5f,    0.f,        1.f,    1.f,    0.f,        0.25f,    0.75f
     };
 
 
@@ -155,7 +155,7 @@ int main (int argc, char *argv[]) {
     // Create program
     Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
 
-    GLuint text0 = createTexture("../textures/catTexture.png", GL_RGBA);
+    GLuint text0 = createTexture("../textures/animeMemesTexture.jpg", GL_RGB);
     //GLuint text1 = createTexture("../textures/texture1.png", GL_RGB);
 
     shader.use();
