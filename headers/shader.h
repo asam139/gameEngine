@@ -6,7 +6,7 @@
 #define GAMEENGINE_SHADER_H
 
 #include <glad/glad.h>
-#include <glm.hpp>
+#include <glm/glm.hpp>
 
 #include <cstdint>
 #include <string>

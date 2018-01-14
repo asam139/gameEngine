@@ -1,13 +1,16 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <glm.hpp>
+#include <glm/glm.hpp>
 
 #define  STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 #include <iostream>
 
-#include "../headers/shader.h"
+// Manage Input
+#include <gainput/gainput.h>
+
+#include "shader.h"
 
 void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_t height) {
     glViewport(0, 0, width, height);

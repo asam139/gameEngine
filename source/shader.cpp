@@ -2,14 +2,13 @@
 // Created by Saul Moreno Abril on 10/01/2018.
 //
 
-#import "../headers/shader.h"
+#import "shader.h"
 
-#include <gtc/type_ptr.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
-
 
 
 using std::string;

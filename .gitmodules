@@ -7,3 +7,6 @@
 [submodule "stb"]
 	path = stb
 	url = https://github.com/nothings/stb.git
+[submodule "gainput"]
+	path = gainput
+	url = https://github.com/jkuhlmann/gainput

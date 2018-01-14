@@ -14,10 +14,18 @@ add_subdirectory(
         glm
 )
 
+add_subdirectory(
+    gainput
+)
+
 include_directories(
         external_headers
-        glm/glm/
+        glfw/include
+        glm
         stb
+        gainput/lib/include
+
+        headers
 )
 
 file (GLOB_RECURSE HEADER_FILES
@@ -43,5 +51,6 @@ add_executable(gameEngine
 
 target_link_libraries(gameEngine
         glfw ${GLFW_LIBRARIES}
+        gainput
 )
 #target_link_libraries(gameEngine glfw ${OPENGL_glu_LIBRARY} ${GLFW_LIBRARIES})
