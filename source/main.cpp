@@ -7,19 +7,37 @@
 
 #include <iostream>
 
-// Manage Input
-#include <gainput/gainput.h>
-
 #include "shader.h"
+
+///////////////////////
+// Static variables
+
+// To control time
+static double deltaTime = 0.0f;
+
+///////////////////////
 
 void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_t height) {
     glViewport(0, 0, width, height);
 }
 
-void handleInput(GLFWwindow* window) {
+void handleInput(GLFWwindow* window, const Shader& shader, GLfloat *mixingThreshold) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
+
+    const float speed = 0.5f; // Value/s
+    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+        if (*mixingThreshold < 1.f) {
+            *mixingThreshold += speed * deltaTime;
+        }
+    } else if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+        if (*mixingThreshold > 0.f) {
+            *mixingThreshold -= speed * deltaTime;
+        }
+    }
+
+    std::cout << "Mixing Threshold Value:" << *mixingThreshold << std::endl;
 }
 
 void render(const GLuint VAO, const uint size, const void * indices, const Shader& shader, const GLuint text0, const GLuint text1) {
@@ -27,8 +45,8 @@ void render(const GLuint VAO, const uint size, const void * indices, const Shade
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, text0);
-    //glActiveTexture(GL_TEXTURE1);
-    //glBindTexture(GL_TEXTURE_2D, text1);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, text1);
 
     //GLfloat time = (float)glfwGetTime();
     //shader.set("time", time);
@@ -159,11 +177,14 @@ int main (int argc, char *argv[]) {
     Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
 
     GLuint text0 = createTexture("../textures/animeMemesTexture.jpg", GL_RGB);
-    //GLuint text1 = createTexture("../textures/texture1.png", GL_RGB);
+    GLuint text1 = createTexture("../textures/oxideTexture.jpg", GL_RGB);
+
+    // Mixing Threshold
+    GLfloat mixingThreshold = 0.5f;
 
     shader.use();
     shader.set("texture1", 0);
-    //shader.set("texture2", 1);
+    shader.set("texture2", 1);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -174,47 +195,48 @@ int main (int argc, char *argv[]) {
     // Enable Culling
     glEnable(GL_CULL_FACE);
     // To not draw back faces
-    glCullFace(GL_BACK);
-
-
-    //Configure gainput
-    enum Button
-    {
-        ButtonConfirm
-    };
-
-    gainput::InputManager manager;
-    manager.SetDisplaySize(displayWidth, displayHeight);
-    const gainput::DeviceId keyboardId = manager.CreateDevice<gainput::InputDeviceKeyboard>();
-    const gainput::DeviceId mouseId = manager.CreateDevice<gainput::InputDeviceMouse>();
-    const gainput::DeviceId padId = manager.CreateDevice<gainput::InputDevicePad>();
-    const gainput::DeviceId touchId = manager.CreateDevice<gainput::InputDeviceTouch>();
-
-    gainput::InputMap map(manager);
-    map.MapBool(ButtonConfirm, keyboardId, gainput::KeyReturn);
-    map.MapBool(ButtonConfirm, mouseId, gainput::MouseButtonLeft);
-    map.MapBool(ButtonConfirm, padId, gainput::PadButtonA);
-    map.MapBool(ButtonConfirm, touchId, gainput::Touch0Down);
-
-
-    while (!glfwWindowShouldClose(window)) { //Loop until user closes the window
-        // Handle Input
-        handleInput(window);
 
 
 
-        // Clear
-        glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+    // To control FPS
+    const double maxFPS = 60.0;
+    const double maxPeriod = 1.0 / maxFPS;
+    // approx ~ 16.666 ms
 
-        //Render VAO
-        render(triangle_VAO, verticesSize, nullptr, shader, text0, 0);
+    double lastTime = 0.0;
 
-        //Swap front and back buffers
-        glfwSwapBuffers(window);
 
-        // Poll for and process events
-        glfwPollEvents();
+    while (!glfwWindowShouldClose(window)) { //Loop until user closes the window+
+        double time = glfwGetTime();
+        deltaTime = time - lastTime;
+
+        if( deltaTime >= maxPeriod ) {
+            std::cout << "Delta Time:" << deltaTime << std::endl;
+            lastTime = time;
+
+            //////////////////////////////
+            // Code here gets called with max FPS
+            //////////////////////////////
+
+            // Handle Input
+            handleInput(window, shader, &mixingThreshold);
+
+            // Clear
+            glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
+
+            // Set mixingThreshold
+            shader.set("mixingThreshold", mixingThreshold);
+
+            //Render VAO
+            render(triangle_VAO, verticesSize, nullptr, shader, text0, text1);
+
+            //Swap front and back buffers
+            glfwSwapBuffers(window);
+
+            // Poll for and process events
+            glfwPollEvents();
+        }
     }
 
     ////////////////////////////
@@ -227,7 +249,7 @@ int main (int argc, char *argv[]) {
     ////////////////////////////
     // Delete Textures
     glDeleteTextures(1, &text0);
-    //glDeleteTextures(1, &text1);
+    glDeleteTextures(1, &text1);
 
     glfwTerminate();
     return 0;
