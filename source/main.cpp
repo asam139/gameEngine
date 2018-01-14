@@ -68,7 +68,7 @@ GLuint createVertexData(GLfloat* vertices, GLuint vSize, GLuint* indices, GLuint
     return VAO;
 }
 
-GLuint createTexture (const char* path) {
+GLuint createTexture (const char* path, GLenum type) {
     GLuint texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -82,7 +82,7 @@ GLuint createTexture (const char* path) {
     GLint width, height, nChannels;
     unsigned char* data = stbi_load(path, &width, &height, &nChannels, 0);
     if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, type, width, height, 0, type, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 
         stbi_image_free(data);
@@ -122,16 +122,23 @@ int main (int argc, char *argv[]) {
 
     glfwSetFramebufferSizeCallback(window, &onChangeFramebufferSize);
 
+
+    ///////////////////////////
+    // Configure stb
+    stbi_set_flip_vertically_on_load(true);
+
+    ///////////////////////////
+
     ///////////////////////////
     // Create VBOs and VAOs
     ///////////////////////////
     // Triangle
     GLint verticesSize = 32;
     GLfloat triangle_vertices[] = {
-        .5f,    .5f,    0.f,        1.f,    0.f,    0.f,        8.f,    8.f,
-        .5f,    -.5f,   0.f,        0.f,    1.f,    0.f,        8.f,    0.f,
+        .5f,    .5f,    0.f,        1.f,    0.f,    0.f,        1.f,    1.f,
+        .5f,    -.5f,   0.f,        0.f,    1.f,    0.f,        1.f,    0.f,
         -0.5f,  -.5f,   0.f,        0.f,    0.f,    1.0f,       0.f,    0.f,
-        -0.5f,  .5f,    0.f,        1.f,    1.f,    0.f,        0.f,    8.f
+        -0.5f,  .5f,    0.f,        1.f,    1.f,    0.f,        0.f,    1.f
     };
 
 
@@ -148,8 +155,8 @@ int main (int argc, char *argv[]) {
     // Create program
     Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
 
-    GLuint text0 = createTexture("../textures/catTexture.png");
-    //GLuint text1 = createTexture("../textures/texture1.png");
+    GLuint text0 = createTexture("../textures/catTexture.png", GL_RGBA);
+    //GLuint text1 = createTexture("../textures/texture1.png", GL_RGB);
 
     shader.use();
     shader.set("texture1", 0);
