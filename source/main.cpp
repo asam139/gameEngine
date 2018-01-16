@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -18,26 +19,32 @@ const uint32_t kScreenWidth = 800;
 const uint32_t kScreenHeight = 800;
 
 // To control time
-static double deltaTime = 0.0f;
+static float deltaTime = 0.0f;
 
-///////////////////////
+// Camera
+glm::vec3 cameraPos = glm::vec3(0.f, 0.f, 3.f);
+glm::vec3 cameraFront = glm::vec3(0.f, 0.f, -1.f);
+const glm::vec3 cameraUp = glm::vec3(0.f, 1.f, 0.f);
+//Disabled because moving with mouse it is necessary to calculate every time
+//const glm::vec3 cameraRight = glm::normalize(glm::cross(cameraFront, cameraUp));
 
-void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_t height) {
-    glViewport(0, 0, width, height);
-}
+const float cameraSpeed = 10.f; // m/s
 
-void handleInput(GLFWwindow* window, const Shader& shader) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        glfwSetWindowShouldClose(window, true);
-    }
+const float minFov = 1.f;
+const float maxFov = 60.f;
+float fov = 60.f;
+
+// Mouse
+bool firstMouse = true;
+float yaw = -90.f;
+float maxPitch = 89.f;
+float minPitch = -89.f;
+float pitch = 0.f;
+float lastX = (float)kScreenWidth / 2.f;
+float lastY = (float)kScreenHeight / 2.f;
 
 
-    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
-
-    } else if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
-
-    }
-}
+// Objects
 
 glm::vec3 cubePositions[] = {
         glm::vec3(0.0f, 0.0f, 0.0f),
@@ -52,6 +59,94 @@ glm::vec3 cubePositions[] = {
         glm::vec3(-1.3f, 1.0f, -1.5f)
 };
 
+///////////////////////
+
+// Resize callback
+void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_t height) {
+    glViewport(0, 0, width, height);
+}
+
+
+// Mouse callback
+
+void onMouse(GLFWwindow* window, double xpos, double ypos) {
+    // Initial values the first frame
+    if (firstMouse) {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    // Calc offset movement since last frame
+    float xoffset = xpos - lastX;
+    // Reversed y-coords go from bottom to top
+    float yoffset = lastY - ypos;
+    lastX = xpos;
+    lastY = ypos;
+
+    // Constraint the movement speed
+    float sensitivity = 0.1f;
+    xoffset *= sensitivity;
+    yoffset *= sensitivity;
+    // Add offsets to pitch/yaw
+    yaw += xoffset;
+    pitch += yoffset;
+
+    // Constraints for the pitch
+    if (pitch > maxPitch) {
+        pitch = maxPitch;
+    }
+    if (pitch < minPitch) {
+        pitch = minPitch;
+    }
+
+    // Calc the direction vector
+    glm::vec3 front;
+    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front.y = sin(glm::radians(pitch));
+    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront = glm::normalize(front);
+}
+
+// Scroll callback
+void onScroll(GLFWwindow* window, double xoffset, double yoffset) {
+    if (fov >= minFov && fov <= maxFov) {
+        fov -= yoffset;
+    }
+
+    if (fov <= minFov) {
+        fov = minFov;
+    }
+
+    if (fov >= maxFov) {
+        fov = maxFov;
+    }
+}
+
+// Handle Input
+void handleInput(GLFWwindow* window, const Shader& shader) {
+
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, true);
+        return;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+        cameraPos += cameraFront * cameraSpeed * deltaTime;
+    } else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+        cameraPos -= cameraFront * cameraSpeed * deltaTime;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+        glm::vec3 cameraRight = glm::normalize(glm::cross(cameraFront, cameraUp));
+        cameraPos += cameraRight * cameraSpeed * deltaTime;
+    } else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+        glm::vec3 cameraRight = glm::normalize(glm::cross(cameraFront, cameraUp));
+        cameraPos -= cameraRight * cameraSpeed * deltaTime;
+    }
+}
+
+// Render
 void render(const GLuint VAO, const uint size, const void * indices, const Shader& shader, const GLuint text0) {
     glBindVertexArray(VAO);
 
@@ -59,22 +154,21 @@ void render(const GLuint VAO, const uint size, const void * indices, const Shade
     glBindTexture(GL_TEXTURE_2D, text0);
 
     glm::mat4 view = glm::mat4(1.0f);
-    view = glm::translate(view, glm::vec3(0.f, 0.f, -3.f));
+    view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
     shader.set("view", view);
 
-
-    //Angle of view:60 degrees
-    //Near clipping plane distance: 0.1
-    //Far clipping plane distance: 100.0
+    //Angle of view
+    //Near clipping plane distance
+    //Far clipping plane distance
     glm::mat4 projection;
-    projection = glm::perspective(glm::radians(60.f), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
+    projection = glm::perspective(glm::radians(fov), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     shader.set("projection", projection);
 
     for (uint8_t i = 0; i < 10; i++) {
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, cubePositions[i]);
         float angle = 10.0f + (20.0f * i);
-        model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+        model = glm::rotate(model, /*(float) glfwGetTime() **/ glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
         shader.set("model", model);
         glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, indices);
     }
@@ -161,8 +255,15 @@ int main (int argc, char *argv[]) {
         return -1;
     }
 
+    // Resize callback
     glfwSetFramebufferSizeCallback(window, &onChangeFramebufferSize);
 
+    // Mouse callback
+    glfwSetCursorPosCallback(window, onMouse);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+    //Scroll callback
+    glfwSetScrollCallback(window, onScroll);
 
     ///////////////////////////
     // Configure stb
@@ -241,15 +342,15 @@ int main (int argc, char *argv[]) {
     glEnable(GL_DEPTH_TEST);
 
     // To control FPS
-    const double maxFPS = 60.0;
-    const double maxPeriod = 1.0 / maxFPS;
+    const float maxFPS = 60.0;
+    const float maxPeriod = 1.0 / maxFPS;
     // approx ~ 16.666 ms
 
-    double lastTime = 0.0;
+    float lastTime = 0.0;
 
 
     while (!glfwWindowShouldClose(window)) { //Loop until user closes the window+
-        double time = glfwGetTime();
+        float time = glfwGetTime();
         deltaTime = time - lastTime;
 
         if( deltaTime >= maxPeriod ) {
