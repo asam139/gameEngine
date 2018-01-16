@@ -1,6 +1,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #define  STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
@@ -12,6 +14,9 @@
 ///////////////////////
 // Static variables
 
+const uint32_t kScreenWidth = 800;
+const uint32_t kScreenHeight = 800;
+
 // To control time
 static double deltaTime = 0.0f;
 
@@ -21,38 +26,42 @@ void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_
     glViewport(0, 0, width, height);
 }
 
-void handleInput(GLFWwindow* window, const Shader& shader, GLfloat *mixingThreshold) {
+void handleInput(GLFWwindow* window, const Shader& shader) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
 
-    const float speed = 0.5f; // Value/s
-    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
-        if (*mixingThreshold < 1.f) {
-            *mixingThreshold += speed * deltaTime;
-        }
-    } else if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
-        if (*mixingThreshold > 0.f) {
-            *mixingThreshold -= speed * deltaTime;
-        }
-    }
 
-    std::cout << "Mixing Threshold Value:" << *mixingThreshold << std::endl;
+    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+
+    } else if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+
+    }
 }
 
-void render(const GLuint VAO, const uint size, const void * indices, const Shader& shader, const GLuint text0, const GLuint text1) {
+void render(const GLuint VAO, const uint size, const void * indices, const Shader& shader, const GLuint text0) {
     glBindVertexArray(VAO);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, text0);
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, text1);
 
-    //GLfloat time = (float)glfwGetTime();
-    //shader.set("time", time);
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::rotate(model, glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f));
 
-    //GLfloat radius = 0.25f;
-    //shader.set("refPoint", glm::vec3(radius * cosf(time), radius * sinf(time), 0));
+    glm::mat4 view = glm::mat4(1.0f);
+    view = glm::translate(view, glm::vec3(0.f, 0.f, -3.f));
+
+    glm::mat4 projection;
+    projection = glm::perspective(glm::radians(45.f), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
+
+    shader.set("model", model);
+    shader.set("view", view);
+    shader.set("projection", projection);
+
+    glm::mat4 trans = glm::mat4(1.0f);
+    trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.f, 0.f, 1.f));
+    trans = glm::scale(trans, glm::vec3(0.5f, 0.5f, 0.5f));
+    shader.set("transform", trans);
 
     glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, indices);
 }
@@ -126,7 +135,7 @@ int main (int argc, char *argv[]) {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  //Core Profile
 
     GLFWwindow *window;    //Create a windowed mode window and its OpenGL context
-    window = glfwCreateWindow(800, 800, "New Window", nullptr, nullptr);
+    window = glfwCreateWindow(kScreenWidth, kScreenHeight, "New Window", nullptr, nullptr);
     if (!window) {
         std::cout << "Failed To Create GLFW Window" << std::endl;
         glfwTerminate();
@@ -156,10 +165,10 @@ int main (int argc, char *argv[]) {
     // Triangle
     GLint verticesSize = 32;
     GLfloat triangle_vertices[] = {
-        .5f,    .5f,    0.f,        1.f,    0.f,    0.f,        0.5f,    0.5f,
-        .5f,    -.5f,   0.f,        0.f,    1.f,    0.f,        0.5f,    0.25f,
-        -0.5f,  -.5f,   0.f,        0.f,    0.f,    1.0f,       0.25f,    0.25f,
-        -0.5f,  .5f,    0.f,        1.f,    1.f,    0.f,        0.25f,    0.5f
+        .5f,    .5f,    0.f,        1.f,    0.f,    0.f,        1.f,    1.f,
+        .5f,    -.5f,   0.f,        0.f,    1.f,    0.f,        1.f,    0.f,
+        -0.5f,  -.5f,   0.f,        0.f,    0.f,    1.0f,       0.f,    0.f,
+        -0.5f,  .5f,    0.f,        1.f,    1.f,    0.f,        0.f,    1.f
     };
 
 
@@ -177,14 +186,9 @@ int main (int argc, char *argv[]) {
     Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
 
     GLuint text0 = createTexture("../textures/animeMemesTexture.jpg", GL_RGB);
-    GLuint text1 = createTexture("../textures/oxideTexture.jpg", GL_RGB);
-
-    // Mixing Threshold
-    GLfloat mixingThreshold = 0.5f;
 
     shader.use();
     shader.set("texture1", 0);
-    shader.set("texture2", 1);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -211,7 +215,6 @@ int main (int argc, char *argv[]) {
         deltaTime = time - lastTime;
 
         if( deltaTime >= maxPeriod ) {
-            std::cout << "Delta Time:" << deltaTime << std::endl;
             lastTime = time;
 
             //////////////////////////////
@@ -219,17 +222,15 @@ int main (int argc, char *argv[]) {
             //////////////////////////////
 
             // Handle Input
-            handleInput(window, shader, &mixingThreshold);
+            handleInput(window, shader);
 
             // Clear
             glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            // Set mixingThreshold
-            shader.set("mixingThreshold", mixingThreshold);
 
             //Render VAO
-            render(triangle_VAO, verticesSize, nullptr, shader, text0, text1);
+            render(triangle_VAO, verticesSize, nullptr, shader, text0);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
@@ -249,7 +250,6 @@ int main (int argc, char *argv[]) {
     ////////////////////////////
     // Delete Textures
     glDeleteTextures(1, &text0);
-    glDeleteTextures(1, &text1);
 
     glfwTerminate();
     return 0;
