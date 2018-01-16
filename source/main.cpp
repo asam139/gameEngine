@@ -39,31 +39,45 @@ void handleInput(GLFWwindow* window, const Shader& shader) {
     }
 }
 
+glm::vec3 cubePositions[] = {
+        glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec3(2.0f, 5.0f, -15.0f),
+        glm::vec3(-1.5f, -2.2f, -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3(2.4f, -0.4f, -3.5f),
+        glm::vec3(-1.7f, 3.0f, -7.5f),
+        glm::vec3(1.3f, -2.0f, -2.5f),
+        glm::vec3(1.5f, 2.0f, -2.5f),
+        glm::vec3(1.5f, 0.2f, -1.5f),
+        glm::vec3(-1.3f, 1.0f, -1.5f)
+};
+
 void render(const GLuint VAO, const uint size, const void * indices, const Shader& shader, const GLuint text0) {
     glBindVertexArray(VAO);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, text0);
 
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::rotate(model, glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f));
-
     glm::mat4 view = glm::mat4(1.0f);
     view = glm::translate(view, glm::vec3(0.f, 0.f, -3.f));
-
-    glm::mat4 projection;
-    projection = glm::perspective(glm::radians(45.f), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
-
-    shader.set("model", model);
     shader.set("view", view);
+
+
+    //Angle of view:60 degrees
+    //Near clipping plane distance: 0.1
+    //Far clipping plane distance: 100.0
+    glm::mat4 projection;
+    projection = glm::perspective(glm::radians(60.f), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     shader.set("projection", projection);
 
-    glm::mat4 trans = glm::mat4(1.0f);
-    trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.f, 0.f, 1.f));
-    trans = glm::scale(trans, glm::vec3(0.5f, 0.5f, 0.5f));
-    shader.set("transform", trans);
-
-    glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, indices);
+    for (uint8_t i = 0; i < 10; i++) {
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, cubePositions[i]);
+        float angle = 10.0f + (20.0f * i);
+        model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+        shader.set("model", model);
+        glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, indices);
+    }
 }
 
 GLuint createVertexData(GLfloat* vertices, GLuint vSize, GLuint* indices, GLuint iSize,  GLuint* VBO, GLuint* EBO) {
@@ -159,7 +173,7 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
     // Create VBOs and VAOs
     ///////////////////////////
-    // Triangle
+    // Cube
     GLint verticesSize = 120;
     GLfloat vertices[] = {
             // Position             // UVs
@@ -198,8 +212,8 @@ int main (int argc, char *argv[]) {
             20, 21, 22,     20, 22, 23 //Top
     };
 
-    GLuint triangle_VBO, triangle_EBO;
-    GLuint triangle_VAO = createVertexData(vertices, verticesSize, indices, indicesSize,  &triangle_VBO, &triangle_EBO);
+    GLuint VBO, EBO;
+    GLuint VAO = createVertexData(vertices, verticesSize, indices, indicesSize,  &VBO, &EBO);
     ///////////////////////////
 
     // Create program
@@ -216,11 +230,15 @@ int main (int argc, char *argv[]) {
     // To draw only the lines
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+
+    // To not draw back faces
+    glCullFace(GL_BACK);
     // Enable Culling
     glEnable(GL_CULL_FACE);
-    // To not draw back faces
 
-
+    // Enable Depth
+    glDepthFunc(GL_LESS);
+    glEnable(GL_DEPTH_TEST);
 
     // To control FPS
     const double maxFPS = 60.0;
@@ -246,11 +264,11 @@ int main (int argc, char *argv[]) {
 
             // Clear
             glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
             //Render VAO
-            render(triangle_VAO, verticesSize, nullptr, shader, text0);
+            render(VAO, verticesSize, nullptr, shader, text0);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
@@ -262,9 +280,9 @@ int main (int argc, char *argv[]) {
 
     ////////////////////////////
     // Delete VAO and VBO
-    glDeleteVertexArrays(1, &triangle_VAO);
-    glDeleteBuffers(1, &triangle_VBO);
-    glDeleteBuffers(1, &triangle_EBO);
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
     ///////////////////////////
 
     ////////////////////////////
