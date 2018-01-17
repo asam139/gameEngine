@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include "shader.h"
+#include "Camera.h"
 
 ///////////////////////
 // Static variables
@@ -22,30 +23,14 @@ const uint32_t kScreenHeight = 800;
 static float deltaTime = 0.0f;
 
 // Camera
-glm::vec3 cameraPos = glm::vec3(0.f, 0.f, 3.f);
-glm::vec3 cameraFront = glm::vec3(0.f, 0.f, -1.f);
-const glm::vec3 cameraUp = glm::vec3(0.f, 1.f, 0.f);
-//Disabled because moving with mouse it is necessary to calculate every time
-//const glm::vec3 cameraRight = glm::normalize(glm::cross(cameraFront, cameraUp));
-
-const float cameraSpeed = 10.f; // m/s
-
-const float minFov = 1.f;
-const float maxFov = 60.f;
-float fov = 60.f;
+Camera camera(glm::vec3(0.f, 0.f, 3.f));
 
 // Mouse
 bool firstMouse = true;
-float yaw = -90.f;
-float maxPitch = 89.f;
-float minPitch = -89.f;
-float pitch = 0.f;
 float lastX = (float)kScreenWidth / 2.f;
 float lastY = (float)kScreenHeight / 2.f;
 
-
 // Objects
-
 glm::vec3 cubePositions[] = {
         glm::vec3(0.0f, 0.0f, 0.0f),
         glm::vec3(2.0f, 5.0f, -15.0f),
@@ -78,49 +63,18 @@ void onMouse(GLFWwindow* window, double xpos, double ypos) {
     }
 
     // Calc offset movement since last frame
-    float xoffset = xpos - lastX;
+    float xOffset = xpos - lastX;
     // Reversed y-coords go from bottom to top
-    float yoffset = lastY - ypos;
+    float yOffset = lastY - ypos;
     lastX = xpos;
     lastY = ypos;
 
-    // Constraint the movement speed
-    float sensitivity = 0.1f;
-    xoffset *= sensitivity;
-    yoffset *= sensitivity;
-    // Add offsets to pitch/yaw
-    yaw += xoffset;
-    pitch += yoffset;
-
-    // Constraints for the pitch
-    if (pitch > maxPitch) {
-        pitch = maxPitch;
-    }
-    if (pitch < minPitch) {
-        pitch = minPitch;
-    }
-
-    // Calc the direction vector
-    glm::vec3 front;
-    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    front.y = sin(glm::radians(pitch));
-    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    cameraFront = glm::normalize(front);
+    camera.handleMouseMovement(xOffset, yOffset);
 }
 
 // Scroll callback
-void onScroll(GLFWwindow* window, double xoffset, double yoffset) {
-    if (fov >= minFov && fov <= maxFov) {
-        fov -= yoffset;
-    }
-
-    if (fov <= minFov) {
-        fov = minFov;
-    }
-
-    if (fov >= maxFov) {
-        fov = maxFov;
-    }
+void onScroll(GLFWwindow* window, double xOffset, double yOffset) {
+    camera.handleMouseScroll(yOffset);
 }
 
 // Handle Input
@@ -131,19 +85,21 @@ void handleInput(GLFWwindow* window, const Shader& shader) {
         return;
     }
 
+    Camera::Movement movementMask = Camera::Movement::None;
+
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        cameraPos += cameraFront * cameraSpeed * deltaTime;
+        movementMask = (Camera::Movement)(movementMask | Camera::Movement::Forward);
     } else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        cameraPos -= cameraFront * cameraSpeed * deltaTime;
+        movementMask = (Camera::Movement)(movementMask | Camera::Movement::Backward);
     }
 
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        glm::vec3 cameraRight = glm::normalize(glm::cross(cameraFront, cameraUp));
-        cameraPos += cameraRight * cameraSpeed * deltaTime;
+        movementMask = (Camera::Movement)(movementMask | Camera::Movement::Right);
     } else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        glm::vec3 cameraRight = glm::normalize(glm::cross(cameraFront, cameraUp));
-        cameraPos -= cameraRight * cameraSpeed * deltaTime;
+        movementMask = (Camera::Movement)(movementMask | Camera::Movement::Left);
     }
+
+    camera.handleKeyboard(movementMask, deltaTime);
 }
 
 // Render
@@ -153,15 +109,11 @@ void render(const GLuint VAO, const uint size, const void * indices, const Shade
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, text0);
 
-    glm::mat4 view = glm::mat4(1.0f);
-    view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-    shader.set("view", view);
 
-    //Angle of view
-    //Near clipping plane distance
-    //Far clipping plane distance
     glm::mat4 projection;
-    projection = glm::perspective(glm::radians(fov), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
+    projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
+
+    shader.set("view", camera.getViewMatrix());
     shader.set("projection", projection);
 
     for (uint8_t i = 0; i < 10; i++) {

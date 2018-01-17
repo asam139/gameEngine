@@ -41,8 +41,7 @@ file (GLOB_RECURSE SRC_FILES
 add_executable(gameEngine
         ${HEADER_FILES}
         ${DEPS_SRC_FILES}
-        ${SRC_FILES}
-        headers/shader.h source/shader.cpp)
+        ${SRC_FILES})
 
 target_link_libraries(gameEngine
         glfw ${GLFW_LIBRARIES}
