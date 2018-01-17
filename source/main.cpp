@@ -321,7 +321,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(VAO, verticesSize, nullptr, shader, text0);
+            render(VAO, indicesSize, nullptr, shader, text0);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
