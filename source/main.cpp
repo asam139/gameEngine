@@ -13,6 +13,8 @@
 #include "shader.h"
 #include "Camera.h"
 
+#include "Cube.h"
+
 ///////////////////////
 // Static variables
 
@@ -103,8 +105,8 @@ void handleInput(GLFWwindow* window, const Shader& shader) {
 }
 
 // Render
-void render(const GLuint VAO, const uint size, const void * indices, const Shader& shader, const GLuint text0) {
-    glBindVertexArray(VAO);
+void render(const Cube& cube, const Shader& shader, const GLuint text0) {
+    glBindVertexArray(cube.getVAO());
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, text0);
@@ -120,39 +122,10 @@ void render(const GLuint VAO, const uint size, const void * indices, const Shade
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, cubePositions[i]);
         float angle = 10.0f + (20.0f * i);
-        model = glm::rotate(model, /*(float) glfwGetTime() **/ glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+        model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
         shader.set("model", model);
-        glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, indices);
+        glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
     }
-}
-
-GLuint createVertexData(GLfloat* vertices, GLuint vSize, GLuint* indices, GLuint iSize,  GLuint* VBO, GLuint* EBO) {
-    GLuint VAO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, VBO);
-    glGenBuffers(1, EBO);
-
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, *VBO);
-    glBufferData(GL_ARRAY_BUFFER, vSize * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize * sizeof(GLuint), indices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), nullptr);
-    glEnableVertexAttribArray(0);
-
-    glVertexAttribPointer(1, 2,  GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void *) (3 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(1);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glBindVertexArray(0);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-    return VAO;
 }
 
 GLuint createTexture (const char* path, GLenum type) {
@@ -226,47 +199,8 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
     // Create VBOs and VAOs
     ///////////////////////////
-    // Cube
-    GLint verticesSize = 120;
-    GLfloat vertices[] = {
-            // Position             // UVs
-            -0.5f, -0.5f, 0.5f,     0.0f, 0.0f, //Front
-            0.5f, -0.5f, 0.5f,      1.0f, 0.0f,
-            0.5f, 0.5f, 0.5f,       1.0f, 1.0f,
-            -0.5f, 0.5f, 0.5f,      0.0f, 1.0f,
-            0.5f, -0.5f, 0.5f,      0.0f, 0.0f, //Right
-            0.5f, -0.5f, -0.5f,     1.0f, 0.0f,
-            0.5f, 0.5f, -0.5f,      1.0f, 1.0f,
-            0.5f, 0.5f, 0.5f,       0.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f,    1.0f, 0.0f, //Back
-            -0.5f, 0.5f, -0.5f,     1.0f, 1.0f,
-            0.5f, 0.5f, -0.5f,      0.0f, 1.0f,
-            0.5f, -0.5f, -0.5f,     0.0f, 0.0f,
-            -0.5f, -0.5f, 0.5f,     1.0f, 0.0f, //Left
-            -0.5f, 0.5f, 0.5f,      1.0f, 1.0f,
-            -0.5f, 0.5f, -0.5f,     0.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f,    0.0f, 0.0f,
-            -0.5f, -0.5f, 0.5f,     0.0f, 1.0f, //Bottom
-            -0.5f, -0.5f, -0.5f,    0.0f, 0.0f,
-            0.5f, -0.5f, -0.5f,     1.0f, 0.0f,
-            0.5f, -0.5f, 0.5f,      1.0f, 1.0f,
-            -0.5f, 0.5f, 0.5f,      0.0f, 0.0f, //Top
-            0.5f, 0.5f, 0.5f,       1.0f, 0.0f,
-            0.5f, 0.5f, -0.5f,      1.0f, 1.0f,
-            -0.5f, 0.5f, -0.5f,     0.0f, 1.0f
-    };
-    GLint  indicesSize = 36;
-    GLuint indices[] = {
-            0, 1, 2,        0, 2, 3, //Front
-            4, 5, 6,        4, 6, 7, //Right
-            8, 9, 10,       8, 10, 11, //Back
-            12, 13, 14,     12, 14, 15, //Left
-            16, 17, 18,     16, 18, 19, //Bottom
-            20, 21, 22,     20, 22, 23 //Top
-    };
+    Cube cube;
 
-    GLuint VBO, EBO;
-    GLuint VAO = createVertexData(vertices, verticesSize, indices, indicesSize,  &VBO, &EBO);
     ///////////////////////////
 
     // Create program
@@ -302,7 +236,7 @@ int main (int argc, char *argv[]) {
 
 
     while (!glfwWindowShouldClose(window)) { //Loop until user closes the window+
-        float time = glfwGetTime();
+        float time = (float)glfwGetTime();
         deltaTime = time - lastTime;
 
         if( deltaTime >= maxPeriod ) {
@@ -321,7 +255,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(VAO, indicesSize, nullptr, shader, text0);
+            render(cube, shader, text0);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
@@ -331,12 +265,6 @@ int main (int argc, char *argv[]) {
         }
     }
 
-    ////////////////////////////
-    // Delete VAO and VBO
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
-    ///////////////////////////
 
     ////////////////////////////
     // Delete Textures
