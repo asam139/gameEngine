@@ -5,15 +5,7 @@
 #include "GameObject.h"
 
 
-GameObject::GameObject() {
-
-}
-
-GameObject::~GameObject() {
-
-}
-
-int GameObject::getIndecesSize() const {
+uint32_t GameObject::getIndecesSize() const {
     return _indicesSize;
 }
 

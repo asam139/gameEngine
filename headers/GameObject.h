@@ -10,8 +10,8 @@
 
 class GameObject {
 public:
-    GameObject(); //Empty Constructor
-    virtual ~GameObject(); //Destructor
+    GameObject() noexcept = default; //Empty Constructor
+    virtual ~GameObject() noexcept = default; //Destructor
 
     //Constructor with Vectors
     /*Camera(const glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
@@ -25,13 +25,13 @@ public:
     //glm::mat4 getViewMatrix() const;
 
     uint32_t getVAO() const;
-    int getIndecesSize() const;
+    uint32_t getIndecesSize() const;
 
 protected:
-    int _verticesSize;
+    uint32_t _verticesSize;
     float* _vertices;
 
-    int _indicesSize;
+    uint32_t _indicesSize;
     unsigned int* _indices;
 
     virtual void configuration() = 0;
