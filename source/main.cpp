@@ -118,11 +118,40 @@ void render(const Cube& cube, const Shader& shader, const GLuint text0) {
     shader.set("view", camera.getViewMatrix());
     shader.set("projection", projection);
 
+    bool first = true;
+
     for (uint8_t i = 0; i < 10; i++) {
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, cubePositions[i]);
-        float angle = 10.0f + (20.0f * i);
-        model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+
+
+        // Normal Behaviour
+        // Scale, Rotate, Translate
+        // M = T * R * S
+
+        // Other Behaviours
+        // Scale, Translate, Rotate
+        // M = R * T * S
+        // i.e.: rotate object around an axis
+
+        // Transforms:
+        //      - Translate
+        //      - Rotate
+        if (first) {
+            model = glm::translate(model, cubePositions[i]);
+            float angle = 10.0f + (20.0f * i);
+            model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+        }
+
+
+        // Transforms:
+        //      - Rotate
+        //      - Translate
+        if (!first) {
+            float angle = 10.0f + (20.0f * i);
+            model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+            model = glm::translate(model, cubePositions[i]);
+        }
+
         shader.set("model", model);
         glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
     }
@@ -154,6 +183,27 @@ GLuint createTexture (const char* path, GLenum type) {
 }
 
 int main (int argc, char *argv[]) {
+    for (int j = 1; j < 8; j = j + 2) {
+        const int x = j & 1;
+        const int y = (j>>1) & 1;
+        const int z = (j>>2) & 1;
+
+        printf("%d: %d,%d,%d\n", j, x,y,z);
+    }
+
+    for (int j = 2; j < 4; j++) {
+        const int x = j & 1;
+        const int y = (j>>1) & 1;
+        const int z = (j>>2) & 1;
+
+        const int x2 = (j+4) & 1;
+        const int y2 = ((j+4)>>1) & 1;
+        const int z2 = ((j+4)>>2) & 1;
+
+        printf("%d: %d,%d,%d\n", j, x,y,z);
+        printf("%d: %d,%d,%d\n", j, x2,y2,z2);
+
+    }
 
     if (!glfwInit()) {       //Initialize the library
         std::cout << "Failed To Initialize GLFW" << std::endl;

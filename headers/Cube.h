@@ -13,7 +13,6 @@ public:
     ~Cube() override;
 
 protected:
-    uint32_t generatedVertices(float* vertices);
     void configuration() override;
 
     uint32_t createVertexData(float* vertices, uint32_t vSize, uint32_t* indices, uint32_t iSize,  uint32_t* VBO, uint32_t* EBO) override;
