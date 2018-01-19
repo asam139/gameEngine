@@ -131,24 +131,25 @@ void render(const Cube& cube, const Shader& shader, const GLuint text0) {
         // Other Behaviours
         // Scale, Translate, Rotate
         // M = R * T * S
-        // i.e.: rotate object around an axis
+        // i.e.: rotate object around axis
 
-        // Transforms:
-        //      - Translate
-        //      - Rotate
+        // Normal Behaviour
         if (first) {
             model = glm::translate(model, cubePositions[i]);
-            float angle = 10.0f + (20.0f * i);
-            model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+            // Rotate
+            if (i%2 == 0) {
+                float angle = 10.0f + (20.0f * i);
+                model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+            }
         }
 
 
-        // Transforms:
-        //      - Rotate
-        //      - Translate
+        // Rotate object around axis
         if (!first) {
             float angle = 10.0f + (20.0f * i);
-            model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+            if (i%2 == 0) {
+                model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+            }
             model = glm::translate(model, cubePositions[i]);
         }
 
