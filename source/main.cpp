@@ -26,7 +26,7 @@ const uint32_t kScreenHeight = 800;
 static float deltaTime = 0.0f;
 
 // Camera
-Camera camera(glm::vec3(0.f, 25.f, 25.f), glm::vec3(0.f, 1.f, 0.f), -45.f);
+Camera camera(glm::vec3(0.f, 10.f, 10.f), glm::vec3(0.f, 1.f, 0.f), -45.f);
 
 // Mouse
 bool firstMouse = true;
@@ -39,17 +39,17 @@ glm::vec3 planePosition = glm::vec3(0.0f, 0.0f, 0.0f);
 // Cubes
 const unsigned int cubesCount = 9;
 glm::vec3 cubePositions[] = {
-        glm::vec3(-2.0f, 2.0f, 0.0f),
-        glm::vec3(-1.0f, 1.0f, 0.0f),
+        glm::vec3(-2.0f, 0.0f, -2.0f),
+        glm::vec3(-1.0f, 0.0f, -1.0f),
 
-        glm::vec3(2.0f, 2.0f, 0.0f),
-        glm::vec3(1.0f, 1.0f, 0.0f),
+        glm::vec3(2.0f, 0.0f, 2.0f),
+        glm::vec3(1.0f, 0.0f, 1.0f),
 
-        glm::vec3(-2.0f, -2.0f, 0.0f),
-        glm::vec3(-1.0f, -1.0f, 0.0f),
+        glm::vec3(-2.0f, 0.0f, 2.0f),
+        glm::vec3(-1.0f, 0.0f, 1.0f),
 
-        glm::vec3(2.0f, -2.0f, 0.0f),
-        glm::vec3(1.0f, -1.0f, 0.0f),
+        glm::vec3(2.0f, 0.0f, -2.0f),
+        glm::vec3(1.0f, 0.0f, -1.0f),
 
         glm::vec3(0.0f, 0.0f, 0.0f),
 };
@@ -120,6 +120,10 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     shader.set("projection", projection);
 
 
+    /////////////////////////////////
+    // Plane
+
+    ////////////////////////////////
     glBindVertexArray(plane.getVAO());
 
     glActiveTexture(GL_TEXTURE0);
@@ -127,21 +131,22 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
 
     glm::mat4 planeModel = glm::mat4(1.0f);
     planeModel = glm::translate(planeModel, planePosition);
-    planeModel = glm::scale(planeModel, glm::vec3(25.f, 1.f, 25.f));
+    planeModel = glm::scale(planeModel, glm::vec3(10.f, 1.f, 10.f));
     shader.set("model", planeModel);
     glDrawElements(GL_TRIANGLES, plane.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
+    /////////////////////////////////
+    // Cubes
 
+    ////////////////////////////////
     glBindVertexArray(cube.getVAO());
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, text0);
 
-
-    /*bool first = true;
+    bool first = true;
     for (uint8_t i = 0; i < cubesCount; i++) {
         glm::mat4 cubeModel = glm::mat4(1.0f);
-
 
         // Normal Behaviour
         // Scale, Rotate, Translate
@@ -174,7 +179,7 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
 
         shader.set("model", cubeModel);
         glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
-    }*/
+    }
 }
 
 GLuint createTexture (const char* path, GLenum type) {
@@ -248,7 +253,7 @@ int main (int argc, char *argv[]) {
     // Create VBOs and VAOs
     ///////////////////////////
     Plane plane;
-    Cube cube;
+    Cube cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f);
 
     ///////////////////////////
 
