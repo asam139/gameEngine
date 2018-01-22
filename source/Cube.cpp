@@ -6,6 +6,49 @@
 
 #include <iostream>
 
+const unsigned int _verticesMapSize = 120;
+static float _verticesMap[] = {
+    // Position             // UVs
+    -0.5f, -0.5f, 0.5f,     0.0f, 0.0f, //Front
+    0.5f, -0.5f, 0.5f,      1.0f, 0.0f,
+    0.5f, 0.5f, 0.5f,       1.0f, 1.0f,
+    -0.5f, 0.5f, 0.5f,      0.0f, 1.0f,
+    0.5f, -0.5f, 0.5f,      0.0f, 0.0f, //Right
+    0.5f, -0.5f, -0.5f,     1.0f, 0.0f,
+    0.5f, 0.5f, -0.5f,      1.0f, 1.0f,
+    0.5f, 0.5f, 0.5f,       0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,    1.0f, 0.0f, //Back
+    -0.5f, 0.5f, -0.5f,     1.0f, 1.0f,
+    0.5f, 0.5f, -0.5f,      0.0f, 1.0f,
+    0.5f, -0.5f, -0.5f,     0.0f, 0.0f,
+    -0.5f, -0.5f, 0.5f,     1.0f, 0.0f, //Left
+    -0.5f, 0.5f, 0.5f,      1.0f, 1.0f,
+    -0.5f, 0.5f, -0.5f,     0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,    0.0f, 0.0f,
+    -0.5f, -0.5f, 0.5f,     0.0f, 1.0f, //Bottom
+    -0.5f, -0.5f, -0.5f,    0.0f, 0.0f,
+    0.5f, -0.5f, -0.5f,     1.0f, 0.0f,
+    0.5f, -0.5f, 0.5f,      1.0f, 1.0f,
+    -0.5f, 0.5f, 0.5f,      0.0f, 0.0f, //Top
+    0.5f, 0.5f, 0.5f,       1.0f, 0.0f,
+    0.5f, 0.5f, -0.5f,      1.0f, 1.0f,
+    -0.5f, 0.5f, -0.5f,     0.0f, 1.0f
+};
+
+const unsigned int _indecesMapSize = 36;
+static unsigned int _indecesMap[] = {
+    0, 1, 2,        0, 2, 3, //Front
+    4, 5, 6,        4, 6, 7, //Right
+    8, 9, 10,       8, 10, 11, //Back
+    12, 13, 14,     12, 14, 15, //Left
+    16, 17, 18,     16, 18, 19, //Bottom
+    20, 21, 22,     20, 22, 23 //Top
+};
+
+
+const unsigned int _numberOfVertices = 24;
+
+
 Cube::Cube() {
     _center = glm::vec3(0.f, 0.f, 0.f);
     _radius = 1.f;
@@ -29,43 +72,10 @@ Cube::~Cube() {
 
 void Cube::configuration() {
     // Empty Object
-    _verticesSize = 120;
-    _vertices = (float[120]){
-            // Position             // UVs
-            -0.5f, -0.5f, 0.5f,     0.0f, 0.0f, //Front
-            0.5f, -0.5f, 0.5f,      1.0f, 0.0f,
-            0.5f, 0.5f, 0.5f,       1.0f, 1.0f,
-            -0.5f, 0.5f, 0.5f,      0.0f, 1.0f,
-            0.5f, -0.5f, 0.5f,      0.0f, 0.0f, //Right
-            0.5f, -0.5f, -0.5f,     1.0f, 0.0f,
-            0.5f, 0.5f, -0.5f,      1.0f, 1.0f,
-            0.5f, 0.5f, 0.5f,       0.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f,    1.0f, 0.0f, //Back
-            -0.5f, 0.5f, -0.5f,     1.0f, 1.0f,
-            0.5f, 0.5f, -0.5f,      0.0f, 1.0f,
-            0.5f, -0.5f, -0.5f,     0.0f, 0.0f,
-            -0.5f, -0.5f, 0.5f,     1.0f, 0.0f, //Left
-            -0.5f, 0.5f, 0.5f,      1.0f, 1.0f,
-            -0.5f, 0.5f, -0.5f,     0.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f,    0.0f, 0.0f,
-            -0.5f, -0.5f, 0.5f,     0.0f, 1.0f, //Bottom
-            -0.5f, -0.5f, -0.5f,    0.0f, 0.0f,
-            0.5f, -0.5f, -0.5f,     1.0f, 0.0f,
-            0.5f, -0.5f, 0.5f,      1.0f, 1.0f,
-            -0.5f, 0.5f, 0.5f,      0.0f, 0.0f, //Top
-            0.5f, 0.5f, 0.5f,       1.0f, 0.0f,
-            0.5f, 0.5f, -0.5f,      1.0f, 1.0f,
-            -0.5f, 0.5f, -0.5f,     0.0f, 1.0f
-    };
-    _indicesSize = 36;
-    _indices = (unsigned int[36]){
-            0, 1, 2,        0, 2, 3, //Front
-            4, 5, 6,        4, 6, 7, //Right
-            8, 9, 10,       8, 10, 11, //Back
-            12, 13, 14,     12, 14, 15, //Left
-            16, 17, 18,     16, 18, 19, //Bottom
-            20, 21, 22,     20, 22, 23 //Top
-    };
+    _verticesSize = _verticesMapSize;
+    _vertices = _verticesMap;
+    _indicesSize = _indecesMapSize;
+    _indices = _indecesMap;
 
     for (int i = 0; i < _numberOfVertices; i++) {
         int offset = i*5;

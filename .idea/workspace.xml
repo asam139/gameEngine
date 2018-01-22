@@ -2,38 +2,38 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="gameEngine" targetName="glfw" />
-      <config projectName="gameEngine" targetName="title" />
-      <config projectName="gameEngine" targetName="cursor" />
-      <config projectName="gameEngine" targetName="tearing" />
+      <config projectName="gameEngine" targetName="monitors" />
+      <config projectName="gameEngine" targetName="splitview" />
+      <config projectName="gameEngine" targetName="iconify" />
       <config projectName="gameEngine" targetName="icon" />
+      <config projectName="gameEngine" targetName="simple" />
+      <config projectName="gameEngine" targetName="cursor" />
+      <config projectName="gameEngine" targetName="timeout" />
+      <config projectName="gameEngine" targetName="glfw" />
+      <config projectName="gameEngine" targetName="gears" />
+      <config projectName="gameEngine" targetName="clipboard" />
+      <config projectName="gameEngine" targetName="glm_dummy" />
+      <config projectName="gameEngine" targetName="boing" />
       <config projectName="gameEngine" targetName="wave" />
       <config projectName="gameEngine" targetName="empty" />
-      <config projectName="gameEngine" targetName="windows" />
-      <config projectName="gameEngine" targetName="clipboard" />
-      <config projectName="gameEngine" targetName="iconify" />
+      <config projectName="gameEngine" targetName="title" />
       <config projectName="gameEngine" targetName="reopen" />
-      <config projectName="gameEngine" targetName="msaa" />
-      <config projectName="gameEngine" targetName="gamma" />
-      <config projectName="gameEngine" targetName="monitors" />
-      <config projectName="gameEngine" targetName="opacity" />
-      <config projectName="gameEngine" targetName="gameEngine" />
-      <config projectName="gameEngine" targetName="threads" />
-      <config projectName="gameEngine" targetName="glfwinfo" />
-      <config projectName="gameEngine" targetName="glm_dummy" />
-      <config projectName="gameEngine" targetName="uninstall" />
-      <config projectName="gameEngine" targetName="sharing" />
-      <config projectName="gameEngine" targetName="boing" />
-      <config projectName="gameEngine" targetName="timeout" />
-      <config projectName="gameEngine" targetName="joysticks" />
-      <config projectName="gameEngine" targetName="offscreen" />
-      <config projectName="gameEngine" targetName="splitview" />
-      <config projectName="gameEngine" targetName="inputlag" />
-      <config projectName="gameEngine" targetName="simple" />
       <config projectName="gameEngine" targetName="heightmap" />
-      <config projectName="gameEngine" targetName="particles" />
-      <config projectName="gameEngine" targetName="gears" />
+      <config projectName="gameEngine" targetName="offscreen" />
       <config projectName="gameEngine" targetName="events" />
+      <config projectName="gameEngine" targetName="sharing" />
+      <config projectName="gameEngine" targetName="opacity" />
+      <config projectName="gameEngine" targetName="joysticks" />
+      <config projectName="gameEngine" targetName="windows" />
+      <config projectName="gameEngine" targetName="glfwinfo" />
+      <config projectName="gameEngine" targetName="msaa" />
+      <config projectName="gameEngine" targetName="tearing" />
+      <config projectName="gameEngine" targetName="uninstall" />
+      <config projectName="gameEngine" targetName="inputlag" />
+      <config projectName="gameEngine" targetName="threads" />
+      <config projectName="gameEngine" targetName="gameEngine" />
+      <config projectName="gameEngine" targetName="gamma" />
+      <config projectName="gameEngine" targetName="particles" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -64,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="128" column="0" lean-forward="true" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+            <state relative-caret-position="1476">
+              <caret line="183" column="5" lean-forward="false" selection-start-line="183" selection-start-column="5" selection-end-line="183" selection-end-column="5" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
                 <element signature="e#178#200#0" expanded="true" />
@@ -80,18 +80,18 @@
       <file leaf-file-name="glad.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/external_headers/glad/glad.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
+            <state relative-caret-position="965">
               <caret line="946" column="31" lean-forward="false" selection-start-line="946" selection-start-column="31" selection-end-line="946" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameObject.h" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameObject.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/headers/GameObject.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+            <state relative-caret-position="225">
+              <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
               <folding>
                 <element signature="e#119#141#0" expanded="true" />
               </folding>
@@ -102,8 +102,8 @@
       <file leaf-file-name="GameObject.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/GameObject.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="135">
+              <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -112,8 +112,8 @@
       <file leaf-file-name="Cube.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/headers/Cube.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="225">
+              <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -122,8 +122,8 @@
       <file leaf-file-name="Cube.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/Cube.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+            <state relative-caret-position="409">
+              <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding>
                 <element signature="e#54#71#0" expanded="true" />
               </folding>
@@ -197,18 +197,19 @@
         <option value="$PROJECT_DIR$/source/Camera.cpp" />
         <option value="$PROJECT_DIR$/headers/Camera.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/headers/GameObject.h" />
         <option value="$PROJECT_DIR$/source/GameObject.cpp" />
-        <option value="$PROJECT_DIR$/source/Cube.cpp" />
-        <option value="$PROJECT_DIR$/headers/Cube.h" />
         <option value="$PROJECT_DIR$/source/main.cpp" />
+        <option value="$PROJECT_DIR$/headers/Cube.h" />
+        <option value="$PROJECT_DIR$/source/Cube.cpp" />
+        <option value="$PROJECT_DIR$/headers/GameObject.h" />
       </list>
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
+    <option name="x" value="1280" />
     <option name="y" value="23" />
-    <option name="width" value="1646" />
+    <option name="width" value="1280" />
     <option name="height" value="1417" />
   </component>
   <component name="ProjectView">
@@ -465,12 +466,14 @@
       <workItem from="1516134886734" duration="3472000" />
       <workItem from="1516224187656" duration="3948000" />
       <workItem from="1516299232321" duration="4112000" />
-      <workItem from="1516376333947" duration="4062000" />
+      <workItem from="1516376333947" duration="4209000" />
+      <workItem from="1516436913761" duration="584000" />
+      <workItem from="1516651513085" duration="3008000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87568000" />
+    <option name="totallyTimeSpent" value="91307000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -482,10 +485,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1646" height="1417" extended-state="0" />
+    <frame x="1280" y="23" width="1280" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18952619" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25121164" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753405" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32829046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -516,7 +519,7 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="18" />
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -730,7 +733,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -753,7 +755,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -804,42 +805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/GameObject.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/headers/GameObject.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
-          <folding>
-            <element signature="e#119#141#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/Cube.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-          <folding>
-            <element signature="e#54#71#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/headers/Cube.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="645">
@@ -848,9 +813,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/source/GameObject.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/Cube.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Cube.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding>
+            <element signature="e#54#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/external_headers/glad/glad.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
+        <state relative-caret-position="965">
           <caret line="946" column="31" lean-forward="false" selection-start-line="946" selection-start-column="31" selection-end-line="946" selection-end-column="31" />
           <folding />
         </state>
@@ -858,11 +849,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/source/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="128" column="0" lean-forward="true" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+        <state relative-caret-position="1476">
+          <caret line="183" column="5" lean-forward="false" selection-start-line="183" selection-start-column="5" selection-end-line="183" selection-end-column="5" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
             <element signature="e#178#200#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/GameObject.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+          <folding>
+            <element signature="e#119#141#0" expanded="true" />
           </folding>
         </state>
       </provider>

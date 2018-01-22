@@ -14,7 +14,6 @@ public:
     ~Cube() override;
 
 protected:
-    const unsigned int _numberOfVertices = 24;
     glm::vec3 _center;
     float _radius;
 
