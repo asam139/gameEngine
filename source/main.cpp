@@ -26,7 +26,7 @@ const uint32_t kScreenHeight = 800;
 static float deltaTime = 0.0f;
 
 // Camera
-Camera camera(glm::vec3(0.f, 0.f, 3.f));
+Camera camera(glm::vec3(0.f, 25.f, 25.f), glm::vec3(0.f, 1.f, 0.f), -45.f);
 
 // Mouse
 bool firstMouse = true;

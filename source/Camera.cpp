@@ -6,7 +6,7 @@
 
 Camera::Camera() {
     _position = glm::vec3(0.f, 0.f, 0.f);
-    _worldUp = glm::vec3(0.f, 1.f, 0.f),
+    _worldUp = glm::vec3(0.f, 1.f, 0.f);
     _yaw = kYaw;
     _pitch = kPitch;
     _fov = kFov;
@@ -18,20 +18,20 @@ Camera::~Camera(){
 
 }
 
-Camera::Camera(const glm::vec3 position, const glm::vec3 up, const float yaw, const float pitch) {
+Camera::Camera(const glm::vec3 position, const glm::vec3 up, const float pitch) {
     _position = position;
     _worldUp = up;
-    _yaw = yaw;
+    _yaw = kYaw;
     _pitch = pitch;
     _fov = kFov;
     updateCameraVectors();
 }
 
 Camera::Camera(const float posX, const float posY, const float posZ, const float upX, const float upY, const float upZ,
-               const float yaw, const float pitch) {
+               const float pitch) {
     _position = glm::vec3(posX, posY, posZ);
     _worldUp =  glm::vec3(upX, upY, upZ);;
-    _yaw = yaw;
+    _yaw = kYaw;
     _pitch = pitch;
     _fov = kFov;
     updateCameraVectors();
