@@ -14,6 +14,7 @@
 #include "Camera.h"
 
 #include "Cube.h"
+#include "Plane.h"
 
 ///////////////////////
 // Static variables
@@ -32,7 +33,10 @@ bool firstMouse = true;
 float lastX = (float)kScreenWidth / 2.f;
 float lastY = (float)kScreenHeight / 2.f;
 
-// Objects
+// Plane
+glm::vec3 planePosition = glm::vec3(0.0f, 0.0f, 0.0f);
+
+// Cubes
 const unsigned int cubesCount = 9;
 glm::vec3 cubePositions[] = {
         glm::vec3(-2.0f, 2.0f, 0.0f),
@@ -109,22 +113,35 @@ void handleInput(GLFWwindow* window, const Shader& shader) {
 }
 
 // Render
-void render(const Cube& cube, const Shader& shader, const GLuint text0) {
+void render(const Plane& plane, const Cube& cube, const Shader& shader, const GLuint text0) {
+    glm::mat4 projection;
+    projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
+    shader.set("view", camera.getViewMatrix());
+    shader.set("projection", projection);
+
+
+    glBindVertexArray(plane.getVAO());
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, text0);
+
+    glm::mat4 planeModel = glm::mat4(1.0f);
+    planeModel = glm::translate(planeModel, planePosition);
+    //planeModel = glm::rotate(planeModel, (float) glfwGetTime() * glm::radians(50.f), glm::vec3(0.5f, 1.0f, 0.0f));
+    //planeModel = glm::scale(planeModel, glm::vec3(50.f, 50.f, 50.f));
+    shader.set("model", planeModel);
+    glDrawElements(GL_TRIANGLES, plane.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
+
+
     glBindVertexArray(cube.getVAO());
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, text0);
 
 
-    glm::mat4 projection;
-    projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
-
-    shader.set("view", camera.getViewMatrix());
-    shader.set("projection", projection);
-
-    bool first = true;
+    /*bool first = true;
     for (uint8_t i = 0; i < cubesCount; i++) {
-        glm::mat4 model = glm::mat4(1.0f);
+        glm::mat4 cubeModel = glm::mat4(1.0f);
 
 
         // Normal Behaviour
@@ -138,11 +155,11 @@ void render(const Cube& cube, const Shader& shader, const GLuint text0) {
 
         // Normal Behaviour
         if (first) {
-            model = glm::translate(model, cubePositions[i]);
+            cubeModel = glm::translate(cubeModel, cubePositions[i]);
             // Rotate
             if (i%2 == 0) {
                 float angle = 10.0f + (20.0f * i);
-                model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+                cubeModel = glm::rotate(cubeModel, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
             }
         }
 
@@ -151,14 +168,14 @@ void render(const Cube& cube, const Shader& shader, const GLuint text0) {
         if (!first) {
             float angle = 10.0f + (20.0f * i);
             if (i%2 == 0) {
-                model = glm::rotate(model, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+                cubeModel = glm::rotate(cubeModel, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
             }
-            model = glm::translate(model, cubePositions[i]);
+            cubeModel = glm::translate(cubeModel, cubePositions[i]);
         }
 
-        shader.set("model", model);
+        shader.set("model", cubeModel);
         glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
-    }
+    }*/
 }
 
 GLuint createTexture (const char* path, GLenum type) {
@@ -231,6 +248,7 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
     // Create VBOs and VAOs
     ///////////////////////////
+    Plane plane;
     Cube cube;
 
     ///////////////////////////
@@ -287,7 +305,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(cube, shader, text0);
+            render(plane, cube, shader, text0);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);

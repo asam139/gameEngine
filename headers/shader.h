@@ -13,7 +13,7 @@
 
 
 class  Shader {
-    public:
+public:
     Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr);
     ~Shader();
 
@@ -34,20 +34,20 @@ class  Shader {
     void set(const char* name, const glm::mat3& value) const;
     void set(const char* name, const glm::mat4& value) const;
 
-    private:
-        Shader() {};
+private:
+    Shader() {};
 
-        enum class Type {
-            Vertex = 0,
-            Fragment = 1,
-            Geometry = 2,
-            Program = 3
-        };
-        static const char* typeToString (const Type type);
-        void checkError(const GLuint shader, const Type type) const;
-        void loadShader(const char* path, std::string* code);
+    enum class Type {
+        Vertex = 0,
+        Fragment = 1,
+        Geometry = 2,
+        Program = 3
+    };
+    static const char* typeToString (const Type type);
+    void checkError(const GLuint shader, const Type type) const;
+    void loadShader(const char* path, std::string* code);
 
-        GLuint id_;
+    GLuint id_;
 };
 
 
