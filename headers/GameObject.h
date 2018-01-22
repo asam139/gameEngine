@@ -13,20 +13,20 @@ class GameObject {
 public:
     GameObject() noexcept = default; //Empty Constructor
     virtual ~GameObject() noexcept = default; //Destructor
-    
+
     uint32_t getVAO() const;
     uint32_t getIndecesSize() const;
 
 protected:
-    uint32_t _verticesSize;
-    float* _vertices;
+    uint32_t _verticesSize = 0;
+    float* _vertices = nullptr;
 
-    uint32_t _indicesSize;
-    unsigned int* _indices;
+    uint32_t _indicesSize = 0;
+    unsigned int* _indices = nullptr;
 
     virtual void configuration() = 0;
 
-    unsigned int _VBO, _EBO, _VAO;
+    unsigned int _VBO = 0, _EBO = 0, _VAO = 0;
     virtual uint32_t createVertexData(float* vertices, uint32_t vSize, uint32_t* indices, uint32_t iSize,  uint32_t* VBO, uint32_t* EBO) = 0;
 };
 
