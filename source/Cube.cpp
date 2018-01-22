@@ -4,10 +4,19 @@
 
 #include "Cube.h"
 
-
 #include <iostream>
 
 Cube::Cube() {
+    _center = glm::vec3(0.f, 0.f, 0.f);
+    _radius = 1.f;
+
+    configuration();
+}
+
+Cube::Cube(const glm::vec3 center, float radius) {
+    _center = center;
+    _radius = radius;
+
     configuration();
 }
 
@@ -47,7 +56,6 @@ void Cube::configuration() {
             0.5f, 0.5f, 0.5f,       1.0f, 0.0f,
             0.5f, 0.5f, -0.5f,      1.0f, 1.0f,
             -0.5f, 0.5f, -0.5f,     0.0f, 1.0f
-
     };
     _indicesSize = 36;
     _indices = (unsigned int[36]){
@@ -58,6 +66,19 @@ void Cube::configuration() {
             16, 17, 18,     16, 18, 19, //Bottom
             20, 21, 22,     20, 22, 23 //Top
     };
+
+    for (int i = 0; i < _numberOfVertices; i++) {
+        int offset = i*5;
+        _vertices[offset] = (_vertices[offset] - _center.x) * _radius;
+        offset++;
+        _vertices[offset] = (_vertices[offset] - _center.y) * _radius;
+        offset++;
+        _vertices[offset] = (_vertices[offset] - _center.z) * _radius;
+        offset++;
+        _vertices[offset] = _vertices[offset];
+        offset++;
+        _vertices[offset] = _vertices[offset];
+    }
 
     _VAO = createVertexData(_vertices, _verticesSize, _indices, _indicesSize,  &_VBO, &_EBO);
 }

@@ -187,28 +187,6 @@ GLuint createTexture (const char* path, GLenum type) {
 }
 
 int main (int argc, char *argv[]) {
-    for (int j = 1; j < 8; j = j + 2) {
-        const int x = j & 1;
-        const int y = (j>>1) & 1;
-        const int z = (j>>2) & 1;
-
-        printf("%d: %d,%d,%d\n", j, x,y,z);
-    }
-
-    for (int j = 2; j < 4; j++) {
-        const int x = j & 1;
-        const int y = (j>>1) & 1;
-        const int z = (j>>2) & 1;
-
-        const int x2 = (j+4) & 1;
-        const int y2 = ((j+4)>>1) & 1;
-        const int z2 = ((j+4)>>2) & 1;
-
-        printf("%d: %d,%d,%d\n", j, x,y,z);
-        printf("%d: %d,%d,%d\n", j, x2,y2,z2);
-
-    }
-
     if (!glfwInit()) {       //Initialize the library
         std::cout << "Failed To Initialize GLFW" << std::endl;
         return -1;
