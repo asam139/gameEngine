@@ -7,15 +7,16 @@
 const unsigned int _verticesMapSize = 20;
 static float _verticesMap[] = {
         // Position             // UVs
-        -0.5f, -0.5f, 0.5f,     0.0f, 0.0f, //Front
-        0.5f, -0.5f, 0.5f,      1.0f, 0.0f,
-        0.5f, 0.5f, 0.5f,       1.0f, 1.0f,
-        -0.5f, 0.5f, 0.5f,      0.0f, 1.0f
+        -0.5f, 0.5f, 0.5f,      0.0f, 0.0f,
+        0.5f, 0.5f, 0.5f,       1.0f, 0.0f,
+        0.5f, 0.5f, -0.5f,      1.0f, 1.0f,
+        -0.5f, 0.5f, -0.5f,     0.0f, 1.0f
 };
 
 const unsigned int _indecesMapSize = 6;
 static unsigned int _indecesMap[] = {
-        0, 1, 2,        0, 2, 3
+        0, 1, 2,
+        0, 2, 3
 };
 
 

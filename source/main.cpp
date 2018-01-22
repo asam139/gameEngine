@@ -127,8 +127,7 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
 
     glm::mat4 planeModel = glm::mat4(1.0f);
     planeModel = glm::translate(planeModel, planePosition);
-    //planeModel = glm::rotate(planeModel, (float) glfwGetTime() * glm::radians(50.f), glm::vec3(0.5f, 1.0f, 0.0f));
-    //planeModel = glm::scale(planeModel, glm::vec3(50.f, 50.f, 50.f));
+    planeModel = glm::scale(planeModel, glm::vec3(25.f, 1.f, 25.f));
     shader.set("model", planeModel);
     glDrawElements(GL_TRIANGLES, plane.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
