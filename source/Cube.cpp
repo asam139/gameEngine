@@ -4,8 +4,6 @@
 
 #include "Cube.h"
 
-#include <iostream>
-
 const unsigned int _verticesMapSize = 120;
 static float _verticesMap[] = {
     // Position             // UVs
