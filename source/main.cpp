@@ -39,14 +39,14 @@ glm::vec3 planePosition = glm::vec3(0.0f, 0.0f, 0.0f);
 // Cubes
 const unsigned int cubesCount = 9;
 glm::vec3 cubePositions[] = {
-        glm::vec3(-2.0f, 0.0f, -2.0f),
-        glm::vec3(-1.0f, 0.0f, -1.0f),
+        glm::vec3(-2.0f, 1.0f, -2.0f),
+        glm::vec3(-1.0f, 2.0f, -1.0f),
 
         glm::vec3(2.0f, 0.0f, 2.0f),
         glm::vec3(1.0f, 0.0f, 1.0f),
 
-        glm::vec3(-2.0f, 0.0f, 2.0f),
-        glm::vec3(-1.0f, 0.0f, 1.0f),
+        glm::vec3(-2.0f, 2.0f, 2.0f),
+        glm::vec3(-1.0f, 1.0f, 1.0f),
 
         glm::vec3(2.0f, 0.0f, -2.0f),
         glm::vec3(1.0f, 0.0f, -1.0f),
@@ -159,11 +159,18 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
 
         // Normal Behaviour
         if (first) {
+            //Translate
             cubeModel = glm::translate(cubeModel, cubePositions[i]);
+
             // Rotate
             if (i%2 == 0) {
                 float angle = 10.0f + (20.0f * i);
                 cubeModel = glm::rotate(cubeModel, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
+            }
+
+            // Scale
+            if (i%3 == 0) {
+                cubeModel = glm::scale(cubeModel, glm::vec3(0.5f, 0.5f, 0.5f));
             }
         }
 
