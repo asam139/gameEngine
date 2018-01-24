@@ -67,24 +67,24 @@ void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_
 void onMouse(GLFWwindow* window, double xpos, double ypos) {
     // Initial values the first frame
     if (firstMouse) {
-        lastX = xpos;
-        lastY = ypos;
+        lastX = static_cast<float> (xpos);
+        lastY = static_cast<float> (ypos);
         firstMouse = false;
     }
 
     // Calc offset movement since last frame
-    float xOffset = xpos - lastX;
+    auto xOffset = static_cast<float> (xpos - lastX);
     // Reversed y-coords go from bottom to top
-    float yOffset = lastY - ypos;
-    lastX = xpos;
-    lastY = ypos;
+    auto yOffset = static_cast<float> (lastY - ypos);
+    lastX = static_cast<float> (xpos);
+    lastY = static_cast<float> (ypos);
 
     camera.handleMouseMovement(xOffset, yOffset);
 }
 
 // Scroll callback
 void onScroll(GLFWwindow* window, double xOffset, double yOffset) {
-    camera.handleMouseScroll(yOffset);
+    camera.handleMouseScroll(static_cast<const float>(yOffset));
 }
 
 // Handle Input
@@ -289,15 +289,15 @@ int main (int argc, char *argv[]) {
     glEnable(GL_DEPTH_TEST);
 
     // To control FPS
-    const float maxFPS = 60.0;
-    const float maxPeriod = 1.0 / maxFPS;
+    const float maxFPS = 60.f;
+    const float maxPeriod = 1.f / maxFPS;
     // approx ~ 16.666 ms
 
     float lastTime = 0.0;
 
 
     while (!glfwWindowShouldClose(window)) { //Loop until user closes the window+
-        float time = (float)glfwGetTime();
+        auto time = static_cast<float>(glfwGetTime());
         deltaTime = time - lastTime;
 
         if( deltaTime >= maxPeriod ) {
