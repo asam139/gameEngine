@@ -119,10 +119,10 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     shader.set("view", camera.getViewMatrix());
     shader.set("projection", projection);
 
+    camera.setMovementAxis(static_cast<Camera::MovementAxis>(Camera::MovementAxisX | Camera::MovementAxisZ));
 
     /////////////////////////////////
     // Plane
-
     ////////////////////////////////
     glBindVertexArray(plane.getVAO());
 

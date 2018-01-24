@@ -49,6 +49,10 @@ glm::vec3 Camera::getPosition() const {
     return _position;
 }
 
+void Camera::setMovementAxis(MovementAxis movementAxis) {
+    _movementAxis = movementAxis;
+}
+
 void Camera::updateCameraVectors() {
     glm::vec3 front;
     front.x = cos(glm::radians(_yaw)) * cos(glm::radians(_pitch));
@@ -67,10 +71,16 @@ void Camera::handleKeyboard(Movement direction, const float deltaTime) {
 
     float dS = kSpeed * deltaTime;
 
+    glm::vec3 constraintsFront;
+    constraintsFront.x = _movementAxis & MovementAxisX ? _front.x : 0.f;
+    constraintsFront.y = _movementAxis & MovementAxisY ? _front.y : 0.f;
+    constraintsFront.z = _movementAxis & MovementAxisZ ? _front.z : 0.f;
+    constraintsFront = glm::normalize(constraintsFront);
+
     if (direction & Movement::Forward) {
-        _position += _front * dS;
+        _position += constraintsFront * dS;
     } else if (direction & Movement::Backward) {
-        _position -= _front * dS;
+        _position -= constraintsFront * dS;
     }
 
     if (direction & Movement::Right) {

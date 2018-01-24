@@ -26,6 +26,12 @@ const float kFov = kMaxFov;
 
 class Camera {
 public:
+    enum MovementAxis {
+        MovementAxisX = 0u << 0,
+        MovementAxisY = 1u << 0,
+        MovementAxisZ = 1u << 1
+    };
+
     //Possible options for camera movement
     enum Movement {
         None = 0u << 0,
@@ -34,6 +40,7 @@ public:
         Left = 1u << 2,
         Right = 1u << 3,
     };
+
     Camera(); //Empty Constructor
     ~Camera(); //Destructor
 
@@ -52,6 +59,9 @@ public:
     glm::vec3  getPosition() const;
     float getFOV() const; //Returns the FOV
 
+    // Modify Movement Axis
+    void setMovementAxis(MovementAxis movementAxis);
+
     //Process input from keyboard
     void handleKeyboard(const Movement direction, const float deltaTime);
 
@@ -66,6 +76,9 @@ private:
     glm::vec3 _position, _front, _up, _right, _worldUp; // Camera Attributes
     float _yaw, _pitch; // Euler Angles
     float _fov; // Camera options
+
+    // Movement Axis Allow
+    MovementAxis _movementAxis = static_cast<MovementAxis >(MovementAxisX | MovementAxisY| MovementAxisZ);
 };
 
 
