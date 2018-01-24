@@ -2,7 +2,7 @@
 // Created by Saul Moreno Abril on 10/01/2018.
 //
 
-#import "shader.h"
+#include "shader.h"
 
 #include <glm/gtc/type_ptr.hpp>
 
@@ -38,11 +38,11 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geo
     GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragment, 1, &fragmentCode, nullptr);
     glCompileShader(fragment);
-    checkError(vertex, Type::Fragment);
+    checkError(fragment, Type::Fragment);
 
     GLuint geometry;
     if (geometryPath) {
-        const char *geometryCode = sFragmentCode.c_str();
+        const char *geometryCode = sGeometryCode.c_str();
 
         geometry = glCreateShader(GL_GEOMETRY_SHADER);
         glShaderSource(geometry, 1, &geometryCode, nullptr);
