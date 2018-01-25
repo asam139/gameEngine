@@ -83,6 +83,9 @@ private:
 
     // Movement Axis Allow
     MovementAxis _movementAxis = static_cast<MovementAxis >(MovementAxisX | MovementAxisY| MovementAxisZ);
+
+    //My own lookAt
+    glm::mat4 lookAt(const glm::vec3 eye, const glm::vec3 target, const glm::vec3 up) const;
 };
 
 
