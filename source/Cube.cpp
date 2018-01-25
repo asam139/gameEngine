@@ -4,33 +4,33 @@
 
 #include "Cube.h"
 
-const unsigned int _verticesMapSize = 120;
+const unsigned int _verticesMapSize = 192;
 static float _verticesMap[] = {
-    // Position             // UVs
-    -0.5f, -0.5f, 0.5f,     0.0f, 0.0f, //Front
-    0.5f, -0.5f, 0.5f,      1.0f, 0.0f,
-    0.5f, 0.5f, 0.5f,       1.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f,      0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f,      0.0f, 0.0f, //Right
-    0.5f, -0.5f, -0.5f,     1.0f, 0.0f,
-    0.5f, 0.5f, -0.5f,      1.0f, 1.0f,
-    0.5f, 0.5f, 0.5f,       0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,    1.0f, 0.0f, //Back
-    -0.5f, 0.5f, -0.5f,     1.0f, 1.0f,
-    0.5f, 0.5f, -0.5f,      0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f,     0.0f, 0.0f,
-    -0.5f, -0.5f, 0.5f,     1.0f, 0.0f, //Left
-    -0.5f, 0.5f, 0.5f,      1.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f,     0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,    0.0f, 0.0f,
-    -0.5f, -0.5f, 0.5f,     0.0f, 1.0f, //Bottom
-    -0.5f, -0.5f, -0.5f,    0.0f, 0.0f,
-    0.5f, -0.5f, -0.5f,     1.0f, 0.0f,
-    0.5f, -0.5f, 0.5f,      1.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f,      0.0f, 0.0f, //Top
-    0.5f, 0.5f, 0.5f,       1.0f, 0.0f,
-    0.5f, 0.5f, -0.5f,      1.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f,     0.0f, 1.0f
+    // Position             // UVs              // Normals
+    -0.5f, -0.5f, 0.5f,     0.0f, 0.0f,         0.0f, 0.0f, 1.0f,   //Front
+    0.5f, -0.5f, 0.5f,      1.0f, 0.0f,         0.0f, 0.0f, 1.0f,
+    0.5f, 0.5f, 0.5f,       1.0f, 1.0f,         0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, 0.5f,      0.0f, 1.0f,         0.0f, 0.0f, 1.0f,
+    0.5f, -0.5f, 0.5f,      0.0f, 0.0f,         1.0f, 0.0f, 0.0f,   //Right
+    0.5f, -0.5f, -0.5f,     1.0f, 0.0f,         1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, -0.5f,      1.0f, 1.0f,         1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, 0.5f,       0.0f, 1.0f,         1.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f,    1.0f, 0.0f,         0.0f, 0.0f, -1.0f,  //Back
+    -0.5f, 0.5f, -0.5f,     1.0f, 1.0f,         0.0f, 0.0f, -1.0f,
+    0.5f, 0.5f, -0.5f,      0.0f, 1.0f,         0.0f, 0.0f, -1.0f,
+    0.5f, -0.5f, -0.5f,     0.0f, 0.0f,         0.0f, 0.0f, -1.0f,
+    -0.5f, -0.5f, 0.5f,     1.0f, 0.0f,         -1.0f, 0.0f, 0.0f,  //Left
+    -0.5f, 0.5f, 0.5f,      1.0f, 1.0f,         -1.0f, 0.0f, 0.0f,
+    -0.5f, 0.5f, -0.5f,     0.0f, 1.0f,         -1.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f,    0.0f, 0.0f,         -1.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, 0.5f,     0.0f, 1.0f,         0.0f, -1.0f, 0.0f,  //Bottom
+    -0.5f, -0.5f, -0.5f,    0.0f, 0.0f,         0.0f, -1.0f, 0.0f,
+    0.5f, -0.5f, -0.5f,     1.0f, 0.0f,         0.0f, -1.0f, 0.0f,
+    0.5f, -0.5f, 0.5f,      1.0f, 1.0f,         0.0f, -1.0f, 0.0f,
+    -0.5f, 0.5f, 0.5f,      0.0f, 0.0f,         0.0f, 1.0f, 0.0f,   //Top
+    0.5f, 0.5f, 0.5f,       1.0f, 0.0f,         0.0f, 1.0f, 0.0f,
+    0.5f, 0.5f, -0.5f,      1.0f, 1.0f,         0.0f, 1.0f, 0.0f,
+    -0.5f, 0.5f, -0.5f,     0.0f, 1.0f,          0.0f, 1.0f, 0.0f
 };
 
 const unsigned int _indecesMapSize = 36;
@@ -76,12 +76,18 @@ void Cube::configuration() {
     _indices = _indecesMap;
 
     for (int i = 0; i < _numberOfVertices; i++) {
-        int offset = i*5;
+        int offset = i*8;
         _vertices[offset] = (_vertices[offset] - _center.x) * _radius;
         offset++;
         _vertices[offset] = (_vertices[offset] - _center.y) * _radius;
         offset++;
         _vertices[offset] = (_vertices[offset] - _center.z) * _radius;
+        offset++;
+        _vertices[offset] = _vertices[offset];
+        offset++;
+        _vertices[offset] = _vertices[offset];
+        offset++;
+        _vertices[offset] = _vertices[offset];
         offset++;
         _vertices[offset] = _vertices[offset];
         offset++;
@@ -105,11 +111,14 @@ uint32_t Cube::createVertexData(float* vertices, uint32_t vSize, uint32_t* indic
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize * sizeof(GLuint), indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), nullptr);
+    glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), nullptr);
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 2,  GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void *) (3 * sizeof(GLfloat)));
+    glVertexAttribPointer(1, 2,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *) (3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
+
+    glVertexAttribPointer(2, 3,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *) (5 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 

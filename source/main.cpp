@@ -28,7 +28,7 @@ const uint32_t kScreenHeight = 800;
 static float deltaTime = 0.0f;
 
 // Camera
-Camera camera(glm::vec3(0.f, 10.f, 10.f), glm::vec3(0.f, 1.f, 0.f), -45.f);
+Camera camera(glm::vec3(0.0f, 2.0f, 5.0f), glm::vec3(0.f, 1.f, 0.f), -10.f);
 
 // Mouse
 bool firstMouse = true;
@@ -38,23 +38,11 @@ float lastY = (float)kScreenHeight / 2.f;
 // Plane
 glm::vec3 planePosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
-// Cubes
-const unsigned int cubesCount = 9;
-glm::vec3 cubePositions[] = {
-        glm::vec3(-2.0f, 1.0f, -2.0f),
-        glm::vec3(-1.0f, 2.0f, -1.0f),
+// Cube
+glm::vec3 cubePosition = glm::vec3(1.0f, 0.0f, 0.0f);
 
-        glm::vec3(2.0f, 0.0f, 2.0f),
-        glm::vec3(1.0f, 0.0f, 1.0f),
-
-        glm::vec3(-2.0f, 2.0f, 2.0f),
-        glm::vec3(-1.0f, 1.0f, 1.0f),
-
-        glm::vec3(2.0f, 0.0f, -2.0f),
-        glm::vec3(1.0f, 0.0f, -1.0f),
-
-        glm::vec3(0.0f, 0.0f, 0.0f),
-};
+// Light
+glm::vec3 lightPosition = glm::vec3(-1.0f, 2.5f, -5.0f);
 
 ///////////////////////
 
@@ -115,13 +103,13 @@ void handleInput(GLFWwindow* window, const Shader& shader) {
 }
 
 // Render
-void render(const Plane& plane, const Cube& cube, const Shader& shader, const GLuint text0) {
+void render(const Plane& plane, const Cube& cube, const Shader& shader, const GLuint tex) {
     glm::mat4 projection;
     projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     shader.set("view", camera.getViewMatrix());
     shader.set("projection", projection);
 
-    camera.setMovementAxis(MovementAxisX | MovementAxisZ);
+    camera.setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
 
     /////////////////////////////////
     // Plane
@@ -129,65 +117,63 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     glBindVertexArray(plane.getVAO());
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, text0);
+    glBindTexture(GL_TEXTURE_2D, tex);
 
     glm::mat4 planeModel = glm::mat4(1.0f);
     planeModel = glm::translate(planeModel, planePosition);
     planeModel = glm::scale(planeModel, glm::vec3(10.f, 1.f, 10.f));
     shader.set("model", planeModel);
+
+    shader.set("color", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+
     glDrawElements(GL_TRIANGLES, plane.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
+    // Duplicate code to learn easily
     /////////////////////////////////
-    // Cubes
+    // Light
     ////////////////////////////////
     glBindVertexArray(cube.getVAO());
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, text0);
+    glBindTexture(GL_TEXTURE_2D, tex);
 
-    bool first = true;
-    for (uint8_t i = 0; i < cubesCount; i++) {
-        glm::mat4 cubeModel = glm::mat4(1.0f);
+    glm::mat4 lightModel = glm::mat4(1.0f);
+    lightModel = glm::translate(lightModel, lightPosition);
+    lightModel = glm::scale(lightModel, glm::vec3(0.3f));
+    shader.set("model", lightModel);
 
-        // Normal Behaviour
-        // Scale, Rotate, Translate
-        // M = T * R * S
+    shader.set("color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    shader.set("ambientStrenght", 1.f);
 
-        // Other Behaviours
-        // Scale, Translate, Rotate
-        // M = R * T * S
-        // i.e.: rotate object around axis
-
-        // Normal Behaviour
-        if (first) {
-            //Translate
-            cubeModel = glm::translate(cubeModel, cubePositions[i]);
-
-            // Rotate
-            if (i%2 == 0) {
-                float angle = 10.0f + (20.0f * i);
-                cubeModel = glm::rotate(cubeModel, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
-            }
-
-            // Scale
-            if (i%3 == 0) {
-                cubeModel = glm::scale(cubeModel, glm::vec3(0.5f, 0.5f, 0.5f));
-            }
-        }
+    glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
 
-        // Rotate object around axis
-        if (!first) {
-            float angle = 10.0f + (20.0f * i);
-            if (i%2 == 0) {
-                cubeModel = glm::rotate(cubeModel, (float) glfwGetTime() * glm::radians(angle), glm::vec3(0.5f, 1.0f, 0.0f));
-            }
-            cubeModel = glm::translate(cubeModel, cubePositions[i]);
-        }
+    /////////////////////////////////
+    // Cube
+    ////////////////////////////////
+    glBindVertexArray(cube.getVAO());
 
-        shader.set("model", cubeModel);
-        glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
-    }
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glm::mat4 cubeModel = glm::mat4(1.0f);
+    cubeModel = glm::translate(cubeModel, cubePosition);
+    cubeModel = glm::translate(cubeModel, cubePosition);
+    shader.set("model", cubeModel);
+
+    shader.set("color", glm::vec4(0.8f, 0.5f, 0.2f, 1.0f));
+
+
+    glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(cubeModel)));
+    shader.set("normalMat", cNormalMat);
+    shader.set("lightPos", lightPosition);
+    shader.set("lightColor", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    shader.set("ambientStrenght", 0.1f);
+    shader.set("viewPos", camera.getPosition());
+    shader.set("shininess", 32);
+    shader.set("specularStrenght", 0.6f);
+
+    glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 }
 
 GLuint createTexture (const char* path, GLenum type) {
@@ -270,10 +256,10 @@ int main (int argc, char *argv[]) {
     // Create program
     Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
 
-    GLuint text0 = createTexture("../textures/animeMemesTexture.jpg", GL_RGB);
+    GLuint defaultTex = createTexture("../textures/whiteTex.png", GL_RGB);
 
     shader.use();
-    shader.set("texture1", 0);
+    shader.set("tex", defaultTex);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -319,7 +305,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(plane, cube, shader, text0);
+            render(plane, cube, shader, defaultTex);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
@@ -329,10 +315,9 @@ int main (int argc, char *argv[]) {
         }
     }
 
-
     ////////////////////////////
     // Delete Textures
-    glDeleteTextures(1, &text0);
+    glDeleteTextures(1, &defaultTex);
 
     glfwTerminate();
     return 0;
