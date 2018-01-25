@@ -97,18 +97,18 @@ void handleInput(GLFWwindow* window, const Shader& shader) {
         return;
     }
 
-    Movement movementMask = Movement::None;
+    Movement movementMask = MovementNone;
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        movementMask |= Movement::Forward;
+        movementMask |= MovementForward;
     } else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        movementMask |= Movement::Backward;
+        movementMask |= MovementBackward;
     }
 
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        movementMask = movementMask | Movement::Right;
+        movementMask |= MovementRight;
     } else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        movementMask = movementMask | Movement::Left;
+        movementMask |= MovementLeft;
     }
 
     camera.handleKeyboard(movementMask, deltaTime);
@@ -139,7 +139,6 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
 
     /////////////////////////////////
     // Cubes
-
     ////////////////////////////////
     glBindVertexArray(cube.getVAO());
 

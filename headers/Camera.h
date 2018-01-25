@@ -35,11 +35,11 @@ ENABLE_BITMASK_OPERATORS(MovementAxis)
 
 //Possible options for camera movement
 typedef enum  {
-    None = 0x00,
-    Forward = 0x01,
-    Backward = 0x02,
-    Left = 0x04,
-    Right = 0x08
+    MovementNone = 0x00,
+    MovementForward = 0x01,
+    MovementBackward = 0x02,
+    MovementLeft = 0x04,
+    MovementRight = 0x08
 } Movement;
 ENABLE_BITMASK_OPERATORS(Movement)
 

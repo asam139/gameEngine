@@ -65,7 +65,7 @@ void Camera::updateCameraVectors() {
 }
 
 void Camera::handleKeyboard(Movement direction, const float deltaTime) {
-    if (direction == Movement::None) {
+    if (direction == MovementNone) {
         return;
     }
 
@@ -77,15 +77,15 @@ void Camera::handleKeyboard(Movement direction, const float deltaTime) {
     constraintsFront.z = _movementAxis & MovementAxisZ ? _front.z : 0.f;
     constraintsFront = glm::normalize(constraintsFront);
 
-    if (direction & Movement::Forward) {
+    if (direction & MovementForward) {
         _position += constraintsFront * dS;
-    } else if (direction & Movement::Backward) {
+    } else if (direction & MovementBackward) {
         _position -= constraintsFront * dS;
     }
 
-    if (direction & Movement::Right) {
+    if (direction & MovementRight) {
         _position += _right * dS;
-    } else if (direction & Movement::Left) {
+    } else if (direction & MovementLeft) {
         _position -= _right * dS;
     }
 }
