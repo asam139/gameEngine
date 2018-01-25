@@ -13,6 +13,9 @@ public:
     Cube(const glm::vec3 center, float radius);
     ~Cube() override;
 
+
+    void update(const float deltaTime) override;
+
 protected:
     glm::vec3 _center;
     float _radius;

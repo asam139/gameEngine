@@ -69,3 +69,8 @@ uint32_t Plane::createVertexData(float* vertices, uint32_t vSize, uint32_t* indi
 
     return VAO;
 }
+
+void Plane::update(const float deltaTime) {
+
+
+}

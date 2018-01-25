@@ -11,13 +11,15 @@
 
 class GameObject {
 public:
-    GameObject() noexcept = default; //Empty Constructor
-    virtual ~GameObject() noexcept = default; //Destructor
+    virtual ~GameObject() {};
+    virtual void update(const float deltaTime) = 0;
 
     uint32_t getVAO() const;
     uint32_t getIndecesSize() const;
 
 protected:
+    GameObject() {};
+
     uint32_t _verticesSize = 0;
     float* _vertices = nullptr;
 

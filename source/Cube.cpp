@@ -119,3 +119,8 @@ uint32_t Cube::createVertexData(float* vertices, uint32_t vSize, uint32_t* indic
 
     return VAO;
 }
+
+
+void Cube::update(const float deltaTime) {
+
+}

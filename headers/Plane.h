@@ -12,6 +12,8 @@ public:
     Plane();
     ~Plane() override;
 
+    void update(const float deltaTime) override;
+
 protected:
     void configuration() override;
 
