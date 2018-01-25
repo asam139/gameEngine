@@ -16,6 +16,8 @@
 #include "Cube.h"
 #include "Plane.h"
 
+#include "BitmaskEnum.h"
+
 ///////////////////////
 // Static variables
 
@@ -95,18 +97,18 @@ void handleInput(GLFWwindow* window, const Shader& shader) {
         return;
     }
 
-    Camera::Movement movementMask = Camera::Movement::None;
+    Movement movementMask = Movement::None;
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        movementMask = (Camera::Movement)(movementMask | Camera::Movement::Forward);
+        movementMask = (Movement)(movementMask | Movement::Forward);
     } else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        movementMask = (Camera::Movement)(movementMask | Camera::Movement::Backward);
+        movementMask = (Movement)(movementMask | Movement::Backward);
     }
 
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        movementMask = (Camera::Movement)(movementMask | Camera::Movement::Right);
+        movementMask = (Movement)(movementMask | Movement::Right);
     } else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        movementMask = (Camera::Movement)(movementMask | Camera::Movement::Left);
+        movementMask = (Movement)(movementMask | Movement::Left);
     }
 
     camera.handleKeyboard(movementMask, deltaTime);
@@ -119,7 +121,7 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     shader.set("view", camera.getViewMatrix());
     shader.set("projection", projection);
 
-    camera.setMovementAxis(static_cast<Camera::MovementAxis>(Camera::MovementAxisX | Camera::MovementAxisZ));
+    camera.setMovementAxis(static_cast<MovementAxis>(MovementAxisX | MovementAxisZ));
 
     /////////////////////////////////
     // Plane
@@ -214,7 +216,9 @@ GLuint createTexture (const char* path, GLenum type) {
     return texture;
 }
 
+
 int main (int argc, char *argv[]) {
+
     if (!glfwInit()) {       //Initialize the library
         std::cout << "Failed To Initialize GLFW" << std::endl;
         return -1;
@@ -334,3 +338,4 @@ int main (int argc, char *argv[]) {
     glfwTerminate();
     return 0;
 }
+

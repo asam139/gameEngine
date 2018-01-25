@@ -9,6 +9,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "BitmaskEnum.h"
+
 //Default Camera Values
 const float kYaw = -90.0f;
 
@@ -24,23 +26,25 @@ const float kMaxFov = 60.f;
 const float kMinFov = 1.f;
 const float kFov = kMaxFov;
 
+typedef enum  {
+    MovementAxisX = 0x01,
+    MovementAxisY = 0x02,
+    MovementAxisZ = 0x04
+} MovementAxis;
+ENABLE_BITMASK_OPERATORS(MovementAxis)
+
+//Possible options for camera movement
+typedef enum  {
+    None = 0x00,
+    Forward = 0x01,
+    Backward = 0x02,
+    Left = 0x04,
+    Right = 0x08
+} Movement;
+ENABLE_BITMASK_OPERATORS(Movement)
+
 class Camera {
 public:
-    enum MovementAxis {
-        MovementAxisX = 0u << 0,
-        MovementAxisY = 1u << 0,
-        MovementAxisZ = 1u << 1
-    };
-
-    //Possible options for camera movement
-    enum Movement {
-        None = 0u << 0,
-        Forward = 1u << 0,
-        Backward = 1u << 1,
-        Left = 1u << 2,
-        Right = 1u << 3,
-    };
-
     Camera(); //Empty Constructor
     ~Camera(); //Destructor
 
