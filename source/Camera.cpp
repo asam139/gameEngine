@@ -38,7 +38,7 @@ Camera::Camera(const float posX, const float posY, const float posZ, const float
 }
 
 glm::mat4 Camera::getViewMatrix() const {
-    return lookAt(_position, _position + _front, _up);
+    return glm::lookAt(_position, _position + _front, _up);
 }
 
 float Camera::getFOV() const {
@@ -122,37 +122,4 @@ void Camera::handleMouseScroll(const float yOffset) {
         _fov = kMaxFov;
     }
 }
-
-// My own LookAt
-
-glm::mat4 Camera::lookAt(const glm::vec3 eye, const glm::vec3 target, const glm::vec3 up) const {
-    // Create new coordinate system
-    glm::vec3 X, Y, Z;
-
-    Z = eye - target;
-    Y = up;
-    X = glm::cross(Y, Z);
-    Y = glm::cross(Z, X);
-
-    X = glm::normalize(X);
-    Y = glm::normalize(Y);
-    Z = glm::normalize(Z);
-
-    glm::mat4 matrix(1);
-    matrix[0][0] = X.x;
-    matrix[1][0] = X.y;
-    matrix[2][0] = X.z;
-    matrix[0][1] = Y.x;
-    matrix[1][1] = Y.y;
-    matrix[2][1] = Y.z;
-    matrix[0][2] = Z.x;
-    matrix[1][2] = Z.y;
-    matrix[2][2] = Z.z;
-    matrix[3][0] = -glm::dot(X, eye);
-    matrix[3][1] = -glm::dot(Y, eye);
-    matrix[3][2] = -glm::dot(Z, eye);
-
-    return matrix;
-}
-
 
