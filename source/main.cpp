@@ -103,7 +103,7 @@ void handleInput(GLFWwindow* window, const Shader& shader) {
 }
 
 // Render
-void render(const Plane& plane, const Cube& cube, const Shader& shader, const GLuint tex) {
+void render(const Plane& plane, const Cube& cube, const Shader& shader, const uint32_t tex, const uint32_t diffTex, const uint32_t specTex) {
     glm::mat4 projection;
     projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     shader.set("view", camera.getViewMatrix());
@@ -134,9 +134,6 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     ////////////////////////////////
     glBindVertexArray(cube.getVAO());
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, tex);
-
     glm::mat4 lightModel = glm::mat4(1.0f);
     lightModel = glm::translate(lightModel, lightPosition);
     lightModel = glm::scale(lightModel, glm::vec3(0.3f));
@@ -144,8 +141,12 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
 
     shader.set("color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
-    shader.set("material.ambient", 1.0f, 1.0f, 1.0f);
+    shader.set("material.diffuse", 0);
     shader.set("light.ambient", 1.0f, 1.0f, 1.0f);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, tex);
+
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
 
@@ -168,15 +169,19 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     shader.set("normalMat", cNormalMat);
     shader.set("viewPos", camera.getPosition());
 
-    shader.set("material.ambient", 1.0f, 0.5f, 0.3f);
-    shader.set("material.diffuse", 1.0f, 0.5f, 0.3f);
-    shader.set("material.specular", 0.5f, 0.5f, 0.5f);
+    shader.set("material.diffuse", 0);
+    shader.set("material.specular", 1);
     shader.set("material.shininess", 32.0f);
 
     shader.set("light.position", lightPosition);
     shader.set("light.ambient", 0.2f, 0.15f, 0.1f);
     shader.set("light.diffuse", 0.5f, 0.5f, 0.5f);
     shader.set("light.specular", 1.0f, 1.0f, 1.0f);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, diffTex);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, specTex);
 
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 }
@@ -260,18 +265,19 @@ int main (int argc, char *argv[]) {
 
     // Create program
     Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
-
-    GLuint defaultTex = createTexture("../textures/whiteTex.png", GL_RGB);
-
     shader.use();
-    shader.set("tex", defaultTex);
 
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    uint32_t defaultTex = createTexture("../textures/whiteTex.png", GL_RGB);
+
+    uint32_t diffTex = createTexture("../textures/diffuseTex.jpg", GL_RGB);
+    uint32_t specTex = createTexture("../textures/specularTex.jpg", GL_RGB);
+
+
+    //glEnable(GL_BLEND);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // To draw only the lines
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
 
     // To not draw back faces
     glCullFace(GL_BACK);
@@ -310,7 +316,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(plane, cube, shader, defaultTex);
+            render(plane, cube, shader, defaultTex, diffTex, specTex);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
@@ -323,6 +329,8 @@ int main (int argc, char *argv[]) {
     ////////////////////////////
     // Delete Textures
     glDeleteTextures(1, &defaultTex);
+    glDeleteTextures(1, &diffTex);
+    glDeleteTextures(1, &specTex);
 
     glfwTerminate();
     return 0;
