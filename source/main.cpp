@@ -143,7 +143,8 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     shader.set("model", lightModel);
 
     shader.set("color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-    shader.set("ambientStrenght", 1.f);
+
+    shader.set("material.ambient", 1.0f, 1.0f, 1.0f);
 
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
@@ -161,17 +162,18 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     cubeModel = glm::translate(cubeModel, cubePosition);
     shader.set("model", cubeModel);
 
-    shader.set("color", glm::vec4(0.8f, 0.5f, 0.2f, 1.0f));
-
+    shader.set("color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
     glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(cubeModel)));
     shader.set("normalMat", cNormalMat);
     shader.set("lightPos", lightPosition);
     shader.set("lightColor", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-    shader.set("ambientStrenght", 0.1f);
     shader.set("viewPos", camera.getPosition());
-    shader.set("shininess", 32);
-    shader.set("specularStrenght", 0.6f);
+
+    shader.set("material.ambient", 1.0f, 0.5f, 0.3f);
+    shader.set("material.diffuse", 1.0f, 0.5f, 0.3f);
+    shader.set("material.specular", 0.5f, 0.5f, 0.5f);
+    shader.set("material.shininess", 32.0f);
 
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 }
