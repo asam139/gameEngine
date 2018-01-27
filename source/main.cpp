@@ -147,7 +147,7 @@ void render(const Plane& plane, const Sphere& sphere, const Shader& shader, cons
     lightModel = glm::scale(lightModel, glm::vec3(0.3f));
     shader.set("model", lightModel);
 
-    shader.set("color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    shader.set("color", glm::vec3(1.0f, 1.0f, 1.0f));
     shader.set("ambientStrenght", 1.f);
 
     glDrawElements(GL_TRIANGLES, sphere.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
@@ -165,12 +165,12 @@ void render(const Plane& plane, const Sphere& sphere, const Shader& shader, cons
     sphereModel = glm::translate(sphereModel, spherePosition);
     shader.set("model", sphereModel);
 
-    shader.set("color", glm::vec4(0.8f, 0.5f, 0.2f, 1.0f));
+    shader.set("color", glm::vec3(0.8f, 0.5f, 0.2f));
 
     glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
     shader.set("normalMat", cNormalMat);
     shader.set("lightPos", lightPosition);
-    shader.set("lightColor", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    shader.set("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
 
     shader.set("ambientStrenght", 0.1f);
     shader.set("shininess", 32);
@@ -271,7 +271,6 @@ int main (int argc, char *argv[]) {
 
     // To draw only the lines
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
 
     // To not draw back faces
     glCullFace(GL_BACK);

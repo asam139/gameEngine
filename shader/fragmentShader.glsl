@@ -7,11 +7,11 @@ in vec3 fragPos;
 
 out vec4 fragColor;
 
-uniform vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec3 color = vec3(1.0, 1.0, 1.0);
 uniform sampler2D tex;
 
 uniform vec3 lightPos;
-uniform vec4 lightColor = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);
 uniform float ambientStrenght = 0.1;
 
 uniform vec3 viewPos;
@@ -30,11 +30,10 @@ void main() {
     vec3 viewDir = normalize(viewPos - fragPos);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0f), shininess);
-    vec3 specular = specularStrenght * spec * lightColor.rgb;
+    vec3 specular = specularStrenght * spec * lightColor;
 
-    vec4 textColor = texture(tex, textCoord);
-    vec3 phong = (ambient + diffuse + specular) * (textColor * color).rgb;
+    vec3 textColor = texture(tex, textCoord).rgb;
+    vec3 phong = (ambient + diffuse + specular) * (textColor * color);
 
-
-    fragColor = vec4(phong, textColor.a * color.a);
+    fragColor = vec4(phong, 1.0);
 }
