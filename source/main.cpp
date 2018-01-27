@@ -172,10 +172,28 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     shader.set("normalMat", cNormalMat);
     shader.set("lightPos", lightPosition);
     shader.set("lightColor", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-    shader.set("ambientStrenght", 0.1f);
+
+    // Testing Ambient
+    const float aStrenght = 0.1f;
+    //const float aStrenght = 0.5f;
+    //const float aStrenght = 0.7f;
+    //const float aStrenght = 0.9f;
+    shader.set("ambientStrenght", aStrenght);
+
+    // Testing Shininess
+    //const int shininess = 16;
+    //const int shininess = 32;
+    const int shininess = 64;
+    shader.set("shininess", shininess);
+
+    // Testing Specular
+    //const float specularStrenght = 0.25f;
+    const float specularStrenght = 0.6f;
+    //const float specularStrenght = 0.7f;
+    //const float specularStrenght = 0.8f;
+    shader.set("specularStrenght", specularStrenght);
+
     shader.set("viewPos", camera.getPosition());
-    shader.set("shininess", 32);
-    shader.set("specularStrenght", 0.6f);
 
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 }
