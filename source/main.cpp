@@ -137,9 +137,9 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
 
-    auto time = static_cast<float>(glfwGetTime());
-    float radius = 5.0f;
-    lightPosition = glm::vec3(radius * sinf(time), lightPosition.y, radius * cosf(time));
+    //auto time = static_cast<float>(glfwGetTime());
+    //float radius = 5.0f;
+    //lightPosition = glm::vec3(radius * sinf(time), lightPosition.y, radius * cosf(time));
 
     glm::mat4 lightModel = glm::mat4(1.0f);
     lightModel = glm::translate(lightModel, lightPosition);
@@ -162,7 +162,7 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
 
     glm::mat4 cubeModel = glm::mat4(1.0f);
     cubeModel = glm::translate(cubeModel, cubePosition);
-    cubeModel = glm::translate(cubeModel, cubePosition);
+    //cubeModel = glm::rotate(cubeModel, (float)M_PI_4, glm::vec3(1.0f, 1.0f, 0.0f));
     shader.set("model", cubeModel);
 
     shader.set("color", glm::vec4(0.8f, 0.5f, 0.2f, 1.0f));
@@ -173,26 +173,9 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     shader.set("lightPos", lightPosition);
     shader.set("lightColor", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
-    // Testing Ambient
-    const float aStrenght = 0.1f;
-    //const float aStrenght = 0.5f;
-    //const float aStrenght = 0.7f;
-    //const float aStrenght = 0.9f;
-    shader.set("ambientStrenght", aStrenght);
-
-    // Testing Shininess
-    //const int shininess = 16;
-    //const int shininess = 32;
-    const int shininess = 64;
-    shader.set("shininess", shininess);
-
-    // Testing Specular
-    //const float specularStrenght = 0.25f;
-    const float specularStrenght = 0.6f;
-    //const float specularStrenght = 0.7f;
-    //const float specularStrenght = 0.8f;
-    shader.set("specularStrenght", specularStrenght);
-
+    shader.set("ambientStrenght", 0.0f);
+    shader.set("shininess", 32);
+    shader.set("specularStrenght", 0.6f);
     shader.set("viewPos", camera.getPosition());
 
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
