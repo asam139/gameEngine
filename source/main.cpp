@@ -259,7 +259,8 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
 
     // Create program
-    Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
+    //Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
+    Shader shader("../shader/gouraudVertexShader.glsl", "../shader/gouraudFragmentShader.glsl");
 
     uint32_t defaultTex = createTexture("../textures/whiteTex.png", GL_RGB);
 

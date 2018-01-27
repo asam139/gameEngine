@@ -26,19 +26,20 @@ void main() {
     vec3 normal = normalMat * aNormal;
     vec3 fragPos = vec3(model * vec4(aPos, 1.0));
 
-    vec3 ambient = ambientStrenght * lightColor;
+    //vec3 ambient = ambientStrenght * lightColor;
 
     vec3 norm = normalize(normal);
     vec3 lightDir = normalize(lightPos - fragPos);
     float diff = max(dot(norm, lightDir), 0.0f);
     vec3 diffuse = diff * lightColor;
 
-    vec3 viewDir = normalize(viewPos - fragPos);
+    /*vec3 viewDir = normalize(viewPos - fragPos);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0f), shininess);
-    vec3 specular = specularStrenght * spec * lightColor;
+    vec3 specular = specularStrenght * spec * lightColor;*/
 
-    vec3 phong = (ambient + diffuse + specular) * color;
+    //vec3 phong = (ambient + diffuse + specular) * color;
+    vec3 phong = diffuse * color;
 
     gl_Position = projection * view * model * vec4(aPos, 1.f);
     textCoord = aTextCoord;
