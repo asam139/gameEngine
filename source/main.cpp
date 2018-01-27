@@ -137,6 +137,10 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const GL
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
 
+    auto time = static_cast<float>(glfwGetTime());
+    float radius = 5.0f;
+    lightPosition = glm::vec3(radius * sinf(time), lightPosition.y, radius * cosf(time));
+
     glm::mat4 lightModel = glm::mat4(1.0f);
     lightModel = glm::translate(lightModel, lightPosition);
     lightModel = glm::scale(lightModel, glm::vec3(0.3f));
