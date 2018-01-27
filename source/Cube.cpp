@@ -70,31 +70,31 @@ Cube::~Cube() {
 
 void Cube::configuration() {
     // Empty Object
-    _verticesSize = _verticesMapSize;
-    _vertices = _verticesMap;
+    uint32_t verticesSize = _verticesMapSize;
+    float* vertices = _verticesMap;
     _indicesSize = _indecesMapSize;
     _indices = _indecesMap;
 
     for (int i = 0; i < _numberOfVertices; i++) {
         int offset = i*8;
-        _vertices[offset] = (_vertices[offset] - _center.x) * _radius;
+        vertices[offset] = (vertices[offset] - _center.x) * _radius;
         offset++;
-        _vertices[offset] = (_vertices[offset] - _center.y) * _radius;
+        vertices[offset] = (vertices[offset] - _center.y) * _radius;
         offset++;
-        _vertices[offset] = (_vertices[offset] - _center.z) * _radius;
+        vertices[offset] = (vertices[offset] - _center.z) * _radius;
         offset++;
-        _vertices[offset] = _vertices[offset];
+        vertices[offset] = vertices[offset];
         offset++;
-        _vertices[offset] = _vertices[offset];
+        vertices[offset] = vertices[offset];
         offset++;
-        _vertices[offset] = _vertices[offset];
+        vertices[offset] = vertices[offset];
         offset++;
-        _vertices[offset] = _vertices[offset];
+        vertices[offset] = vertices[offset];
         offset++;
-        _vertices[offset] = _vertices[offset];
+        vertices[offset] = vertices[offset];
     }
 
-    _VAO = createVertexData(_vertices, _verticesSize, _indices, _indicesSize,  &_VBO, &_EBO);
+    _VAO = createVertexData(vertices, verticesSize, _indices, _indicesSize,  &_VBO, &_EBO);
 }
 
 uint32_t Cube::createVertexData(float* vertices, uint32_t vSize, uint32_t* indices, uint32_t iSize,  uint32_t* VBO, uint32_t* EBO) {

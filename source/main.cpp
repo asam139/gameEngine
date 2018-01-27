@@ -261,7 +261,7 @@ int main (int argc, char *argv[]) {
     // Create program
     Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
 
-    GLuint defaultTex = createTexture("../textures/whiteTex.png", GL_RGB);
+    uint32_t defaultTex = createTexture("../textures/whiteTex.png", GL_RGB);
 
     shader.use();
     shader.set("tex", defaultTex);

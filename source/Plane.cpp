@@ -33,12 +33,12 @@ Plane::~Plane() {
 
 void Plane::configuration() {
     // Empty Object
-    _verticesSize = _verticesMapSize;
-    _vertices = _verticesMap;
+    uint32_t verticesSize = _verticesMapSize;
+    float* vertices = _verticesMap;
     _indicesSize = _indecesMapSize;
     _indices = _indecesMap;
 
-    _VAO = createVertexData(_vertices, _verticesSize, _indices, _indicesSize,  &_VBO, &_EBO);
+    _VAO = createVertexData(vertices, verticesSize, _indices, _indicesSize,  &_VBO, &_EBO);
 }
 
 uint32_t Plane::createVertexData(float* vertices, uint32_t vSize, uint32_t* indices, uint32_t iSize,  uint32_t* VBO, uint32_t* EBO) {
