@@ -17,6 +17,8 @@ public:
     void update(const float deltaTime) override;
 
 protected:
+    uint32_t _VBO, _EBO;
+
     glm::vec3 _center;
     float _radius;
 

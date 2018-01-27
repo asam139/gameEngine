@@ -15,6 +15,7 @@ public:
     void update(const float deltaTime) override;
 
 protected:
+    uint32_t _VBO, _EBO;
 
     void configuration() override;
 

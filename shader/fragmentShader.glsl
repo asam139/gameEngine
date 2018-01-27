@@ -37,5 +37,4 @@ void main() {
 
 
     fragColor = vec4(phong, textColor.a * color.a);
-
 }

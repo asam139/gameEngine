@@ -24,7 +24,7 @@ protected:
 
     virtual void configuration() = 0;
 
-    unsigned int _VBO = 0, _EBO = 0, _VAO = 0;
+    uint32_t _VAO = 0;
 };
 
 
