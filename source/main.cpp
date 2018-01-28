@@ -236,23 +236,24 @@ void render(const Plane& plane, const Sphere& sphere, const Shader& phongShader,
     phongShader.set("view", view);
     phongShader.set("projection", projection);
 
-
     sphereModel = glm::mat4(1.0f);
 
     sphereModel = glm::translate(sphereModel, spherePosition2);
     phongShader.set("model", sphereModel);
     cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
-    phongShader.set("normalMat", cNormalMat);
+    phongShader.set("normal_mat", cNormalMat);
 
     phongShader.set("color", glm::vec3(0.8f, 0.5f, 0.2f));
 
-    phongShader.set("lightPos", lightPosition);
-    phongShader.set("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+    phongShader.set("view_position", camera.getPosition());
+    phongShader.set("light_position", lightPosition);
+    phongShader.set("light_color", glm::vec3(1.0f, 1.0f, 1.0f));
+    phongShader.set("ambient_color", glm::vec3(1.0f, 1.0f, 1.0f));
 
-    phongShader.set("ambientStrenght", 0.1f);
+    phongShader.set("ambient_strenght", 0.1f);
+    phongShader.set("diffuse_strenght", 1.0f);
+    phongShader.set("specular_strenght", 0.6f);
     phongShader.set("shininess", 32);
-    phongShader.set("specularStrenght", 0.6f);
-    phongShader.set("viewPos", camera.getPosition());
 
     phongShader.set("text", 0);
     glActiveTexture(GL_TEXTURE0);

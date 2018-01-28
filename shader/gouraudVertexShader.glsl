@@ -27,7 +27,7 @@ void main() {
     // Calculate normal in view space
     vec3 P = vec3(model * vec4(aPos, 1.0));
 
-    // Calculate nromal in view space
+    // Calculate normal in view space
     vec3 normal = normal_mat * aNormal;
     vec3 N = normalize(mat3(model) * normal);
 
