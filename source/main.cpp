@@ -40,7 +40,9 @@ float lastY = (float)kScreenHeight / 2.f;
 glm::vec3 planePosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
 // Sphere
-glm::vec3 spherePosition = glm::vec3(1.0f, 0.0f, 0.0f);
+glm::vec3 spherePosition0 = glm::vec3(2.0f, 0.0f, 0.0f);
+glm::vec3 spherePosition1 = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 spherePosition2 = glm::vec3(-2.0f, 0.0f, 0.0f);
 
 // Light
 glm::vec3 lightPosition = glm::vec3(-1.0f, 2.5f, -5.0f);
@@ -79,7 +81,7 @@ void onScroll(GLFWwindow* window, double xOffset, double yOffset) {
 }
 
 // Handle Input
-void handleInput(GLFWwindow* window, const Shader& shader) {
+void handleInput(GLFWwindow* window) {
 
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
@@ -104,39 +106,40 @@ void handleInput(GLFWwindow* window, const Shader& shader) {
 }
 
 // Render
-void render(const Plane& plane, const Sphere& sphere, const Shader& shader, const GLuint tex) {
-    glm::mat4 projection;
-    projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
-    shader.set("view", camera.getViewMatrix());
-    shader.set("projection", projection);
-
-    camera.setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
+void render(const Plane& plane, const Sphere& sphere, const Shader& phongShader, const Shader& gouraudShader, const Shader& flatShader, const GLuint tex) {
+    glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
+    glm::mat4 view = camera.getViewMatrix();
 
     /////////////////////////////////
     // Plane
     ////////////////////////////////
-    glBindVertexArray(plane.getVAO());
+    phongShader.use();
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, tex);
+    phongShader.set("view", view);
+    phongShader.set("projection", projection);
 
     glm::mat4 planeModel = glm::mat4(1.0f);
     planeModel = glm::translate(planeModel, planePosition);
     planeModel = glm::scale(planeModel, glm::vec3(10.f, 1.f, 10.f));
-    shader.set("model", planeModel);
+    phongShader.set("model", planeModel);
 
-    shader.set("color", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+    phongShader.set("color", glm::vec3(0.0f, 0.0f, 0.0f));
 
+    phongShader.set("text", 0);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glBindVertexArray(plane.getVAO());
     glDrawElements(GL_TRIANGLES, plane.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
     // Duplicate code to learn easily
     /////////////////////////////////
     // Light
     ////////////////////////////////
-    glBindVertexArray(sphere.getVAO());
+    phongShader.use();
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, tex);
+    phongShader.set("view", view);
+    phongShader.set("projection", projection);
 
     //auto time = static_cast<float>(glfwGetTime());
     //float radius = 5.0f;
@@ -145,39 +148,117 @@ void render(const Plane& plane, const Sphere& sphere, const Shader& shader, cons
     glm::mat4 lightModel = glm::mat4(1.0f);
     lightModel = glm::translate(lightModel, lightPosition);
     lightModel = glm::scale(lightModel, glm::vec3(0.3f));
-    shader.set("model", lightModel);
+    phongShader.set("model", lightModel);
 
-    shader.set("color", glm::vec3(1.0f, 1.0f, 1.0f));
-    shader.set("ambientStrenght", 1.f);
+    phongShader.set("color", glm::vec3(1.0f, 1.0f, 1.0f));
+    phongShader.set("ambientStrenght", 1.f);
 
+    phongShader.set("text", 0);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glBindVertexArray(sphere.getVAO());
     glDrawElements(GL_TRIANGLES, sphere.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
 
     /////////////////////////////////
     // Sphere
     ////////////////////////////////
-    glBindVertexArray(sphere.getVAO());
+    flatShader.use();
 
+    flatShader.set("view", view);
+    flatShader.set("projection", projection);
+
+    glm::mat4 sphereModel = glm::mat4(1.0f);
+
+    sphereModel = glm::translate(sphereModel, spherePosition0);
+    flatShader.set("model", sphereModel);
+    glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
+    flatShader.set("normalMat", cNormalMat);
+
+    flatShader.set("color", glm::vec3(0.8f, 0.5f, 0.2f));
+
+    flatShader.set("lightPos", lightPosition);
+    flatShader.set("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+
+    flatShader.set("ambientStrenght", 0.1f);
+    flatShader.set("shininess", 32);
+    flatShader.set("specularStrenght", 0.6f);
+    flatShader.set("viewPos", camera.getPosition());
+
+    flatShader.set("text", 0);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
 
-    glm::mat4 sphereModel = glm::mat4(1.0f);
-    sphereModel = glm::translate(sphereModel, spherePosition);
-    shader.set("model", sphereModel);
-
-    shader.set("color", glm::vec3(0.8f, 0.5f, 0.2f));
-
-    glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
-    shader.set("normalMat", cNormalMat);
-    shader.set("lightPos", lightPosition);
-    shader.set("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
-
-    shader.set("ambientStrenght", 0.1f);
-    shader.set("shininess", 32);
-    shader.set("specularStrenght", 0.6f);
-    shader.set("viewPos", camera.getPosition());
-
+    glBindVertexArray(sphere.getVAO());
     glDrawElements(GL_TRIANGLES, sphere.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
+
+
+    /////////////////////////////////
+    // Sphere
+    ////////////////////////////////
+    gouraudShader.use();
+
+    gouraudShader.set("view", view);
+    gouraudShader.set("projection", projection);
+
+    sphereModel = glm::mat4(1.0f);
+
+    sphereModel = glm::translate(sphereModel, spherePosition1);
+    gouraudShader.set("model", sphereModel);
+    cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
+    gouraudShader.set("normalMat", cNormalMat);
+
+    gouraudShader.set("color", glm::vec3(0.8f, 0.5f, 0.2f));
+
+    gouraudShader.set("lightPos", lightPosition);
+    gouraudShader.set("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+
+    gouraudShader.set("ambientStrenght", 0.1f);
+    gouraudShader.set("shininess", 32);
+    gouraudShader.set("specularStrenght", 0.6f);
+    gouraudShader.set("viewPos", camera.getPosition());
+
+    gouraudShader.set("text", 0);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glBindVertexArray(sphere.getVAO());
+    glDrawElements(GL_TRIANGLES, sphere.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
+
+    /////////////////////////////////
+    // Sphere
+    ////////////////////////////////
+    phongShader.use();
+
+    phongShader.set("view", view);
+    phongShader.set("projection", projection);
+
+
+    sphereModel = glm::mat4(1.0f);
+
+    sphereModel = glm::translate(sphereModel, spherePosition2);
+    phongShader.set("model", sphereModel);
+    cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
+    phongShader.set("normalMat", cNormalMat);
+
+    phongShader.set("color", glm::vec3(0.8f, 0.5f, 0.2f));
+
+    phongShader.set("lightPos", lightPosition);
+    phongShader.set("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+
+    phongShader.set("ambientStrenght", 0.1f);
+    phongShader.set("shininess", 32);
+    phongShader.set("specularStrenght", 0.6f);
+    phongShader.set("viewPos", camera.getPosition());
+
+    phongShader.set("text", 0);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glBindVertexArray(sphere.getVAO());
+    glDrawElements(GL_TRIANGLES, sphere.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
+
 }
 
 GLuint createTexture (const char* path, GLenum type) {
@@ -250,6 +331,11 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
 
     ///////////////////////////
+    // Configure Camera
+    camera.setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
+    ///////////////////////////
+
+    ///////////////////////////
     // Create VBOs and VAOs
     ///////////////////////////
     Plane plane;
@@ -259,13 +345,12 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
 
     // Create program
-    //Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
-    Shader shader("../shader/gouraudVertexShader.glsl", "../shader/gouraudFragmentShader.glsl");
+    Shader phongShader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
+    Shader gouraudShader("../shader/gouraudVertexShader.glsl", "../shader/gouraudFragmentShader.glsl");
+    Shader flatShader("../shader/flatVertexShader.glsl", "../shader/flatFragmentShader.glsl");
 
     uint32_t defaultTex = createTexture("../textures/whiteTex.png", GL_RGB);
 
-    shader.use();
-    shader.set("tex", defaultTex);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -302,7 +387,7 @@ int main (int argc, char *argv[]) {
             //////////////////////////////
 
             // Handle Input
-            handleInput(window, shader);
+            handleInput(window);
 
             // Clear
             glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
@@ -310,7 +395,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(plane, sphere, shader, defaultTex);
+            render(plane, sphere, phongShader, gouraudShader, flatShader, defaultTex);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
