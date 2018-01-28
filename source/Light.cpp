@@ -18,16 +18,8 @@ Light::~Light() {
 
 }
 
-
-void Light::setPosition(glm::vec3 position) {
-    _transform.position = position;
-    _shader->set("light.position", _transform.position);
-}
-
-
 void Light::setAmbientColor(glm::vec3 ambientColor) {
     _ambientColor = ambientColor;
-    _shader->set("material.ambient", _ambientColor);
 }
 
 glm::vec3 Light::getAmbientColor() {
@@ -36,7 +28,6 @@ glm::vec3 Light::getAmbientColor() {
 
 void Light::setDiffuseColor(glm::vec3 diffuseColor) {
     _diffuseColor = diffuseColor;
-    _shader->set("material.diffuse", _diffuseColor);
 }
 
 glm::vec3 Light::getDiffuseColor() {
@@ -45,7 +36,6 @@ glm::vec3 Light::getDiffuseColor() {
 
 void Light::setSpecularColor(glm::vec3 specularColor) {
     _specularColor = specularColor;
-    _shader->set("material.specular", _specularColor);
 }
 
 glm::vec3 Light::getSpecularColor() {

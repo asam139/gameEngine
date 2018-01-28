@@ -24,8 +24,6 @@ public:
     Shader* getShader();
     void configureShader();
 
-    void setPosition(glm::vec3 position) override;
-
 protected:
 
     glm::vec3 _ambientColor;

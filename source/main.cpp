@@ -10,9 +10,10 @@
 
 #include <iostream>
 
+#include "Camera.h"
 #include "shader.h"
 #include "Material.h"
-#include "Camera.h"
+#include "Light.h"
 
 #include "Plane.h"
 #include "Cube.h"
@@ -42,12 +43,6 @@ glm::vec3 planePosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
 // Cube
 glm::vec3 cubePosition = glm::vec3(2.0f, 0.0f, 0.0f);
-
-
-// Light
-glm::vec3 lightPosition = glm::vec3(-1.0f, 2.5f, -5.0f);
-glm::vec3 lightColor = glm::vec3(0.8f, 0.8f, 0.8f);
-glm::vec3 ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
 
 
 ///////////////////////
@@ -109,7 +104,7 @@ void handleInput(GLFWwindow* window) {
 }
 
 // Render
-void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, const uint32_t tex, const uint32_t diffTex, const uint32_t specTex) {
+void render(Plane& plane, Cube& cube, Material& material, Light& light, const Shader& shader, const uint32_t tex, const uint32_t diffTex, const uint32_t specTex) {
     glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     glm::mat4 view = camera.getViewMatrix();
 
@@ -131,9 +126,9 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
     material.setSpecularColor(glm::vec3(.3f));
     material.setSpecularText(0);
     material.setShininess(32.0f);
+    material.configureShader();
 
-    shader.set("light.position", lightPosition);
-    shader.set("light.ambient", lightColor);
+    light.configureShader();
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
@@ -154,7 +149,7 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
     //float radius = 5.0f;
     //lightPosition = glm::vec3(radius * sinf(time), lightPosition.y, radius * cosf(time));
 
-    cube.setPosition(lightPosition);
+    cube.setPosition(light.getPosition());
     cube.setScale(glm::vec3(0.3f));
     glm::mat4 lightModel = cube.getModel();
     glm::mat3 lNormalMat = glm::inverse(glm::transpose(glm::mat3(lightModel)));
@@ -171,9 +166,9 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
     material.setSpecularColor(glm::vec3(0.0f));
     material.setSpecularText(0);
     material.setShininess(32.0f);
+    material.configureShader();
 
-    shader.set("light.position", lightPosition);
-    shader.set("light.ambient", lightColor);
+    light.configureShader();
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
@@ -205,11 +200,9 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
     material.setSpecularColor(glm::vec3(1.0f));
     material.setSpecularText(1);
     material.setShininess(32.0f);
+    material.configureShader();
 
-    shader.set("light.position", lightPosition);
-    shader.set("light.ambient", lightColor);
-    shader.set("light.diffuse", 0.5f, 0.5f, 0.5f);
-    shader.set("light.specular", 1.0f, 1.0f, 1.0f);
+    light.configureShader();
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, diffTex);
@@ -217,14 +210,6 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, specTex);
 
-
-    /*Material emerald;
-    emerald.ambient_color = glm::vec3(0.0215f, 0.1745f, 0.0215f);
-    emerald.diffuse_color = glm::vec3(0.07568f, 0.61424f, 0.07568f);
-    emerald.diffuse_text = 0;
-    emerald.specular_color = glm::vec3(0.633f, 0.727811f, 0.633f);
-    emerald.specular_text = 0;
-    emerald.shininess = 0.6;*/
 
     glBindVertexArray(cube.getVAO());
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
@@ -326,6 +311,13 @@ int main (int argc, char *argv[]) {
     // Create Material
     Material material(&phongShader);
 
+    // Create Light
+    Light light(&phongShader);
+    light.setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
+    light.setAmbientColor(glm::vec3(0.8f));
+    light.setDiffuseColor(glm::vec3(0.8f));
+    light.setSpecularColor(glm::vec3(0.5f));
+
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -369,7 +361,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(plane, cube, material, phongShader, defaultTex, diffTex, specTex);
+            render(plane, cube, material, light, phongShader, defaultTex, diffTex, specTex);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);

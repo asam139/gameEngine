@@ -23,7 +23,6 @@ Material::~Material() {
 
 void Material::setAmbientColor(glm::vec3 ambientColor) {
     _ambientColor = ambientColor;
-    _shader->set("material.ambient_color", _ambientColor);
 }
 
 glm::vec3 Material::getAmbientColor() {
@@ -32,7 +31,6 @@ glm::vec3 Material::getAmbientColor() {
 
 void Material::setDiffuseColor(glm::vec3 diffuseColor) {
     _diffuseColor = diffuseColor;
-    _shader->set("material.diffuse_color", _diffuseColor);
 }
 
 glm::vec3 Material::getDiffuseColor() {
@@ -41,7 +39,6 @@ glm::vec3 Material::getDiffuseColor() {
 
 void Material::setDiffuseText(uint32_t diffuseText) {
     _diffuseText = diffuseText;
-    _shader->set("material.diffuse_text", _diffuseText);
 }
 
 uint32_t Material::getDiffuseText() {
@@ -50,7 +47,6 @@ uint32_t Material::getDiffuseText() {
 
 void Material::setSpecularColor(glm::vec3 specularColor) {
     _specularColor = specularColor;
-    _shader->set("material.specular_color", _specularColor);
 }
 
 glm::vec3 Material::getSpecularColor() {
@@ -59,7 +55,6 @@ glm::vec3 Material::getSpecularColor() {
 
 void Material::setSpecularText(uint32_t specularText) {
     _specularText = specularText;
-    _shader->set("material.specular_text", _specularText);
 }
 
 uint32_t Material::getSpecularText() {
@@ -68,7 +63,6 @@ uint32_t Material::getSpecularText() {
 
 void Material::setShininess(float shininess) {
     _shininess = shininess;
-    _shader->set("material.shininess", _shininess);
 }
 
 float Material::getShininess() {
