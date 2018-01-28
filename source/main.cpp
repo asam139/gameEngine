@@ -108,7 +108,7 @@ void handleInput(GLFWwindow* window) {
 }
 
 // Render
-void render(const Plane& plane, const Sphere& sphere, const Shader& phongShader, const Shader& gouraudShader, const Shader& flatShader, const GLuint tex) {
+void render(const Plane& plane, const Sphere& sphere, const Shader& phongShader, const Shader& gouraudShader, const Shader& flatShader, const uint32_t tex) {
     glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     glm::mat4 view = camera.getViewMatrix();
 
@@ -270,8 +270,8 @@ void render(const Plane& plane, const Sphere& sphere, const Shader& phongShader,
 
 }
 
-GLuint createTexture (const char* path, GLenum type) {
-    GLuint texture;
+uint32_t createTexture (const char* path, GLenum type) {
+    uint32_t texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
 
