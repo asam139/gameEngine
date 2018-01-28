@@ -20,11 +20,11 @@ public:
     GameObject();
     virtual ~GameObject();
 
-    void setPosition(glm::vec3 position);
+    virtual void setPosition(glm::vec3 position);
     glm::vec3 getPosition();
-    void setRotation(glm::vec3 rotation);
+    virtual void setRotation(glm::vec3 rotation);
     glm::vec3 getRotation();
-    void setScale(glm::vec3 scale);
+    virtual void setScale(glm::vec3 scale);
     glm::vec3 getScale();
 
     glm::mat4 getModel();

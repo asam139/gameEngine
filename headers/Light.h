@@ -2,41 +2,35 @@
 // Created by Saul Moreno Abril on 28/01/2018.
 //
 
-#ifndef GAMEENGINE_MATERIAL_H
-#define GAMEENGINE_MATERIAL_H
+#ifndef GAMEENGINE_LIGHT_H
+#define GAMEENGINE_LIGHT_H
 
-#include <glm/glm.hpp>
+#include "GameObject.h"
 #include "shader.h"
 
-class Material {
+class Light : public GameObject {
 public:
-    Material(Shader *shader);
-    ~Material();
+    Light(Shader *shader);
+    ~Light();
 
     void setAmbientColor(glm::vec3 ambientColor);
     void setDiffuseColor(glm::vec3 diffuseColor);
-    void setDiffuseText(uint32_t diffuseText);
     void setSpecularColor(glm::vec3 specularColor);
-    void setSpecularText(uint32_t specularText);
-    void setShininess(float shininess);
 
     glm::vec3 getAmbientColor();
     glm::vec3 getDiffuseColor();
-    uint32_t getDiffuseText();
     glm::vec3 getSpecularColor();
-    uint32_t getSpecularText();
-    float getShininess();
 
     Shader* getShader();
     void configureShader();
 
+    void setPosition(glm::vec3 position) override;
+
 protected:
+
     glm::vec3 _ambientColor;
     glm::vec3 _diffuseColor;
-    uint32_t _diffuseText;
     glm::vec3 _specularColor;
-    uint32_t _specularText;
-    float _shininess;
 
     Shader* _shader;
 
@@ -45,4 +39,4 @@ private:
 };
 
 
-#endif //GAMEENGINE_MATERIAL_H
+#endif //GAMEENGINE_LIGHT_H
