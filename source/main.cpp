@@ -159,7 +159,12 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
 
     shader.set("view_position", camera.getPosition());
 
-    shader.set("material.ambient_color", glm::vec3(1.0f));
+    material.setAmbientColor(glm::vec3(1.0f));
+    material.setDiffuseColor(glm::vec3(1.0f));
+    material.setDiffuseText(0);
+    material.setSpecularColor(glm::vec3(1.0f));
+    material.setSpecularText(0);
+    material.setShininess(32.0f);
 
     shader.set("light.position", lightPosition);
     shader.set("light.ambient", 1.0f, 1.0f, 1.0f);
@@ -190,12 +195,12 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
 
     shader.set("view_position", camera.getPosition());
 
-    shader.set("material.ambient_color", glm::vec3(1.0f));
-    shader.set("material.diffuse_color", glm::vec3(1.0f));
-    shader.set("material.diffuse_text", 0);
-    shader.set("material.specular_color", glm::vec3(1.0f));
-    shader.set("material.specular_text", 1);
-    shader.set("material.shininess", 32.0f);
+    material.setAmbientColor(glm::vec3(1.0f));
+    material.setDiffuseColor(glm::vec3(1.0f));
+    material.setDiffuseText(0);
+    material.setSpecularColor(glm::vec3(1.0f));
+    material.setSpecularText(1);
+    material.setShininess(32.0f);
 
     shader.set("light.position", lightPosition);
     shader.set("light.ambient", 0.2f, 0.15f, 0.1f);
