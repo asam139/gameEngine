@@ -46,6 +46,8 @@ glm::vec3 spherePosition2 = glm::vec3(-2.0f, 0.0f, 0.0f);
 
 // Light
 glm::vec3 lightPosition = glm::vec3(-1.0f, 2.5f, -5.0f);
+glm::vec3 lightColor = glm::vec3(0.75f, 0.75f, 0.75f);
+glm::vec3 ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
 
 ///////////////////////
 
@@ -151,7 +153,7 @@ void render(const Plane& plane, const Sphere& sphere, const Shader& phongShader,
     phongShader.set("model", lightModel);
 
     phongShader.set("color", glm::vec3(1.0f, 1.0f, 1.0f));
-    phongShader.set("ambientStrenght", 1.f);
+    phongShader.set("ambient_strenght", 1.f);
 
     phongShader.set("text", 0);
     glActiveTexture(GL_TEXTURE0);
@@ -161,6 +163,8 @@ void render(const Plane& plane, const Sphere& sphere, const Shader& phongShader,
     glDrawElements(GL_TRIANGLES, sphere.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
 
+
+    glm::vec3 sphereColor = glm::vec3(0.8f, 0.5f, 0.2f);
     /////////////////////////////////
     // Sphere
     ////////////////////////////////
@@ -174,17 +178,19 @@ void render(const Plane& plane, const Sphere& sphere, const Shader& phongShader,
     sphereModel = glm::translate(sphereModel, spherePosition0);
     flatShader.set("model", sphereModel);
     glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
-    flatShader.set("normalMat", cNormalMat);
+    flatShader.set("normal_mat", cNormalMat);
 
-    flatShader.set("color", glm::vec3(0.8f, 0.5f, 0.2f));
+    flatShader.set("color", sphereColor);
 
-    flatShader.set("lightPos", lightPosition);
-    flatShader.set("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+    flatShader.set("view_position", camera.getPosition());
+    flatShader.set("light_position", lightPosition);
+    flatShader.set("light_color", lightColor);
+    flatShader.set("ambient_color", ambientColor);
 
-    flatShader.set("ambientStrenght", 0.1f);
+    flatShader.set("ambient_strenght", 0.1f);
+    flatShader.set("diffuse_strenght", 1.0f);
+    flatShader.set("specular_strenght", 0.6f);
     flatShader.set("shininess", 32);
-    flatShader.set("specularStrenght", 0.6f);
-    flatShader.set("viewPos", camera.getPosition());
 
     flatShader.set("text", 0);
     glActiveTexture(GL_TEXTURE0);
@@ -209,12 +215,12 @@ void render(const Plane& plane, const Sphere& sphere, const Shader& phongShader,
     cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
     gouraudShader.set("normal_mat", cNormalMat);
 
-    gouraudShader.set("color", glm::vec3(0.8f, 0.5f, 0.2f));
+    gouraudShader.set("color", sphereColor);
 
     gouraudShader.set("view_position", camera.getPosition());
     gouraudShader.set("light_position", lightPosition);
-    gouraudShader.set("light_color", glm::vec3(1.0f, 1.0f, 1.0f));
-    gouraudShader.set("ambient_color", glm::vec3(1.0f, 1.0f, 1.0f));
+    gouraudShader.set("light_color", lightColor);
+    gouraudShader.set("ambient_color", ambientColor);
 
     gouraudShader.set("ambient_strenght", 0.1f);
     gouraudShader.set("diffuse_strenght", 1.0f);
@@ -243,12 +249,12 @@ void render(const Plane& plane, const Sphere& sphere, const Shader& phongShader,
     cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
     phongShader.set("normal_mat", cNormalMat);
 
-    phongShader.set("color", glm::vec3(0.8f, 0.5f, 0.2f));
+    phongShader.set("color", sphereColor);
 
     phongShader.set("view_position", camera.getPosition());
     phongShader.set("light_position", lightPosition);
-    phongShader.set("light_color", glm::vec3(1.0f, 1.0f, 1.0f));
-    phongShader.set("ambient_color", glm::vec3(1.0f, 1.0f, 1.0f));
+    phongShader.set("light_color", lightColor);
+    phongShader.set("ambient_color", ambientColor);
 
     phongShader.set("ambient_strenght", 0.1f);
     phongShader.set("diffuse_strenght", 1.0f);
