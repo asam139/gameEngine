@@ -48,6 +48,18 @@ glm::vec3 lightPosition = glm::vec3(-1.0f, 2.5f, -5.0f);
 glm::vec3 lightColor = glm::vec3(0.75f, 0.75f, 0.75f);
 glm::vec3 ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
 
+// Materials
+
+typedef struct {
+    glm::vec3 ambient_color;
+    glm::vec3 diffuse_color;
+    uint32_t diffuse_text;
+    glm::vec3 specular_color;
+    uint32_t specular_text;
+    float shininess;
+} Material;
+
+
 ///////////////////////
 
 // Resize callback
@@ -157,9 +169,9 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const ui
 
     shader.set("view_position", camera.getPosition());
 
-    shader.set("material.diffuse", 0);
+    shader.set("material.ambient_color", glm::vec3(1.0f));
 
-    shader.set("light_position", lightPosition);
+    shader.set("light.position", lightPosition);
     shader.set("light.ambient", 1.0f, 1.0f, 1.0f);
 
     glActiveTexture(GL_TEXTURE0);
@@ -187,8 +199,11 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const ui
 
     shader.set("view_position", camera.getPosition());
 
-    shader.set("material.diffuse", 0);
-    shader.set("material.specular", 1);
+    shader.set("material.ambient_color", glm::vec3(1.0f));
+    shader.set("material.diffuse_color", glm::vec3(1.0f));
+    shader.set("material.diffuse_text", 0);
+    shader.set("material.specular_color", glm::vec3(1.0f));
+    shader.set("material.specular_text", 1);
     shader.set("material.shininess", 32.0f);
 
     shader.set("light.position", lightPosition);
@@ -201,6 +216,15 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const ui
 
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, specTex);
+
+
+    /*Material emerald;
+    emerald.ambient_color = glm::vec3(0.0215f, 0.1745f, 0.0215f);
+    emerald.diffuse_color = glm::vec3(0.07568f, 0.61424f, 0.07568f);
+    emerald.diffuse_text = 0;
+    emerald.specular_color = glm::vec3(0.633f, 0.727811f, 0.633f);
+    emerald.specular_text = 0;
+    emerald.shininess = 0.6;*/
 
     glBindVertexArray(cube.getVAO());
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
@@ -299,6 +323,8 @@ int main (int argc, char *argv[]) {
 
     uint32_t diffTex = createTexture("../textures/diffuseTex.jpg", GL_RGB);
     uint32_t specTex = createTexture("../textures/specularTex.jpg", GL_RGB);
+
+
 
 
     //glEnable(GL_BLEND);

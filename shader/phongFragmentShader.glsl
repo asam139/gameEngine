@@ -11,8 +11,14 @@ out vec4 frag_color;
 uniform vec3 color = vec3(1.0, 1.0, 1.0);
 
 struct Material {
-    sampler2D diffuse;
-    sampler2D specular;
+    vec3 ambient_color;
+
+    vec3 diffuse_color;
+    sampler2D diffuse_text;
+
+    sampler2D specular_text;
+    vec3 specular_color;
+
     float shininess;
 };
 uniform Material material;
@@ -40,13 +46,13 @@ void main() {
     vec3 R = reflect(-L, N);
 
     // Get Textures
-    vec3 diff_tex = vec3(texture(material.diffuse, text_coord));
-    vec3 spec_tex = vec3(texture(material.specular, text_coord));
+    vec3 diff_tex = vec3(texture(material.diffuse_text, text_coord));
+    vec3 spec_tex = vec3(texture(material.specular_text, text_coord));
 
     // Calculate ambient, difusse, specular contribution
-    vec3 ambient = light.ambient * diff_tex;
-    vec3 diffuse  = diff_tex * light.diffuse * max(0.0, dot(N, L));
-    vec3 specular = spec_tex * light.specular * pow(max(0.0, dot(R, V)), material.shininess);
+    vec3 ambient = diff_tex * material.ambient_color * light.ambient;
+    vec3 diffuse  = diff_tex * material.diffuse_color * light.diffuse * max(0.0, dot(N, L));
+    vec3 specular = spec_tex * material.specular_color * light.specular * pow(max(0.0, dot(R, V)), material.shininess);
 
     vec3 phong = ambient + diffuse + specular;
 
