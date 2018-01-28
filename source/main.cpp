@@ -119,7 +119,7 @@ void handleInput(GLFWwindow* window) {
 }
 
 // Render
-void render(const Plane& plane, const Cube& cube, const Shader& shader, const uint32_t tex, const uint32_t diffTex, const uint32_t specTex) {
+void render(Plane& plane, Cube& cube, const Shader& shader, const uint32_t tex, const uint32_t diffTex, const uint32_t specTex) {
     glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     glm::mat4 view = camera.getViewMatrix();
 
@@ -131,10 +131,9 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const ui
     shader.set("view", view);
     shader.set("projection", projection);
 
-    glm::mat4 planeModel = glm::mat4(1.0f);
-    planeModel = glm::translate(planeModel, planePosition);
-    planeModel = glm::scale(planeModel, glm::vec3(10.f, 1.f, 10.f));
-    shader.set("model", planeModel);
+    plane.setPosition(planePosition);
+    plane.setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
+    shader.set("model", plane.getModel());
 
     shader.set("color", glm::vec3(0.0f, 0.0f, 0.0f));
 
@@ -158,11 +157,12 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const ui
     //float radius = 5.0f;
     //lightPosition = glm::vec3(radius * sinf(time), lightPosition.y, radius * cosf(time));
 
-    glm::mat4 lightModel = glm::mat4(1.0f);
-    lightModel = glm::translate(lightModel, lightPosition);
-    lightModel = glm::scale(lightModel, glm::vec3(0.3f));
-    shader.set("model", lightModel);
+    cube.setPosition(lightPosition);
+    cube.setScale(glm::vec3(0.3f));
+    glm::mat4 lightModel = cube.getModel();
     glm::mat3 lNormalMat = glm::inverse(glm::transpose(glm::mat3(lightModel)));
+
+    shader.set("model", cube.getModel());
     shader.set("normal_mat", lNormalMat);
 
     shader.set("color", glm::vec3(1.0f, 1.0f, 1.0f));
@@ -188,11 +188,12 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const ui
     shader.set("view", view);
     shader.set("projection", projection);
 
-    glm::mat4 sphereModel = glm::mat4(1.0f);
+    cube.setPosition(cubePosition);
+    cube.setScale(glm::vec3(1.0f));
+    glm::mat4 cubeModel = cube.getModel();
+    glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(cubeModel)));
 
-    sphereModel = glm::translate(sphereModel, cubePosition);
-    shader.set("model", sphereModel);
-    glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
+    shader.set("model", cube.getModel());
     shader.set("normal_mat", cNormalMat);
 
     shader.set("color", glm::vec3(1.0f, 1.0f, 1.0f));
