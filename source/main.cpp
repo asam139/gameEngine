@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include "shader.h"
+#include "Material.h"
 #include "Camera.h"
 
 #include "Plane.h"
@@ -47,17 +48,6 @@ glm::vec3 cubePosition = glm::vec3(2.0f, 0.0f, 0.0f);
 glm::vec3 lightPosition = glm::vec3(-1.0f, 2.5f, -5.0f);
 glm::vec3 lightColor = glm::vec3(0.75f, 0.75f, 0.75f);
 glm::vec3 ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
-
-// Materials
-
-typedef struct {
-    glm::vec3 ambient_color;
-    glm::vec3 diffuse_color;
-    uint32_t diffuse_text;
-    glm::vec3 specular_color;
-    uint32_t specular_text;
-    float shininess;
-} Material;
 
 
 ///////////////////////
@@ -119,7 +109,7 @@ void handleInput(GLFWwindow* window) {
 }
 
 // Render
-void render(Plane& plane, Cube& cube, const Shader& shader, const uint32_t tex, const uint32_t diffTex, const uint32_t specTex) {
+void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, const uint32_t tex, const uint32_t diffTex, const uint32_t specTex) {
     glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     glm::mat4 view = camera.getViewMatrix();
 
@@ -312,7 +302,6 @@ int main (int argc, char *argv[]) {
     Plane plane;
     Cube cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f);
     //Sphere sphere(glm::vec3(0.0f, -1.0f, 0.0f), 1.0f);
-
     ///////////////////////////
 
     // Create program
@@ -325,8 +314,8 @@ int main (int argc, char *argv[]) {
     uint32_t diffTex = createTexture("../textures/diffuseTex.jpg", GL_RGB);
     uint32_t specTex = createTexture("../textures/specularTex.jpg", GL_RGB);
 
-
-
+    // Create Material
+    Material material(&phongShader);
 
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -371,7 +360,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(plane, cube, phongShader, defaultTex, diffTex, specTex);
+            render(plane, cube, material, phongShader, defaultTex, diffTex, specTex);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
