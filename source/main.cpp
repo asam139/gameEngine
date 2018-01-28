@@ -168,7 +168,6 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const ui
     glBindVertexArray(cube.getVAO());
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
-    glm::vec3 sphereColor = glm::vec3(0.8f, 0.5f, 0.2f);
     /////////////////////////////////
     // Sphere
     ////////////////////////////////
@@ -184,7 +183,7 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const ui
     glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
     shader.set("normal_mat", cNormalMat);
 
-    shader.set("color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    shader.set("color", glm::vec3(1.0f, 1.0f, 1.0f));
 
     shader.set("view_position", camera.getPosition());
 
@@ -192,7 +191,7 @@ void render(const Plane& plane, const Cube& cube, const Shader& shader, const ui
     shader.set("material.specular", 1);
     shader.set("material.shininess", 32.0f);
 
-    shader.set("light_position", lightPosition);
+    shader.set("light.position", lightPosition);
     shader.set("light.ambient", 0.2f, 0.15f, 0.1f);
     shader.set("light.diffuse", 0.5f, 0.5f, 0.5f);
     shader.set("light.specular", 1.0f, 1.0f, 1.0f);

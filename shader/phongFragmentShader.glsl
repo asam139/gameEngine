@@ -2,8 +2,8 @@
 
 in vec2 text_coord;
 
+in vec3 P;
 in vec3 N1;
-in vec3 L1;
 in vec3 V1;
 
 out vec4 frag_color;
@@ -18,6 +18,8 @@ struct Material {
 uniform Material material;
 
 struct Light {
+    vec3 position;
+
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
@@ -26,6 +28,9 @@ uniform Light light;
 
 
 void main() {
+    // Calculate light vector
+    vec3 L1 = light.position - P.xyz;
+
     // Normalize the incoming N, L, and V vectors
     vec3 N = normalize(N1);
     vec3 L = normalize(L1);
