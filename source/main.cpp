@@ -354,7 +354,7 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
 
     // Create program
-    Shader phongShader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
+    Shader phongShader("../shader/phongVertexShader.glsl", "../shader/phongFragmentShader.glsl");
     Shader gouraudShader("../shader/gouraudVertexShader.glsl", "../shader/gouraudFragmentShader.glsl");
     Shader flatShader("../shader/flatVertexShader.glsl", "../shader/flatFragmentShader.glsl");
 
