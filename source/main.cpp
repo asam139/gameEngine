@@ -13,8 +13,9 @@
 #include "shader.h"
 #include "Camera.h"
 
-#include "Cube.h"
 #include "Plane.h"
+#include "Cube.h"
+#include "Sphere.h"
 
 #include "BitmaskEnum.h"
 
@@ -39,10 +40,13 @@ float lastY = (float)kScreenHeight / 2.f;
 glm::vec3 planePosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
 // Cube
-glm::vec3 cubePosition = glm::vec3(1.0f, 0.0f, 0.0f);
+glm::vec3 cubePosition = glm::vec3(2.0f, 0.0f, 0.0f);
+
 
 // Light
 glm::vec3 lightPosition = glm::vec3(-1.0f, 2.5f, -5.0f);
+glm::vec3 lightColor = glm::vec3(0.75f, 0.75f, 0.75f);
+glm::vec3 ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
 
 ///////////////////////
 
@@ -78,7 +82,7 @@ void onScroll(GLFWwindow* window, double xOffset, double yOffset) {
 }
 
 // Handle Input
-void handleInput(GLFWwindow* window, const Shader& shader) {
+void handleInput(GLFWwindow* window) {
 
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
@@ -104,90 +108,108 @@ void handleInput(GLFWwindow* window, const Shader& shader) {
 
 // Render
 void render(const Plane& plane, const Cube& cube, const Shader& shader, const uint32_t tex, const uint32_t diffTex, const uint32_t specTex) {
-    glm::mat4 projection;
-    projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
-    shader.set("view", camera.getViewMatrix());
-    shader.set("projection", projection);
-
-    camera.setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
+    glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
+    glm::mat4 view = camera.getViewMatrix();
 
     /////////////////////////////////
     // Plane
     ////////////////////////////////
-    glBindVertexArray(plane.getVAO());
+    shader.use();
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, tex);
+    shader.set("view", view);
+    shader.set("projection", projection);
 
     glm::mat4 planeModel = glm::mat4(1.0f);
     planeModel = glm::translate(planeModel, planePosition);
     planeModel = glm::scale(planeModel, glm::vec3(10.f, 1.f, 10.f));
     shader.set("model", planeModel);
 
-    shader.set("color", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+    shader.set("color", glm::vec3(0.0f, 0.0f, 0.0f));
 
+    shader.set("text", 0);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glBindVertexArray(plane.getVAO());
     glDrawElements(GL_TRIANGLES, plane.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
     // Duplicate code to learn easily
     /////////////////////////////////
     // Light
     ////////////////////////////////
-    glBindVertexArray(cube.getVAO());
+    shader.use();
+
+    shader.set("view", view);
+    shader.set("projection", projection);
+
+    //auto time = static_cast<float>(glfwGetTime());
+    //float radius = 5.0f;
+    //lightPosition = glm::vec3(radius * sinf(time), lightPosition.y, radius * cosf(time));
 
     glm::mat4 lightModel = glm::mat4(1.0f);
     lightModel = glm::translate(lightModel, lightPosition);
     lightModel = glm::scale(lightModel, glm::vec3(0.3f));
     shader.set("model", lightModel);
+    glm::mat3 lNormalMat = glm::inverse(glm::transpose(glm::mat3(lightModel)));
+    shader.set("normal_mat", lNormalMat);
 
-    shader.set("color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    shader.set("color", glm::vec3(1.0f, 1.0f, 1.0f));
+
+    shader.set("view_position", camera.getPosition());
 
     shader.set("material.diffuse", 0);
+
+    shader.set("light_position", lightPosition);
     shader.set("light.ambient", 1.0f, 1.0f, 1.0f);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
 
+    glBindVertexArray(cube.getVAO());
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
-
+    glm::vec3 sphereColor = glm::vec3(0.8f, 0.5f, 0.2f);
     /////////////////////////////////
-    // Cube
+    // Sphere
     ////////////////////////////////
-    glBindVertexArray(cube.getVAO());
+    shader.use();
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, tex);
+    shader.set("view", view);
+    shader.set("projection", projection);
 
-    glm::mat4 cubeModel = glm::mat4(1.0f);
-    cubeModel = glm::translate(cubeModel, cubePosition);
-    cubeModel = glm::translate(cubeModel, cubePosition);
-    shader.set("model", cubeModel);
+    glm::mat4 sphereModel = glm::mat4(1.0f);
+
+    sphereModel = glm::translate(sphereModel, cubePosition);
+    shader.set("model", sphereModel);
+    glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
+    shader.set("normal_mat", cNormalMat);
 
     shader.set("color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
-    glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(cubeModel)));
-    shader.set("normalMat", cNormalMat);
-    shader.set("viewPos", camera.getPosition());
+    shader.set("view_position", camera.getPosition());
 
     shader.set("material.diffuse", 0);
     shader.set("material.specular", 1);
     shader.set("material.shininess", 32.0f);
 
-    shader.set("light.position", lightPosition);
+    shader.set("light_position", lightPosition);
     shader.set("light.ambient", 0.2f, 0.15f, 0.1f);
     shader.set("light.diffuse", 0.5f, 0.5f, 0.5f);
     shader.set("light.specular", 1.0f, 1.0f, 1.0f);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, diffTex);
+
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, specTex);
 
+    glBindVertexArray(cube.getVAO());
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
+
 }
 
-GLuint createTexture (const char* path, GLenum type) {
-    GLuint texture;
+uint32_t createTexture (const char* path, GLenum type) {
+    uint32_t texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -256,16 +278,23 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
 
     ///////////////////////////
+    // Configure Camera
+    camera.setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
+    ///////////////////////////
+
+    ///////////////////////////
     // Create VBOs and VAOs
     ///////////////////////////
     Plane plane;
     Cube cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f);
+    //Sphere sphere(glm::vec3(0.0f, -1.0f, 0.0f), 1.0f);
 
     ///////////////////////////
 
     // Create program
-    Shader shader("../shader/vertexShader.glsl", "../shader/fragmentShader.glsl");
-    shader.use();
+    Shader phongShader("../shader/phongVertexShader.glsl", "../shader/phongFragmentShader.glsl");
+    //Shader gouraudShader("../shader/gouraudVertexShader.glsl", "../shader/gouraudFragmentShader.glsl");
+    //Shader flatShader("../shader/flatVertexShader.glsl", "../shader/flatFragmentShader.glsl");
 
     uint32_t defaultTex = createTexture("../textures/whiteTex.png", GL_RGB);
 
@@ -308,7 +337,7 @@ int main (int argc, char *argv[]) {
             //////////////////////////////
 
             // Handle Input
-            handleInput(window, shader);
+            handleInput(window);
 
             // Clear
             glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
@@ -316,7 +345,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(plane, cube, shader, defaultTex, diffTex, specTex);
+            render(plane, cube, phongShader, defaultTex, diffTex, specTex);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
