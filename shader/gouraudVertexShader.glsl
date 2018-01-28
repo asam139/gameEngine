@@ -4,43 +4,56 @@ layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec2 aTextCoord;
 layout (location = 2) in vec3 aNormal;
 
-out vec2 textCoord;
-out vec3 vColor;
-
-uniform vec3 color = vec3(1.0, 1.0, 1.0);
+out vec2 text_coord;
+out vec3 vertex_Color;
 
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
-uniform mat3 normalMat;
+uniform mat3 normal_mat;
 
-uniform vec3 lightPos;
-uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);
-uniform float ambientStrenght = 0.1;
+uniform vec3 light_position = vec3(0.0, 0.0, 0.0);
+uniform vec3 light_color = vec3(0.75, 0.75, 0.75);
+uniform vec3 ambient_color = vec3(1.0);
 
-uniform vec3 viewPos;
-uniform int shininess;
-uniform float specularStrenght;
+uniform vec3 view_position;
+
+uniform float ambient_strenght = 0.0;
+uniform float diffuse_strenght = 1.0;
+uniform float specular_strenght = 0.35;
+uniform int shininess = 32;
 
 void main() {
-    vec3 normal = normalMat * aNormal;
-    vec3 fragPos = vec3(model * vec4(aPos, 1.0));
+    // Calculate normal in view space
+    vec3 P = vec3(model * vec4(aPos, 1.0));
 
-    vec3 ambient = ambientStrenght * lightColor;
+    // Calculate nromal in view space
+    vec3 normal = normal_mat * aNormal;
+    vec3 N = normalize(mat3(model) * normal);
 
-    vec3 norm = normalize(normal);
-    vec3 lightDir = normalize(lightPos - fragPos);
-    float diff = max(dot(norm, lightDir), 0.0f);
-    vec3 diffuse = diff * lightColor;
+    // Calculate view-space light vector
+    vec3 L = normalize(light_position - P);
 
-    vec3 viewDir = normalize(viewPos - fragPos);
-    vec3 reflectDir = reflect(-lightDir, norm);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0f), shininess);
-    vec3 specular = specularStrenght * spec * lightColor;
+    // Calculate view vector (simply the negtive of the view-space position)
+    vec3 V = normalize(view_position - P);
 
-    vec3 phong = (ambient + diffuse + specular) * color;
+    // Calculate R by reflecting -L around the plane defined by N
+    vec3 R = reflect(-L, N);
 
+    // Calculate ambient, diffuse, specular contribution
+    vec3 ambient = ambient_strenght * light_color;
+    vec3 diffuse = diffuse_strenght * light_color * max(0.0, dot(N, L));;
+    vec3 specular = specular_strenght * light_color * pow(max(0.0, dot(R, V)), shininess);
+
+    vec3 gouraud = ambient + diffuse + specular;
+
+    // Seed text coord
+    text_coord = aTextCoord;
+
+    // Send the color output to the fragment shader
+    vertex_Color = gouraud;
+
+    // Calculate the clip-space position of each vertex
     gl_Position = projection * view * model * vec4(aPos, 1.f);
-    textCoord = aTextCoord;
-    vColor = phong;
+
 }

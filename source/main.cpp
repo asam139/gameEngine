@@ -207,17 +207,19 @@ void render(const Plane& plane, const Sphere& sphere, const Shader& phongShader,
     sphereModel = glm::translate(sphereModel, spherePosition1);
     gouraudShader.set("model", sphereModel);
     cNormalMat = glm::inverse(glm::transpose(glm::mat3(sphereModel)));
-    gouraudShader.set("normalMat", cNormalMat);
+    gouraudShader.set("normal_mat", cNormalMat);
 
     gouraudShader.set("color", glm::vec3(0.8f, 0.5f, 0.2f));
 
-    gouraudShader.set("lightPos", lightPosition);
-    gouraudShader.set("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+    gouraudShader.set("view_position", camera.getPosition());
+    gouraudShader.set("light_position", lightPosition);
+    gouraudShader.set("light_color", glm::vec3(1.0f, 1.0f, 1.0f));
+    gouraudShader.set("ambient_color", glm::vec3(1.0f, 1.0f, 1.0f));
 
-    gouraudShader.set("ambientStrenght", 0.1f);
+    gouraudShader.set("ambient_strenght", 0.1f);
+    gouraudShader.set("diffuse_strenght", 1.0f);
+    gouraudShader.set("specular_strenght", 0.6f);
     gouraudShader.set("shininess", 32);
-    gouraudShader.set("specularStrenght", 0.6f);
-    gouraudShader.set("viewPos", camera.getPosition());
 
     gouraudShader.set("text", 0);
     glActiveTexture(GL_TEXTURE0);

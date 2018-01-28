@@ -12,11 +12,14 @@ uniform sampler2D tex;
 
 uniform vec3 lightPos;
 uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);
-uniform float ambientStrenght = 0.1;
+
 
 uniform vec3 viewPos;
-uniform int shininess;
-uniform float specularStrenght;
+
+uniform float ambientStrenght = 0.1;
+uniform float diffuseStrenght = 0.5;
+uniform float specularStrenght = 0.35;
+uniform int shininess = 32;
 
 void main() {
     vec3 ambient = ambientStrenght * lightColor.rgb;
