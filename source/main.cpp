@@ -199,7 +199,7 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
 
     shader.set("view_position", camera.getPosition());
 
-    material.setAmbientColor(glm::vec3(1.0f));
+    material.setAmbientColor(glm::vec3(0.25f));
     material.setDiffuseColor(glm::vec3(1.0f));
     material.setDiffuseText(0);
     material.setSpecularColor(glm::vec3(1.0f));
