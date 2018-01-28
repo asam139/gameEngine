@@ -8,21 +8,39 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
+typedef struct {
+    glm::vec3 position;
+    glm::vec3 rotation;
+    glm::vec3 scale;
+} Transform;
+
 
 class GameObject {
 public:
-    virtual ~GameObject() {};
-    virtual void update(const float deltaTime) = 0;
+    GameObject();
+    virtual ~GameObject();
+
+    void setPosition(glm::vec3 position);
+    glm::vec3 getPosition();
+    void setRotation(glm::vec3 rotation);
+    glm::vec3 getRotation();
+    void setScale(glm::vec3 scale);
+    glm::vec3 getScale();
+
+    glm::mat4 getModel();
+
+    virtual void update(const float deltaTime);
 
     uint32_t getVAO() const;
     uint32_t getIndecesSize() const;
+
 protected:
-    GameObject() {};
+    Transform _transform;
+
+    virtual void configuration();
 
     uint32_t _indicesSize = 0;
     uint32_t* _indices = nullptr;
-
-    virtual void configuration() = 0;
 
     uint32_t _VAO = 0;
 };
