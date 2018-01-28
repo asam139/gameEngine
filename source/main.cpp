@@ -46,7 +46,7 @@ glm::vec3 cubePosition = glm::vec3(2.0f, 0.0f, 0.0f);
 
 // Light
 glm::vec3 lightPosition = glm::vec3(-1.0f, 2.5f, -5.0f);
-glm::vec3 lightColor = glm::vec3(0.75f, 0.75f, 0.75f);
+glm::vec3 lightColor = glm::vec3(0.8f, 0.8f, 0.8f);
 glm::vec3 ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
 
 
@@ -125,9 +125,16 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
     plane.setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
     shader.set("model", plane.getModel());
 
-    shader.set("color", glm::vec3(0.0f, 0.0f, 0.0f));
+    material.setAmbientColor(glm::vec3(0.1f));
+    material.setDiffuseColor(glm::vec3(1.0f));
+    material.setDiffuseText(0);
+    material.setSpecularColor(glm::vec3(.3f));
+    material.setSpecularText(0);
+    material.setShininess(32.0f);
 
-    shader.set("text", 0);
+    shader.set("light.position", lightPosition);
+    shader.set("light.ambient", lightColor);
+
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
 
@@ -155,19 +162,18 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
     shader.set("model", cube.getModel());
     shader.set("normal_mat", lNormalMat);
 
-    shader.set("color", glm::vec3(1.0f, 1.0f, 1.0f));
-
     shader.set("view_position", camera.getPosition());
 
+    // Special configuration to draw Object as light source
     material.setAmbientColor(glm::vec3(1.0f));
     material.setDiffuseColor(glm::vec3(1.0f));
     material.setDiffuseText(0);
-    material.setSpecularColor(glm::vec3(1.0f));
+    material.setSpecularColor(glm::vec3(0.0f));
     material.setSpecularText(0);
     material.setShininess(32.0f);
 
     shader.set("light.position", lightPosition);
-    shader.set("light.ambient", 1.0f, 1.0f, 1.0f);
+    shader.set("light.ambient", lightColor);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
@@ -191,8 +197,6 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
     shader.set("model", cube.getModel());
     shader.set("normal_mat", cNormalMat);
 
-    shader.set("color", glm::vec3(1.0f, 1.0f, 1.0f));
-
     shader.set("view_position", camera.getPosition());
 
     material.setAmbientColor(glm::vec3(1.0f));
@@ -203,7 +207,7 @@ void render(Plane& plane, Cube& cube, Material& material, const Shader& shader, 
     material.setShininess(32.0f);
 
     shader.set("light.position", lightPosition);
-    shader.set("light.ambient", 0.2f, 0.15f, 0.1f);
+    shader.set("light.ambient", lightColor);
     shader.set("light.diffuse", 0.5f, 0.5f, 0.5f);
     shader.set("light.specular", 1.0f, 1.0f, 1.0f);
 

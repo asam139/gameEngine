@@ -8,8 +8,6 @@ in vec3 V1;
 
 out vec4 frag_color;
 
-uniform vec3 color = vec3(1.0, 1.0, 1.0);
-
 struct Material {
     vec3 ambient_color;
 
@@ -56,5 +54,5 @@ void main() {
 
     vec3 phong = ambient + diffuse + specular;
 
-    frag_color = vec4(phong * color, 1.0);
+    frag_color = vec4(phong, 1.0);
 }
