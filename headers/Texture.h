@@ -16,6 +16,8 @@ public:
     ~Texture();
 
     uint32_t getTexture() const;
+    void activeTextureAs(GLenum texture) const;
+
 protected:
     uint32_t _texture;
 

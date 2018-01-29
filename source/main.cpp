@@ -128,8 +128,7 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
 
     light.configureShader();
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, defaultText.getTexture());
+    defaultText.activeTextureAs(GL_TEXTURE0);
 
     glBindVertexArray(plane.getVAO());
     glDrawElements(GL_TRIANGLES, plane.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
@@ -168,8 +167,7 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
 
     light.configureShader();
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, defaultText.getTexture());
+    defaultText.activeTextureAs(GL_TEXTURE0);
 
     glBindVertexArray(cube.getVAO());
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
@@ -202,12 +200,8 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
 
     light.configureShader();
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, diffText.getTexture());
-
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, specText.getTexture());
-
+    diffText.activeTextureAs(GL_TEXTURE0);
+    specText.activeTextureAs(GL_TEXTURE1);
 
     glBindVertexArray(cube.getVAO());
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);

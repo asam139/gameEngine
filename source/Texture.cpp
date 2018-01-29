@@ -48,3 +48,8 @@ uint32_t Texture::getTexture() const {
     return _texture;
 }
 
+void Texture::activeTextureAs(GLenum texture) const {
+    glActiveTexture(texture);
+    glBindTexture(GL_TEXTURE_2D, getTexture());
+}
+
