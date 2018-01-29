@@ -5,13 +5,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#define  STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
-
 #include <iostream>
 
 #include "Camera.h"
 #include "shader.h"
+#include "Texture.h"
 #include "Material.h"
 #include "Light.h"
 
@@ -104,7 +102,7 @@ void handleInput(GLFWwindow* window) {
 }
 
 // Render
-void render(Plane& plane, Cube& cube, Material& material, Light& light, const Shader& shader, const uint32_t tex, const uint32_t diffTex, const uint32_t specTex) {
+void render(Plane& plane, Cube& cube, Material& material, Light& light, const Shader& shader, const Texture& defaultText, const Texture& diffText, const Texture& specText) {
     glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     glm::mat4 view = camera.getViewMatrix();
 
@@ -131,7 +129,7 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     light.configureShader();
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, tex);
+    glBindTexture(GL_TEXTURE_2D, defaultText.getTexture());
 
     glBindVertexArray(plane.getVAO());
     glDrawElements(GL_TRIANGLES, plane.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
@@ -171,7 +169,7 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     light.configureShader();
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, tex);
+    glBindTexture(GL_TEXTURE_2D, defaultText.getTexture());
 
     glBindVertexArray(cube.getVAO());
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
@@ -205,40 +203,15 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     light.configureShader();
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, diffTex);
+    glBindTexture(GL_TEXTURE_2D, diffText.getTexture());
 
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, specTex);
+    glBindTexture(GL_TEXTURE_2D, specText.getTexture());
 
 
     glBindVertexArray(cube.getVAO());
     glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
 
-}
-
-uint32_t createTexture (const char* path, GLenum type) {
-    uint32_t texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    GLint width, height, nChannels;
-    unsigned char* data = stbi_load(path, &width, &height, &nChannels, 0);
-    if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, type, width, height, 0, type, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-
-        stbi_image_free(data);
-    } else {
-        std::cout << "Failed To Load Texture" << path << std::endl;
-    }
-
-    return texture;
 }
 
 
@@ -280,10 +253,6 @@ int main (int argc, char *argv[]) {
     glfwSetScrollCallback(window, onScroll);
 
     ///////////////////////////
-    // Configure stb
-    stbi_set_flip_vertically_on_load(true);
-
-    ///////////////////////////
 
     ///////////////////////////
     // Configure Camera
@@ -303,10 +272,10 @@ int main (int argc, char *argv[]) {
     //Shader gouraudShader("../shader/gouraudVertexShader.glsl", "../shader/gouraudFragmentShader.glsl");
     //Shader flatShader("../shader/flatVertexShader.glsl", "../shader/flatFragmentShader.glsl");
 
-    uint32_t defaultTex = createTexture("../textures/whiteTex.png", GL_RGB);
+    Texture defaultText("../textures/whiteTex.png", GL_RGB);
 
-    uint32_t diffTex = createTexture("../textures/diffuseTex.jpg", GL_RGB);
-    uint32_t specTex = createTexture("../textures/specularTex.jpg", GL_RGB);
+    Texture diffText("../textures/diffuseTex.jpg", GL_RGB);
+    Texture specText("../textures/specularTex.jpg", GL_RGB);
 
     // Create Material
     Material material(&phongShader);
@@ -361,7 +330,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(plane, cube, material, light, phongShader, defaultTex, diffTex, specTex);
+            render(plane, cube, material, light, phongShader, defaultText, diffText, specText);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
@@ -370,12 +339,6 @@ int main (int argc, char *argv[]) {
             glfwPollEvents();
         }
     }
-
-    ////////////////////////////
-    // Delete Textures
-    glDeleteTextures(1, &defaultTex);
-    glDeleteTextures(1, &diffTex);
-    glDeleteTextures(1, &specTex);
 
     glfwTerminate();
     return 0;
