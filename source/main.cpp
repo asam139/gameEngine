@@ -143,9 +143,6 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     shader.set("view", view);
     shader.set("projection", projection);
 
-    //auto time = static_cast<float>(glfwGetTime());
-    //float radius = 5.0f;
-    //lightPosition = glm::vec3(radius * sinf(time), lightPosition.y, radius * cosf(time));
 
     cube.setPosition(light.getPosition());
     cube.setScale(glm::vec3(0.3f));
@@ -196,7 +193,7 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     material.setSpecularText(1);
     material.setShininess(32.0f);
     material.configureShader();
-    
+
     diffText.activeTextureAs(GL_TEXTURE0);
     specText.activeTextureAs(GL_TEXTURE1);
 

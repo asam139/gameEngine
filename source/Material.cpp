@@ -7,6 +7,8 @@
 
 Material::Material(Shader* shader) {
     _shader = shader;
+    _diffuseTexture = nullptr;
+    _specularTexture = nullptr;
 
     setAmbientColor(glm::vec3(0.5f));
     setDiffuseColor(glm::vec3(1.0f));
@@ -37,6 +39,14 @@ glm::vec3 Material::getDiffuseColor() {
     return _diffuseColor;
 }
 
+void Material::setDiffuseTexture(Texture* texture) {
+    _diffuseTexture = texture;
+}
+
+Texture* Material::getDiffuseTexture() {
+    return _diffuseTexture;
+}
+
 void Material::setDiffuseText(uint32_t diffuseText) {
     _diffuseText = diffuseText;
 }
@@ -52,6 +62,15 @@ void Material::setSpecularColor(glm::vec3 specularColor) {
 glm::vec3 Material::getSpecularColor() {
     return _specularColor;
 }
+
+void Material::setSpecularTexture(Texture* texture) {
+    _specularTexture = texture;
+}
+
+Texture* Material::getSpecularTexture() {
+    return _specularTexture;
+}
+
 
 void Material::setSpecularText(uint32_t specularText) {
     _specularText = specularText;
@@ -76,9 +95,20 @@ Shader* Material::getShader() {
 
 void Material::configureShader() {
     _shader->set("material.ambient_color", _ambientColor);
+
     _shader->set("material.diffuse_color", _diffuseColor);
+    if (_diffuseTexture != nullptr) {
+        setDiffuseText(0);
+        _diffuseTexture->activeTextureAs(GL_TEXTURE0);
+    }
     _shader->set("material.diffuse_text", _diffuseText);
+
     _shader->set("material.specular_color", _specularColor);
+    if (_specularTexture != nullptr) {
+        setDiffuseText(1);
+        _specularTexture->activeTextureAs(GL_TEXTURE1);
+    }
     _shader->set("material.specular_text", _specularText);
+
     _shader->set("material.shininess", _shininess);
 }
