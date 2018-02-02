@@ -106,6 +106,8 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     glm::mat4 view = camera.getViewMatrix();
 
+    light.configureShader();
+
     /////////////////////////////////
     // Plane
     ////////////////////////////////
@@ -126,7 +128,6 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     material.setShininess(32.0f);
     material.configureShader();
 
-    light.configureShader();
 
     defaultText.activeTextureAs(GL_TEXTURE0);
 
@@ -165,8 +166,6 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     material.setShininess(32.0f);
     material.configureShader();
 
-    light.configureShader();
-
     defaultText.activeTextureAs(GL_TEXTURE0);
 
     glBindVertexArray(cube.getVAO());
@@ -197,9 +196,7 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     material.setSpecularText(1);
     material.setShininess(32.0f);
     material.configureShader();
-
-    light.configureShader();
-
+    
     diffText.activeTextureAs(GL_TEXTURE0);
     specText.activeTextureAs(GL_TEXTURE1);
 
