@@ -5,8 +5,12 @@
 #ifndef GAMEENGINE_GAMEOBJECT_H
 #define GAMEENGINE_GAMEOBJECT_H
 
+#include <memory>
+
 #include <glad/glad.h>
 #include <glm/glm.hpp>
+
+#include "Renderer.h"
 
 typedef struct {
     glm::vec3 position;
@@ -31,18 +35,14 @@ public:
 
     virtual void update(const float deltaTime);
 
-    uint32_t getVAO() const;
-    uint32_t getIndecesSize() const;
+    Renderer* getRenderer();
 
 protected:
     Transform _transform;
 
     virtual void configuration();
 
-    uint32_t _indicesSize = 0;
-    uint32_t* _indices = nullptr;
-
-    uint32_t _VAO = 0;
+    std::shared_ptr<Renderer> _renderer;
 };
 
 

@@ -62,17 +62,10 @@ Cube::Cube(const glm::vec3 center, float radius) {
 }
 
 Cube::~Cube() {
-    // Delete VAO
-    glDeleteVertexArrays(1, &_VAO);
 }
 
 void Cube::configuration() {
-    // Empty Object
-    uint32_t verticesSize = _verticesMapSize;
     float* vertices = _verticesMap;
-    _indicesSize = _indecesMapSize;
-    _indices = _indecesMap;
-
     for (int i = 0; i < _numberOfVertices; i++) {
         int offset = i*8;
         vertices[offset] = (vertices[offset] - _center.x) * _radius;
@@ -92,43 +85,9 @@ void Cube::configuration() {
         vertices[offset] = vertices[offset];
     }
 
-    _VAO = createVertexData(vertices, verticesSize, _indices, _indicesSize);
+    auto renderer = new Renderer(vertices, _verticesMapSize, _indecesMap, _indecesMapSize);
+    _renderer = std::unique_ptr<Renderer>(renderer);
 }
-
-uint32_t Cube::createVertexData(float* vertices, uint32_t vSize, uint32_t* indices, uint32_t iSize) {
-    uint32_t VAO;
-    uint32_t VBO, EBO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
-
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vSize * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), nullptr);
-    glEnableVertexAttribArray(0);
-
-    glVertexAttribPointer(1, 2,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *) (3 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(1);
-
-    glVertexAttribPointer(2, 3,  GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *) (5 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(2);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize * sizeof(GLuint), indices, GL_STATIC_DRAW);
-
-    glBindVertexArray(0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
-
-    return VAO;
-}
-
 
 void Cube::update(const float deltaTime) {
 

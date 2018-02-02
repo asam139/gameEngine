@@ -121,18 +121,17 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     shader.set("model", plane.getModel());
 
     material.setAmbientColor(glm::vec3(0.1f));
-    material.setDiffuseColor(glm::vec3(1.0f));
+    material.setDiffuseColor(glm::vec3(0.0f));
     material.setDiffuseText(0);
-    material.setSpecularColor(glm::vec3(.3f));
+    material.setSpecularColor(glm::vec3(.1f));
     material.setSpecularText(0);
-    material.setShininess(32.0f);
+    material.setShininess(16.0f);
     material.configureShader();
 
 
     defaultText.activeTextureAs(GL_TEXTURE0);
 
-    glBindVertexArray(plane.getVAO());
-    glDrawElements(GL_TRIANGLES, plane.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
+    plane.getRenderer()->render();
 
     // Duplicate code to learn easily
     /////////////////////////////////
@@ -165,8 +164,7 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
 
     defaultText.activeTextureAs(GL_TEXTURE0);
 
-    glBindVertexArray(cube.getVAO());
-    glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
+    cube.getRenderer()->render();
 
     /////////////////////////////////
     // Sphere
@@ -197,9 +195,7 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     diffText.activeTextureAs(GL_TEXTURE0);
     specText.activeTextureAs(GL_TEXTURE1);
 
-    glBindVertexArray(cube.getVAO());
-    glDrawElements(GL_TRIANGLES, cube.getIndecesSize(), GL_UNSIGNED_INT, nullptr);
-
+    cube.getRenderer()->render();
 }
 
 

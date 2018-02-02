@@ -62,10 +62,6 @@ void GameObject::update(const float deltaTime) {
 }
 
 
-uint32_t GameObject::getIndecesSize() const {
-    return _indicesSize;
-}
-
-uint32_t GameObject::getVAO() const{
-    return _VAO;
+Renderer* GameObject::getRenderer() {
+    return _renderer.get();
 }
