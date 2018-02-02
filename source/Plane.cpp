@@ -25,10 +25,8 @@ Plane::Plane() {
 }
 
 Plane::~Plane() {
-    // Delete VAO, VBO and EBO
+    // Delete VAO
     glDeleteVertexArrays(1, &_VAO);
-    glDeleteBuffers(1, &_VBO);
-    glDeleteBuffers(1, &_EBO);
 }
 
 void Plane::configuration() {
@@ -38,21 +36,23 @@ void Plane::configuration() {
     _indicesSize = _indecesMapSize;
     _indices = _indecesMap;
 
-    _VAO = createVertexData(vertices, verticesSize, _indices, _indicesSize,  &_VBO, &_EBO);
+    _VAO = createVertexData(vertices, verticesSize, _indices, _indicesSize);
 }
 
-uint32_t Plane::createVertexData(float* vertices, uint32_t vSize, uint32_t* indices, uint32_t iSize,  uint32_t* VBO, uint32_t* EBO) {
+uint32_t Plane::createVertexData(float* vertices, uint32_t vSize, uint32_t* indices, uint32_t iSize) {
     uint32_t VAO;
+    uint32_t VBO, EBO;
+
     glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, VBO);
-    glGenBuffers(1, EBO);
+    glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
 
     glBindVertexArray(VAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, *VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, vSize * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, iSize * sizeof(GLuint), indices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3,  GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), nullptr);
@@ -66,6 +66,9 @@ uint32_t Plane::createVertexData(float* vertices, uint32_t vSize, uint32_t* indi
     glBindVertexArray(0);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
 
     return VAO;
 }

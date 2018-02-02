@@ -15,11 +15,9 @@ public:
     void update(const float deltaTime) override;
 
 protected:
-    uint32_t _VBO, _EBO;
-
     void configuration() override;
 
-    uint32_t createVertexData(float* vertices, uint32_t vSize, uint32_t* indices, uint32_t iSize,  uint32_t* VBO, uint32_t* EBO);
+    uint32_t createVertexData(float* vertices, uint32_t vSize, uint32_t* indices, uint32_t iSize);
 };
 
 #endif //GAMEENGINE_PLANE_H
