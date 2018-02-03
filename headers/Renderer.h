@@ -19,7 +19,7 @@ public:
     ~Renderer();
 
 
-    void setMaterial(std::unique_ptr<Material> material);
+    void setMaterial(std::shared_ptr<Material> material);
     Material* getMaterial();
 
     void render();
@@ -31,7 +31,7 @@ protected:
     void createVertexData(float* vertices, uint32_t vSize, uint32_t* indices, uint32_t iSize);
     void createVertexData(float* vertices, uint32_t vSize, float *uv, uint32_t uvSize, float *normal, uint32_t nSize, uint32_t *indices, uint32_t iSize);
 
-    std::unique_ptr<Material> _material = nullptr;
+    std::shared_ptr<Material> _material = nullptr;
 
 private:
     Renderer(){};

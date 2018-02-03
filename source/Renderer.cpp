@@ -101,8 +101,8 @@ void Renderer::createVertexData(float *vertices, uint32_t vSize, float *uv, uint
     _VAO = VAO;
 }
 
-void Renderer::setMaterial(std::unique_ptr<Material> material) {
-    _material = std::move(material);
+void Renderer::setMaterial(std::shared_ptr<Material> material) {
+    _material = material;
 }
 
 Material* Renderer::getMaterial(){
