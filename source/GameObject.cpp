@@ -61,7 +61,6 @@ void GameObject::update(const float deltaTime) {
 
 }
 
-
 Renderer* GameObject::getRenderer() {
     return _renderer.get();
 }

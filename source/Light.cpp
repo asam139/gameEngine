@@ -2,13 +2,10 @@
 // Created by Saul Moreno Abril on 28/01/2018.
 //
 
-#include <GameObject.h>
 #include "Light.h"
 
 
-Light::Light(Shader* shader) {
-    _shader = shader;
-
+Light::Light() {
     setAmbientColor(glm::vec3(0.5f));
     setDiffuseColor(glm::vec3(1.0f));
     setSpecularColor(glm::vec3(0.25f));
@@ -42,14 +39,11 @@ glm::vec3 Light::getSpecularColor() {
     return _specularColor;
 }
 
-Shader* Light::getShader() {
-    return _shader;
-}
 
-void Light::configureShader() {
-    _shader->set("light.position", _transform.position);
+void Light::configureShader(Shader *shader) {
+    shader->set("light.position", _transform.position);
 
-    _shader->set("light.ambient", _ambientColor);
-    _shader->set("light.diffuse", _diffuseColor);
-    _shader->set("light.specular", _specularColor);
+    shader->set("light.ambient", _ambientColor);
+    shader->set("light.diffuse", _diffuseColor);
+    shader->set("light.specular", _specularColor);
 }

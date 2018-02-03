@@ -110,13 +110,14 @@ void render(Plane& plane, Cube& cube, Sphere& sphere, Light& light) {
     glm::mat4 view = camera.getViewMatrix();
     glm::vec3 cameraPos = camera.getPosition();
 
-    light.configureShader();
-
     /////////////////////////////////
     // Plane
     ////////////////////////////////
     plane.setPosition(planePosition);
     plane.setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
+
+    Shader* shader = plane.getRenderer()->getMaterial()->getShader();
+    light.configureShader(shader);
     plane.display(projection, view, cameraPos);
 
     /////////////////////////////////
@@ -124,6 +125,9 @@ void render(Plane& plane, Cube& cube, Sphere& sphere, Light& light) {
     ////////////////////////////////
     sphere.setPosition(light.getPosition());
     sphere.setScale(glm::vec3(0.3f));
+
+    shader = sphere.getRenderer()->getMaterial()->getShader();
+    light.configureShader(shader);
     sphere.display(projection, view, cameraPos);
 
     /////////////////////////////////
@@ -131,6 +135,9 @@ void render(Plane& plane, Cube& cube, Sphere& sphere, Light& light) {
     ////////////////////////////////
     cube.setPosition(cubePosition);
     cube.setScale(glm::vec3(1.0f));
+
+    shader = cube.getRenderer()->getMaterial()->getShader();
+    light.configureShader(shader);
     cube.display(projection, view, cameraPos);
 }
 
@@ -185,12 +192,11 @@ int main (int argc, char *argv[]) {
     std::shared_ptr<Shader> shader_ptr = std::shared_ptr<Shader>(new Shader ("../shader/phongVertexShader.glsl", "../shader/phongFragmentShader.glsl"));
 
     // Create Light
-    Light light(shader_ptr.get());
+    Light light;
     light.setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
     light.setAmbientColor(glm::vec3(0.8f));
     light.setDiffuseColor(glm::vec3(0.8f));
     light.setSpecularColor(glm::vec3(0.5f));
-    light.configureShader();
 
     ///////////////////////////
     // Create White Texture

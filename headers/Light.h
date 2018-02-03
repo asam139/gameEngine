@@ -10,7 +10,7 @@
 
 class Light : public GameObject {
 public:
-    Light(Shader *shader);
+    Light();
     ~Light();
 
     void setAmbientColor(glm::vec3 ambientColor);
@@ -21,16 +21,13 @@ public:
     glm::vec3 getDiffuseColor();
     glm::vec3 getSpecularColor();
 
-    Shader* getShader();
-    void configureShader();
+    void configureShader(Shader *shader);
 
 protected:
-
     glm::vec3 _ambientColor;
     glm::vec3 _diffuseColor;
     glm::vec3 _specularColor;
 
-    Shader* _shader;
 
 private:
 
