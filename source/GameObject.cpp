@@ -65,3 +65,21 @@ void GameObject::update(const float deltaTime) {
 Renderer* GameObject::getRenderer() {
     return _renderer.get();
 }
+
+void GameObject::display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos) {
+    if (_renderer) {
+        glm::mat4 model = getModel();
+        glm::mat3 normalMat = glm::inverse(glm::transpose(glm::mat3(model)));
+
+        Shader* shader = _renderer->getMaterial()->getShader();
+        shader->set("view", view);
+        shader->set("projection", projection);
+        shader->set("model", model);
+        shader->set("normal_mat", normalMat);
+        shader->set("view_position", cameraPos);
+
+        _renderer->render();
+    }
+}
+
+

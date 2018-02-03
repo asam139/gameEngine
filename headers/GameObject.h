@@ -34,6 +34,7 @@ public:
     glm::mat4 getModel();
 
     virtual void update(const float deltaTime);
+    virtual void display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos);
 
     Renderer* getRenderer();
 
@@ -41,6 +42,7 @@ protected:
     Transform _transform;
 
     virtual void configuration();
+
 
     std::shared_ptr<Renderer> _renderer;
 };

@@ -105,62 +105,30 @@ void handleInput(GLFWwindow* window) {
 void render(Plane& plane, Cube& cube, Sphere& sphere, Light& light) {
     glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     glm::mat4 view = camera.getViewMatrix();
+    glm::vec3 cameraPos = camera.getPosition();
 
     light.configureShader();
-
-    //Shader
-    Shader* shader = nullptr;
 
     /////////////////////////////////
     // Plane
     ////////////////////////////////
     plane.setPosition(planePosition);
     plane.setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
-    glm::mat4 planeModel = plane.getModel();
-    glm::mat3 pNormalMat = glm::inverse(glm::transpose(glm::mat3(planeModel)));
-
-    shader = plane.getRenderer()->getMaterial()->getShader();
-    shader->set("view", view);
-    shader->set("projection", projection);
-    shader->set("model", planeModel);
-    shader->set("normal_mat", pNormalMat);
-    shader->set("view_position", camera.getPosition());
-
-    plane.getRenderer()->render();
+    plane.display(projection, view, cameraPos);
 
     /////////////////////////////////
     // Light
     ////////////////////////////////
     sphere.setPosition(light.getPosition());
     sphere.setScale(glm::vec3(0.3f));
-    glm::mat4 lightModel = sphere.getModel();
-    glm::mat3 lNormalMat = glm::inverse(glm::transpose(glm::mat3(lightModel)));
-
-    shader = sphere.getRenderer()->getMaterial()->getShader();
-    shader->set("view", view);
-    shader->set("projection", projection);
-    shader->set("model", lightModel);
-    shader->set("normal_mat", lNormalMat);
-    shader->set("view_position", camera.getPosition());
-
-    sphere.getRenderer()->render();
+    sphere.display(projection, view, cameraPos);
 
     /////////////////////////////////
     // Sphere
     ////////////////////////////////
     cube.setPosition(cubePosition);
     cube.setScale(glm::vec3(1.0f));
-    glm::mat4 cubeModel = cube.getModel();
-    glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(cubeModel)));
-
-    shader = cube.getRenderer()->getMaterial()->getShader();
-    shader->set("view", view);
-    shader->set("projection", projection);
-    shader->set("model", cubeModel);
-    shader->set("normal_mat", cNormalMat);
-    shader->set("view_position", camera.getPosition());
-
-    cube.getRenderer()->render();
+    cube.display(projection, view, cameraPos);
 }
 
 
@@ -196,7 +164,7 @@ int main (int argc, char *argv[]) {
 
     // Mouse callback
     glfwSetCursorPosCallback(window, onMouse);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     //Scroll callback
     glfwSetScrollCallback(window, onScroll);
