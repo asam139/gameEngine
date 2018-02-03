@@ -11,15 +11,15 @@
 
 class Material {
 public:
-    Material(Shader *shader);
+    Material(std::shared_ptr<Shader> shader);
     ~Material();
 
     void setAmbientColor(glm::vec3 ambientColor);
     void setDiffuseColor(glm::vec3 diffuseColor);
-    void setDiffuseTexture(Texture* texture);
+    void setDiffuseTexture(std::shared_ptr<Texture> texture);
     void setDiffuseText(uint32_t diffuseText);
     void setSpecularColor(glm::vec3 specularColor);
-    void setSpecularTexture(Texture* texture);
+    void setSpecularTexture(std::shared_ptr<Texture> texture);
     void setSpecularText(uint32_t specularText);
     void setShininess(float shininess);
 
@@ -38,17 +38,18 @@ public:
 
 protected:
     glm::vec3 _ambientColor;
-    glm::vec3 _diffuseColor;
 
-    Texture* _diffuseTexture;
+    glm::vec3 _diffuseColor;
+    std::shared_ptr<Texture> _diffuseTexture;
     uint32_t _diffuseText;
+
     glm::vec3 _specularColor;
-    Texture* _specularTexture;
+    std::shared_ptr<Texture> _specularTexture;
     uint32_t _specularText;
+
     float _shininess;
 
-    Shader* _shader;
-
+    std::shared_ptr<Shader> _shader;
 private:
 
 };

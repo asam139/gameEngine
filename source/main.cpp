@@ -182,10 +182,10 @@ int main (int argc, char *argv[]) {
 
     ///////////////////////////
     // Create program
-    Shader phongShader("../shader/phongVertexShader.glsl", "../shader/phongFragmentShader.glsl");
+    std::shared_ptr<Shader> shader_ptr = std::shared_ptr<Shader>(new Shader ("../shader/phongVertexShader.glsl", "../shader/phongFragmentShader.glsl"));
 
     // Create Light
-    Light light(&phongShader);
+    Light light(shader_ptr.get());
     light.setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
     light.setAmbientColor(glm::vec3(0.8f));
     light.setDiffuseColor(glm::vec3(0.8f));
@@ -194,7 +194,7 @@ int main (int argc, char *argv[]) {
 
     ///////////////////////////
     // Create White Texture
-    Texture defaultText("../textures/whiteTex.png", GL_RGB);
+    std::shared_ptr<Texture> defaultTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/whiteTex.png", GL_RGB));
 
     ///////////////////////////
     // Create Objects
@@ -202,12 +202,12 @@ int main (int argc, char *argv[]) {
     Plane plane;
     Renderer* planeRenderer = plane.getRenderer();
 
-    std::unique_ptr<Material> planeMaterial_ptr = std::unique_ptr<Material>(new Material(&phongShader));
+    std::unique_ptr<Material> planeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
     planeMaterial_ptr->setAmbientColor(glm::vec3(0.1f));
     planeMaterial_ptr->setDiffuseColor(glm::vec3(0.0f));
-    planeMaterial_ptr->setDiffuseTexture(&defaultText);
+    planeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
     planeMaterial_ptr->setSpecularColor(glm::vec3(.1f));
-    planeMaterial_ptr->setSpecularTexture(&defaultText);
+    planeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
     planeMaterial_ptr->setShininess(16.0f);
 
     planeRenderer->setMaterial(std::move(planeMaterial_ptr));
@@ -216,15 +216,15 @@ int main (int argc, char *argv[]) {
     Cube cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f);
     Renderer* cubeRenderer = cube.getRenderer();
 
-    Texture diffText("../textures/diffuseTex.jpg", GL_RGB);
-    Texture specText("../textures/specularTex.jpg", GL_RGB);
+    std::shared_ptr<Texture> diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
+    std::shared_ptr<Texture> specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/specularTex.jpg", GL_RGB));
 
-    std::unique_ptr<Material> cubeMaterial_ptr = std::unique_ptr<Material>(new Material(&phongShader));
+    std::unique_ptr<Material> cubeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
     cubeMaterial_ptr->setAmbientColor(glm::vec3(0.25f));
     cubeMaterial_ptr->setDiffuseColor(glm::vec3(1.0f));
-    cubeMaterial_ptr->setDiffuseTexture(&diffText);
+    cubeMaterial_ptr->setDiffuseTexture(diffTexture_ptr);
     cubeMaterial_ptr->setSpecularColor(glm::vec3(1.0f));
-    cubeMaterial_ptr->setSpecularTexture(&specText);
+    cubeMaterial_ptr->setSpecularTexture(specTexture_ptr);
     cubeMaterial_ptr->setShininess(32.0f);
 
     cubeRenderer->setMaterial(std::move(cubeMaterial_ptr));
@@ -233,13 +233,13 @@ int main (int argc, char *argv[]) {
     Sphere lightR(glm::vec3(0.0f, -1.0f, 0.0f), 1.f);
     Renderer* lightRRenderer = lightR.getRenderer();
 
-    std::unique_ptr<Material> lightRMaterial_ptr = std::unique_ptr<Material>(new Material(&phongShader));
+    std::unique_ptr<Material> lightRMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
     // Special configuration to draw Object as light source
     lightRMaterial_ptr->setAmbientColor(glm::vec3(1.0f));
     lightRMaterial_ptr->setDiffuseColor(glm::vec3(1.0f));
-    lightRMaterial_ptr->setDiffuseTexture(&defaultText);
+    lightRMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
     lightRMaterial_ptr->setSpecularColor(glm::vec3(0.0f));
-    lightRMaterial_ptr->setSpecularTexture(&defaultText);
+    lightRMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
     lightRMaterial_ptr->setShininess(32.0f);
 
     lightRRenderer->setMaterial(std::move(lightRMaterial_ptr));

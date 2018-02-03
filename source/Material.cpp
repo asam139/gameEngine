@@ -5,7 +5,7 @@
 #include "Material.h"
 
 
-Material::Material(Shader* shader) {
+Material::Material(std::shared_ptr<Shader> shader) {
     _shader = shader;
     _diffuseTexture = nullptr;
     _specularTexture = nullptr;
@@ -39,12 +39,12 @@ glm::vec3 Material::getDiffuseColor() {
     return _diffuseColor;
 }
 
-void Material::setDiffuseTexture(Texture* texture) {
+void Material::setDiffuseTexture(std::shared_ptr<Texture> texture) {
     _diffuseTexture = texture;
 }
 
 Texture* Material::getDiffuseTexture() {
-    return _diffuseTexture;
+    return _diffuseTexture.get();
 }
 
 void Material::setDiffuseText(uint32_t diffuseText) {
@@ -63,12 +63,12 @@ glm::vec3 Material::getSpecularColor() {
     return _specularColor;
 }
 
-void Material::setSpecularTexture(Texture* texture) {
+void Material::setSpecularTexture(std::shared_ptr<Texture> texture) {
     _specularTexture = texture;
 }
 
 Texture* Material::getSpecularTexture() {
-    return _specularTexture;
+    return _specularTexture.get();
 }
 
 
@@ -90,7 +90,7 @@ float Material::getShininess() {
 
 
 Shader* Material::getShader() {
-    return _shader;
+    return _shader.get();
 }
 
 void Material::configureShader() {
