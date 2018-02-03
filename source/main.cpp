@@ -257,7 +257,7 @@ int main (int argc, char *argv[]) {
 
     //////////////////////////
     // Sphere as Light
-    Sphere lightR(glm::vec3(0.0f, -1.0f, 0.0f), 1.f);
+    Sphere lightR(glm::vec3(0.0f, 0.0f, 0.0f), 1.f);
     lightR.setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
     lightR.setScale(glm::vec3(0.3f));
 
