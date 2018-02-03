@@ -11,6 +11,7 @@
 #include <glm/glm.hpp>
 
 #include "Renderer.h"
+#include "Light.h"
 
 typedef struct {
     glm::vec3 position;
@@ -34,17 +35,21 @@ public:
     glm::mat4 getModel();
 
     virtual void update(const float deltaTime);
-    virtual void display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos);
+    virtual void display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos, glm::vec3 lightPos, Light* light);
 
+    void setRenderer(std::shared_ptr<Renderer> renderer);
     Renderer* getRenderer();
+
+    void setLight(std::shared_ptr<Light> light);
+    Light* getLight();
 
 protected:
     Transform _transform;
 
     virtual void configuration();
 
-
     std::shared_ptr<Renderer> _renderer;
+    std::shared_ptr<Light> _light;
 };
 
 

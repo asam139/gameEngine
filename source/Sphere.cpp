@@ -41,8 +41,8 @@ void Sphere::configuration() {
 
     generateVerts(vertices, normal, uv, indices, slices, stacks, _radius);
 
-    auto renderer = new Renderer(vertices, verticesSize, uv, uvSize, normal, normalSize, indices, indicesSize);
-    _renderer = std::unique_ptr<Renderer>(renderer);
+    auto renderer_ptr = std::shared_ptr<Renderer>(new Renderer(vertices, verticesSize, uv, uvSize, normal, normalSize, indices, indicesSize));
+    setRenderer(renderer_ptr);
 }
 
 

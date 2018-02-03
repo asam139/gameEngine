@@ -41,8 +41,6 @@ glm::vec3 Light::getSpecularColor() {
 
 
 void Light::configureShader(Shader *shader) {
-    shader->set("light.position", _transform.position);
-
     shader->set("light.ambient", _ambientColor);
     shader->set("light.diffuse", _diffuseColor);
     shader->set("light.specular", _specularColor);

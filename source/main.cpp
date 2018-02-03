@@ -105,40 +105,31 @@ void handleInput(GLFWwindow* window) {
 }
 
 // Render
-void render(Plane& plane, Cube& cube, Sphere& sphere, Light& light) {
+void render(Plane& plane, Cube& cube, GameObject& lightObject) {
     glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     glm::mat4 view = camera.getViewMatrix();
     glm::vec3 cameraPos = camera.getPosition();
 
-    /////////////////////////////////
-    // Plane
     ////////////////////////////////
+    // Get Light
+    Light* light = lightObject.getLight();
+    glm::vec3 lightPos = lightObject.getPosition();
+
+    /////////////////////////////////
+    // LightObject
+    lightObject.display(projection, view, cameraPos, lightPos, light);
+
+    ////////////////////////////////
+    // Plane
     plane.setPosition(planePosition);
     plane.setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
+    plane.display(projection, view, cameraPos, lightPos, light);
 
-    Shader* shader = plane.getRenderer()->getMaterial()->getShader();
-    light.configureShader(shader);
-    plane.display(projection, view, cameraPos);
 
     /////////////////////////////////
-    // Light
-    ////////////////////////////////
-    sphere.setPosition(light.getPosition());
-    sphere.setScale(glm::vec3(0.3f));
-
-    shader = sphere.getRenderer()->getMaterial()->getShader();
-    light.configureShader(shader);
-    sphere.display(projection, view, cameraPos);
-
-    /////////////////////////////////
-    // Sphere
-    ////////////////////////////////
+    // Cube
     cube.setPosition(cubePosition);
-    cube.setScale(glm::vec3(1.0f));
-
-    shader = cube.getRenderer()->getMaterial()->getShader();
-    light.configureShader(shader);
-    cube.display(projection, view, cameraPos);
+    cube.display(projection, view, cameraPos, lightPos, light);
 }
 
 
@@ -189,31 +180,11 @@ int main (int argc, char *argv[]) {
 
     ///////////////////////////
     // Create program
-    std::shared_ptr<Shader> shader_ptr = std::shared_ptr<Shader>(new Shader ("../shader/phongVertexShader.glsl", "../shader/phongFragmentShader.glsl"));
-
-    //////////////////////////
-    // Create Light
-    Light light;
-    light.setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
-
-    // Type 0
-    light.setAmbientColor(glm::vec3(0.8f));
-    light.setDiffuseColor(glm::vec3(0.8f));
-    light.setSpecularColor(glm::vec3(0.5f));
-
-    // Type 1
-    /*light.setAmbientColor(glm::vec3(0.8f));
-    light.setDiffuseColor(glm::vec3(1.0f));
-    light.setSpecularColor(glm::vec3(0.1f));*/
-
-    // Type 1
-    /*light.setAmbientColor(glm::vec3(0.25f, 1.0f, 0.25f));
-    light.setDiffuseColor(glm::vec3(0.25f, 0.25f, 1.0f));
-    light.setSpecularColor(glm::vec3(1.0f, 0.25f, 0.25f));*/
+    auto shader_ptr = std::shared_ptr<Shader>(new Shader ("../shader/phongVertexShader.glsl", "../shader/phongFragmentShader.glsl"));
 
     ///////////////////////////
     // Create White Texture
-    std::shared_ptr<Texture> defaultTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/whiteTex.png", GL_RGB));
+    auto defaultTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/whiteTex.png", GL_RGB));
 
     ///////////////////////////
     // Create Objects
@@ -221,7 +192,7 @@ int main (int argc, char *argv[]) {
     Plane plane;
     Renderer* planeRenderer = plane.getRenderer();
 
-    std::unique_ptr<Material> planeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
+    auto planeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
     planeMaterial_ptr->setAmbientColor(glm::vec3(0.1f));
     planeMaterial_ptr->setDiffuseColor(glm::vec3(0.0f));
     planeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
@@ -235,11 +206,11 @@ int main (int argc, char *argv[]) {
     Cube cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f);
     Renderer* cubeRenderer = cube.getRenderer();
 
-    std::shared_ptr<Texture> diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
-    std::shared_ptr<Texture> specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/specularTex.jpg", GL_RGB));
+    auto diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
+    auto specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/specularTex.jpg", GL_RGB));
 
 
-    std::unique_ptr<Material> cubeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
+    auto cubeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
 
     ///////////////////////////
     // With Textures
@@ -284,11 +255,14 @@ int main (int argc, char *argv[]) {
 
     cubeRenderer->setMaterial(std::move(cubeMaterial_ptr));
 
-
+    //////////////////////////
+    // Sphere as Light
     Sphere lightR(glm::vec3(0.0f, -1.0f, 0.0f), 1.f);
-    Renderer* lightRRenderer = lightR.getRenderer();
+    lightR.setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
+    lightR.setScale(glm::vec3(0.3f));
 
-    std::unique_ptr<Material> lightRMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
+    Renderer* lightRRenderer = lightR.getRenderer();
+    auto lightRMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
     // Special configuration to draw Object as light source
     lightRMaterial_ptr->setAmbientColor(glm::vec3(1.0f));
     lightRMaterial_ptr->setDiffuseColor(glm::vec3(1.0f));
@@ -299,6 +273,26 @@ int main (int argc, char *argv[]) {
 
     lightRRenderer->setMaterial(std::move(lightRMaterial_ptr));
 
+    // Create Light
+    auto light_ptr = std::shared_ptr<Light>(new Light);
+
+
+    // Type 0
+    light_ptr->setAmbientColor(glm::vec3(0.8f));
+    light_ptr->setDiffuseColor(glm::vec3(0.8f));
+    light_ptr->setSpecularColor(glm::vec3(0.5f));
+
+    // Type 1
+    /*light_ptr.setAmbientColor(glm::vec3(0.8f));
+    light_ptr.setDiffuseColor(glm::vec3(1.0f));
+    light_ptr.setSpecularColor(glm::vec3(0.1f));*/
+
+    // Type 1
+    /*light_ptr.setAmbientColor(glm::vec3(0.25f, 1.0f, 0.25f));
+    light_ptr.setDiffuseColor(glm::vec3(0.25f, 0.25f, 1.0f));
+    light_ptr.setSpecularColor(glm::vec3(1.0f, 0.25f, 0.25f));*/
+
+    lightR.setLight(light_ptr);
 
     ///////////////////////////
 
@@ -345,7 +339,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(plane, cube, lightR, light);
+            render(plane, cube, lightR);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);

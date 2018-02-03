@@ -85,8 +85,8 @@ void Cube::configuration() {
         vertices[offset] = vertices[offset];
     }
 
-    auto renderer = new Renderer(vertices, _verticesMapSize, _indecesMap, _indecesMapSize);
-    _renderer = std::unique_ptr<Renderer>(renderer);
+    auto renderer_ptr = std::shared_ptr<Renderer>(new Renderer(vertices, _verticesMapSize, _indecesMap, _indecesMapSize));
+    setRenderer(renderer_ptr);
 }
 
 void Cube::update(const float deltaTime) {

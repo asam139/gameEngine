@@ -45,8 +45,7 @@ void main() {
 
     // Get Textures
     vec3 diff_tex = vec3(texture(material.diffuse_text, text_coord));
-    //vec3 spec_tex = vec3(texture(material.specular_text, text_coord));
-    vec3 spec_tex = vec3(1.0) - vec3(texture(material.specular_text, text_coord)); // Invert
+    vec3 spec_tex = vec3(texture(material.specular_text, text_coord));
 
     // Calculate ambient, difusse, specular contribution
     vec3 ambient = diff_tex * material.ambient_color * light.ambient;

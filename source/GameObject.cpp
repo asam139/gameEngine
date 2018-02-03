@@ -8,7 +8,7 @@
 GameObject::GameObject() {
     _transform.position = glm::vec3(0.0f, 0.0f, 0.0f);
     _transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
-    _transform.scale = glm::vec3(0.0f, 0.0f, 0.0f);
+    _transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
 
     configuration();
 }
@@ -61,11 +61,23 @@ void GameObject::update(const float deltaTime) {
 
 }
 
+void GameObject::setRenderer(std::shared_ptr<Renderer> renderer) {
+    _renderer = renderer;
+}
+
 Renderer* GameObject::getRenderer() {
     return _renderer.get();
 }
 
-void GameObject::display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos) {
+void GameObject::setLight(std::shared_ptr<Light> light) {
+    _light = light;
+}
+
+Light* GameObject::getLight() {
+    return _light.get();
+}
+
+void GameObject::display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos, glm::vec3 lightPos, Light* light) {
     if (_renderer) {
         glm::mat4 model = getModel();
         glm::mat3 normalMat = glm::inverse(glm::transpose(glm::mat3(model)));
@@ -76,6 +88,8 @@ void GameObject::display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraP
         shader->set("model", model);
         shader->set("normal_mat", normalMat);
         shader->set("view_position", cameraPos);
+        shader->set("light.position", lightPos);
+        light->configureShader(shader);
 
         _renderer->render();
     }

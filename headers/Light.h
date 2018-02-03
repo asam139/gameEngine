@@ -5,10 +5,9 @@
 #ifndef GAMEENGINE_LIGHT_H
 #define GAMEENGINE_LIGHT_H
 
-#include "GameObject.h"
 #include "shader.h"
 
-class Light : public GameObject {
+class Light {
 public:
     Light();
     ~Light();
