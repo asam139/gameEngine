@@ -117,19 +117,19 @@ void render(Plane& plane, Cube& cube, GameObject& lightObject) {
 
     /////////////////////////////////
     // LightObject
-    lightObject.display(projection, view, cameraPos, lightPos, light);
+    lightObject.display(projection, view, cameraPos, lightPos, *light);
 
     ////////////////////////////////
     // Plane
     plane.setPosition(planePosition);
     plane.setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
-    plane.display(projection, view, cameraPos, lightPos, light);
+    plane.display(projection, view, cameraPos, lightPos, *light);
 
 
     /////////////////////////////////
     // Cube
     cube.setPosition(cubePosition);
-    cube.display(projection, view, cameraPos, lightPos, light);
+    cube.display(projection, view, cameraPos, lightPos, *light);
 }
 
 
