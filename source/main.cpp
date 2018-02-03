@@ -191,12 +191,25 @@ int main (int argc, char *argv[]) {
     // Create program
     std::shared_ptr<Shader> shader_ptr = std::shared_ptr<Shader>(new Shader ("../shader/phongVertexShader.glsl", "../shader/phongFragmentShader.glsl"));
 
+    //////////////////////////
     // Create Light
     Light light;
     light.setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
+
+    // Type 0
     light.setAmbientColor(glm::vec3(0.8f));
     light.setDiffuseColor(glm::vec3(0.8f));
     light.setSpecularColor(glm::vec3(0.5f));
+
+    // Type 1
+    /*light.setAmbientColor(glm::vec3(0.8f));
+    light.setDiffuseColor(glm::vec3(1.0f));
+    light.setSpecularColor(glm::vec3(0.1f));*/
+
+    // Type 1
+    /*light.setAmbientColor(glm::vec3(0.25f, 1.0f, 0.25f));
+    light.setDiffuseColor(glm::vec3(0.25f, 0.25f, 1.0f));
+    light.setSpecularColor(glm::vec3(1.0f, 0.25f, 0.25f));*/
 
     ///////////////////////////
     // Create White Texture
@@ -230,12 +243,12 @@ int main (int argc, char *argv[]) {
 
     ///////////////////////////
     // With Textures
-    /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.25f));
+    cubeMaterial_ptr->setAmbientColor(glm::vec3(0.25f));
     cubeMaterial_ptr->setDiffuseColor(glm::vec3(1.0f));
     cubeMaterial_ptr->setDiffuseTexture(diffTexture_ptr);
     cubeMaterial_ptr->setSpecularColor(glm::vec3(1.0f));
     cubeMaterial_ptr->setSpecularTexture(specTexture_ptr);
-    cubeMaterial_ptr->setShininess(32.0f);*/
+    cubeMaterial_ptr->setShininess(32.0f);
 
     // Esmerald
     /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.0210f, 0.17450f, 0.0215f));
@@ -254,12 +267,12 @@ int main (int argc, char *argv[]) {
     cubeMaterial_ptr->setShininess(0.6f);*/
 
     // Gold
-    cubeMaterial_ptr->setAmbientColor(glm::vec3(0.24725f, 0.1995f, 0.0745f));
+    /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.24725f, 0.1995f, 0.0745f));
     cubeMaterial_ptr->setDiffuseColor(glm::vec3(0.75164f, 0.60648f, 0.22648f));
     cubeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
     cubeMaterial_ptr->setSpecularColor(glm::vec3(0.628281f, 0.555802f, 0.366065f));
     cubeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
-    cubeMaterial_ptr->setShininess(0.4f);
+    cubeMaterial_ptr->setShininess(0.4f);*/
 
     // White Rubber
     /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.05f));
