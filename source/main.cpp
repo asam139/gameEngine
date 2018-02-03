@@ -207,7 +207,7 @@ int main (int argc, char *argv[]) {
     Renderer* cubeRenderer = cube.getRenderer();
 
     auto diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
-    auto specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/specularTex.jpg", GL_RGB));
+    auto specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/coloursSpecularTex.jpg", GL_RGB));
     auto emissionTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/emissiveTex.jpg", GL_RGB));
 
     auto cubeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
