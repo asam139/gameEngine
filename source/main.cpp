@@ -174,7 +174,7 @@ int main (int argc, char *argv[]) {
 
     // Mouse callback
     glfwSetCursorPosCallback(window, onMouse);
-    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     //Scroll callback
     glfwSetScrollCallback(window, onScroll);
@@ -225,13 +225,49 @@ int main (int argc, char *argv[]) {
     std::shared_ptr<Texture> diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
     std::shared_ptr<Texture> specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/specularTex.jpg", GL_RGB));
 
+
     std::unique_ptr<Material> cubeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
-    cubeMaterial_ptr->setAmbientColor(glm::vec3(0.25f));
+
+    ///////////////////////////
+    // With Textures
+    /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.25f));
     cubeMaterial_ptr->setDiffuseColor(glm::vec3(1.0f));
     cubeMaterial_ptr->setDiffuseTexture(diffTexture_ptr);
     cubeMaterial_ptr->setSpecularColor(glm::vec3(1.0f));
     cubeMaterial_ptr->setSpecularTexture(specTexture_ptr);
-    cubeMaterial_ptr->setShininess(32.0f);
+    cubeMaterial_ptr->setShininess(32.0f);*/
+
+    // Esmerald
+    /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.0210f, 0.17450f, 0.0215f));
+    cubeMaterial_ptr->setDiffuseColor(glm::vec3(0.07568f, 0.61424f, 0.07568f));
+    cubeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
+    cubeMaterial_ptr->setSpecularColor(glm::vec3(0.633f, 0.727811f, 0.633f));
+    cubeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
+    cubeMaterial_ptr->setShininess(0.6f);*/
+
+    // Ruby
+    /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.1745f, 0.01175f, 0.01175f));
+    cubeMaterial_ptr->setDiffuseColor(glm::vec3(0.61424f, 0.04136f, 0.04136f));
+    cubeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
+    cubeMaterial_ptr->setSpecularColor(glm::vec3(0.727811f, 0.626959f, 0.626959f));
+    cubeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
+    cubeMaterial_ptr->setShininess(0.6f);*/
+
+    // Gold
+    cubeMaterial_ptr->setAmbientColor(glm::vec3(0.24725f, 0.1995f, 0.0745f));
+    cubeMaterial_ptr->setDiffuseColor(glm::vec3(0.75164f, 0.60648f, 0.22648f));
+    cubeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
+    cubeMaterial_ptr->setSpecularColor(glm::vec3(0.628281f, 0.555802f, 0.366065f));
+    cubeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
+    cubeMaterial_ptr->setShininess(0.4f);
+
+    // White Rubber
+    /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.05f));
+    cubeMaterial_ptr->setDiffuseColor(glm::vec3(0.5f));
+    cubeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
+    cubeMaterial_ptr->setSpecularColor(glm::vec3(0.7f));
+    cubeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
+    cubeMaterial_ptr->setShininess(0.078125f);*/
 
     cubeRenderer->setMaterial(std::move(cubeMaterial_ptr));
 
