@@ -102,7 +102,7 @@ void handleInput(GLFWwindow* window) {
 }
 
 // Render
-void render(Plane& plane, Cube& cube, Material& material, Light& light, const Shader& shader, const Texture& defaultText, const Texture& diffText, const Texture& specText) {
+void render(Plane& plane, Cube& cube, Sphere& sphere, Light& light, const Shader& shader) {
     glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     glm::mat4 view = camera.getViewMatrix();
 
@@ -119,17 +119,6 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     plane.setPosition(planePosition);
     plane.setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
     shader.set("model", plane.getModel());
-
-    material.setAmbientColor(glm::vec3(0.1f));
-    material.setDiffuseColor(glm::vec3(0.0f));
-    material.setDiffuseText(0);
-    material.setSpecularColor(glm::vec3(.1f));
-    material.setSpecularText(0);
-    material.setShininess(16.0f);
-    material.configureShader();
-
-
-    defaultText.activeTextureAs(GL_TEXTURE0);
 
     plane.getRenderer()->render();
 
@@ -153,18 +142,7 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
 
     shader.set("view_position", camera.getPosition());
 
-    // Special configuration to draw Object as light source
-    material.setAmbientColor(glm::vec3(1.0f));
-    material.setDiffuseColor(glm::vec3(1.0f));
-    material.setDiffuseText(0);
-    material.setSpecularColor(glm::vec3(0.0f));
-    material.setSpecularText(0);
-    material.setShininess(32.0f);
-    material.configureShader();
-
-    defaultText.activeTextureAs(GL_TEXTURE0);
-
-    cube.getRenderer()->render();
+    sphere.getRenderer()->render();
 
     /////////////////////////////////
     // Sphere
@@ -183,17 +161,6 @@ void render(Plane& plane, Cube& cube, Material& material, Light& light, const Sh
     shader.set("normal_mat", cNormalMat);
 
     shader.set("view_position", camera.getPosition());
-
-    material.setAmbientColor(glm::vec3(0.25f));
-    material.setDiffuseColor(glm::vec3(1.0f));
-    material.setDiffuseText(0);
-    material.setSpecularColor(glm::vec3(1.0f));
-    material.setSpecularText(1);
-    material.setShininess(32.0f);
-    material.configureShader();
-
-    diffText.activeTextureAs(GL_TEXTURE0);
-    specText.activeTextureAs(GL_TEXTURE1);
 
     cube.getRenderer()->render();
 }
@@ -243,26 +210,10 @@ int main (int argc, char *argv[]) {
     camera.setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
     ///////////////////////////
 
-    ///////////////////////////
-    // Create VBOs and VAOs
-    ///////////////////////////
-    Plane plane;
-    Cube cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f);
-    //Sphere sphere(glm::vec3(0.0f, -1.0f, 0.0f), 1.0f);
-    ///////////////////////////
 
+    ///////////////////////////
     // Create program
     Shader phongShader("../shader/phongVertexShader.glsl", "../shader/phongFragmentShader.glsl");
-    //Shader gouraudShader("../shader/gouraudVertexShader.glsl", "../shader/gouraudFragmentShader.glsl");
-    //Shader flatShader("../shader/flatVertexShader.glsl", "../shader/flatFragmentShader.glsl");
-
-    Texture defaultText("../textures/whiteTex.png", GL_RGB);
-
-    Texture diffText("../textures/diffuseTex.jpg", GL_RGB);
-    Texture specText("../textures/specularTex.jpg", GL_RGB);
-
-    // Create Material
-    Material material(&phongShader);
 
     // Create Light
     Light light(&phongShader);
@@ -270,6 +221,68 @@ int main (int argc, char *argv[]) {
     light.setAmbientColor(glm::vec3(0.8f));
     light.setDiffuseColor(glm::vec3(0.8f));
     light.setSpecularColor(glm::vec3(0.5f));
+    light.configureShader();
+
+    ///////////////////////////
+    // Create White Texture
+    Texture defaultText("../textures/whiteTex.png", GL_RGB);
+
+    ///////////////////////////
+    // Create Objects
+    ///////////////////////////
+    Plane plane;
+    Renderer* planeRenderer = plane.getRenderer();
+
+    std::unique_ptr<Material> planeMaterial_ptr = std::unique_ptr<Material>(new Material(&phongShader));
+    planeMaterial_ptr->setAmbientColor(glm::vec3(0.1f));
+    planeMaterial_ptr->setDiffuseColor(glm::vec3(0.0f));
+    planeMaterial_ptr->setDiffuseTexture(&defaultText);
+    planeMaterial_ptr->setSpecularColor(glm::vec3(.1f));
+    planeMaterial_ptr->setSpecularTexture(&defaultText);
+    planeMaterial_ptr->setShininess(16.0f);
+
+    planeRenderer->setMaterial(std::move(planeMaterial_ptr));
+
+
+    Cube cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f);
+    Renderer* cubeRenderer = cube.getRenderer();
+
+    Texture diffText("../textures/diffuseTex.jpg", GL_RGB);
+    Texture specText("../textures/specularTex.jpg", GL_RGB);
+
+    std::unique_ptr<Material> cubeMaterial_ptr = std::unique_ptr<Material>(new Material(&phongShader));
+    cubeMaterial_ptr->setAmbientColor(glm::vec3(0.25f));
+    cubeMaterial_ptr->setDiffuseColor(glm::vec3(1.0f));
+    cubeMaterial_ptr->setDiffuseTexture(&diffText);
+    cubeMaterial_ptr->setSpecularColor(glm::vec3(1.0f));
+    cubeMaterial_ptr->setSpecularTexture(&specText);
+    cubeMaterial_ptr->setShininess(32.0f);
+
+    cubeRenderer->setMaterial(std::move(cubeMaterial_ptr));
+
+
+    Sphere lightR(glm::vec3(0.0f, -1.0f, 0.0f), 1.f);
+    Renderer* lightRRenderer = lightR.getRenderer();
+
+    std::unique_ptr<Material> lightRMaterial_ptr = std::unique_ptr<Material>(new Material(&phongShader));
+    // Special configuration to draw Object as light source
+    lightRMaterial_ptr->setAmbientColor(glm::vec3(1.0f));
+    lightRMaterial_ptr->setDiffuseColor(glm::vec3(1.0f));
+    lightRMaterial_ptr->setDiffuseTexture(&defaultText);
+    lightRMaterial_ptr->setSpecularColor(glm::vec3(0.0f));
+    lightRMaterial_ptr->setSpecularTexture(&defaultText);
+    lightRMaterial_ptr->setShininess(32.0f);
+
+    lightRRenderer->setMaterial(std::move(lightRMaterial_ptr));
+
+
+    ///////////////////////////
+
+
+
+    // Create Material
+    Material material(&phongShader);
+
 
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -314,7 +327,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(plane, cube, material, light, phongShader, defaultText, diffText, specText);
+            render(plane, cube, lightR, light, phongShader);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);

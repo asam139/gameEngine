@@ -101,8 +101,20 @@ void Renderer::createVertexData(float *vertices, uint32_t vSize, float *uv, uint
     _VAO = VAO;
 }
 
+void Renderer::setMaterial(std::unique_ptr<Material> material) {
+    _material = std::move(material);
+}
+
+Material* Renderer::getMaterial(){
+    return _material.get();
+}
+
 
 void Renderer::render() {
+    if (_material) {
+        _material->configureShader();
+    }
+
     glBindVertexArray(_VAO);
     glDrawElements(GL_TRIANGLES, _indicesSize, GL_UNSIGNED_INT, nullptr);
 }
