@@ -35,7 +35,7 @@ public:
     glm::mat4 getModel() const;
 
     virtual void update(const float deltaTime);
-    virtual void display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos, glm::vec3 lightPos, Light* light) const;
+    virtual void display(const glm::mat4 projection, const glm::mat4 view, const glm::vec3 cameraPos, const glm::vec3 lightPos, const Light* light) const;
 
     void setRenderer(std::shared_ptr<Renderer> renderer);
     Renderer* getRenderer() const;

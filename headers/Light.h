@@ -16,11 +16,11 @@ public:
     void setDiffuseColor(glm::vec3 diffuseColor);
     void setSpecularColor(glm::vec3 specularColor);
 
-    glm::vec3 getAmbientColor();
-    glm::vec3 getDiffuseColor();
-    glm::vec3 getSpecularColor();
+    glm::vec3 getAmbientColor() const;
+    glm::vec3 getDiffuseColor() const;
+    glm::vec3 getSpecularColor() const;
 
-    void configureShader(Shader *shader);
+    void configureShader(Shader *shader) const;
 
 protected:
     glm::vec3 _ambientColor;

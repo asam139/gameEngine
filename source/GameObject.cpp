@@ -77,7 +77,7 @@ Light* GameObject::getLight() const {
     return _light.get();
 }
 
-void GameObject::display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos, glm::vec3 lightPos, Light* light) const {
+void GameObject::display(const glm::mat4 projection, const glm::mat4 view, const glm::vec3 cameraPos, const glm::vec3 lightPos, const Light* light) const {
     if (_renderer) {
         glm::mat4 model = getModel();
         glm::mat3 normalMat = glm::inverse(glm::transpose(glm::mat3(model)));
