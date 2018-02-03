@@ -18,6 +18,10 @@ struct Material {
     vec3 specular_color;
 
     float shininess;
+
+    bool emission_active;
+    sampler2D emissive_text;
+    vec3 emissive_color;
 };
 uniform Material material;
 
@@ -52,7 +56,14 @@ void main() {
     vec3 diffuse  = diff_tex * material.diffuse_color * light.diffuse * max(0.0, dot(N, L));
     vec3 specular = spec_tex * material.specular_color * light.specular * pow(max(0.0, dot(R, V)), material.shininess);
 
-    vec3 phong = ambient + diffuse + specular;
+    // Calculate Emission
+    vec3 emission = vec3(0.0);
+    if (material.emission_active) {
+        vec3 emis_tex = vec3(texture(material.emissive_text, text_coord));
+        emission = emis_tex * material.emissive_color;
+    }
+
+    vec3 phong = ambient + diffuse + specular + emission;
 
     frag_color = vec4(phong, 1.0);
 }

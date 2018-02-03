@@ -208,7 +208,7 @@ int main (int argc, char *argv[]) {
 
     auto diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
     auto specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/specularTex.jpg", GL_RGB));
-
+    auto emissionTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/emissiveTex.jpg", GL_RGB));
 
     auto cubeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
 
@@ -220,6 +220,10 @@ int main (int argc, char *argv[]) {
     cubeMaterial_ptr->setSpecularColor(glm::vec3(1.0f));
     cubeMaterial_ptr->setSpecularTexture(specTexture_ptr);
     cubeMaterial_ptr->setShininess(32.0f);
+
+    cubeMaterial_ptr->setEmissionActive(true);
+    cubeMaterial_ptr->setEmissiveColor(glm::vec3(1.0f));
+    cubeMaterial_ptr->setEmissiveTexture(emissionTexture_ptr);
 
     // Esmerald
     /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.0210f, 0.17450f, 0.0215f));
