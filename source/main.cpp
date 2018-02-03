@@ -8,7 +8,7 @@
 #include <iostream>
 
 #include "Camera.h"
-#include "shader.h"
+#include "Shader.h"
 #include "Texture.h"
 #include "Material.h"
 #include "Light.h"

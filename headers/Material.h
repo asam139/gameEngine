@@ -6,7 +6,7 @@
 #define GAMEENGINE_MATERIAL_H
 
 #include <glm/glm.hpp>
-#include "shader.h"
+#include "Shader.h"
 #include "Texture.h"
 
 class Material {

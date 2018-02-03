@@ -2,7 +2,7 @@
 // Created by Saul Moreno Abril on 10/01/2018.
 //
 
-#include "shader.h"
+#include "Shader.h"
 
 #include <glm/gtc/type_ptr.hpp>
 

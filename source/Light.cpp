@@ -4,7 +4,6 @@
 
 #include "Light.h"
 
-
 Light::Light() {
     setAmbientColor(glm::vec3(0.5f));
     setDiffuseColor(glm::vec3(1.0f));
@@ -37,11 +36,4 @@ void Light::setSpecularColor(glm::vec3 specularColor) {
 
 glm::vec3 Light::getSpecularColor() const {
     return _specularColor;
-}
-
-
-void Light::configureShader(Shader *shader) const {
-    shader->set("light.ambient", _ambientColor);
-    shader->set("light.diffuse", _diffuseColor);
-    shader->set("light.specular", _specularColor);
 }

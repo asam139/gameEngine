@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_LIGHT_H
 #define GAMEENGINE_LIGHT_H
 
-#include "shader.h"
+#include <glm/glm.hpp>
 
 class Light {
 public:
@@ -19,8 +19,6 @@ public:
     glm::vec3 getAmbientColor() const;
     glm::vec3 getDiffuseColor() const;
     glm::vec3 getSpecularColor() const;
-
-    void configureShader(Shader *shader) const;
 
 protected:
     glm::vec3 _ambientColor;

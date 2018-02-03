@@ -88,8 +88,11 @@ void GameObject::display(const glm::mat4 projection, const glm::mat4 view, const
         shader->set("model", model);
         shader->set("normal_mat", normalMat);
         shader->set("view_position", cameraPos);
+
         shader->set("light.position", lightPos);
-        light->configureShader(shader);
+        shader->set("light.ambient", light->getAmbientColor());
+        shader->set("light.diffuse", light->getDiffuseColor());
+        shader->set("light.specular", light->getSpecularColor());
 
         _renderer->render();
     }
