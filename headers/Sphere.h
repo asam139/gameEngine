@@ -23,8 +23,6 @@ protected:
     void configuration() override;
 
     void generateVerts(float * verts, float * norms, float * tex, unsigned int * el, const uint32_t slices, const uint32_t stacks, const uint32_t radius);
-
-    uint32_t createVertexData(float* vertices, uint32_t vSize, float *uv, uint32_t uvSize, float *normal, uint32_t nSize, uint32_t* indices, uint32_t iSize);
 };
 
 #endif //GAMEENGINE_SPHERE_H
