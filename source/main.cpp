@@ -22,8 +22,8 @@
 ///////////////////////
 // Static variables
 
-const uint32_t kScreenWidth = 800;
-const uint32_t kScreenHeight = 800;
+uint32_t kScreenWidth = 800;
+uint32_t kScreenHeight = 800;
 
 // To control time
 static float deltaTime = 0.0f;
@@ -47,6 +47,9 @@ glm::vec3 cubePosition = glm::vec3(2.0f, 0.0f, 0.0f);
 
 // Resize callback
 void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_t height) {
+    kScreenWidth = (float)width;
+    kScreenHeight = (float)height;
+
     glViewport(0, 0, width, height);
 }
 
