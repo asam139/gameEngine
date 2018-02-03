@@ -111,4 +111,7 @@ void Material::configureShader() {
     _shader->set("material.specular_text", _specularText);
 
     _shader->set("material.shininess", _shininess);
+
+    // Set to use
+    _shader->use();
 }

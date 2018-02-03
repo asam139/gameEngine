@@ -102,65 +102,63 @@ void handleInput(GLFWwindow* window) {
 }
 
 // Render
-void render(Plane& plane, Cube& cube, Sphere& sphere, Light& light, const Shader& shader) {
+void render(Plane& plane, Cube& cube, Sphere& sphere, Light& light) {
     glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
     glm::mat4 view = camera.getViewMatrix();
 
     light.configureShader();
 
+    //Shader
+    Shader* shader = nullptr;
+
     /////////////////////////////////
     // Plane
     ////////////////////////////////
-    shader.use();
-
-    shader.set("view", view);
-    shader.set("projection", projection);
-
     plane.setPosition(planePosition);
     plane.setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
-    shader.set("model", plane.getModel());
+    glm::mat4 planeModel = plane.getModel();
+    glm::mat3 pNormalMat = glm::inverse(glm::transpose(glm::mat3(planeModel)));
+
+    shader = plane.getRenderer()->getMaterial()->getShader();
+    shader->set("view", view);
+    shader->set("projection", projection);
+    shader->set("model", planeModel);
+    shader->set("normal_mat", pNormalMat);
+    shader->set("view_position", camera.getPosition());
 
     plane.getRenderer()->render();
 
-    // Duplicate code to learn easily
     /////////////////////////////////
     // Light
     ////////////////////////////////
-    shader.use();
-
-    shader.set("view", view);
-    shader.set("projection", projection);
-
-
-    cube.setPosition(light.getPosition());
-    cube.setScale(glm::vec3(0.3f));
-    glm::mat4 lightModel = cube.getModel();
+    sphere.setPosition(light.getPosition());
+    sphere.setScale(glm::vec3(0.3f));
+    glm::mat4 lightModel = sphere.getModel();
     glm::mat3 lNormalMat = glm::inverse(glm::transpose(glm::mat3(lightModel)));
 
-    shader.set("model", cube.getModel());
-    shader.set("normal_mat", lNormalMat);
-
-    shader.set("view_position", camera.getPosition());
+    shader = sphere.getRenderer()->getMaterial()->getShader();
+    shader->set("view", view);
+    shader->set("projection", projection);
+    shader->set("model", lightModel);
+    shader->set("normal_mat", lNormalMat);
+    shader->set("view_position", camera.getPosition());
 
     sphere.getRenderer()->render();
 
     /////////////////////////////////
     // Sphere
     ////////////////////////////////
-    shader.use();
-
-    shader.set("view", view);
-    shader.set("projection", projection);
-
     cube.setPosition(cubePosition);
     cube.setScale(glm::vec3(1.0f));
     glm::mat4 cubeModel = cube.getModel();
     glm::mat3 cNormalMat = glm::inverse(glm::transpose(glm::mat3(cubeModel)));
 
-    shader.set("model", cube.getModel());
-    shader.set("normal_mat", cNormalMat);
-
-    shader.set("view_position", camera.getPosition());
+    shader = cube.getRenderer()->getMaterial()->getShader();
+    shader->set("view", view);
+    shader->set("projection", projection);
+    shader->set("model", cubeModel);
+    shader->set("normal_mat", cNormalMat);
+    shader->set("view_position", camera.getPosition());
 
     cube.getRenderer()->render();
 }
@@ -278,12 +276,6 @@ int main (int argc, char *argv[]) {
 
     ///////////////////////////
 
-
-
-    // Create Material
-    Material material(&phongShader);
-
-
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -327,7 +319,7 @@ int main (int argc, char *argv[]) {
 
 
             //Render VAO
-            render(plane, cube, lightR, light, phongShader);
+            render(plane, cube, lightR, light);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
