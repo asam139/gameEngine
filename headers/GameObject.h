@@ -26,22 +26,22 @@ public:
     virtual ~GameObject();
 
     virtual void setPosition(glm::vec3 position);
-    glm::vec3 getPosition();
+    glm::vec3 getPosition() const;
     virtual void setRotation(glm::vec3 rotation);
-    glm::vec3 getRotation();
+    glm::vec3 getRotation() const;
     virtual void setScale(glm::vec3 scale);
-    glm::vec3 getScale();
+    glm::vec3 getScale() const;
 
-    glm::mat4 getModel();
+    glm::mat4 getModel() const;
 
     virtual void update(const float deltaTime);
-    virtual void display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos, glm::vec3 lightPos, Light* light);
+    virtual void display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos, glm::vec3 lightPos, Light* light) const;
 
     void setRenderer(std::shared_ptr<Renderer> renderer);
-    Renderer* getRenderer();
+    Renderer* getRenderer() const;
 
     void setLight(std::shared_ptr<Light> light);
-    Light* getLight();
+    Light* getLight() const;
 
 protected:
     Transform _transform;

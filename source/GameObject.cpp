@@ -25,7 +25,7 @@ void GameObject::setPosition(glm::vec3 position) {
     _transform.position = position;
 }
 
-glm::vec3 GameObject::getPosition() {
+glm::vec3 GameObject::getPosition() const {
     return _transform.position;
 }
 
@@ -33,7 +33,7 @@ void GameObject::setRotation(glm::vec3 rotation) {
     _transform.rotation = rotation;
 }
 
-glm::vec3 GameObject::getRotation() {
+glm::vec3 GameObject::getRotation() const {
     return _transform.rotation;
 }
 
@@ -41,11 +41,11 @@ void GameObject::setScale(glm::vec3 scale) {
     _transform.scale = scale;
 }
 
-glm::vec3 GameObject::getScale() {
+glm::vec3 GameObject::getScale() const {
     return _transform.scale;
 }
 
-glm::mat4 GameObject::getModel() {
+glm::mat4 GameObject::getModel() const {
     glm::mat4 model = glm::mat4(1.0f);
 
     model = glm::translate(model, _transform.position);
@@ -65,7 +65,7 @@ void GameObject::setRenderer(std::shared_ptr<Renderer> renderer) {
     _renderer = renderer;
 }
 
-Renderer* GameObject::getRenderer() {
+Renderer* GameObject::getRenderer() const {
     return _renderer.get();
 }
 
@@ -73,11 +73,11 @@ void GameObject::setLight(std::shared_ptr<Light> light) {
     _light = light;
 }
 
-Light* GameObject::getLight() {
+Light* GameObject::getLight() const {
     return _light.get();
 }
 
-void GameObject::display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos, glm::vec3 lightPos, Light* light) {
+void GameObject::display(glm::mat4 projection, glm::mat4 view, glm::vec3 cameraPos, glm::vec3 lightPos, Light* light) const {
     if (_renderer) {
         glm::mat4 model = getModel();
         glm::mat3 normalMat = glm::inverse(glm::transpose(glm::mat3(model)));
