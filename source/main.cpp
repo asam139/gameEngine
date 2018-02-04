@@ -175,8 +175,6 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
     // Configure Camera
     camera.setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
-    ///////////////////////////
-
 
     ///////////////////////////
     // Create program
@@ -188,7 +186,8 @@ int main (int argc, char *argv[]) {
 
     ///////////////////////////
     // Create Objects
-    ///////////////////////////
+
+    // Plane
     Plane plane;
     Renderer* planeRenderer = plane.getRenderer();
 
@@ -202,7 +201,7 @@ int main (int argc, char *argv[]) {
 
     planeRenderer->setMaterial(std::move(planeMaterial_ptr));
 
-
+    // Cube
     Cube cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f);
     Renderer* cubeRenderer = cube.getRenderer();
 
@@ -212,8 +211,6 @@ int main (int argc, char *argv[]) {
 
     auto cubeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
 
-    ///////////////////////////
-    // With Textures
     cubeMaterial_ptr->setAmbientColor(glm::vec3(0.25f));
     cubeMaterial_ptr->setDiffuseColor(glm::vec3(1.0f));
     cubeMaterial_ptr->setDiffuseTexture(diffTexture_ptr);
@@ -224,38 +221,6 @@ int main (int argc, char *argv[]) {
     cubeMaterial_ptr->setEmissionActive(true);
     cubeMaterial_ptr->setEmissiveColor(glm::vec3(1.0f));
     cubeMaterial_ptr->setEmissiveTexture(emissionTexture_ptr);
-
-    // Esmerald
-    /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.0210f, 0.17450f, 0.0215f));
-    cubeMaterial_ptr->setDiffuseColor(glm::vec3(0.07568f, 0.61424f, 0.07568f));
-    cubeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
-    cubeMaterial_ptr->setSpecularColor(glm::vec3(0.633f, 0.727811f, 0.633f));
-    cubeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
-    cubeMaterial_ptr->setShininess(0.6f);*/
-
-    // Ruby
-    /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.1745f, 0.01175f, 0.01175f));
-    cubeMaterial_ptr->setDiffuseColor(glm::vec3(0.61424f, 0.04136f, 0.04136f));
-    cubeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
-    cubeMaterial_ptr->setSpecularColor(glm::vec3(0.727811f, 0.626959f, 0.626959f));
-    cubeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
-    cubeMaterial_ptr->setShininess(0.6f);*/
-
-    // Gold
-    /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.24725f, 0.1995f, 0.0745f));
-    cubeMaterial_ptr->setDiffuseColor(glm::vec3(0.75164f, 0.60648f, 0.22648f));
-    cubeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
-    cubeMaterial_ptr->setSpecularColor(glm::vec3(0.628281f, 0.555802f, 0.366065f));
-    cubeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
-    cubeMaterial_ptr->setShininess(0.4f);*/
-
-    // White Rubber
-    /*cubeMaterial_ptr->setAmbientColor(glm::vec3(0.05f));
-    cubeMaterial_ptr->setDiffuseColor(glm::vec3(0.5f));
-    cubeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
-    cubeMaterial_ptr->setSpecularColor(glm::vec3(0.7f));
-    cubeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
-    cubeMaterial_ptr->setShininess(0.078125f);*/
 
     cubeRenderer->setMaterial(std::move(cubeMaterial_ptr));
 
@@ -279,23 +244,9 @@ int main (int argc, char *argv[]) {
 
     // Create Light
     auto light_ptr = std::shared_ptr<Light>(new Light);
-
-
-    // Type 0
     light_ptr->setAmbientColor(glm::vec3(0.8f));
     light_ptr->setDiffuseColor(glm::vec3(0.8f));
     light_ptr->setSpecularColor(glm::vec3(0.5f));
-
-    // Type 1
-    /*light_ptr.setAmbientColor(glm::vec3(0.8f));
-    light_ptr.setDiffuseColor(glm::vec3(1.0f));
-    light_ptr.setSpecularColor(glm::vec3(0.1f));*/
-
-    // Type 1
-    /*light_ptr.setAmbientColor(glm::vec3(0.25f, 1.0f, 0.25f));
-    light_ptr.setDiffuseColor(glm::vec3(0.25f, 0.25f, 1.0f));
-    light_ptr.setSpecularColor(glm::vec3(1.0f, 0.25f, 0.25f));*/
-
     lightR.setLight(light_ptr);
 
     ///////////////////////////
