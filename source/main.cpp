@@ -10,11 +10,6 @@
 #include "Camera.h"
 #include "SceneGraph.h"
 
-#include "Shader.h"
-#include "Texture.h"
-#include "Material.h"
-#include "Light.h"
-
 #include "Plane.h"
 #include "Cube.h"
 #include "Sphere.h"
@@ -42,8 +37,8 @@ float lastY = (float)kScreenHeight / 2.f;
 
 // Resize callback
 void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_t height) {
-    kScreenWidth = (float)width;
-    kScreenHeight = (float)height;
+    kScreenWidth = static_cast<float>(width);
+    kScreenHeight = static_cast<float>(height);
     camera.setAspect(kScreenWidth/kScreenHeight);
 
     glViewport(0, 0, width, height);
@@ -282,7 +277,7 @@ int main (int argc, char *argv[]) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             GameObject& root = *sceneGraph.root;
-            GameObject& lightObject = *sphere_ptr.get();
+            GameObject& lightObject = *sphere_ptr;
 
             camera.render(root, lightObject);
 
