@@ -250,12 +250,6 @@ int main (int argc, char *argv[]) {
     lightRef.setDiffuseColor(glm::vec3(0.8f));
     lightRef.setSpecularColor(glm::vec3(0.5f));
 
-    //auto light_ptr = std::shared_ptr<Light>(new Light("Light"));
-    //light_ptr->setAmbientColor(glm::vec3(0.8f));
-    //light_ptr->setDiffuseColor(glm::vec3(0.8f));
-    //light_ptr->setSpecularColor(glm::vec3(0.5f));
-    //lightR.setLight(light_ptr);
-
     ///////////////////////////
 
     //glEnable(GL_BLEND);

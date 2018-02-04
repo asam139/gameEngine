@@ -71,14 +71,6 @@ Renderer* GameObject::getRenderer() const {
     return _renderer.get();
 }
 
-void GameObject::setLight(std::shared_ptr<Light> light) {
-    _light = light;
-}
-
-Light* GameObject::getLight() const {
-    return _light.get();
-}
-
 void GameObject::display(const glm::mat4 projection, const glm::mat4 view, const glm::vec3 cameraPos, const glm::vec3 lightPos, const Light& light) const {
     if (_renderer) {
         glm::mat4 model = getModel();

@@ -58,16 +58,12 @@ public:
     void setRenderer(std::shared_ptr<Renderer> renderer);
     Renderer* getRenderer() const;
 
-    void setLight(std::shared_ptr<Light> light);
-    Light* getLight() const;
-
 protected:
     Transform _transform;
 
     virtual void configuration();
 
     std::shared_ptr<Renderer> _renderer;
-    std::shared_ptr<Light> _light;
 };
 
 
