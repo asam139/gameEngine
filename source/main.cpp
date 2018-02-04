@@ -112,24 +112,24 @@ void render(Plane& plane, Cube& cube, GameObject& lightObject) {
 
     ////////////////////////////////
     // Get Light
-    Light* light = lightObject.getLight();
+    auto& light = lightObject.GetComponent<Light>();
     glm::vec3 lightPos = lightObject.getPosition();
 
     /////////////////////////////////
     // LightObject
-    lightObject.display(projection, view, cameraPos, lightPos, *light);
+    lightObject.display(projection, view, cameraPos, lightPos, light);
 
     ////////////////////////////////
     // Plane
     plane.setPosition(planePosition);
     plane.setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
-    plane.display(projection, view, cameraPos, lightPos, *light);
+    plane.display(projection, view, cameraPos, lightPos, light);
 
 
     /////////////////////////////////
     // Cube
     cube.setPosition(cubePosition);
-    cube.display(projection, view, cameraPos, lightPos, *light);
+    cube.display(projection, view, cameraPos, lightPos, light);
 }
 
 
@@ -243,11 +243,18 @@ int main (int argc, char *argv[]) {
     lightRRenderer->setMaterial(std::move(lightRMaterial_ptr));
 
     // Create Light
-    auto light_ptr = std::shared_ptr<Light>(new Light);
-    light_ptr->setAmbientColor(glm::vec3(0.8f));
-    light_ptr->setDiffuseColor(glm::vec3(0.8f));
-    light_ptr->setSpecularColor(glm::vec3(0.5f));
-    lightR.setLight(light_ptr);
+    lightR.AddComponent<Light>("Light");
+
+    auto& lightRef = lightR.GetComponent< Light >();
+    lightRef.setAmbientColor(glm::vec3(0.8f));
+    lightRef.setDiffuseColor(glm::vec3(0.8f));
+    lightRef.setSpecularColor(glm::vec3(0.5f));
+
+    //auto light_ptr = std::shared_ptr<Light>(new Light("Light"));
+    //light_ptr->setAmbientColor(glm::vec3(0.8f));
+    //light_ptr->setDiffuseColor(glm::vec3(0.8f));
+    //light_ptr->setSpecularColor(glm::vec3(0.5f));
+    //lightR.setLight(light_ptr);
 
     ///////////////////////////
 

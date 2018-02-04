@@ -7,10 +7,13 @@
 
 #include <glm/glm.hpp>
 
-class Light {
+#include "Component.h"
+
+class Light : public Component {
+CLASS_DECLARATION( Light )
+
 public:
-    Light();
-    ~Light();
+    Light( std::string && initialValue );
 
     void setAmbientColor(glm::vec3 ambientColor);
     void setDiffuseColor(glm::vec3 diffuseColor);
