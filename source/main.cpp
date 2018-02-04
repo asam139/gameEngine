@@ -8,6 +8,8 @@
 #include <iostream>
 
 #include "Camera.h"
+#include "SceneGraph.h"
+
 #include "Shader.h"
 #include "Texture.h"
 #include "Material.h"
@@ -314,32 +316,3 @@ int main (int argc, char *argv[]) {
     glfwTerminate();
     return 0;
 }
-
-
-/*
-#import <queue>
-
-void breadthFirstSearch(GameObject root)
-{
-    std::queue<GameObject*> Q;
-    std::vector<std::unique_ptr<GameObject>>* children;
-
-
-    Q.push(&root);
-
-    while(!Q.empty())
-    {
-        GameObject* gO = Q.front();
-        glm::mat4 model = gO->getTransform().getModel();
-        Q.pop();
-
-        children = &(gO->children);
-        for (int i = 0; i < children->size(); ++i) {
-            GameObject* child = (*children)[i].get();
-            if(gO->getTransform().dirty) {
-                child->getTransform().setParentModel(model);
-            }
-            Q.push(child);
-        }
-    }
-}*/
