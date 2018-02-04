@@ -9,15 +9,9 @@
 #include <glm/glm.hpp>
 
 #include "Component.h"
+#include "Transform.h"
 #include "Renderer.h"
 #include "Light.h"
-
-typedef struct {
-    glm::vec3 position;
-    glm::vec3 rotation;
-    glm::vec3 scale;
-} Transform;
-
 
 class GameObject {
 public:
@@ -43,20 +37,18 @@ public:
     int RemoveComponents();
     ///////////////////////////////////////////////////////
 
-    virtual void setPosition(glm::vec3 position);
-    glm::vec3 getPosition() const;
-    virtual void setRotation(glm::vec3 rotation);
-    glm::vec3 getRotation() const;
-    virtual void setScale(glm::vec3 scale);
-    glm::vec3 getScale() const;
+    std::vector< std::unique_ptr< GameObject > > childs;
 
-    glm::mat4 getModel() const;
+    //////////////////////////////////////////////////////
+    Transform& getTransform();
+
+    //////////////////////////////////////////////////////
 
     virtual void update(const float deltaTime);
     virtual void display(const glm::mat4 projection, const glm::mat4 view, const glm::vec3 cameraPos, const glm::vec3 lightPos, const Light& light);
 
 protected:
-    Transform _transform;
+    Transform* _transform;
 
     virtual void configuration();
 };

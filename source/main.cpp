@@ -113,7 +113,7 @@ void render(Plane& plane, Cube& cube, GameObject& lightObject) {
     ////////////////////////////////
     // Get Light
     auto& light = lightObject.GetComponent<Light>();
-    glm::vec3 lightPos = lightObject.getPosition();
+    glm::vec3 lightPos = lightObject.getTransform().getPosition();
 
     /////////////////////////////////
     // LightObject
@@ -121,14 +121,14 @@ void render(Plane& plane, Cube& cube, GameObject& lightObject) {
 
     ////////////////////////////////
     // Plane
-    plane.setPosition(planePosition);
-    plane.setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
+    plane.getTransform().setPosition(planePosition);
+    plane.getTransform().setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
     plane.display(projection, view, cameraPos, lightPos, light);
 
 
     /////////////////////////////////
     // Cube
-    cube.setPosition(cubePosition);
+    cube.getTransform().setPosition(cubePosition);
     cube.display(projection, view, cameraPos, lightPos, light);
 }
 
@@ -227,8 +227,8 @@ int main (int argc, char *argv[]) {
     //////////////////////////
     // Sphere as Light
     Sphere lightR(glm::vec3(0.0f, 0.0f, 0.0f), 1.f);
-    lightR.setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
-    lightR.setScale(glm::vec3(0.3f));
+    lightR.getTransform().setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
+    lightR.getTransform().setScale(glm::vec3(0.3f));
 
     auto& lightRRenderer = lightR.GetComponent<Renderer>();
     auto lightRMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
