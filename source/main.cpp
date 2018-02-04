@@ -203,13 +203,13 @@ int main (int argc, char *argv[]) {
 
     // Cube
     Cube cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f);
-    auto& cubeRenderer = cube.GetComponent<Renderer>();;
+    auto& cubeRenderer = cube.GetComponent<Renderer>();
 
     auto diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
     auto specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/specularTex.jpg", GL_RGB));
     auto emissionTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/emissiveTex.jpg", GL_RGB));
 
-    auto cubeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
+    auto cubeMaterial_ptr = std::shared_ptr<Material>(new Material(shader_ptr));
 
     cubeMaterial_ptr->setAmbientColor(glm::vec3(0.25f));
     cubeMaterial_ptr->setDiffuseColor(glm::vec3(1.0f));
@@ -222,7 +222,13 @@ int main (int argc, char *argv[]) {
     cubeMaterial_ptr->setEmissiveColor(glm::vec3(1.0f));
     cubeMaterial_ptr->setEmissiveTexture(emissionTexture_ptr);
 
-    cubeRenderer.setMaterial(std::move(cubeMaterial_ptr));
+    cubeRenderer.setMaterial(cubeMaterial_ptr);
+
+
+    auto subCube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f));
+    auto& subCubeRenderer = subCube_ptr->GetComponent<Renderer>();
+    subCubeRenderer.setMaterial(cubeMaterial_ptr);
+    cube.AddChild(std::move(subCube_ptr));
 
     //////////////////////////
     // Sphere as Light

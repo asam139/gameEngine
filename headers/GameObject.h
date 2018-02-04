@@ -36,8 +36,11 @@ public:
     template< class ComponentType >
     int RemoveComponents();
     ///////////////////////////////////////////////////////
+    std::vector< std::unique_ptr< GameObject > > children;
 
-    std::vector< std::unique_ptr< GameObject > > childs;
+    void AddChild(std::unique_ptr<GameObject> gameObject_ptr);
+
+
 
     //////////////////////////////////////////////////////
     Transform& getTransform();
