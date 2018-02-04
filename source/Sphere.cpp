@@ -41,7 +41,7 @@ void Sphere::configuration() {
 
     generateVerts(vertices, normal, uv, indices, slices, stacks, _radius);
 
-    AddComponent<Renderer>("Renderer");
+    AddComponent<Renderer>("Renderer", this);
     Renderer& renderer =  GetComponent<Renderer>();
     renderer.createVertexData(vertices, verticesSize, uv, uvSize, normal, normalSize, indices, indicesSize);
 }

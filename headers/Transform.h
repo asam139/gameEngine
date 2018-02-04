@@ -15,7 +15,7 @@ class Transform : public Component {
 CLASS_DECLARATION(Transform)
 
 public:
-    Transform(std::string &&initialValue);
+    Transform( std::string && initialValue, GameObject * owner);
 
 
     virtual void setPosition(glm::vec3 position);

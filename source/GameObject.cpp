@@ -5,7 +5,7 @@
 #include "GameObject.h"
 
 GameObject::GameObject() {
-    AddComponent<Transform>("Transform");
+    AddComponent<Transform>("Transform", this);
     _transform = &GetComponent<Transform>();
 
     configuration();

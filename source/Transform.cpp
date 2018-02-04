@@ -6,7 +6,7 @@
 
 CLASS_DEFINITION(Component, Transform)
 
-Transform::Transform( std::string && initialValue) : Component( std::move( initialValue ) ) {
+Transform::Transform( std::string && initialValue, GameObject *owner) : Component( std::move( initialValue ), owner) {
     _position = glm::vec3(0.0f);
     _rotation = glm::vec3(0.0f);
     _scale = glm::vec3(1.0f);

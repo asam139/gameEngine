@@ -29,7 +29,7 @@ Plane::~Plane() {
 }
 
 void Plane::configuration() {
-    AddComponent<Renderer>("Renderer");
+    AddComponent<Renderer>("Renderer", this);
     Renderer& renderer =  GetComponent<Renderer>();
     renderer.createVertexData(_verticesMap, _verticesMapSize, _indecesMap, _indecesMapSize);
 }

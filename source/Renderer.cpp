@@ -6,7 +6,7 @@
 
 CLASS_DEFINITION(Component, Renderer)
 
-Renderer::Renderer( std::string && initialValue) : Component( std::move( initialValue ) ) {
+Renderer::Renderer( std::string && initialValue, GameObject *owner) : Component( std::move( initialValue ), owner) {
 
 }
 

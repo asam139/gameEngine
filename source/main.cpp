@@ -249,7 +249,7 @@ int main (int argc, char *argv[]) {
     lightRRenderer.setMaterial(std::move(lightRMaterial_ptr));
 
     // Create Light
-    lightR.AddComponent<Light>("Light");
+    lightR.AddComponent<Light>("Light", &lightR);
 
     auto& lightRef = lightR.GetComponent< Light >();
     lightRef.setAmbientColor(glm::vec3(0.8f));

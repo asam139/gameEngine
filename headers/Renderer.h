@@ -16,7 +16,7 @@ class Renderer : public Component {
 CLASS_DECLARATION( Renderer )
 
 public:
-    Renderer( std::string && initialValue);
+    Renderer( std::string && initialValue, GameObject * owner);
     ~Renderer() override;
 
     void createVertexData(float* vertices, uint32_t vSize, uint32_t* indices, uint32_t iSize);

@@ -6,7 +6,8 @@
 
 CLASS_DEFINITION(Component, Light)
 
-Light::Light( std::string && initialValue ) : Component( std::move( initialValue ) ) {
+Light::Light( std::string && initialValue, GameObject *owner) : Component( std::move( initialValue ), owner) {
+
     setAmbientColor(glm::vec3(0.5f));
     setDiffuseColor(glm::vec3(1.0f));
     setSpecularColor(glm::vec3(0.25f));

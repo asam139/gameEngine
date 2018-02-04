@@ -85,7 +85,7 @@ void Cube::configuration() {
         vertices[offset] = vertices[offset];
     }
 
-    AddComponent<Renderer>("Renderer");
+    AddComponent<Renderer>("Renderer", this);
     Renderer& renderer =  GetComponent<Renderer>();
     renderer.createVertexData(vertices, _verticesMapSize, _indecesMap, _indecesMapSize);
 }

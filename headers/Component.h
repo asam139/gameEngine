@@ -11,6 +11,8 @@
 #include <memory>
 #include <algorithm>
 
+class GameObject;
+
 #define TO_STRING( x ) #x
 
 //****************
@@ -51,10 +53,15 @@ public:
 public:
 
     virtual ~Component() = default;
-    Component( std::string && initialValue ) : value( initialValue ) {};
+    Component( std::string && initialValue, GameObject *owner ) : value( initialValue), _gameObject(owner) {};
 
 public:
     std::string value = "uninitialized";
+
+    GameObject& getGameObject();
+
+protected:
+    GameObject *_gameObject;
 };
 
 
