@@ -36,9 +36,9 @@ public:
     template< class ComponentType >
     int RemoveComponents();
     ///////////////////////////////////////////////////////
-    std::vector< std::unique_ptr< GameObject > > children;
+    std::vector< std::shared_ptr< GameObject > > children;
 
-    void AddChild(std::unique_ptr<GameObject> gameObject_ptr);
+    void AddChild(std::shared_ptr<GameObject> gameObject_ptr);
 
 
 

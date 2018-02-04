@@ -13,7 +13,7 @@ Transform::Transform( std::string && initialValue, GameObject *owner) : Componen
 
     _parentModel = glm::mat4(1.0f);
 
-    dirty = false;
+    dirty = true;
 }
 
 
@@ -55,6 +55,7 @@ glm::mat4 Transform::getModel() const {
 
 void Transform::setParentModel(glm::mat4 parentModel) {
     _parentModel = parentModel;
+    dirty = false;
 }
 
 glm::mat4 Transform::getParentModel() {

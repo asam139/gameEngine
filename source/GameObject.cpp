@@ -25,8 +25,8 @@ Transform& GameObject::getTransform() {
 
 
 ///////////////////////////////////////////////////////
-void GameObject::AddChild(std::unique_ptr<GameObject> gameObject_ptr) {
-    children.push_back(std::move(gameObject_ptr));
+void GameObject::AddChild(std::shared_ptr<GameObject> gameObject_ptr) {
+    children.push_back(gameObject_ptr);
 }
 
 //////////////////////////////////////////////////////
@@ -54,10 +54,6 @@ void GameObject::display(const glm::mat4 projection, const glm::mat4 view, const
         shader->set("light.specular", light.getSpecularColor());
 
         renderer.render();
-    }
-
-    for ( auto && gameObject : children ) {
-        gameObject->display(projection, view, cameraPos, lightPos, light);
     }
 }
 

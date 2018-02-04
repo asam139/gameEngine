@@ -38,13 +38,6 @@ bool firstMouse = true;
 float lastX = (float)kScreenWidth / 2.f;
 float lastY = (float)kScreenHeight / 2.f;
 
-// Plane
-glm::vec3 planePosition = glm::vec3(0.0f, 0.0f, 0.0f);
-
-// Cube
-glm::vec3 cubePosition = glm::vec3(2.0f, 0.0f, 0.0f);
-
-
 ///////////////////////
 
 // Resize callback
@@ -123,14 +116,13 @@ void render(Plane& plane, Cube& cube, GameObject& lightObject) {
 
     ////////////////////////////////
     // Plane
-    plane.getTransform().setPosition(planePosition);
-    plane.getTransform().setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
+
     plane.display(projection, view, cameraPos, lightPos, light);
 
 
     /////////////////////////////////
     // Cube
-    cube.getTransform().setPosition(cubePosition);
+
     cube.display(projection, view, cameraPos, lightPos, light);
 }
 
@@ -167,7 +159,7 @@ int main (int argc, char *argv[]) {
 
     // Mouse callback
     glfwSetCursorPosCallback(window, onMouse);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     //Scroll callback
     glfwSetScrollCallback(window, onScroll);
@@ -177,6 +169,12 @@ int main (int argc, char *argv[]) {
     ///////////////////////////
     // Configure Camera
     camera.setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
+
+    ///////////////////////////
+    // SceneGraph
+
+    GameObject gameObjectRoot;
+    SceneGraph sceneGraph(&gameObjectRoot);
 
     ///////////////////////////
     // Create program
@@ -190,8 +188,11 @@ int main (int argc, char *argv[]) {
     // Create Objects
 
     // Plane
-    Plane plane;
-    auto& planeRenderer = plane.GetComponent<Renderer>();
+    auto plane_ptr = std::unique_ptr<Plane>(new Plane());
+    plane_ptr->getTransform().setPosition(glm::vec3(0.0f));
+    plane_ptr->getTransform().setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
+
+    auto& planeRenderer = plane_ptr->GetComponent<Renderer>();
 
     auto planeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
     planeMaterial_ptr->setAmbientColor(glm::vec3(0.1f));
@@ -203,9 +204,12 @@ int main (int argc, char *argv[]) {
 
     planeRenderer.setMaterial(std::move(planeMaterial_ptr));
 
+    gameObjectRoot.AddChild(std::move(plane_ptr));
+
     // Cube
-    Cube cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f);
-    auto& cubeRenderer = cube.GetComponent<Renderer>();
+    auto cube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f));
+    cube_ptr->getTransform().setPosition(glm::vec3(2.0f, 0.0f, 0.0f));
+    auto& cubeRenderer = cube_ptr->GetComponent<Renderer>();
 
     auto diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
     auto specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/specularTex.jpg", GL_RGB));
@@ -230,15 +234,17 @@ int main (int argc, char *argv[]) {
     auto subCube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f));
     auto& subCubeRenderer = subCube_ptr->GetComponent<Renderer>();
     subCubeRenderer.setMaterial(cubeMaterial_ptr);
-    cube.AddChild(std::move(subCube_ptr));
+    cube_ptr->AddChild(std::move(subCube_ptr));
+
+    gameObjectRoot.AddChild(std::move(cube_ptr));
 
     //////////////////////////
     // Sphere as Light
-    Sphere lightR(glm::vec3(0.0f, 0.0f, 0.0f), 1.f);
-    lightR.getTransform().setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
-    lightR.getTransform().setScale(glm::vec3(0.3f));
+    auto sphere_ptr = std::shared_ptr<Sphere>(new Sphere(glm::vec3(0.0f, 0.0f, 0.0f), 1.f));
+    sphere_ptr->getTransform().setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
+    sphere_ptr->getTransform().setScale(glm::vec3(0.3f));
 
-    auto& lightRRenderer = lightR.GetComponent<Renderer>();
+    auto& lightRRenderer = sphere_ptr->GetComponent<Renderer>();
     auto lightRMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
     // Special configuration to draw Object as light source
     lightRMaterial_ptr->setAmbientColor(glm::vec3(1.0f));
@@ -251,12 +257,14 @@ int main (int argc, char *argv[]) {
     lightRRenderer.setMaterial(std::move(lightRMaterial_ptr));
 
     // Create Light
-    lightR.AddComponent<Light>("Light", &lightR);
+    sphere_ptr->AddComponent<Light>("Light", sphere_ptr.get());
 
-    auto& lightRef = lightR.GetComponent< Light >();
+    auto& lightRef = sphere_ptr->GetComponent< Light >();
     lightRef.setAmbientColor(glm::vec3(0.8f));
     lightRef.setDiffuseColor(glm::vec3(0.8f));
     lightRef.setSpecularColor(glm::vec3(0.5f));
+
+    gameObjectRoot.AddChild(sphere_ptr);
 
     ///////////////////////////
 
@@ -301,9 +309,8 @@ int main (int argc, char *argv[]) {
             glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-            //Render VAO
-            render(plane, cube, lightR);
+            GameObject& lightObject = *sphere_ptr.get();
+            sceneGraph.render(camera, lightObject);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);

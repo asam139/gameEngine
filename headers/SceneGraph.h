@@ -5,6 +5,7 @@
 #ifndef GAMEENGINE_SCENEGRAPH_H
 #define GAMEENGINE_SCENEGRAPH_H
 
+#include "Camera.h"
 #include "GameObject.h"
 
 class SceneGraph {
@@ -14,12 +15,12 @@ public:
 
     GameObject* root;
 
-    void render();
+    void render(Camera& camera, GameObject& lightObject);
 
 private:
     SceneGraph(){};
 
-    void breadthFirstSearch();
+    //void breadthFirstSearch();
 };
 
 
