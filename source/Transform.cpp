@@ -10,6 +10,10 @@ Transform::Transform( std::string && initialValue, GameObject *owner) : Componen
     _position = glm::vec3(0.0f);
     _rotation = glm::vec3(0.0f);
     _scale = glm::vec3(1.0f);
+
+    _parentModel = glm::mat4(1.0f);
+
+    dirty = false;
 }
 
 
@@ -46,5 +50,13 @@ glm::mat4 Transform::getModel() const {
     model = glm::rotate(model, _rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
     model = glm::scale(model, _scale);
 
-    return model;
+    return _parentModel * model;
+}
+
+void Transform::setParentModel(glm::mat4 parentModel) {
+    _parentModel = parentModel;
+}
+
+glm::mat4 Transform::getParentModel() {
+    return _parentModel;
 }

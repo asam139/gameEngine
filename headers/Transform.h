@@ -27,11 +27,17 @@ public:
 
     glm::mat4 getModel() const;
 
+    void setParentModel(glm::mat4 parentModel);
+    glm::mat4 getParentModel();
+
+    bool dirty;
+
 protected:
     glm::vec3 _position;
     glm::vec3 _rotation;
     glm::vec3 _scale;
 
+    glm::mat4 _parentModel;
 };
 
 
