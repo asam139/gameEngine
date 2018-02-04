@@ -15,12 +15,8 @@ public:
 
     GameObject* root;
 
-    void render(Camera& camera, GameObject& lightObject);
-
 private:
     SceneGraph(){};
-
-    //void breadthFirstSearch();
 };
 
 

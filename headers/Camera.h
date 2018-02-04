@@ -10,6 +10,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "BitmaskEnum.h"
+#include "GameObject.h"
 
 //Default Camera Values
 const float kYaw = -90.0f;
@@ -58,6 +59,9 @@ public:
            const float upX, const float upY, const float upZ,
            const float pitch);
 
+    void setAspect(float aspect);
+    float getAspect();
+
     //Returns current view matrix
     glm::mat4 getViewMatrix() const;
     glm::vec3  getPosition() const;
@@ -75,11 +79,16 @@ public:
     //Process mouse scroll
     void handleMouseScroll(const float yoffset);
 
+    // Render
+    void render(GameObject& root, GameObject& lightObject);
+
 private:
     void updateCameraVectors(); //Calculates front vector
     glm::vec3 _position, _front, _up, _right, _worldUp; // Camera Attributes
     float _yaw, _pitch; // Euler Angles
     float _fov; // Camera options
+
+    float _aspect = 1.0f;
 
     // Movement Axis Allow
     MovementAxis _movementAxis = static_cast<MovementAxis >(MovementAxisX | MovementAxisY| MovementAxisZ);

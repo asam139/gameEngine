@@ -44,6 +44,7 @@ float lastY = (float)kScreenHeight / 2.f;
 void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_t height) {
     kScreenWidth = (float)width;
     kScreenHeight = (float)height;
+    camera.setAspect(kScreenWidth/kScreenHeight);
 
     glViewport(0, 0, width, height);
 }
@@ -99,34 +100,6 @@ void handleInput(GLFWwindow* window) {
     camera.handleKeyboard(movementMask, deltaTime);
 }
 
-// Render
-void render(Plane& plane, Cube& cube, GameObject& lightObject) {
-    glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), (float)kScreenWidth / (float)kScreenHeight, 0.1f, 100.f);
-    glm::mat4 view = camera.getViewMatrix();
-    glm::vec3 cameraPos = camera.getPosition();
-
-    ////////////////////////////////
-    // Get Light
-    auto& light = lightObject.GetComponent<Light>();
-    glm::vec3 lightPos = lightObject.getTransform().getPosition();
-
-    /////////////////////////////////
-    // LightObject
-    lightObject.display(projection, view, cameraPos, lightPos, light);
-
-    ////////////////////////////////
-    // Plane
-
-    plane.display(projection, view, cameraPos, lightPos, light);
-
-
-    /////////////////////////////////
-    // Cube
-
-    cube.display(projection, view, cameraPos, lightPos, light);
-}
-
-
 int main (int argc, char *argv[]) {
 
     if (!glfwInit()) {       //Initialize the library
@@ -159,20 +132,18 @@ int main (int argc, char *argv[]) {
 
     // Mouse callback
     glfwSetCursorPosCallback(window, onMouse);
-    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     //Scroll callback
     glfwSetScrollCallback(window, onScroll);
 
     ///////////////////////////
-
-    ///////////////////////////
     // Configure Camera
+    camera.setAspect(kScreenWidth/kScreenHeight);
     camera.setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
 
     ///////////////////////////
     // SceneGraph
-
     GameObject gameObjectRoot;
     SceneGraph sceneGraph(&gameObjectRoot);
 
@@ -208,7 +179,7 @@ int main (int argc, char *argv[]) {
 
     // Cube
     auto cube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f));
-    cube_ptr->getTransform().setPosition(glm::vec3(2.0f, 0.0f, 0.0f));
+    cube_ptr->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
     auto& cubeRenderer = cube_ptr->GetComponent<Renderer>();
 
     auto diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
@@ -231,7 +202,8 @@ int main (int argc, char *argv[]) {
     cubeRenderer.setMaterial(cubeMaterial_ptr);
 
 
-    auto subCube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f));
+    auto subCube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
+    cube_ptr->getTransform().setPosition(glm::vec3(0.0f, 2.0f, 0.0f));
     auto& subCubeRenderer = subCube_ptr->GetComponent<Renderer>();
     subCubeRenderer.setMaterial(cubeMaterial_ptr);
     cube_ptr->AddChild(std::move(subCube_ptr));
@@ -309,8 +281,10 @@ int main (int argc, char *argv[]) {
             glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+            GameObject& root = *sceneGraph.root;
             GameObject& lightObject = *sphere_ptr.get();
-            sceneGraph.render(camera, lightObject);
+
+            camera.render(root, lightObject);
 
             //Swap front and back buffers
             glfwSwapBuffers(window);

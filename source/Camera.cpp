@@ -4,6 +4,8 @@
 
 #include "Camera.h"
 
+#include <queue>
+
 Camera::Camera() {
     _position = glm::vec3(0.f, 0.f, 0.f);
     _worldUp = glm::vec3(0.f, 1.f, 0.f);
@@ -36,6 +38,15 @@ Camera::Camera(const float posX, const float posY, const float posZ, const float
     _fov = kFov;
     updateCameraVectors();
 }
+
+void Camera::setAspect(float aspect) {
+    _aspect = aspect;
+}
+
+float Camera::getAspect() {
+    return _aspect;
+}
+
 
 glm::mat4 Camera::getViewMatrix() const {
     return glm::lookAt(_position, _position + _front, _up);
@@ -120,6 +131,41 @@ void Camera::handleMouseScroll(const float yOffset) {
 
     if (_fov >= kMaxFov) {
         _fov = kMaxFov;
+    }
+}
+
+
+void Camera::render(GameObject& root, GameObject& lightObject) {
+    glm::mat4 projection = glm::perspective(glm::radians(getFOV()), _aspect, 0.1f, 100.f);
+    glm::mat4 view = getViewMatrix();
+    glm::vec3 cameraPos = getPosition();
+
+    ////////////////////////////////
+    // Get Light
+    auto& light = lightObject.GetComponent<Light>();
+    glm::vec3 lightPos = lightObject.getTransform().getPosition();
+
+
+    std::queue<GameObject*> Q;
+    std::vector<std::shared_ptr<GameObject>>* children;
+
+    Q.push(&root);
+    while(!Q.empty()) {
+
+        GameObject* gO = Q.front();
+        glm::mat4 model = gO->getTransform().getModel();
+        Q.pop();
+
+        gO->display(projection, view, cameraPos, lightPos, light);
+
+        children = &(gO->children);
+        for (int i = 0; i < children->size(); ++i) {
+            GameObject* child = (*children)[i].get();
+            if(gO->getTransform().dirty) {
+                child->getTransform().setParentModel(model);
+            }
+            Q.push(child);
+        }
     }
 }
 
