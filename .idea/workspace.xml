@@ -2,38 +2,38 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="gameEngine" targetName="monitors" />
-      <config projectName="gameEngine" targetName="splitview" />
-      <config projectName="gameEngine" targetName="iconify" />
-      <config projectName="gameEngine" targetName="icon" />
-      <config projectName="gameEngine" targetName="simple" />
-      <config projectName="gameEngine" targetName="cursor" />
-      <config projectName="gameEngine" targetName="timeout" />
       <config projectName="gameEngine" targetName="glfw" />
-      <config projectName="gameEngine" targetName="gears" />
-      <config projectName="gameEngine" targetName="clipboard" />
-      <config projectName="gameEngine" targetName="glm_dummy" />
-      <config projectName="gameEngine" targetName="boing" />
+      <config projectName="gameEngine" targetName="title" />
+      <config projectName="gameEngine" targetName="cursor" />
+      <config projectName="gameEngine" targetName="tearing" />
+      <config projectName="gameEngine" targetName="icon" />
       <config projectName="gameEngine" targetName="wave" />
       <config projectName="gameEngine" targetName="empty" />
-      <config projectName="gameEngine" targetName="title" />
-      <config projectName="gameEngine" targetName="reopen" />
-      <config projectName="gameEngine" targetName="heightmap" />
-      <config projectName="gameEngine" targetName="offscreen" />
-      <config projectName="gameEngine" targetName="events" />
-      <config projectName="gameEngine" targetName="sharing" />
-      <config projectName="gameEngine" targetName="opacity" />
-      <config projectName="gameEngine" targetName="joysticks" />
       <config projectName="gameEngine" targetName="windows" />
-      <config projectName="gameEngine" targetName="glfwinfo" />
+      <config projectName="gameEngine" targetName="clipboard" />
+      <config projectName="gameEngine" targetName="iconify" />
+      <config projectName="gameEngine" targetName="reopen" />
       <config projectName="gameEngine" targetName="msaa" />
-      <config projectName="gameEngine" targetName="tearing" />
-      <config projectName="gameEngine" targetName="uninstall" />
-      <config projectName="gameEngine" targetName="inputlag" />
-      <config projectName="gameEngine" targetName="threads" />
-      <config projectName="gameEngine" targetName="gameEngine" />
       <config projectName="gameEngine" targetName="gamma" />
+      <config projectName="gameEngine" targetName="monitors" />
+      <config projectName="gameEngine" targetName="opacity" />
+      <config projectName="gameEngine" targetName="gameEngine" />
+      <config projectName="gameEngine" targetName="threads" />
+      <config projectName="gameEngine" targetName="glfwinfo" />
+      <config projectName="gameEngine" targetName="glm_dummy" />
+      <config projectName="gameEngine" targetName="uninstall" />
+      <config projectName="gameEngine" targetName="sharing" />
+      <config projectName="gameEngine" targetName="boing" />
+      <config projectName="gameEngine" targetName="timeout" />
+      <config projectName="gameEngine" targetName="joysticks" />
+      <config projectName="gameEngine" targetName="offscreen" />
+      <config projectName="gameEngine" targetName="splitview" />
+      <config projectName="gameEngine" targetName="inputlag" />
+      <config projectName="gameEngine" targetName="simple" />
+      <config projectName="gameEngine" targetName="heightmap" />
       <config projectName="gameEngine" targetName="particles" />
+      <config projectName="gameEngine" targetName="gears" />
+      <config projectName="gameEngine" targetName="events" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -54,73 +54,33 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/source/main.cpp">
+      <file leaf-file-name="Component.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/headers/Component.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="853">
-              <caret line="189" column="12" lean-forward="false" selection-start-line="189" selection-start-column="12" selection-end-line="189" selection-end-column="12" />
+            <state relative-caret-position="465">
+              <caret line="33" column="18" lean-forward="false" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
               <folding>
-                <element signature="e#0#22#0" expanded="true" />
+                <element signature="e#117#134#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Plane.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/Plane.cpp">
+      <file leaf-file-name="Component.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/Component.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="30" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="32" selection-end-column="30" />
+            <state relative-caret-position="165">
+              <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Texture.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/headers/Texture.h">
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="46" lean-forward="false" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Camera.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/headers/Camera.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="50" column="30" lean-forward="false" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Material.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/Material.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1845">
-              <caret line="123" column="5" lean-forward="false" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="phongFragmentShader.glsl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shader/phongFragmentShader.glsl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="885">
-              <caret line="59" column="30" lean-forward="false" selection-start-line="59" selection-start-column="30" selection-end-line="59" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Material.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/headers/Material.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="61" lean-forward="false" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
+            <state relative-caret-position="405">
+              <caret line="27" column="21" lean-forward="true" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -129,21 +89,32 @@
       <file leaf-file-name="GameObject.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/headers/GameObject.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="39" column="57" lean-forward="false" selection-start-line="39" selection-start-column="57" selection-end-line="39" selection-end-column="57" />
+            <state relative-caret-position="135">
+              <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
               <folding>
-                <element signature="e#119#136#0" expanded="true" />
+                <element signature="e#636#675#0" expanded="true" />
+                <element signature="e#732#753#0" expanded="true" />
+                <element signature="e#802#823#0" expanded="true" />
+                <element signature="e#865#886#0" expanded="true" />
+                <element signature="e#950#971#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameObject.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameObject.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/GameObject.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1440">
-              <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="354">
+              <caret line="35" column="37" lean-forward="false" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
+              <folding>
+                <element signature="e#54#77#0" expanded="true" />
+                <element signature="e#887#928#0" expanded="true" />
+                <element signature="e#1419#1442#0" expanded="true" />
+                <element signature="e#1914#1937#0" expanded="true" />
+                <element signature="e#3173#3196#0" expanded="true" />
+                <element signature="e#3700#3723#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -220,7 +191,6 @@
         <option value="$PROJECT_DIR$/shader/gouraudVertexShader.glsl" />
         <option value="$PROJECT_DIR$/source/Texture.cpp" />
         <option value="$PROJECT_DIR$/headers/Texture.h" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/headers/Plane.h" />
         <option value="$PROJECT_DIR$/headers/shader.h" />
         <option value="$PROJECT_DIR$/source/Renderer.cpp" />
@@ -232,20 +202,23 @@
         <option value="$PROJECT_DIR$/headers/Light.h" />
         <option value="$PROJECT_DIR$/headers/Cube.h" />
         <option value="$PROJECT_DIR$/headers/Sphere.h" />
-        <option value="$PROJECT_DIR$/source/GameObject.cpp" />
-        <option value="$PROJECT_DIR$/headers/GameObject.h" />
         <option value="$PROJECT_DIR$/shader/phongFragmentShader.glsl" />
         <option value="$PROJECT_DIR$/headers/Material.h" />
         <option value="$PROJECT_DIR$/source/Material.cpp" />
         <option value="$PROJECT_DIR$/source/main.cpp" />
+        <option value="$PROJECT_DIR$/source/Component.cpp" />
+        <option value="$PROJECT_DIR$/headers/Component.h" />
+        <option value="$PROJECT_DIR$/headers/GameObject.h" />
+        <option value="$PROJECT_DIR$/source/GameObject.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
       </list>
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="2560" />
-    <option name="height" value="1417" />
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+    <option name="x" value="1282" />
+    <option name="width" value="1278" />
+    <option name="height" value="1440" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -277,11 +250,6 @@
             <path>
               <item name="gameEngine" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
               <item name="gameEngine" type="462c0819:PsiDirectoryNode" />
-              <item name="shader" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gameEngine" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
-              <item name="gameEngine" type="462c0819:PsiDirectoryNode" />
               <item name="source" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -302,8 +270,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/textures" />
       <recent name="$PROJECT_DIR$/source" />
+      <recent name="$PROJECT_DIR$/textures" />
       <recent name="$PROJECT_DIR$/headers" />
       <recent name="$PROJECT_DIR$/shader" />
       <recent name="$PROJECT_DIR$/external_source" />
@@ -499,12 +467,12 @@
       <workItem from="1517309697043" duration="1000" />
       <workItem from="1517589134854" duration="42000" />
       <workItem from="1517589199854" duration="2421000" />
-      <workItem from="1517743008080" duration="197000" />
+      <workItem from="1517743008080" duration="1933000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172695000" />
+    <option name="totallyTimeSpent" value="174431000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -516,22 +484,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="2560" height="1417" extended-state="0" />
-    <editor active="true" />
+    <frame x="837" y="0" width="1723" height="1440" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13661636" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20464009" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16093636" sideWeight="0.49375373" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32829046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991913" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2322239" sideWeight="0.63072777" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2322239" sideWeight="0.36927223" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23189466" sideWeight="0.6323617" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23189466" sideWeight="0.36763832" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27458397" sideWeight="0.4819407" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16111952" sideWeight="0.29164422" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -583,20 +550,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include/curses.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12444">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/external_source/deps/glad/glad.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="22" lean-forward="false" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gainput/lib/CMakeLists.txt" />
     <entry file="file://$PROJECT_DIR$/glfw/include/GLFW/glfw3.h">
       <provider selected="true" editor-type-id="text-editor">
@@ -754,13 +707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="20" lean-forward="false" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/type_traits">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
@@ -787,6 +733,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="616">
           <caret line="104" column="24" lean-forward="false" selection-start-line="104" selection-start-column="24" selection-end-line="104" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -862,16 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/headers/GameObject.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="57" lean-forward="false" selection-start-line="39" selection-start-column="57" selection-end-line="39" selection-end-column="57" />
-          <folding>
-            <element signature="e#119#136#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/Plane.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -885,20 +822,18 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/GameObject.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="853">
-          <caret line="189" column="12" lean-forward="false" selection-start-line="189" selection-start-column="12" selection-end-line="189" selection-end-column="12" />
+        <state relative-caret-position="433">
+          <caret line="161" column="0" lean-forward="false" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
           <folding>
-            <element signature="e#0#22#0" expanded="true" />
+            <marker date="1517743475356" expanded="true" signature="9:350" ph="..." />
+            <marker date="1517743475356" expanded="true" signature="976:1085" ph="{...}" />
+            <marker date="1517743475356" expanded="true" signature="1166:1679" ph="{...}" />
+            <marker date="1517743475356" expanded="true" signature="1766:1834" ph="{...}" />
+            <marker date="1517743475356" expanded="true" signature="1889:2532" ph="{...}" />
+            <marker date="1517743475356" expanded="true" signature="2607:3504" ph="{...}" />
+            <marker date="1517743475356" expanded="true" signature="3541:9459" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -932,6 +867,61 @@
         <state relative-caret-position="1845">
           <caret line="123" column="5" lean-forward="false" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/Component.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="33" column="18" lean-forward="false" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
+          <folding>
+            <element signature="e#117#134#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/headers/GameObject.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding>
+            <element signature="e#636#675#0" expanded="true" />
+            <element signature="e#732#753#0" expanded="true" />
+            <element signature="e#802#823#0" expanded="true" />
+            <element signature="e#865#886#0" expanded="true" />
+            <element signature="e#950#971#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/Component.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="21" lean-forward="true" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/GameObject.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="35" column="37" lean-forward="false" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
+          <folding>
+            <element signature="e#54#77#0" expanded="true" />
+            <element signature="e#887#928#0" expanded="true" />
+            <element signature="e#1419#1442#0" expanded="true" />
+            <element signature="e#1914#1937#0" expanded="true" />
+            <element signature="e#3173#3196#0" expanded="true" />
+            <element signature="e#3700#3723#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

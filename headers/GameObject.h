@@ -5,11 +5,16 @@
 #ifndef GAMEENGINE_GAMEOBJECT_H
 #define GAMEENGINE_GAMEOBJECT_H
 
+#include <string>
+#include <functional>
+#include <vector>
 #include <memory>
+#include <algorithm>
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
+#include "Component.h"
 #include "Renderer.h"
 #include "Light.h"
 
@@ -24,6 +29,25 @@ class GameObject {
 public:
     GameObject();
     virtual ~GameObject();
+
+    ///////////////////////////////////////////////////////
+    std::vector< std::unique_ptr< Component > > components;
+
+    template<class ComponentType, typename... Args>
+    void AddComponent( Args&&... params );
+
+    template<class ComponentType>
+    ComponentType& GetComponent();
+
+    template<class ComponentType>
+    bool RemoveComponent();
+
+    template<class ComponentType>
+    std::vector<ComponentType *> GetComponents();
+
+    template<class ComponentType>
+    int RemoveComponents();
+    ///////////////////////////////////////////////////////
 
     virtual void setPosition(glm::vec3 position);
     glm::vec3 getPosition() const;
