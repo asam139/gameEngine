@@ -4,14 +4,10 @@
 
 #include "Renderer.h"
 
+CLASS_DEFINITION(Component, Renderer)
 
-Renderer::Renderer(float *vertices, uint32_t vSize, uint32_t *indices, uint32_t iSize) {
-    createVertexData(vertices, vSize, indices, iSize);
-}
+Renderer::Renderer( std::string && initialValue) : Component( std::move( initialValue ) ) {
 
-Renderer::Renderer(float *vertices, uint32_t vSize, float *uv, uint32_t uvSize, float *normal,
-                                uint32_t nSize, uint32_t *indices, uint32_t iSize) {
-    createVertexData(vertices, vSize, uv, uvSize, normal, nSize, indices, iSize);
 }
 
 Renderer::~Renderer() {
@@ -102,10 +98,10 @@ void Renderer::createVertexData(float *vertices, uint32_t vSize, float *uv, uint
 }
 
 void Renderer::setMaterial(std::shared_ptr<Material> material) {
-    _material = material;
+    _material = std::move(material);
 }
 
-Material* Renderer::getMaterial(){
+Material* Renderer::getMaterial() {
     return _material.get();
 }
 

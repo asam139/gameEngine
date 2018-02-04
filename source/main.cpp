@@ -189,7 +189,7 @@ int main (int argc, char *argv[]) {
 
     // Plane
     Plane plane;
-    Renderer* planeRenderer = plane.getRenderer();
+    auto& planeRenderer = plane.GetComponent<Renderer>();
 
     auto planeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
     planeMaterial_ptr->setAmbientColor(glm::vec3(0.1f));
@@ -199,11 +199,11 @@ int main (int argc, char *argv[]) {
     planeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
     planeMaterial_ptr->setShininess(16.0f);
 
-    planeRenderer->setMaterial(std::move(planeMaterial_ptr));
+    planeRenderer.setMaterial(std::move(planeMaterial_ptr));
 
     // Cube
     Cube cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f);
-    Renderer* cubeRenderer = cube.getRenderer();
+    auto& cubeRenderer = cube.GetComponent<Renderer>();;
 
     auto diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
     auto specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/specularTex.jpg", GL_RGB));
@@ -222,7 +222,7 @@ int main (int argc, char *argv[]) {
     cubeMaterial_ptr->setEmissiveColor(glm::vec3(1.0f));
     cubeMaterial_ptr->setEmissiveTexture(emissionTexture_ptr);
 
-    cubeRenderer->setMaterial(std::move(cubeMaterial_ptr));
+    cubeRenderer.setMaterial(std::move(cubeMaterial_ptr));
 
     //////////////////////////
     // Sphere as Light
@@ -230,7 +230,7 @@ int main (int argc, char *argv[]) {
     lightR.setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
     lightR.setScale(glm::vec3(0.3f));
 
-    Renderer* lightRRenderer = lightR.getRenderer();
+    auto& lightRRenderer = lightR.GetComponent<Renderer>();
     auto lightRMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
     // Special configuration to draw Object as light source
     lightRMaterial_ptr->setAmbientColor(glm::vec3(1.0f));
@@ -240,7 +240,7 @@ int main (int argc, char *argv[]) {
     lightRMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
     lightRMaterial_ptr->setShininess(32.0f);
 
-    lightRRenderer->setMaterial(std::move(lightRMaterial_ptr));
+    lightRRenderer.setMaterial(std::move(lightRMaterial_ptr));
 
     // Create Light
     lightR.AddComponent<Light>("Light");

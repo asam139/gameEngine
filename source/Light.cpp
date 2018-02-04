@@ -7,9 +7,9 @@
 CLASS_DEFINITION(Component, Light)
 
 Light::Light( std::string && initialValue ) : Component( std::move( initialValue ) ) {
-    /*setAmbientColor(glm::vec3(0.5f));
+    setAmbientColor(glm::vec3(0.5f));
     setDiffuseColor(glm::vec3(1.0f));
-    setSpecularColor(glm::vec3(0.25f));*/
+    setSpecularColor(glm::vec3(0.25f));
 }
 
 void Light::setAmbientColor(glm::vec3 ambientColor) {

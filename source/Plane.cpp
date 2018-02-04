@@ -29,8 +29,9 @@ Plane::~Plane() {
 }
 
 void Plane::configuration() {
-    auto renderer_ptr = std::shared_ptr<Renderer>(new Renderer(_verticesMap, _verticesMapSize, _indecesMap, _indecesMapSize));
-    setRenderer(renderer_ptr);
+    AddComponent<Renderer>("Renderer");
+    Renderer& renderer =  GetComponent<Renderer>();
+    renderer.createVertexData(_verticesMap, _verticesMapSize, _indecesMap, _indecesMapSize);
 }
 
 void Plane::update(const float deltaTime) {

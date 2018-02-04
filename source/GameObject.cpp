@@ -63,20 +63,13 @@ void GameObject::update(const float deltaTime) {
 
 }
 
-void GameObject::setRenderer(std::shared_ptr<Renderer> renderer) {
-    _renderer = renderer;
-}
-
-Renderer* GameObject::getRenderer() const {
-    return _renderer.get();
-}
-
-void GameObject::display(const glm::mat4 projection, const glm::mat4 view, const glm::vec3 cameraPos, const glm::vec3 lightPos, const Light& light) const {
-    if (_renderer) {
+void GameObject::display(const glm::mat4 projection, const glm::mat4 view, const glm::vec3 cameraPos, const glm::vec3 lightPos, const Light& light) {
+    auto& renderer = GetComponent<Renderer>();
+    if (&renderer != nullptr) {
         glm::mat4 model = getModel();
         glm::mat3 normalMat = glm::inverse(glm::transpose(glm::mat3(model)));
 
-        Shader* shader = _renderer->getMaterial()->getShader();
+        Shader* shader = renderer.getMaterial()->getShader();
         shader->set("view", view);
         shader->set("projection", projection);
         shader->set("model", model);
@@ -88,7 +81,7 @@ void GameObject::display(const glm::mat4 projection, const glm::mat4 view, const
         shader->set("light.diffuse", light.getDiffuseColor());
         shader->set("light.specular", light.getSpecularColor());
 
-        _renderer->render();
+        renderer.render();
     }
 }
 
