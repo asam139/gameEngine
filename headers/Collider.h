@@ -7,13 +7,20 @@
 
 #include "Component.h"
 
+#include <glm/glm.hpp>
+
 class Collider : public Component {
 
     CLASS_DECLARATION( Collider )
 
 public:
-
     Collider(  std::string && initialValue, GameObject * owner );
+
+    void setCenter(glm::vec3 center);
+    glm::vec3 getCenter();
+
+protected:
+    glm::vec3 _center;
 };
 
 

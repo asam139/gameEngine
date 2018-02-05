@@ -9,3 +9,11 @@ CLASS_DEFINITION(Component, Collider)
 Collider::Collider( std::string && initialValue, GameObject *owner) : Component( std::move( initialValue ), owner) {
 
 }
+
+void Collider::setCenter(glm::vec3 center) {
+    _center = center;
+}
+
+glm::vec3 Collider::getCenter() {
+    return _center;
+}
