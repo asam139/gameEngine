@@ -13,6 +13,12 @@ CLASS_DECLARATION( BoxCollider )
 
 public:
     BoxCollider( std::string && initialValue, GameObject *owner);
+
+    void setSize(glm::vec3 size);
+    glm::vec3 getSize();
+
+protected:
+    glm::vec3 _size;
 };
 
 
