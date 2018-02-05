@@ -5,9 +5,9 @@
 #ifndef GAMEENGINE_LIGHT_H
 #define GAMEENGINE_LIGHT_H
 
-#include <glm/glm.hpp>
-
 #include "Component.h"
+
+#include <glm/glm.hpp>
 
 class Light : public Component {
 CLASS_DECLARATION( Light )

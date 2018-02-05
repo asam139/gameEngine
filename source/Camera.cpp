@@ -161,9 +161,9 @@ void Camera::render(GameObject& root, GameObject& lightObject) {
         children = &(gO->children);
         for (int i = 0; i < children->size(); ++i) {
             GameObject* child = (*children)[i].get();
-            //if(gO->getTransform().dirty) {
+            if(gO->getTransform().dirty) {
                 child->getTransform().setParentModel(model);
-            //}
+            }
             Q.push(child);
         }
     }

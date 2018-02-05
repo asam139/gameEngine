@@ -19,6 +19,7 @@ Transform::Transform( std::string && initialValue, GameObject *owner) : Componen
 
 void Transform::setPosition(glm::vec3 position) {
     _position = position;
+    dirty = true;
 }
 
 glm::vec3 Transform::getPosition() const {
@@ -27,14 +28,17 @@ glm::vec3 Transform::getPosition() const {
 
 void Transform::setRotation(glm::quat rotation) {
     _rotation = rotation;
+    dirty = true;
 }
 
 void Transform::setRotation(glm::vec3 eulerAngles) {
     _rotation = glm::quat(eulerAngles);
+    dirty = true;
 }
 
 void Transform::setRotation(float rotationAngle, glm::vec3 rotationAxis) {
     _rotation = glm::angleAxis(rotationAngle, rotationAxis);
+    dirty = true;
 }
 
 glm::quat Transform::getRotation() const {
@@ -43,6 +47,7 @@ glm::quat Transform::getRotation() const {
 
 void Transform::setScale(glm::vec3 scale) {
     _scale = scale;
+    dirty = true;
 }
 
 glm::vec3 Transform::getScale() const {
