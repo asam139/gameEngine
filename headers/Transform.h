@@ -7,6 +7,12 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
+
+#ifndef GLM_ENABLE_EXPERIMENTAL
+#define GLM_ENABLE_EXPERIMENTAL
+#endif
+#include <glm/gtx/quaternion.hpp>
 
 #include "Component.h"
 
@@ -20,8 +26,12 @@ public:
 
     virtual void setPosition(glm::vec3 position);
     glm::vec3 getPosition() const;
-    virtual void setRotation(glm::vec3 rotation);
-    glm::vec3 getRotation() const;
+
+
+    virtual void setRotation(glm::quat rotation);
+    void setRotation(glm::vec3 eulerAngles);
+    void setRotation(float rotationAngle, glm::vec3 rotationAxis);
+    glm::quat getRotation() const;
     virtual void setScale(glm::vec3 scale);
     glm::vec3 getScale() const;
 
@@ -34,7 +44,7 @@ public:
 
 protected:
     glm::vec3 _position;
-    glm::vec3 _rotation;
+    glm::quat _rotation;
     glm::vec3 _scale;
 
     glm::mat4 _parentModel;

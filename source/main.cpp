@@ -198,11 +198,12 @@ int main (int argc, char *argv[]) {
 
 
     auto subCube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    cube_ptr->getTransform().setPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+    subCube_ptr->getTransform().setPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+    subCube_ptr->getTransform().setRotation(M_PI_4, glm::vec3(0.f, 1.f, 0.f));
     auto& subCubeRenderer = subCube_ptr->GetComponent<Renderer>();
+
     subCubeRenderer.setMaterial(cubeMaterial_ptr);
     cube_ptr->AddChild(std::move(subCube_ptr));
-
     gameObjectRoot.AddChild(std::move(cube_ptr));
 
     //////////////////////////
