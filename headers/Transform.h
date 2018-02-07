@@ -24,21 +24,28 @@ public:
     Transform( std::string && initialValue, GameObject * owner);
 
 
-    virtual void setPosition(glm::vec3 position);
+    void setPosition(glm::vec3 position);
     glm::vec3 getPosition() const;
 
-
-    virtual void setRotation(glm::quat rotation);
+    void setRotation(glm::quat rotation);
     void setRotation(glm::vec3 eulerAngles);
     void setRotation(float rotationAngle, glm::vec3 rotationAxis);
     glm::quat getRotation() const;
-    virtual void setScale(glm::vec3 scale);
+    void setScale(glm::vec3 scale);
     glm::vec3 getScale() const;
-
-    glm::mat4 getModel() const;
 
     void setParentModel(glm::mat4 parentModel);
     glm::mat4 getParentModel();
+
+    glm::vec3 getWorldPosition();
+    glm::quat getWorldRotation();
+    glm::vec3 getForward();
+    glm::vec3 getUp();
+    glm::vec3 getRight();
+
+    glm::mat4 getModel() const;
+
+
 
     bool dirty;
 

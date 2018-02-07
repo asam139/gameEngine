@@ -54,6 +54,41 @@ glm::vec3 Transform::getScale() const {
     return _scale;
 }
 
+void Transform::setParentModel(glm::mat4 parentModel) {
+    _parentModel = parentModel;
+    dirty = false;
+}
+
+glm::mat4 Transform::getParentModel() {
+    return _parentModel;
+}
+
+glm::vec3 Transform::getWorldPosition() {
+    glm::vec4 pos = glm::vec4(_position.x, _position.y, _position.z, 1.0f);
+    return glm::vec3(_parentModel * pos);
+}
+
+
+glm::quat Transform::getWorldRotation() {
+    glm::mat4 rotMat = glm::toMat4(_rotation);
+    return glm::toQuat(_parentModel * rotMat);
+}
+
+glm::vec3 Transform::getForward() {
+    glm::vec4 pos = glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
+    return glm::normalize(glm::vec3(glm::rotate(getWorldRotation(), pos)));
+}
+
+glm::vec3 Transform::getUp() {
+    glm::vec4 pos = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
+    return glm::normalize(glm::vec3(glm::rotate(getWorldRotation(), pos)));
+}
+
+glm::vec3 Transform::getRight() {
+    glm::vec4 pos = glm::vec4(1.0f, 0.0f, 0.0f, 0.0f);
+    return glm::normalize(glm::vec3(glm::rotate(getWorldRotation(), pos)));
+}
+
 glm::mat4 Transform::getModel() const {
 
     glm::mat4 model = glm::mat4(1.0f);
@@ -64,11 +99,3 @@ glm::mat4 Transform::getModel() const {
     return _parentModel * model;
 }
 
-void Transform::setParentModel(glm::mat4 parentModel) {
-    _parentModel = parentModel;
-    dirty = false;
-}
-
-glm::mat4 Transform::getParentModel() {
-    return _parentModel;
-}

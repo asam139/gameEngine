@@ -12,10 +12,12 @@ class BoxCollider : public Collider {
 CLASS_DECLARATION( BoxCollider )
 
 public:
-    BoxCollider( std::string && initialValue, GameObject *owner);
+    BoxCollider( std::string && initialValue, GameObject *owner, glm::vec3 size);
 
     void setSize(glm::vec3 size);
     glm::vec3 getSize();
+
+    bool collision(Collider *collider);
 
 protected:
     glm::vec3 _size;
