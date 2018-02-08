@@ -12,6 +12,7 @@
 #include "Transform.h"
 #include "Renderer.h"
 #include "Light.h"
+#include "BoxCollider.h"
 
 class GameObject {
 public:

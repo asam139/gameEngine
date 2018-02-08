@@ -173,8 +173,8 @@ int main (int argc, char *argv[]) {
     gameObjectRoot.AddChild(std::move(plane_ptr));
 
     // Cube
-    auto cube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, -0.5f, 0.0f), 1.f));
-    cube_ptr->getTransform().setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    auto cube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, 0.0f, 0.0f), 1.f));
+    cube_ptr->getTransform().setPosition(glm::vec3(0.0f, 0.5f, 0.0f));
     auto& cubeRenderer = cube_ptr->GetComponent<Renderer>();
 
     auto diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
@@ -195,14 +195,16 @@ int main (int argc, char *argv[]) {
     cubeMaterial_ptr->setEmissiveTexture(emissionTexture_ptr);
 
     cubeRenderer.setMaterial(cubeMaterial_ptr);
-
+    cube_ptr->AddComponent<BoxCollider>("BoxCollider", (GameObject *)cube_ptr.get());
 
     auto subCube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    subCube_ptr->getTransform().setPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+    subCube_ptr->getTransform().setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
     subCube_ptr->getTransform().setRotation(M_PI_4, glm::vec3(0.f, 1.f, 0.f));
-    auto& subCubeRenderer = subCube_ptr->GetComponent<Renderer>();
 
+    auto& subCubeRenderer = subCube_ptr->GetComponent<Renderer>();
     subCubeRenderer.setMaterial(cubeMaterial_ptr);
+    subCube_ptr->AddComponent<BoxCollider>("BoxCollider", (GameObject *)subCube_ptr.get());
+
     cube_ptr->AddChild(std::move(subCube_ptr));
     gameObjectRoot.AddChild(std::move(cube_ptr));
 
@@ -279,6 +281,8 @@ int main (int argc, char *argv[]) {
 
             GameObject& root = *sceneGraph.root;
             GameObject& lightObject = *sphere_ptr;
+
+            sceneGraph.update(deltaTime);
 
             camera.render(root, lightObject);
 

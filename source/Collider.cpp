@@ -7,7 +7,7 @@
 CLASS_DEFINITION(Component, Collider)
 
 Collider::Collider( std::string && initialValue, GameObject *owner) : Component( std::move( initialValue ), owner) {
-
+    _center = glm::vec3(0.0f);
 }
 
 void Collider::setCenter(glm::vec3 center) {

@@ -15,6 +15,7 @@ public:
 
     GameObject* root;
 
+    void update(float deltaTime);
 private:
     SceneGraph(){};
 };

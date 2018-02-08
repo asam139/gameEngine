@@ -33,6 +33,7 @@ static float _verticesMap[] = {
     -0.5f, 0.5f, -0.5f,     0.0f, 1.0f,          0.0f, 1.0f, 0.0f
 };
 
+
 const unsigned int _indecesMapSize = 36;
 static unsigned int _indecesMap[] = {
     0, 1, 2,        0, 2, 3, //Front
