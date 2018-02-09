@@ -57,4 +57,8 @@ void GameObject::display(const glm::mat4 projection, const glm::mat4 view, const
     }
 }
 
+void GameObject::collide(Collider* collider) {
+    
+}
+
 

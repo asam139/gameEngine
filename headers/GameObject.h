@@ -50,6 +50,7 @@ public:
 
     virtual void update(const float deltaTime);
     virtual void display(const glm::mat4 projection, const glm::mat4 view, const glm::vec3 cameraPos, const glm::vec3 lightPos, const Light& light);
+    virtual void collide(Collider* collider);
 
 protected:
     Transform* _transform;

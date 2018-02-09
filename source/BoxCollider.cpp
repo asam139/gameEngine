@@ -6,7 +6,6 @@
 #include "GameObject.h"
 
 #include <iostream>
-#include <BoxCollider.h>
 
 const unsigned int _cornersSize = 8;
 static glm::vec3 _corners[] = {
@@ -57,11 +56,10 @@ bool BoxCollider::collision(Collider *collider) {
 
 BoxCollider::AABB BoxCollider::getAABB() {
     Transform& transform = getGameObject().getTransform();
-    //glm::mat4 model = transform.getModel();
     glm::vec3 finalPos  = transform.getWorldPosition() + _center;
-    glm::vec3 otherHalfSize = 1.0f * transform.getScale() * _size;
+    glm::vec3 otherHalfSize = transform.getScale() * _size;
 
-    std::cout << "FinalPos: x->" << finalPos.x << " FinalPos: y->" << finalPos.y << " FinalPos: z->" << finalPos.z << std::endl;
+    //std::cout << "FinalPos: x->" << finalPos.x << " FinalPos: y->" << finalPos.y << " FinalPos: z->" << finalPos.z << std::endl;
 
     // Get minVector and maxVector
     glm::vec3 corner = finalPos + _corners[0] * otherHalfSize;
@@ -82,8 +80,8 @@ BoxCollider::AABB BoxCollider::getAABB() {
     aabb.minVec = minV;
     aabb.maxVec = maxV;
 
-    std::cout << "Min: x->" << minV.x << " Min: y->" << minV.y << " Min: z->" << minV.z << std::endl;
-    std::cout << "Max: x->" << maxV.x << " Max: y->" << maxV.y << " Man: z->" << maxV.z << std::endl;
+    //std::cout << "Min: x->" << minV.x << " Min: y->" << minV.y << " Min: z->" << minV.z << std::endl;
+    //std::cout << "Max: x->" << maxV.x << " Max: y->" << maxV.y << " Man: z->" << maxV.z << std::endl;
     return aabb;
 };
 
