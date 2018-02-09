@@ -14,13 +14,58 @@
 #include "Cube.h"
 #include "Sphere.h"
 
-#include "BitmaskEnum.h"
 
-///////////////////////
-// Static variables
+//////////////////////////////////////
+// Declaration
 
-uint32_t kScreenWidth = 800;
-uint32_t kScreenHeight = 800;
+void runGame(GLFWwindow *window);
+void menuKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode);
+void gameKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode);
+void winKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode);
+void loseKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode);
+//To test
+void loopKeyControl(GLFWwindow *window);
+
+void freeOpenGLProgram();
+void generateLevelBlocks();
+void initOpenGLProgram();
+
+void drawSceneAndDetectCollisions(GLFWwindow *window, float padDeltaX, float ballDeltaX[], float ballDeltaY[]);
+void drawMenu(GLFWwindow *window);
+void drawWIN(GLFWwindow *window);
+void drawLOSE(GLFWwindow *window);
+
+//////////////////////////////////////
+
+enum class GameState: unsigned int {
+    Menu = 0,
+    Game = 1,
+    Win = 2,
+    Lose = 3
+};
+
+GameState gameState = GameState::Menu;
+bool pause = false;
+
+unsigned int  kScreenWidth = 1024, kScreenHeight = 768;
+const unsigned int ballCount = 1;
+const unsigned int levelColumns = 7;
+const unsigned int levelRows = 12;
+
+float padVelocityX = 0.0f;
+
+///////////////////////////////////////
+
+Cube *leftWall;
+Cube *rightWall;
+Cube *upperWall;
+Cube *ground;
+Cube *pad;
+Sphere *ball;
+
+GameObject *levelBlocks[levelColumns * levelRows];
+
+///////////////////////////////////////
 
 // To control time
 static float deltaTime = 0.0f;
@@ -33,10 +78,29 @@ bool firstMouse = true;
 float lastX = (float)kScreenWidth / 2.f;
 float lastY = (float)kScreenHeight / 2.f;
 
-///////////////////////
+//////////////////////////////////////
+
+
+void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode) {
+    switch (gameState) {
+        case GameState::Menu:
+            menuKeyControl(window, key, scancode, action, mode);
+            break;
+        case GameState::Game:
+
+            gameKeyControl(window, key, scancode, action, mode);
+            break;
+        case GameState::Win:
+            winKeyControl(window, key, scancode, action, mode);
+            break;
+        case GameState::Lose:
+            loseKeyControl(window, key, scancode, action, mode);
+            break;
+    }
+}
 
 // Resize callback
-void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_t height) {
+void framebufferSizeCallck(GLFWwindow* window, const GLint width, const int32_t height) {
     kScreenWidth = static_cast<float>(width);
     kScreenHeight = static_cast<float>(height);
     camera.setAspect(kScreenWidth/kScreenHeight);
@@ -44,10 +108,8 @@ void onChangeFramebufferSize(GLFWwindow* window, const GLint width, const int32_
     glViewport(0, 0, width, height);
 }
 
-
 // Mouse callback
-
-void onMouse(GLFWwindow* window, double xpos, double ypos) {
+void mouseCallback(GLFWwindow* window, double xpos, double ypos) {
     // Initial values the first frame
     if (firstMouse) {
         lastX = static_cast<float> (xpos);
@@ -66,20 +128,82 @@ void onMouse(GLFWwindow* window, double xpos, double ypos) {
 }
 
 // Scroll callback
-void onScroll(GLFWwindow* window, double xOffset, double yOffset) {
+void scrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
     camera.handleMouseScroll(static_cast<const float>(yOffset));
 }
 
-// Handle Input
-void handleInput(GLFWwindow* window) {
 
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        glfwSetWindowShouldClose(window, true);
-        return;
+
+void menuKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode) {
+    if (action == GLFW_PRESS) {
+        if (key == GLFW_KEY_ESCAPE) {
+            glfwSetWindowShouldClose(window, GL_TRUE);
+            return;
+        }
+        gameState = GameState::Game;
+        glfwSetTime(0);
+    }
+}
+
+
+void gameKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode)
+{
+    if (action == GLFW_PRESS) {
+        if (key == GLFW_KEY_ESCAPE)  {
+            glfwSetWindowShouldClose(window, GL_TRUE);
+            return;
+        }
+        if (key == GLFW_KEY_LEFT) {
+            padVelocityX = 30;
+        }
+        if (key == GLFW_KEY_RIGHT) {
+            padVelocityX = -30;
+        }
+        if (key == GLFW_KEY_P) {
+            pause = !pause;
+        }
+        if( key == GLFW_KEY_R) {
+            initOpenGLProgram();
+            glfwSetTime(0);
+        }
     }
 
-    Movement movementMask = MovementNone;
+    if (action == GLFW_RELEASE) {
+        padVelocityX = 0;
+    }
+}
 
+void winKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode) {
+    if (action == GLFW_PRESS) {
+        if (key == GLFW_KEY_ESCAPE) {
+            glfwSetWindowShouldClose(window, GL_TRUE);
+            return;
+        }
+        initOpenGLProgram();
+        gameState = GameState::Game;
+        glfwSetTime(0);
+    }
+}
+
+void loseKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode) {
+    if (action == GLFW_PRESS) {
+        if (key == GLFW_KEY_ESCAPE)
+        {
+            glfwSetWindowShouldClose(window, GL_TRUE);
+            return;
+        }
+        initOpenGLProgram();
+        gameState = GameState::Game;
+        glfwSetTime(0);
+    }
+}
+
+
+//////////////////////////////////
+
+// Handle Input
+void loopKeyControl(GLFWwindow *window) {
+    Movement movementMask = MovementNone;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         movementMask |= MovementForward;
     } else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
@@ -87,7 +211,7 @@ void handleInput(GLFWwindow* window) {
     }
 
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        movementMask |= MovementRight;
+    movementMask |= MovementRight;
     } else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
         movementMask |= MovementLeft;
     }
@@ -122,15 +246,18 @@ int main (int argc, char *argv[]) {
         return -1;
     }
 
+    // Key callback
+    glfwSetKeyCallback(window, keyCallback);
+
     // Resize callback
-    glfwSetFramebufferSizeCallback(window, &onChangeFramebufferSize);
+    glfwSetFramebufferSizeCallback(window, &framebufferSizeCallck);
 
     // Mouse callback
-    glfwSetCursorPosCallback(window, onMouse);
+    glfwSetCursorPosCallback(window, mouseCallback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     //Scroll callback
-    glfwSetScrollCallback(window, onScroll);
+    glfwSetScrollCallback(window, scrollCallback);
 
     ///////////////////////////
     // Configure Camera
@@ -265,15 +392,17 @@ int main (int argc, char *argv[]) {
         auto time = static_cast<float>(glfwGetTime());
         deltaTime = time - lastTime;
 
+
+
         if( deltaTime >= maxPeriod ) {
             lastTime = time;
-
             //////////////////////////////
             // Code here gets called with max FPS
             //////////////////////////////
 
-            // Handle Input
-            handleInput(window);
+            // Loop Key Control
+            loopKeyControl(window);
+
 
             // Clear
             glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
@@ -296,4 +425,9 @@ int main (int argc, char *argv[]) {
 
     glfwTerminate();
     return 0;
+}
+
+
+void initOpenGLProgram() {
+    
 }
