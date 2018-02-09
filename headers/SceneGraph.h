@@ -10,14 +10,16 @@
 
 class SceneGraph {
 public:
-    SceneGraph(GameObject* r);
+    SceneGraph(std::shared_ptr<GameObject> root);
     ~SceneGraph();
 
-    GameObject* root;
+    GameObject* getRoot();
 
     void update(float deltaTime);
 private:
     SceneGraph(){};
+
+    std::shared_ptr<GameObject> _root;
 };
 
 

@@ -6,13 +6,18 @@
 
 #include <queue>
 #include <iostream>
+#include <utility>
 
-SceneGraph::SceneGraph(GameObject *r) {
-    root = r;
+SceneGraph::SceneGraph(std::shared_ptr<GameObject> root) {
+    _root = std::move(root);
 }
 
 SceneGraph::~SceneGraph() {
 
+}
+
+GameObject* SceneGraph::getRoot() {
+    return _root.get();
 }
 
 void SceneGraph::update(float deltaTime) {
@@ -20,8 +25,8 @@ void SceneGraph::update(float deltaTime) {
     std::vector<GameObject*> allObject;
     std::vector<std::shared_ptr<GameObject>>* children;
 
-    Q.push(root);
-    allObject.push_back(root);
+    Q.push(_root.get());
+    allObject.push_back(_root.get());
     while(!Q.empty()) {
         GameObject* gO = Q.front();
         Q.pop();

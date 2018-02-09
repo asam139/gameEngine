@@ -15,6 +15,55 @@
 #include "Sphere.h"
 
 
+unsigned int  kScreenWidth = 1024, kScreenHeight = 768;
+
+///////////////////////////////////////
+// SceneGraph
+std::shared_ptr<SceneGraph> sceneGraph;
+
+// Camera
+std::shared_ptr<Camera> camera;
+
+// Light
+GameObject *lightGameObject;
+
+///////////////////////////////////////
+
+enum class GameState: unsigned int {
+    Menu = 0,
+    Game = 1,
+    Win = 2,
+    Lose = 3
+};
+
+GameState gameState = GameState::Menu;
+bool pause = false;
+
+const unsigned int ballCount = 1;
+const unsigned int levelColumns = 7;
+const unsigned int levelRows = 12;
+
+float padVelocityX = 0.0f;
+
+Cube* leftWall;
+Cube* rightWall;
+Cube* upperWall;
+Cube* ground;
+Cube* pad;
+Sphere* ball;
+
+GameObject *levelBlocks[levelColumns * levelRows];
+
+///////////////////////////////////////
+
+// To control time
+static float deltaTime = 0.0f;
+
+// Mouse
+bool firstMouse = true;
+float lastX = (float)kScreenWidth / 2.f;
+float lastY = (float)kScreenHeight / 2.f;
+
 //////////////////////////////////////
 // Declaration
 
@@ -34,49 +83,6 @@ void drawSceneAndDetectCollisions(GLFWwindow *window, float padDeltaX, float bal
 void drawMenu(GLFWwindow *window);
 void drawWIN(GLFWwindow *window);
 void drawLOSE(GLFWwindow *window);
-
-//////////////////////////////////////
-
-enum class GameState: unsigned int {
-    Menu = 0,
-    Game = 1,
-    Win = 2,
-    Lose = 3
-};
-
-GameState gameState = GameState::Menu;
-bool pause = false;
-
-unsigned int  kScreenWidth = 1024, kScreenHeight = 768;
-const unsigned int ballCount = 1;
-const unsigned int levelColumns = 7;
-const unsigned int levelRows = 12;
-
-float padVelocityX = 0.0f;
-
-///////////////////////////////////////
-
-Cube *leftWall;
-Cube *rightWall;
-Cube *upperWall;
-Cube *ground;
-Cube *pad;
-Sphere *ball;
-
-GameObject *levelBlocks[levelColumns * levelRows];
-
-///////////////////////////////////////
-
-// To control time
-static float deltaTime = 0.0f;
-
-// Camera
-Camera camera(glm::vec3(0.0f, 2.0f, 5.0f), glm::vec3(0.f, 1.f, 0.f), -10.f);
-
-// Mouse
-bool firstMouse = true;
-float lastX = (float)kScreenWidth / 2.f;
-float lastY = (float)kScreenHeight / 2.f;
 
 //////////////////////////////////////
 
@@ -100,10 +106,10 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 }
 
 // Resize callback
-void framebufferSizeCallck(GLFWwindow* window, const GLint width, const int32_t height) {
+void framebufferSizeCallback(GLFWwindow* window, const GLint width, const int32_t height) {
     kScreenWidth = static_cast<float>(width);
     kScreenHeight = static_cast<float>(height);
-    camera.setAspect(kScreenWidth/kScreenHeight);
+    camera->setAspect(kScreenWidth/kScreenHeight);
 
     glViewport(0, 0, width, height);
 }
@@ -124,12 +130,12 @@ void mouseCallback(GLFWwindow* window, double xpos, double ypos) {
     lastX = static_cast<float> (xpos);
     lastY = static_cast<float> (ypos);
 
-    camera.handleMouseMovement(xOffset, yOffset);
+    camera->handleMouseMovement(xOffset, yOffset);
 }
 
 // Scroll callback
 void scrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
-    camera.handleMouseScroll(static_cast<const float>(yOffset));
+    camera->handleMouseScroll(static_cast<const float>(yOffset));
 }
 
 
@@ -216,7 +222,7 @@ void loopKeyControl(GLFWwindow *window) {
         movementMask |= MovementLeft;
     }
 
-    camera.handleKeyboard(movementMask, deltaTime);
+    camera->handleKeyboard(movementMask, deltaTime);
 }
 
 int main (int argc, char *argv[]) {
@@ -250,7 +256,7 @@ int main (int argc, char *argv[]) {
     glfwSetKeyCallback(window, keyCallback);
 
     // Resize callback
-    glfwSetFramebufferSizeCallback(window, &framebufferSizeCallck);
+    glfwSetFramebufferSizeCallback(window, &framebufferSizeCallback);
 
     // Mouse callback
     glfwSetCursorPosCallback(window, mouseCallback);
@@ -261,13 +267,91 @@ int main (int argc, char *argv[]) {
 
     ///////////////////////////
     // Configure Camera
-    camera.setAspect(kScreenWidth/kScreenHeight);
-    camera.setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
+
+
+    ///////////////////////////
+    initOpenGLProgram();
+
+
+    // To control FPS
+    const float maxFPS = 60.f;
+    const float maxPeriod = 1.f / maxFPS;
+    // approx ~ 16.666 ms
+
+    float lastTime = 0.0;
+
+
+    while (!glfwWindowShouldClose(window)) { //Loop until user closes the window+
+        auto time = static_cast<float>(glfwGetTime());
+        deltaTime = time - lastTime;
+
+
+
+        if( deltaTime >= maxPeriod ) {
+            lastTime = time;
+            //////////////////////////////
+            // Code here gets called with max FPS
+            //////////////////////////////
+
+            // Loop Key Control
+            loopKeyControl(window);
+
+
+            sceneGraph->update(deltaTime);
+
+            ////////////////////////////////////////////////
+            // Clear
+            glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            GameObject& root = *sceneGraph.get()->getRoot();
+            GameObject& lightObject = *lightGameObject;
+            camera->render(root, lightObject);
+            ////////////////////////////////////////////////
+
+            //Swap front and back buffers
+            glfwSwapBuffers(window);
+
+            // Poll for and process events
+            glfwPollEvents();
+        }
+    }
+
+    glfwTerminate();
+    return 0;
+}
+
+
+void initOpenGLProgram() {
+    //glEnable(GL_BLEND);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    // To draw only the lines
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    // To not draw back faces
+    glCullFace(GL_BACK);
+    // Enable Culling
+    glEnable(GL_CULL_FACE);
+
+    // Enable Depth
+    glDepthFunc(GL_LESS);
+    glEnable(GL_DEPTH_TEST);
+
+
+    ///////////////////////////
+    // Configure Camera
+    // Camera
+    camera = std::shared_ptr<Camera>(new Camera (glm::vec3(0.0f, 2.0f, 5.0f), glm::vec3(0.f, 1.f, 0.f), -10.f));
+    camera.get()->setAspect(kScreenWidth/kScreenHeight);
+    camera.get()->setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
 
     ///////////////////////////
     // SceneGraph
-    GameObject gameObjectRoot;
-    SceneGraph sceneGraph(&gameObjectRoot);
+    auto gameObjectRoot_ptr = std::shared_ptr<GameObject>(new GameObject());
+    GameObject& gameObjectRoot = *gameObjectRoot_ptr.get();
+    sceneGraph = std::shared_ptr<SceneGraph>(new SceneGraph(gameObjectRoot_ptr));
+
 
     ///////////////////////////
     // Create program
@@ -361,73 +445,6 @@ int main (int argc, char *argv[]) {
     lightRef.setDiffuseColor(glm::vec3(0.8f));
     lightRef.setSpecularColor(glm::vec3(0.5f));
 
-    gameObjectRoot.AddChild(sphere_ptr);
-
-    ///////////////////////////
-
-    //glEnable(GL_BLEND);
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    // To draw only the lines
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-    // To not draw back faces
-    glCullFace(GL_BACK);
-    // Enable Culling
-    glEnable(GL_CULL_FACE);
-
-    // Enable Depth
-    glDepthFunc(GL_LESS);
-    glEnable(GL_DEPTH_TEST);
-
-    // To control FPS
-    const float maxFPS = 60.f;
-    const float maxPeriod = 1.f / maxFPS;
-    // approx ~ 16.666 ms
-
-    float lastTime = 0.0;
-
-
-    while (!glfwWindowShouldClose(window)) { //Loop until user closes the window+
-        auto time = static_cast<float>(glfwGetTime());
-        deltaTime = time - lastTime;
-
-
-
-        if( deltaTime >= maxPeriod ) {
-            lastTime = time;
-            //////////////////////////////
-            // Code here gets called with max FPS
-            //////////////////////////////
-
-            // Loop Key Control
-            loopKeyControl(window);
-
-
-            // Clear
-            glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-            GameObject& root = *sceneGraph.root;
-            GameObject& lightObject = *sphere_ptr;
-
-            sceneGraph.update(deltaTime);
-
-            camera.render(root, lightObject);
-
-            //Swap front and back buffers
-            glfwSwapBuffers(window);
-
-            // Poll for and process events
-            glfwPollEvents();
-        }
-    }
-
-    glfwTerminate();
-    return 0;
-}
-
-
-void initOpenGLProgram() {
-    
+    lightGameObject = sphere_ptr.get();
+    gameObjectRoot.AddChild(std::move(sphere_ptr));
 }
