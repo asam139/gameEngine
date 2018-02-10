@@ -15,7 +15,7 @@
 #include "Sphere.h"
 
 
-unsigned int  kScreenWidth = 1024, kScreenHeight = 768;
+unsigned int  kScreenWidth = 800, kScreenHeight = 800;
 
 ///////////////////////////////////////
 // SceneGraph
@@ -67,7 +67,6 @@ float lastY = (float)kScreenHeight / 2.f;
 //////////////////////////////////////
 // Declaration
 
-void runGame(GLFWwindow *window);
 void menuKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode);
 void gameKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode);
 void winKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode);
@@ -79,6 +78,7 @@ void freeOpenGLProgram();
 void generateLevelBlocks();
 void initOpenGLProgram();
 
+void runGame(GLFWwindow *window);
 void drawSceneAndDetectCollisions(GLFWwindow *window, float padDeltaX, float ballDeltaX[], float ballDeltaY[]);
 void drawMenu(GLFWwindow *window);
 void drawWIN(GLFWwindow *window);
@@ -266,12 +266,7 @@ int main (int argc, char *argv[]) {
     glfwSetScrollCallback(window, scrollCallback);
 
     ///////////////////////////
-    // Configure Camera
-
-
-    ///////////////////////////
     initOpenGLProgram();
-
 
     // To control FPS
     const float maxFPS = 60.f;
@@ -284,30 +279,27 @@ int main (int argc, char *argv[]) {
     while (!glfwWindowShouldClose(window)) { //Loop until user closes the window+
         auto time = static_cast<float>(glfwGetTime());
         deltaTime = time - lastTime;
-
-
-
         if( deltaTime >= maxPeriod ) {
             lastTime = time;
             //////////////////////////////
             // Code here gets called with max FPS
             //////////////////////////////
-
-            // Loop Key Control
-            loopKeyControl(window);
-
-
-            sceneGraph->update(deltaTime);
-
-            ////////////////////////////////////////////////
-            // Clear
-            glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-            GameObject& root = *sceneGraph.get()->getRoot();
-            GameObject& lightObject = *lightGameObject;
-            camera->render(root, lightObject);
-            ////////////////////////////////////////////////
+            switch (gameState) {
+                case GameState::Menu:
+                    drawMenu(window);
+                    break;
+                case GameState::Game:
+                    // Loop Key Control
+                    loopKeyControl(window);
+                    runGame(window);
+                    break;
+                case GameState::Win:
+                    drawWIN(window);
+                    break;
+                case GameState::Lose:
+                    drawLOSE(window);
+                    break;
+            }
 
             //Swap front and back buffers
             glfwSwapBuffers(window);
@@ -447,4 +439,44 @@ void initOpenGLProgram() {
 
     lightGameObject = sphere_ptr.get();
     gameObjectRoot.AddChild(std::move(sphere_ptr));
+}
+
+void runGame(GLFWwindow *window) {
+    sceneGraph->update(deltaTime);
+
+    ////////////////////////////////////////////////
+    // Clear
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    GameObject& root = *sceneGraph.get()->getRoot();
+    GameObject& lightObject = *lightGameObject;
+    camera->render(root, lightObject);
+    ////////////////////////////////////////////////
+}
+
+
+void drawMenu(GLFWwindow *window) {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    //printText2D("Press any key to start ...", 130, 300, 20);
+
+    glfwSwapBuffers(window);
+}
+
+void drawWIN(GLFWwindow *window) {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    //printText2D("You win !", 100, 300, 60);
+    //printText2D("Press any key to restart or esc to exit", 100, 250, 15);
+
+    glfwSwapBuffers(window);
+}
+void drawLOSE(GLFWwindow *window) {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    //printText2D("You lose !", 100, 300, 60);
+    //printText2D("Press any key to restart or esc to exit", 100, 250, 15);
+
+    glfwSwapBuffers(window);
 }
