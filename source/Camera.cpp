@@ -142,7 +142,7 @@ void Camera::render(GameObject& root, GameObject& lightObject) {
 
     ////////////////////////////////
     // Get Light
-    auto& light = lightObject.GetComponent<Light>();
+    auto light = lightObject.GetComponent<Light>();
     glm::vec3 lightPos = lightObject.getTransform().getPosition();
 
 
@@ -156,7 +156,7 @@ void Camera::render(GameObject& root, GameObject& lightObject) {
         glm::mat4 model = gO->getTransform().getModel();
         Q.pop();
 
-        gO->display(projection, view, cameraPos, lightPos, light);
+        gO->display(projection, view, cameraPos, lightPos, *light);
 
         children = &(gO->children);
         for (int i = 0; i < children->size(); ++i) {

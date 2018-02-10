@@ -45,15 +45,15 @@ void SceneGraph::update(float deltaTime) {
         for(auto const& gObject1: allObject) {
             if (gObject0 == gObject1) continue;
 
-            auto& boxCollider0 =  gObject0->GetComponent<BoxCollider>();
-            auto& boxCollider1 =  gObject1->GetComponent<BoxCollider>();
-            if (&boxCollider0 == nullptr || &boxCollider1 == nullptr) continue;
+            auto boxCollider0 =  gObject0->GetComponent<BoxCollider>();
+            auto boxCollider1 =  gObject1->GetComponent<BoxCollider>();
+            if (boxCollider0 == nullptr || boxCollider1 == nullptr) continue;
 
-            bool collision = boxCollider0.collision(&boxCollider1);
+            bool collision = boxCollider0->collision(boxCollider1);
             //std::cout << "Collision: " << collision << std::endl;
             if (collision) {
-                gObject0->collide(&boxCollider1);
-                gObject1->collide(&boxCollider0);
+                gObject0->collide(boxCollider1);
+                gObject1->collide(boxCollider0);
             }
         }
     }

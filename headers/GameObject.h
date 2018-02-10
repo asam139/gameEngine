@@ -26,7 +26,7 @@ public:
     void AddComponent( Args&&... params );
 
     template< class ComponentType >
-    ComponentType& GetComponent();
+    ComponentType* GetComponent();
 
     template< class ComponentType >
     bool RemoveComponent();
@@ -79,13 +79,13 @@ void GameObject::AddComponent( Args&&... params ) {
 // then components[0] will be returned because it derives from Component
 //***************
 template< class ComponentType >
-ComponentType & GameObject::GetComponent() {
+ComponentType* GameObject::GetComponent() {
     for ( auto && component : components ) {
         if ( component->IsClassType( ComponentType::Type ) )
-            return *static_cast< ComponentType * >( component.get() );
+            return static_cast< ComponentType * >( component.get() );
     }
 
-    return *std::unique_ptr< ComponentType >( nullptr );
+    return std::unique_ptr< ComponentType >( nullptr ).get();
 }
 
 //***************

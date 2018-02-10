@@ -87,8 +87,8 @@ void Cube::configuration() {
     }
 
     AddComponent<Renderer>("Renderer", this);
-    Renderer& renderer =  GetComponent<Renderer>();
-    renderer.createVertexData(vertices, _verticesMapSize, _indecesMap, _indecesMapSize);
+    Renderer* renderer =  GetComponent<Renderer>();
+    renderer->createVertexData(vertices, _verticesMapSize, _indecesMap, _indecesMapSize);
 }
 
 void Cube::update(const float deltaTime) {

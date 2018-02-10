@@ -381,16 +381,16 @@ void initOpenGLProgram() {
     auto leftWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
     leftWall_ptr->getTransform().setPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
     leftWall_ptr->getTransform().setScale(glm::vec3(1.0f, 10.0f, 1.0f));
-    auto& renderer = leftWall_ptr->GetComponent<Renderer>();
-    renderer.setMaterial(material_ptr);
+    auto renderer = leftWall_ptr->GetComponent<Renderer>();
+    renderer->setMaterial(material_ptr);
     leftWall_ptr->AddComponent<BoxCollider>("BoxCollider", leftWall_ptr.get());
     gameObjectRoot.AddChild(std::move(leftWall_ptr));
 
     auto rightWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
     rightWall_ptr->getTransform().setPosition(glm::vec3(5.0f, 0.0f, 0.0f));
     rightWall_ptr->getTransform().setScale(glm::vec3(1.0f, 10.0f, 1.0f));
-    auto& rRenderer = rightWall_ptr->GetComponent<Renderer>();
-    rRenderer.setMaterial(material_ptr);
+    auto rRenderer = rightWall_ptr->GetComponent<Renderer>();
+    rRenderer->setMaterial(material_ptr);
     rightWall_ptr->AddComponent<BoxCollider>("BoxCollider", rightWall_ptr.get());
     gameObjectRoot.AddChild(std::move(rightWall_ptr));
 
@@ -420,7 +420,7 @@ void initOpenGLProgram() {
     sphere_ptr->getTransform().setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
     sphere_ptr->getTransform().setScale(glm::vec3(0.3f));
 
-    auto& lightRRenderer = sphere_ptr->GetComponent<Renderer>();
+    auto lightRRenderer = sphere_ptr->GetComponent<Renderer>();
     auto lightRMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
     // Special configuration to draw Object as light source
     lightRMaterial_ptr->setAmbientColor(glm::vec3(1.0f));
@@ -430,15 +430,15 @@ void initOpenGLProgram() {
     lightRMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
     lightRMaterial_ptr->setShininess(32.0f);
 
-    lightRRenderer.setMaterial(std::move(lightRMaterial_ptr));
+    lightRRenderer->setMaterial(std::move(lightRMaterial_ptr));
 
     // Create Light
     sphere_ptr->AddComponent<Light>("Light", sphere_ptr.get());
 
-    auto& lightRef = sphere_ptr->GetComponent< Light >();
-    lightRef.setAmbientColor(glm::vec3(0.8f));
-    lightRef.setDiffuseColor(glm::vec3(0.8f));
-    lightRef.setSpecularColor(glm::vec3(0.5f));
+    auto lightRef = sphere_ptr->GetComponent< Light >();
+    lightRef->setAmbientColor(glm::vec3(0.8f));
+    lightRef->setDiffuseColor(glm::vec3(0.8f));
+    lightRef->setSpecularColor(glm::vec3(0.5f));
 
     lightGameObject = sphere_ptr.get();
     gameObjectRoot.AddChild(std::move(sphere_ptr));

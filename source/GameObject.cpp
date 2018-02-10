@@ -6,7 +6,7 @@
 
 GameObject::GameObject() {
     AddComponent<Transform>("Transform", this);
-    _transform = &GetComponent<Transform>();
+    _transform = GetComponent<Transform>();
 
     configuration();
 }
@@ -36,12 +36,12 @@ void GameObject::update(const float deltaTime) {
 }
 
 void GameObject::display(const glm::mat4 projection, const glm::mat4 view, const glm::vec3 cameraPos, const glm::vec3 lightPos, const Light& light) {
-    auto& renderer = GetComponent<Renderer>();
-    if (&renderer != nullptr) {
+    auto renderer = GetComponent<Renderer>();
+    if (renderer != nullptr) {
         glm::mat4 model = _transform->getModel();
         glm::mat3 normalMat = glm::inverse(glm::transpose(glm::mat3(model)));
 
-        Shader* shader = renderer.getMaterial()->getShader();
+        Shader* shader = renderer->getMaterial()->getShader();
         shader->set("view", view);
         shader->set("projection", projection);
         shader->set("model", model);
@@ -53,7 +53,7 @@ void GameObject::display(const glm::mat4 projection, const glm::mat4 view, const
         shader->set("light.diffuse", light.getDiffuseColor());
         shader->set("light.specular", light.getSpecularColor());
 
-        renderer.render();
+        renderer->render();
     }
 }
 
