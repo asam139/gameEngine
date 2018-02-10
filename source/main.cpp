@@ -38,7 +38,7 @@ enum class GameState: unsigned int {
     Lose = 3
 };
 
-GameState gameState = GameState::Menu;
+GameState gameState = GameState::Game;
 bool pause = false;
 
 const unsigned int ballCount = 1;
@@ -249,8 +249,6 @@ int main (int argc, char *argv[]) {
 
 
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {  //Init GLAD
-
-        std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
 
@@ -339,7 +337,7 @@ void initOpenGLProgram() {
     ///////////////////////////
     // Configure Camera
     // Camera
-    camera = std::shared_ptr<Camera>(new Camera (glm::vec3(0.0f, 2.0f, 5.0f), glm::vec3(0.f, 1.f, 0.f), -10.f));
+    camera = std::shared_ptr<Camera>(new Camera (glm::vec3(0.0f, 2.0f, 20.0f), glm::vec3(0.f, 1.f, 0.f), 0.0f));
     camera->setAspect(kScreenWidth/kScreenHeight);
     camera->setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
 
@@ -358,51 +356,51 @@ void initOpenGLProgram() {
     // Create White Texture
     auto defaultTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/whiteTex.png", GL_RGB));
 
-    ///////////////////////////
-    // Create Objects
-
-    // Plane
-    auto plane_ptr = std::unique_ptr<Plane>(new Plane());
-    plane_ptr->getTransform().setPosition(glm::vec3(0.0f));
-    plane_ptr->getTransform().setScale(glm::vec3(10.f, 1.0f, 10.f)); // Works with glm::vec3(10.0f)
-
-    auto& planeRenderer = plane_ptr->GetComponent<Renderer>();
-
-    auto planeMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
-    planeMaterial_ptr->setAmbientColor(glm::vec3(0.1f));
-    planeMaterial_ptr->setDiffuseColor(glm::vec3(0.0f));
-    planeMaterial_ptr->setDiffuseTexture(defaultTexture_ptr);
-    planeMaterial_ptr->setSpecularColor(glm::vec3(.1f));
-    planeMaterial_ptr->setSpecularTexture(defaultTexture_ptr);
-    planeMaterial_ptr->setShininess(16.0f);
-
-    planeRenderer.setMaterial(std::move(planeMaterial_ptr));
-
-    gameObjectRoot.AddChild(std::move(plane_ptr));
-
-    // Cube
-    auto cube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, 0.0f, 0.0f), 1.f));
-    cube_ptr->getTransform().setPosition(glm::vec3(0.0f, 0.5f, 0.0f));
-    auto& cubeRenderer = cube_ptr->GetComponent<Renderer>();
-
+    // Creatte Other Textures
     auto diffTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/diffuseTex.jpg", GL_RGB));
     auto specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/specularTex.jpg", GL_RGB));
     auto emissionTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/emissiveTex.jpg", GL_RGB));
 
-    auto cubeMaterial_ptr = std::shared_ptr<Material>(new Material(shader_ptr));
 
-    cubeMaterial_ptr->setAmbientColor(glm::vec3(0.25f));
-    cubeMaterial_ptr->setDiffuseColor(glm::vec3(1.0f));
-    cubeMaterial_ptr->setDiffuseTexture(diffTexture_ptr);
-    cubeMaterial_ptr->setSpecularColor(glm::vec3(1.0f));
-    cubeMaterial_ptr->setSpecularTexture(specTexture_ptr);
-    cubeMaterial_ptr->setShininess(32.0f);
+    ///////////////////////////
+    // Create Objects
 
-    cubeMaterial_ptr->setEmissionActive(true);
-    cubeMaterial_ptr->setEmissiveColor(glm::vec3(1.0f));
-    cubeMaterial_ptr->setEmissiveTexture(emissionTexture_ptr);
+    // Material
+    auto material_ptr = std::shared_ptr<Material>(new Material(shader_ptr));
 
-    cubeRenderer.setMaterial(cubeMaterial_ptr);
+    material_ptr->setAmbientColor(glm::vec3(0.25f));
+    material_ptr->setDiffuseColor(glm::vec3(1.0f));
+    material_ptr->setDiffuseTexture(diffTexture_ptr);
+    material_ptr->setSpecularColor(glm::vec3(1.0f));
+    material_ptr->setSpecularTexture(specTexture_ptr);
+    material_ptr->setShininess(32.0f);
+
+    material_ptr->setEmissionActive(false);
+
+    // Left Wall
+    auto leftWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
+    leftWall_ptr->getTransform().setPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
+    leftWall_ptr->getTransform().setScale(glm::vec3(1.0f, 10.0f, 1.0f));
+    auto& renderer = leftWall_ptr->GetComponent<Renderer>();
+    renderer.setMaterial(material_ptr);
+    leftWall_ptr->AddComponent<BoxCollider>("BoxCollider", leftWall_ptr.get());
+    gameObjectRoot.AddChild(std::move(leftWall_ptr));
+
+    auto rightWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
+    rightWall_ptr->getTransform().setPosition(glm::vec3(5.0f, 0.0f, 0.0f));
+    rightWall_ptr->getTransform().setScale(glm::vec3(1.0f, 10.0f, 1.0f));
+    auto& rRenderer = rightWall_ptr->GetComponent<Renderer>();
+    rRenderer.setMaterial(material_ptr);
+    rightWall_ptr->AddComponent<BoxCollider>("BoxCollider", rightWall_ptr.get());
+    gameObjectRoot.AddChild(std::move(rightWall_ptr));
+
+    // Cube
+    /*auto cube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, 0.0f, 0.0f), 1.f));
+    cube_ptr->getTransform().setPosition(glm::vec3(0.0f, 0.5f, 0.0f));
+    auto& cubeRenderer = cube_ptr->GetComponent<Renderer>();
+    cubeRenderer.setMaterial(material_ptr);
+
+
     cube_ptr->AddComponent<BoxCollider>("BoxCollider", (GameObject *)cube_ptr.get());
 
     auto subCube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
@@ -410,11 +408,11 @@ void initOpenGLProgram() {
     subCube_ptr->getTransform().setRotation(M_PI_4, glm::vec3(0.f, 1.f, 0.f));
 
     auto& subCubeRenderer = subCube_ptr->GetComponent<Renderer>();
-    subCubeRenderer.setMaterial(cubeMaterial_ptr);
+    subCubeRenderer.setMaterial(material_ptr);
     subCube_ptr->AddComponent<BoxCollider>("BoxCollider", (GameObject *)subCube_ptr.get());
 
     cube_ptr->AddChild(std::move(subCube_ptr));
-    gameObjectRoot.AddChild(std::move(cube_ptr));
+    gameObjectRoot.AddChild(std::move(cube_ptr));*/
 
     //////////////////////////
     // Sphere as Light
@@ -450,7 +448,7 @@ void runGame(GLFWwindow *window) {
     sceneGraph->update(deltaTime);
 
     // Clear
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     GameObject& root = *sceneGraph->getRoot();
