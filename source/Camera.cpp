@@ -156,6 +156,8 @@ void Camera::render(GameObject& root, GameObject& lightObject) {
         glm::mat4 model = gO->getTransform().getModel();
         Q.pop();
 
+        if (!gO->isActive()) continue;
+
         gO->display(projection, view, cameraPos, lightPos, *light);
 
         children = &(gO->children);

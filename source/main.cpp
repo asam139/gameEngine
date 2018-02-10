@@ -48,6 +48,7 @@ bool pause = false;
 const unsigned int ballCount = 1;
 const unsigned int levelColumns = 10;
 const unsigned int levelRows = 5;
+const unsigned int blockCount = levelColumns * levelRows;
 
 const float widthEdges = 20.0f;
 const float heightEdges = 10.0f;
@@ -65,7 +66,7 @@ GameObject* ground;
 Cube* pad;
 Sphere* ball;
 
-GameObject *levelBlocks[levelColumns * levelRows];
+GameObject *levelBlocks[blockCount];
 
 ///////////////////////////////////////
 

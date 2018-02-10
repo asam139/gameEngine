@@ -19,6 +19,14 @@ void GameObject::configuration() {
 
 }
 
+void GameObject::setActive(bool active) {
+    _active = active;
+}
+
+bool GameObject::isActive() {
+    return _active;
+}
+
 Transform& GameObject::getTransform() {
     return *_transform;
 }

@@ -42,8 +42,10 @@ public:
     void AddChild(std::shared_ptr<GameObject> gameObject_ptr);
 
 
-
     //////////////////////////////////////////////////////
+    void setActive(bool active);
+    bool isActive();
+
     Transform& getTransform();
 
     //////////////////////////////////////////////////////
@@ -53,6 +55,7 @@ public:
     virtual void collide(Collider* collider);
 
 protected:
+    bool _active = true;
     Transform* _transform;
 
     virtual void configuration();
