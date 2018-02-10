@@ -10,7 +10,7 @@
 class Sphere: public GameObject {
 public:
     Sphere();
-    Sphere(const glm::vec3 _center, const float radius);
+    Sphere(const glm::vec3 center, const float radius);
     ~Sphere() override;
 
 

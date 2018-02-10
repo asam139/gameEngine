@@ -17,6 +17,7 @@
 #include "Text2D.h"
 #include "Tools.h"
 
+#include "Ball.h"
 
 unsigned int  kScreenWidth = 800, kScreenHeight = 800;
 
@@ -55,6 +56,7 @@ const float heightEdges = 10.0f;
 const float widthWall = 1.0f;
 const float widthPad = 2.0f;
 const float widthBlock = 2.0f;
+const float radiusBall = 0.3f;
 
 float padVelocity = 5.0f;
 float padVelocityX = 0.0f;
@@ -64,7 +66,7 @@ GameObject* rightWall;
 GameObject* upperWall;
 GameObject* ground;
 Cube* pad;
-Sphere* ball;
+Ball* ball;
 
 GameObject *levelBlocks[blockCount];
 
@@ -93,7 +95,6 @@ void generateLevelBlocks();
 void initOpenGLProgram();
 
 void runGame(GLFWwindow *window);
-void drawSceneAndDetectCollisions(GLFWwindow *window, float padDeltaX, float ballDeltaX[], float ballDeltaY[]);
 void drawMenu(GLFWwindow *window);
 void drawWin(GLFWwindow *window);
 void drawLose(GLFWwindow *window);
@@ -469,6 +470,25 @@ void initOpenGLProgram() {
     gameObjectRoot.AddChild(std::move(cube_ptr));*/
 
     //////////////////////////
+    // Ball
+    material_ptr = std::shared_ptr<Material>(new Material(shader));
+    material_ptr->setAmbientColor(glm::vec3(0.25f));
+    material_ptr->setDiffuseColor(glm::vec3(0.0f, 1.0f, 1.0f));
+    material_ptr->setSpecularColor(glm::vec3(1.0f));
+    material_ptr->setShininess(32.0f);
+    material_ptr->setEmissionActive(false);
+
+    auto ball_ptr = std::shared_ptr<Ball>(new Ball(glm::vec3(0.0f, 0.0f, 0.0f), 1.f));
+    ball_ptr->getTransform().setPosition(glm::vec3(0.0f, -0.5 * (heightEdges - heightPad) + 0.5 * heightPad + radiusBall, 0.0f));
+    ball_ptr->getTransform().setScale(glm::vec3(radiusBall));
+    renderer = ball_ptr->GetComponent<Renderer>();
+    renderer->setMaterial(material_ptr);
+    //ball_ptr->AddComponent<BoxCollider>("BoxCollider", ball_ptr.get());
+
+    ball = ball_ptr.get();
+    gameObjectRoot.AddChild(std::move(ball_ptr));
+
+    //////////////////////////
     // Sphere as Light
     auto sphere_ptr = std::shared_ptr<Sphere>(new Sphere(glm::vec3(0.0f, 0.0f, 0.0f), 1.f));
     sphere_ptr->getTransform().setPosition(glm::vec3(0.0f, 2.5f, 25.0f));
@@ -496,6 +516,9 @@ void initOpenGLProgram() {
 
     lightGameObject = sphere_ptr.get();
     gameObjectRoot.AddChild(std::move(sphere_ptr));
+    //////////////////////////
+
+
 
     generateLevelBlocks();
 }
