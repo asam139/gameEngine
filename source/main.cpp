@@ -47,10 +47,10 @@ const unsigned int levelRows = 12;
 
 float padVelocityX = 0.0f;
 
-Cube* leftWall;
-Cube* rightWall;
-Cube* upperWall;
-Cube* ground;
+GameObject* leftWall;
+GameObject* rightWall;
+GameObject* upperWall;
+GameObject* ground;
 Cube* pad;
 Sphere* ball;
 
@@ -379,20 +379,40 @@ void initOpenGLProgram() {
 
     // Left Wall
     auto leftWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    leftWall_ptr->getTransform().setPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
+    leftWall_ptr->getTransform().setPosition(glm::vec3(-10.0f, 0.0f, 0.0f));
     leftWall_ptr->getTransform().setScale(glm::vec3(1.0f, 10.0f, 1.0f));
     auto renderer = leftWall_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     leftWall_ptr->AddComponent<BoxCollider>("BoxCollider", leftWall_ptr.get());
     gameObjectRoot.AddChild(std::move(leftWall_ptr));
+    leftWall = (GameObject *)leftWall_ptr.get();
 
     auto rightWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    rightWall_ptr->getTransform().setPosition(glm::vec3(5.0f, 0.0f, 0.0f));
+    rightWall_ptr->getTransform().setPosition(glm::vec3(10.0f, 0.0f, 0.0f));
     rightWall_ptr->getTransform().setScale(glm::vec3(1.0f, 10.0f, 1.0f));
-    auto rRenderer = rightWall_ptr->GetComponent<Renderer>();
-    rRenderer->setMaterial(material_ptr);
+    renderer = rightWall_ptr->GetComponent<Renderer>();
+    renderer->setMaterial(material_ptr);
     rightWall_ptr->AddComponent<BoxCollider>("BoxCollider", rightWall_ptr.get());
     gameObjectRoot.AddChild(std::move(rightWall_ptr));
+    rightWall = (GameObject *)rightWall_ptr.get();
+
+    auto upperWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
+    upperWall_ptr->getTransform().setPosition(glm::vec3(0.0f, 5.5f, 0.0f));
+    upperWall_ptr->getTransform().setScale(glm::vec3(21.0f, 1.0f, 1.0f));
+    renderer = upperWall_ptr->GetComponent<Renderer>();
+    renderer->setMaterial(material_ptr);
+    upperWall_ptr->AddComponent<BoxCollider>("BoxCollider", upperWall_ptr.get());
+    gameObjectRoot.AddChild(std::move(upperWall_ptr));
+    upperWall = (GameObject *)upperWall_ptr.get();
+
+    auto ground_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
+    ground_ptr->getTransform().setPosition(glm::vec3(0.0f, -5.5f, 0.0f));
+    ground_ptr->getTransform().setScale(glm::vec3(21.0f, 1.0f, 1.0f));
+    renderer = ground_ptr->GetComponent<Renderer>();
+    renderer->setMaterial(material_ptr);
+    ground_ptr->AddComponent<BoxCollider>("BoxCollider", ground_ptr.get());
+    gameObjectRoot.AddChild(std::move(ground_ptr));
+    ground = (GameObject *)ground_ptr.get();
 
     // Cube
     /*auto cube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, 0.0f, 0.0f), 1.f));
