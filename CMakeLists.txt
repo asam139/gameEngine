@@ -21,12 +21,15 @@ include_directories(
         stb
 
         headers
+        headers/*
+        headers/engine
 )
 
 file (GLOB_RECURSE HEADER_FILES
         external_headers/glad/*.h
         glm/glm/*.hpp
         stb/stb_image.h
+
         headers/*
 )
 
