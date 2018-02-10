@@ -21,7 +21,7 @@ Shader *text2DShader;
 void initText2D(char * texturePath){
 
 	// Initialize texture
-    textTexture = new Texture(texturePath, GL_RGB);
+    textTexture = new Texture(texturePath, GL_RGBA);
 	text2DTextureID = textTexture->getTexture();
 
 	// Initialize VBO
@@ -41,7 +41,7 @@ void printText2D(const char * text, int x, int y, int size){
 	std::vector<glm::vec2> vertices;
 	std::vector<glm::vec2> UVs;
 	for ( unsigned int i=0 ; i<length ; i++ ){
-		
+
 		glm::vec2 vertex_up_left    = glm::vec2( x+i*size     , y+size );
 		glm::vec2 vertex_up_right   = glm::vec2( x+i*size+size, y+size );
 		glm::vec2 vertex_down_right = glm::vec2( x+i*size+size, y      );
@@ -72,7 +72,7 @@ void printText2D(const char * text, int x, int y, int size){
 		UVs.push_back(uv_down_left);
 	}
 
-	GLuint bufVertices = makeBuffer(&vertices[0], vertices.size(), sizeof(float) * 2);		    
+	GLuint bufVertices = makeBuffer(&vertices[0], vertices.size(), sizeof(float) * 2);
 	GLuint bufTexCoords = makeBuffer(&UVs[0], UVs.size(), sizeof(float) * 2);
 	GLuint vao;
     glGenVertexArrays(1, &vao);
@@ -91,12 +91,12 @@ void printText2D(const char * text, int x, int y, int size){
     text2DShader->set("myTextureSampler", 0);
 
 	glBindVertexArray(vao);
-	
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 	glDisable(GL_BLEND);
-		
+
 	glBindVertexArray(0);
 }
 
