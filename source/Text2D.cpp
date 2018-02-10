@@ -4,7 +4,6 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-using namespace glm;
 
 #include "Texture.h"
 #include "Shader.h"
@@ -15,6 +14,8 @@ using namespace glm;
 unsigned int text2DTextureID;
 unsigned int text2DVertexBufferID;
 unsigned int text2DUVBufferID;
+
+
 Texture *textTexture;
 Shader *text2DShader;
 
@@ -35,7 +36,7 @@ void initText2D(char * texturePath){
 
 void printText2D(const char * text, int x, int y, int size){
 
-	unsigned int length = strlen(text);
+	size_t length = strlen(text);
 
 	// Fill buffers
 	std::vector<glm::vec2> vertices;
@@ -72,8 +73,8 @@ void printText2D(const char * text, int x, int y, int size){
 		UVs.push_back(uv_down_left);
 	}
 
-	GLuint bufVertices = makeBuffer(&vertices[0], vertices.size(), sizeof(float) * 2);
-	GLuint bufTexCoords = makeBuffer(&UVs[0], UVs.size(), sizeof(float) * 2);
+	GLuint bufVertices = makeBuffer(&vertices[0], (int)vertices.size(), sizeof(float) * 2);
+	GLuint bufTexCoords = makeBuffer(&UVs[0], (int)UVs.size(), sizeof(float) * 2);
 	GLuint vao;
     glGenVertexArrays(1, &vao);
 
@@ -81,8 +82,8 @@ void printText2D(const char * text, int x, int y, int size){
 
     glBindVertexArray(vao);
 
-	assignVBOtoAttribute(text2DShader,"vertexPosition_screenspace",bufVertices,2);
-	assignVBOtoAttribute(text2DShader, "vertexUV", bufTexCoords, 2);
+	assignVBOtoAttribute(text2DShader,(char*)"vertexPosition_screenspace",bufVertices,2);
+	assignVBOtoAttribute(text2DShader,(char*)"vertexUV", bufTexCoords, 2);
 
 	glBindVertexArray(0);
 
@@ -94,7 +95,7 @@ void printText2D(const char * text, int x, int y, int size){
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+	glDrawArrays(GL_TRIANGLES, 0, (int)vertices.size());
 	glDisable(GL_BLEND);
 
 	glBindVertexArray(0);
