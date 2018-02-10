@@ -367,14 +367,12 @@ void initOpenGLProgram() {
 
     // Material
     auto material_ptr = std::shared_ptr<Material>(new Material(shader_ptr));
-
     material_ptr->setAmbientColor(glm::vec3(0.25f));
-    material_ptr->setDiffuseColor(glm::vec3(1.0f));
-    material_ptr->setDiffuseTexture(diffTexture_ptr);
+    material_ptr->setDiffuseColor(glm::vec3(1.0f, 0.0f, 0.0f));
+    //material_ptr->setDiffuseTexture(diffTexture_ptr);
     material_ptr->setSpecularColor(glm::vec3(1.0f));
-    material_ptr->setSpecularTexture(specTexture_ptr);
+    //material_ptr->setSpecularTexture(specTexture_ptr);
     material_ptr->setShininess(32.0f);
-
     material_ptr->setEmissionActive(false);
 
     // Left Wall
@@ -414,6 +412,23 @@ void initOpenGLProgram() {
     gameObjectRoot.AddChild(std::move(ground_ptr));
     ground = (GameObject *)ground_ptr.get();
 
+    // Pad
+    material_ptr = std::shared_ptr<Material>(new Material(shader_ptr));
+    material_ptr->setAmbientColor(glm::vec3(0.25f));
+    material_ptr->setDiffuseColor(glm::vec3(0.0f, 0.0f, 1.0f));
+    material_ptr->setSpecularColor(glm::vec3(1.0f));
+    material_ptr->setShininess(32.0f);
+    material_ptr->setEmissionActive(false);
+
+    auto pad_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
+    pad_ptr->getTransform().setPosition(glm::vec3(0.0f, -4.5f, 0.0f));
+    pad_ptr->getTransform().setScale(glm::vec3(2.0f, 0.5f, 0.5f));
+    renderer = pad_ptr->GetComponent<Renderer>();
+    renderer->setMaterial(material_ptr);
+    pad_ptr->AddComponent<BoxCollider>("BoxCollider", pad_ptr.get());
+    gameObjectRoot.AddChild(std::move(pad_ptr));
+    pad = pad_ptr.get();
+
     // Cube
     /*auto cube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, 0.0f, 0.0f), 1.f));
     cube_ptr->getTransform().setPosition(glm::vec3(0.0f, 0.5f, 0.0f));
@@ -437,7 +452,7 @@ void initOpenGLProgram() {
     //////////////////////////
     // Sphere as Light
     auto sphere_ptr = std::shared_ptr<Sphere>(new Sphere(glm::vec3(0.0f, 0.0f, 0.0f), 1.f));
-    sphere_ptr->getTransform().setPosition(glm::vec3(-1.0f, 2.5f, -5.0f));
+    sphere_ptr->getTransform().setPosition(glm::vec3(0.0f, 2.5f, 25.0f));
     sphere_ptr->getTransform().setScale(glm::vec3(0.3f));
 
     auto lightRRenderer = sphere_ptr->GetComponent<Renderer>();
@@ -468,7 +483,7 @@ void runGame(GLFWwindow *window) {
     sceneGraph->update(deltaTime);
 
     // Clear
-    glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     GameObject& root = *sceneGraph->getRoot();
