@@ -340,13 +340,13 @@ void initOpenGLProgram() {
     // Configure Camera
     // Camera
     camera = std::shared_ptr<Camera>(new Camera (glm::vec3(0.0f, 2.0f, 5.0f), glm::vec3(0.f, 1.f, 0.f), -10.f));
-    camera.get()->setAspect(kScreenWidth/kScreenHeight);
-    camera.get()->setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
+    camera->setAspect(kScreenWidth/kScreenHeight);
+    camera->setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
 
     ///////////////////////////
     // SceneGraph
     auto gameObjectRoot_ptr = std::shared_ptr<GameObject>(new GameObject());
-    GameObject& gameObjectRoot = *gameObjectRoot_ptr.get();
+    GameObject& gameObjectRoot = *gameObjectRoot_ptr;
     sceneGraph = std::shared_ptr<SceneGraph>(new SceneGraph(gameObjectRoot_ptr));
 
 
@@ -453,7 +453,7 @@ void runGame(GLFWwindow *window) {
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    GameObject& root = *sceneGraph.get()->getRoot();
+    GameObject& root = *sceneGraph->getRoot();
     GameObject& lightObject = *lightGameObject;
     camera->render(root, lightObject);
 

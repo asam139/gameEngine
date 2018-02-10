@@ -19,7 +19,7 @@ unsigned int text2DUVBufferID;
 Texture *textTexture;
 Shader *text2DShader;
 
-void initText2D(char * texturePath){
+void initText2D(const char * texturePath){
 
 	// Initialize texture
     textTexture = new Texture(texturePath, GL_RGBA, false);
