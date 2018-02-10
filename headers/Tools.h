@@ -11,4 +11,6 @@
 unsigned int makeBuffer(void *data, int vertexCount, int vertexsize);
 void assignVBOtoAttribute(Shader *shader, char* attributeName, GLuint bufVBO, int vertexsize);
 
+float randomFloat();
+
 #endif //GAMEENGINE_TOOLS_H

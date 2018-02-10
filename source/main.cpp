@@ -15,11 +15,15 @@
 #include "Sphere.h"
 
 #include "Text2D.h"
+#include "Tools.h"
 
 
 unsigned int  kScreenWidth = 800, kScreenHeight = 800;
 
 ///////////////////////////////////////
+// Shader
+std::shared_ptr<Shader> shader;
+
 // SceneGraph
 std::shared_ptr<SceneGraph> sceneGraph;
 
@@ -42,8 +46,8 @@ GameState gameState = GameState::Game;
 bool pause = false;
 
 const unsigned int ballCount = 1;
-const unsigned int levelColumns = 7;
-const unsigned int levelRows = 12;
+const unsigned int levelColumns = 10;
+const unsigned int levelRows = 5;
 
 float padVelocityX = 0.0f;
 
@@ -306,7 +310,7 @@ int main (int argc, char *argv[]) {
         }
     }
 
-    cleanupText2D();
+    freeOpenGLProgram();
 
     glfwTerminate();
     return 0;
@@ -350,7 +354,7 @@ void initOpenGLProgram() {
 
     ///////////////////////////
     // Create program
-    auto shader_ptr = std::shared_ptr<Shader>(new Shader ("../shader/phongVertexShader.glsl", "../shader/phongFragmentShader.glsl"));
+    shader = std::shared_ptr<Shader>(new Shader ("../shader/phongVertexShader.glsl", "../shader/phongFragmentShader.glsl"));
 
     ///////////////////////////
     // Create White Texture
@@ -366,7 +370,7 @@ void initOpenGLProgram() {
     // Create Objects
 
     // Material
-    auto material_ptr = std::shared_ptr<Material>(new Material(shader_ptr));
+    auto material_ptr = std::shared_ptr<Material>(new Material(shader));
     material_ptr->setAmbientColor(glm::vec3(0.25f));
     material_ptr->setDiffuseColor(glm::vec3(1.0f, 0.0f, 0.0f));
     //material_ptr->setDiffuseTexture(diffTexture_ptr);
@@ -377,7 +381,7 @@ void initOpenGLProgram() {
 
     // Left Wall
     auto leftWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    leftWall_ptr->getTransform().setPosition(glm::vec3(-10.0f, 0.0f, 0.0f));
+    leftWall_ptr->getTransform().setPosition(glm::vec3(-10.5f, 0.0f, 0.0f));
     leftWall_ptr->getTransform().setScale(glm::vec3(1.0f, 10.0f, 1.0f));
     auto renderer = leftWall_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
@@ -386,7 +390,7 @@ void initOpenGLProgram() {
     leftWall = (GameObject *)leftWall_ptr.get();
 
     auto rightWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    rightWall_ptr->getTransform().setPosition(glm::vec3(10.0f, 0.0f, 0.0f));
+    rightWall_ptr->getTransform().setPosition(glm::vec3(10.5f, 0.0f, 0.0f));
     rightWall_ptr->getTransform().setScale(glm::vec3(1.0f, 10.0f, 1.0f));
     renderer = rightWall_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
@@ -396,7 +400,7 @@ void initOpenGLProgram() {
 
     auto upperWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
     upperWall_ptr->getTransform().setPosition(glm::vec3(0.0f, 5.5f, 0.0f));
-    upperWall_ptr->getTransform().setScale(glm::vec3(21.0f, 1.0f, 1.0f));
+    upperWall_ptr->getTransform().setScale(glm::vec3(22.0f, 1.0f, 1.0f));
     renderer = upperWall_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     upperWall_ptr->AddComponent<BoxCollider>("BoxCollider", upperWall_ptr.get());
@@ -405,7 +409,7 @@ void initOpenGLProgram() {
 
     auto ground_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
     ground_ptr->getTransform().setPosition(glm::vec3(0.0f, -5.5f, 0.0f));
-    ground_ptr->getTransform().setScale(glm::vec3(21.0f, 1.0f, 1.0f));
+    ground_ptr->getTransform().setScale(glm::vec3(22.0f, 1.0f, 1.0f));
     renderer = ground_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     ground_ptr->AddComponent<BoxCollider>("BoxCollider", ground_ptr.get());
@@ -413,7 +417,7 @@ void initOpenGLProgram() {
     ground = (GameObject *)ground_ptr.get();
 
     // Pad
-    material_ptr = std::shared_ptr<Material>(new Material(shader_ptr));
+    material_ptr = std::shared_ptr<Material>(new Material(shader));
     material_ptr->setAmbientColor(glm::vec3(0.25f));
     material_ptr->setDiffuseColor(glm::vec3(0.0f, 0.0f, 1.0f));
     material_ptr->setSpecularColor(glm::vec3(1.0f));
@@ -456,7 +460,7 @@ void initOpenGLProgram() {
     sphere_ptr->getTransform().setScale(glm::vec3(0.3f));
 
     auto lightRRenderer = sphere_ptr->GetComponent<Renderer>();
-    auto lightRMaterial_ptr = std::unique_ptr<Material>(new Material(shader_ptr));
+    auto lightRMaterial_ptr = std::unique_ptr<Material>(new Material(shader));
     // Special configuration to draw Object as light source
     lightRMaterial_ptr->setAmbientColor(glm::vec3(1.0f));
     lightRMaterial_ptr->setDiffuseColor(glm::vec3(1.0f));
@@ -477,6 +481,32 @@ void initOpenGLProgram() {
 
     lightGameObject = sphere_ptr.get();
     gameObjectRoot.AddChild(std::move(sphere_ptr));
+
+    generateLevelBlocks();
+}
+
+void generateLevelBlocks() {
+    for (int i = 0; i < levelRows; i++) {
+        for (int j = 0; j < levelColumns; j++) {
+            auto material_ptr = std::shared_ptr<Material>(new Material(shader));
+            material_ptr->setAmbientColor(glm::vec3(0.25f));
+            material_ptr->setDiffuseColor(glm::vec3(randomFloat(), randomFloat(), randomFloat()));
+            material_ptr->setSpecularColor(glm::vec3(1.0f));
+            material_ptr->setShininess(32.0f);
+            material_ptr->setEmissionActive(false);
+
+            auto block_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
+            block_ptr->getTransform().setPosition(glm::vec3(9.0f - 2.0f * j, 4.75f - 0.5f * i, 0.0f));
+            block_ptr->getTransform().setScale(glm::vec3(2.0f, 0.5f, 0.5f));
+            auto renderer = block_ptr->GetComponent<Renderer>();
+            renderer->setMaterial(material_ptr);
+            block_ptr->AddComponent<BoxCollider>("BoxCollider", block_ptr.get());
+            sceneGraph->getRoot()->AddChild(std::move(block_ptr));
+
+            //if(i%2 == 0 && j%2 != 0)levelBlock->show = false;
+            levelBlocks[levelColumns * i + j] = block_ptr.get();
+        }
+    }
 }
 
 void runGame(GLFWwindow *window) {
@@ -493,7 +523,6 @@ void runGame(GLFWwindow *window) {
     //Swap front and back buffers
     glfwSwapBuffers(window);
 }
-
 
 void drawMenu(GLFWwindow *window) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -519,4 +548,8 @@ void drawLose(GLFWwindow *window) {
     printText2D("Press any key to restart or esc to exit", 100, 250, 15);
 
     glfwSwapBuffers(window);
+}
+
+void freeOpenGLProgram() {
+    cleanupText2D();
 }

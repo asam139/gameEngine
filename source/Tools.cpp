@@ -19,3 +19,7 @@ void assignVBOtoAttribute(Shader *shader, char* attributeName, GLuint bufVBO, in
     glEnableVertexAttribArray(location);
     glVertexAttribPointer(location, vertexsize, GL_FLOAT, GL_FALSE, 0, NULL);
 }
+
+float randomFloat() {
+    return static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+}
