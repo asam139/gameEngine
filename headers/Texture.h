@@ -12,6 +12,7 @@ class Texture {
 
 
 public:
+    Texture(const char *path, GLenum type, bool flip);
     Texture(const char* path, GLenum type);
     ~Texture();
 

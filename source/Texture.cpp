@@ -9,11 +9,11 @@
 
 #include <iostream>
 
-Texture::Texture(const char *path, GLenum type) {
+Texture::Texture(const char *path, GLenum type, bool flip) {
     ///////////////////////////
     // Configure stb
     // It is not better place to do this
-    stbi_set_flip_vertically_on_load(true);
+    stbi_set_flip_vertically_on_load(flip);
     ///////////////////////////
 
     uint32_t texture = 0;
@@ -38,6 +38,10 @@ Texture::Texture(const char *path, GLenum type) {
         assert(0);
     }
     _texture = texture;
+}
+
+Texture::Texture(const char *path, GLenum type) : Texture(path, type, true) {
+
 }
 
 Texture::~Texture() {

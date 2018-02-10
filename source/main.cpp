@@ -465,7 +465,8 @@ void runGame(GLFWwindow *window) {
 void drawMenu(GLFWwindow *window) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    printText2D("Press any key to start ...", 130, 300, 20);
+    char string[] = "Press any key to start ...";
+    printText2D(string , 130, 300, 20);
 
     glfwSwapBuffers(window);
 }

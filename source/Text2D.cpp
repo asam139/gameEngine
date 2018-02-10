@@ -21,7 +21,7 @@ Shader *text2DShader;
 void initText2D(char * texturePath){
 
 	// Initialize texture
-    textTexture = new Texture(texturePath, GL_RGBA);
+    textTexture = new Texture(texturePath, GL_RGBA, false);
 	text2DTextureID = textTexture->getTexture();
 
 	// Initialize VBO
