@@ -28,7 +28,7 @@ std::shared_ptr<Shader> shader;
 std::shared_ptr<SceneGraph> sceneGraph;
 
 // Camera
-std::shared_ptr<Camera> camera;
+Camera* camera;
 
 // Light
 GameObject *lightGameObject;
@@ -343,13 +343,6 @@ void initOpenGLProgram() {
 
 
     ///////////////////////////
-    // Configure Camera
-    // Camera
-    camera = std::shared_ptr<Camera>(new Camera (glm::vec3(0.0f, 2.0f, 20.0f), glm::vec3(0.f, 1.f, 0.f), 0.0f));
-    camera->setAspect(kScreenWidth/kScreenHeight);
-    camera->setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
-
-    ///////////////////////////
     // SceneGraph
     auto gameObjectRoot_ptr = std::shared_ptr<GameObject>(new GameObject());
     GameObject& gameObjectRoot = *gameObjectRoot_ptr;
@@ -369,6 +362,17 @@ void initOpenGLProgram() {
     auto specTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/specularTex.jpg", GL_RGB));
     auto emissionTexture_ptr = std::shared_ptr<Texture>(new Texture("../textures/emissiveTex.jpg", GL_RGB));
 
+
+    ///////////////////////////
+    // Configure Camera
+    // Camera
+    auto cameraGO_ptr = std::shared_ptr<GameObject>(new GameObject());
+    cameraGO_ptr->getTransform().setPosition(glm::vec3(0.0f, 2.0f, 20.0f));
+    cameraGO_ptr->AddComponent<Camera>("Camera", cameraGO_ptr.get());
+    camera = cameraGO_ptr->GetComponent<Camera>();
+    camera->setAspect(kScreenWidth/kScreenHeight);
+    camera->setMovementAxis(MovementAxisX | MovementAxisY | MovementAxisZ);
+    gameObjectRoot.AddChild(std::move(cameraGO_ptr));
 
     ///////////////////////////
     // Create Objects

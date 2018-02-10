@@ -12,6 +12,6 @@ bool Component::IsClassType(const std::size_t classType) const {
     return classType == Type;
 }
 
-GameObject& Component::getGameObject() {
+GameObject& Component::getGameObject() const {
     return *_gameObject;
 }

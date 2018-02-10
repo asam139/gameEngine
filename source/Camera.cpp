@@ -6,36 +6,14 @@
 
 #include <queue>
 
-Camera::Camera() {
-    _position = glm::vec3(0.f, 0.f, 0.f);
+CLASS_DEFINITION(Component, Camera)
+
+Camera::Camera(std::string && initialValue, GameObject * owner) : Component( std::move( initialValue ), owner) {
     _worldUp = glm::vec3(0.f, 1.f, 0.f);
     _yaw = kYaw;
     _pitch = kPitch;
     _fov = kFov;
 
-    updateCameraVectors();
-}
-
-Camera::~Camera(){
-
-}
-
-Camera::Camera(const glm::vec3 position, const glm::vec3 up, const float pitch) {
-    _position = position;
-    _worldUp = up;
-    _yaw = kYaw;
-    _pitch = pitch;
-    _fov = kFov;
-    updateCameraVectors();
-}
-
-Camera::Camera(const float posX, const float posY, const float posZ, const float upX, const float upY, const float upZ,
-               const float pitch) {
-    _position = glm::vec3(posX, posY, posZ);
-    _worldUp =  glm::vec3(upX, upY, upZ);;
-    _yaw = kYaw;
-    _pitch = pitch;
-    _fov = kFov;
     updateCameraVectors();
 }
 
@@ -49,7 +27,8 @@ float Camera::getAspect() {
 
 
 glm::mat4 Camera::getViewMatrix() const {
-    return glm::lookAt(_position, _position + _front, _up);
+    glm::vec3 pos = getPosition();
+    return glm::lookAt(pos, pos + _front, _up);
 }
 
 float Camera::getFOV() const {
@@ -57,7 +36,7 @@ float Camera::getFOV() const {
 }
 
 glm::vec3 Camera::getPosition() const {
-    return _position;
+    return getGameObject().getTransform().getWorldPosition();
 }
 
 void Camera::setMovementAxis(MovementAxis movementAxis) {
@@ -88,16 +67,21 @@ void Camera::handleKeyboard(Movement direction, const float deltaTime) {
     constraintsFront.z = _movementAxis & MovementAxisZ ? _front.z : 0.f;
     constraintsFront = glm::normalize(constraintsFront);
 
+    glm::vec3 pos = getGameObject().getTransform().getPosition();
     if (direction & MovementForward) {
-        _position += constraintsFront * dS;
+        pos += constraintsFront * dS;
+        getGameObject().getTransform().setPosition(pos);
     } else if (direction & MovementBackward) {
-        _position -= constraintsFront * dS;
+        pos -= constraintsFront * dS;
+        getGameObject().getTransform().setPosition(pos);
     }
 
     if (direction & MovementRight) {
-        _position += _right * dS;
+        pos += _right * dS;
+        getGameObject().getTransform().setPosition(pos);
     } else if (direction & MovementLeft) {
-        _position -= _right * dS;
+        pos -= _right * dS;
+        getGameObject().getTransform().setPosition(pos);
     }
 }
 
@@ -138,7 +122,7 @@ void Camera::handleMouseScroll(const float yOffset) {
 void Camera::render(GameObject& root, GameObject& lightObject) {
     glm::mat4 projection = glm::perspective(glm::radians(getFOV()), _aspect, 0.1f, 100.f);
     glm::mat4 view = getViewMatrix();
-    glm::vec3 cameraPos = getPosition();
+    glm::vec3 cameraPos = getGameObject().getTransform().getWorldPosition();
 
     ////////////////////////////////
     // Get Light

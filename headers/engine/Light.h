@@ -13,7 +13,7 @@ class Light : public Component {
 CLASS_DECLARATION( Light )
 
 public:
-    Light( std::string && initialValue, GameObject * owner);
+    Light(std::string && initialValue, GameObject * owner);
 
     void setAmbientColor(glm::vec3 ambientColor);
     void setDiffuseColor(glm::vec3 diffuseColor);

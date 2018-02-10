@@ -5,6 +5,8 @@
 #ifndef GAMEENGINE_CAMERA_H
 #define GAMEENGINE_CAMERA_H
 
+#include "Component.h"
+
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -44,20 +46,10 @@ typedef enum  {
 } Movement;
 ENABLE_BITMASK_OPERATORS(Movement)
 
-class Camera {
+class Camera : public Component {
+CLASS_DECLARATION( Camera )
 public:
-    Camera(); //Empty Constructor
-    ~Camera(); //Destructor
-
-    //Constructor with Vectors
-    Camera(const glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
-           const glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f),
-           const float pitch = kPitch);
-
-    //Constructor with Scalars
-    Camera(const float posX, const float posY, const float posZ,
-           const float upX, const float upY, const float upZ,
-           const float pitch);
+    Camera(std::string && initialValue, GameObject * owner); //Empty Constructor
 
     void setAspect(float aspect);
     float getAspect();
@@ -84,7 +76,7 @@ public:
 
 private:
     void updateCameraVectors(); //Calculates front vector
-    glm::vec3 _position, _front, _up, _right, _worldUp; // Camera Attributes
+    glm::vec3 _front, _up, _right, _worldUp; // Camera Attributes
     float _yaw, _pitch; // Euler Angles
     float _fov; // Camera options
 

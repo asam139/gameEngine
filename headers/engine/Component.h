@@ -58,7 +58,7 @@ public:
 public:
     std::string value = "uninitialized";
 
-    GameObject& getGameObject();
+    GameObject& getGameObject() const;
 
 protected:
     GameObject *_gameObject;
