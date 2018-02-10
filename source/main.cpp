@@ -49,6 +49,7 @@ const unsigned int ballCount = 1;
 const unsigned int levelColumns = 10;
 const unsigned int levelRows = 5;
 
+float padVelocity = 5.0f;
 float padVelocityX = 0.0f;
 
 GameObject* leftWall;
@@ -166,10 +167,10 @@ void gameKeyControl(GLFWwindow *window, int key, int scancode, int action, int m
             return;
         }
         if (key == GLFW_KEY_LEFT) {
-            padVelocityX = 30;
+            padVelocityX = -padVelocity;
         }
         if (key == GLFW_KEY_RIGHT) {
-            padVelocityX = -30;
+            padVelocityX = padVelocity;
         }
         if (key == GLFW_KEY_P) {
             pause = !pause;
@@ -275,11 +276,7 @@ int main (int argc, char *argv[]) {
     // To control FPS
     const float maxFPS = 60.f;
     const float maxPeriod = 1.f / maxFPS;
-    // approx ~ 16.666 ms
-
     float lastTime = 0.0;
-
-
     while (!glfwWindowShouldClose(window)) { //Loop until user closes the window+
         auto time = static_cast<float>(glfwGetTime());
         deltaTime = time - lastTime;
@@ -386,8 +383,10 @@ void initOpenGLProgram() {
     auto renderer = leftWall_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     leftWall_ptr->AddComponent<BoxCollider>("BoxCollider", leftWall_ptr.get());
-    gameObjectRoot.AddChild(std::move(leftWall_ptr));
+
     leftWall = (GameObject *)leftWall_ptr.get();
+    gameObjectRoot.AddChild(std::move(leftWall_ptr));
+
 
     auto rightWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
     rightWall_ptr->getTransform().setPosition(glm::vec3(10.5f, 0.0f, 0.0f));
@@ -404,8 +403,9 @@ void initOpenGLProgram() {
     renderer = upperWall_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     upperWall_ptr->AddComponent<BoxCollider>("BoxCollider", upperWall_ptr.get());
-    gameObjectRoot.AddChild(std::move(upperWall_ptr));
+
     upperWall = (GameObject *)upperWall_ptr.get();
+    gameObjectRoot.AddChild(std::move(upperWall_ptr));
 
     auto ground_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
     ground_ptr->getTransform().setPosition(glm::vec3(0.0f, -5.5f, 0.0f));
@@ -413,8 +413,10 @@ void initOpenGLProgram() {
     renderer = ground_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     ground_ptr->AddComponent<BoxCollider>("BoxCollider", ground_ptr.get());
-    gameObjectRoot.AddChild(std::move(ground_ptr));
+
     ground = (GameObject *)ground_ptr.get();
+    gameObjectRoot.AddChild(std::move(ground_ptr));
+
 
     // Pad
     material_ptr = std::shared_ptr<Material>(new Material(shader));
@@ -430,8 +432,9 @@ void initOpenGLProgram() {
     renderer = pad_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     pad_ptr->AddComponent<BoxCollider>("BoxCollider", pad_ptr.get());
-    gameObjectRoot.AddChild(std::move(pad_ptr));
+
     pad = pad_ptr.get();
+    gameObjectRoot.AddChild(std::move(pad_ptr));
 
     // Cube
     /*auto cube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, 0.0f, 0.0f), 1.f));
@@ -510,6 +513,12 @@ void generateLevelBlocks() {
 }
 
 void runGame(GLFWwindow *window) {
+    BoxCollider* padBoxCollider = pad->GetComponent<BoxCollider>();
+    glm::vec3 newPos = pad->getTransform().getPosition() + glm::vec3(deltaTime * padVelocityX, 0.0f, 0.0f);
+    if (newPos.x > -9.0f && newPos.x < 9.0f) {
+        pad->getTransform().setPosition(newPos);
+    }
+
     sceneGraph->update(deltaTime);
 
     // Clear
