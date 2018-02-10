@@ -14,6 +14,8 @@
 #include "Cube.h"
 #include "Sphere.h"
 
+#include "Text2D.h"
+
 
 unsigned int  kScreenWidth = 800, kScreenHeight = 800;
 
@@ -81,8 +83,8 @@ void initOpenGLProgram();
 void runGame(GLFWwindow *window);
 void drawSceneAndDetectCollisions(GLFWwindow *window, float padDeltaX, float ballDeltaX[], float ballDeltaY[]);
 void drawMenu(GLFWwindow *window);
-void drawWIN(GLFWwindow *window);
-void drawLOSE(GLFWwindow *window);
+void drawWin(GLFWwindow *window);
+void drawLose(GLFWwindow *window);
 
 //////////////////////////////////////
 
@@ -294,20 +296,19 @@ int main (int argc, char *argv[]) {
                     runGame(window);
                     break;
                 case GameState::Win:
-                    drawWIN(window);
+                    drawWin(window);
                     break;
                 case GameState::Lose:
-                    drawLOSE(window);
+                    drawLose(window);
                     break;
             }
-
-            //Swap front and back buffers
-            glfwSwapBuffers(window);
 
             // Poll for and process events
             glfwPollEvents();
         }
     }
+
+    cleanupText2D();
 
     glfwTerminate();
     return 0;
@@ -329,6 +330,10 @@ void initOpenGLProgram() {
     // Enable Depth
     glDepthFunc(GL_LESS);
     glEnable(GL_DEPTH_TEST);
+
+
+    ///////////////////////////
+    initText2D("../textures/text.png");
 
 
     ///////////////////////////
@@ -444,7 +449,6 @@ void initOpenGLProgram() {
 void runGame(GLFWwindow *window) {
     sceneGraph->update(deltaTime);
 
-    ////////////////////////////////////////////////
     // Clear
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -452,31 +456,33 @@ void runGame(GLFWwindow *window) {
     GameObject& root = *sceneGraph.get()->getRoot();
     GameObject& lightObject = *lightGameObject;
     camera->render(root, lightObject);
-    ////////////////////////////////////////////////
+
+    //Swap front and back buffers
+    glfwSwapBuffers(window);
 }
 
 
 void drawMenu(GLFWwindow *window) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //printText2D("Press any key to start ...", 130, 300, 20);
+    printText2D("Press any key to start ...", 130, 300, 20);
 
     glfwSwapBuffers(window);
 }
 
-void drawWIN(GLFWwindow *window) {
+void drawWin(GLFWwindow *window) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //printText2D("You win !", 100, 300, 60);
-    //printText2D("Press any key to restart or esc to exit", 100, 250, 15);
+    printText2D("You win !", 100, 300, 60);
+    printText2D("Press any key to restart or esc to exit", 100, 250, 15);
 
     glfwSwapBuffers(window);
 }
-void drawLOSE(GLFWwindow *window) {
+void drawLose(GLFWwindow *window) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //printText2D("You lose !", 100, 300, 60);
-    //printText2D("Press any key to restart or esc to exit", 100, 250, 15);
+    printText2D("You lose !", 100, 300, 60);
+    printText2D("Press any key to restart or esc to exit", 100, 250, 15);
 
     glfwSwapBuffers(window);
 }

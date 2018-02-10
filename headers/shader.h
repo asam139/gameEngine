@@ -19,6 +19,11 @@ public:
 
     void use() const;
 
+
+    unsigned int getUniformLocation(char* variableName);
+
+    unsigned int getAttribLocation(char* variableName);
+
     void set(const char* name, const bool value) const;
     void set(const char* name, const GLint value) const;
     void set(const char* name, const GLuint value) const;

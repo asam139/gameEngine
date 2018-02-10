@@ -122,6 +122,14 @@ void Shader::loadShader(const char *path, std::string *code) {
 
 }
 
+unsigned int Shader::getUniformLocation(char* variableName) {
+    return glGetUniformLocation(id_, variableName);
+}
+
+unsigned int Shader::getAttribLocation(char* variableName) {
+    return glGetAttribLocation(id_, variableName);
+}
+
 
 void Shader::set(const char* name, const bool value) const {
     glUniform1i(glGetUniformLocation(id_, name), value);
