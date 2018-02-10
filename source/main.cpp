@@ -49,6 +49,12 @@ const unsigned int ballCount = 1;
 const unsigned int levelColumns = 10;
 const unsigned int levelRows = 5;
 
+const float widthEdges = 20.0f;
+const float heightEdges = 10.0f;
+const float widthWall = 1.0f;
+const float widthPad = 2.0f;
+const float widthBlock = 2.0f;
+
 float padVelocity = 5.0f;
 float padVelocityX = 0.0f;
 
@@ -378,8 +384,8 @@ void initOpenGLProgram() {
 
     // Left Wall
     auto leftWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    leftWall_ptr->getTransform().setPosition(glm::vec3(-10.5f, 0.0f, 0.0f));
-    leftWall_ptr->getTransform().setScale(glm::vec3(1.0f, 10.0f, 1.0f));
+    leftWall_ptr->getTransform().setPosition(glm::vec3(-0.5f * (widthEdges + widthWall), 0.0f, 0.0f));
+    leftWall_ptr->getTransform().setScale(glm::vec3(widthWall, heightEdges, widthWall));
     auto renderer = leftWall_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     leftWall_ptr->AddComponent<BoxCollider>("BoxCollider", leftWall_ptr.get());
@@ -389,8 +395,8 @@ void initOpenGLProgram() {
 
 
     auto rightWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    rightWall_ptr->getTransform().setPosition(glm::vec3(10.5f, 0.0f, 0.0f));
-    rightWall_ptr->getTransform().setScale(glm::vec3(1.0f, 10.0f, 1.0f));
+    rightWall_ptr->getTransform().setPosition(glm::vec3(0.5f * (widthEdges + widthWall), 0.0f, 0.0f));
+    rightWall_ptr->getTransform().setScale(glm::vec3(widthWall, heightEdges, widthWall));
     renderer = rightWall_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     rightWall_ptr->AddComponent<BoxCollider>("BoxCollider", rightWall_ptr.get());
@@ -398,8 +404,8 @@ void initOpenGLProgram() {
     rightWall = (GameObject *)rightWall_ptr.get();
 
     auto upperWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    upperWall_ptr->getTransform().setPosition(glm::vec3(0.0f, 5.5f, 0.0f));
-    upperWall_ptr->getTransform().setScale(glm::vec3(22.0f, 1.0f, 1.0f));
+    upperWall_ptr->getTransform().setPosition(glm::vec3(0.0f, 0.5f * (heightEdges + widthWall), 0.0f));
+    upperWall_ptr->getTransform().setScale(glm::vec3(widthEdges + 2.0f * widthWall, widthWall, widthWall));
     renderer = upperWall_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     upperWall_ptr->AddComponent<BoxCollider>("BoxCollider", upperWall_ptr.get());
@@ -408,8 +414,8 @@ void initOpenGLProgram() {
     gameObjectRoot.AddChild(std::move(upperWall_ptr));
 
     auto ground_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    ground_ptr->getTransform().setPosition(glm::vec3(0.0f, -5.5f, 0.0f));
-    ground_ptr->getTransform().setScale(glm::vec3(22.0f, 1.0f, 1.0f));
+    ground_ptr->getTransform().setPosition(glm::vec3(0.0f, -0.5f * (heightEdges + widthWall), 0.0f));
+    ground_ptr->getTransform().setScale(glm::vec3(widthEdges + 2.0f * widthWall, widthWall, widthWall));
     renderer = ground_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     ground_ptr->AddComponent<BoxCollider>("BoxCollider", ground_ptr.get());
@@ -427,8 +433,9 @@ void initOpenGLProgram() {
     material_ptr->setEmissionActive(false);
 
     auto pad_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    pad_ptr->getTransform().setPosition(glm::vec3(0.0f, -4.5f, 0.0f));
-    pad_ptr->getTransform().setScale(glm::vec3(2.0f, 0.5f, 0.5f));
+    const float heightPad = 0.5f * widthWall;
+    pad_ptr->getTransform().setPosition(glm::vec3(0.0f, -0.5 * (heightEdges - heightPad), 0.0f));
+    pad_ptr->getTransform().setScale(glm::vec3(widthPad, heightPad, heightPad));
     renderer = pad_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     pad_ptr->AddComponent<BoxCollider>("BoxCollider", pad_ptr.get());
@@ -489,6 +496,7 @@ void initOpenGLProgram() {
 }
 
 void generateLevelBlocks() {
+    const float heightBlock = 0.5f * widthWall;
     for (int i = 0; i < levelRows; i++) {
         for (int j = 0; j < levelColumns; j++) {
             auto material_ptr = std::shared_ptr<Material>(new Material(shader));
@@ -499,8 +507,8 @@ void generateLevelBlocks() {
             material_ptr->setEmissionActive(false);
 
             auto block_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-            block_ptr->getTransform().setPosition(glm::vec3(9.0f - 2.0f * j, 4.75f - 0.5f * i, 0.0f));
-            block_ptr->getTransform().setScale(glm::vec3(2.0f, 0.5f, 0.5f));
+            block_ptr->getTransform().setPosition(glm::vec3(0.5f * widthEdges - (0.5f + j) * widthBlock, 0.5 * (heightEdges - heightBlock)- 0.5f * i, 0.0f));
+            block_ptr->getTransform().setScale(glm::vec3(widthBlock, heightBlock, heightBlock));
             auto renderer = block_ptr->GetComponent<Renderer>();
             renderer->setMaterial(material_ptr);
             block_ptr->AddComponent<BoxCollider>("BoxCollider", block_ptr.get());
