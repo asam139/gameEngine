@@ -17,6 +17,7 @@
 #include "Text2D.h"
 #include "Tools.h"
 
+#include "Pad.h"
 #include "Ball.h"
 
 unsigned int  kScreenWidth = 800, kScreenHeight = 800;
@@ -65,7 +66,7 @@ GameObject* leftWall;
 GameObject* rightWall;
 GameObject* upperWall;
 GameObject* ground;
-Cube* pad;
+Pad* pad;
 Ball* ball;
 
 GameObject *levelBlocks[blockCount];
@@ -438,7 +439,7 @@ void initOpenGLProgram() {
     material_ptr->setShininess(32.0f);
     material_ptr->setEmissionActive(false);
 
-    auto pad_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
+    auto pad_ptr = std::unique_ptr<Pad>(new Pad(glm::vec3(0.0f), 1.f));
     const float heightPad = 0.5f * widthWall;
     pad_ptr->getTransform().setPosition(glm::vec3(0.0f, -0.5 * (heightEdges - heightPad), 0.0f));
     pad_ptr->getTransform().setScale(glm::vec3(widthPad, heightPad, heightPad));
@@ -517,8 +518,6 @@ void initOpenGLProgram() {
     lightGameObject = sphere_ptr.get();
     gameObjectRoot.AddChild(std::move(sphere_ptr));
     //////////////////////////
-
-
 
     generateLevelBlocks();
 }
