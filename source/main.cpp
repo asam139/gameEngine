@@ -548,9 +548,8 @@ void generateLevelBlocks() {
 }
 
 void runGame(GLFWwindow *window) {
-    BoxCollider* padBoxCollider = pad->GetComponent<BoxCollider>();
     glm::vec3 newPos = pad->getTransform().getPosition() + glm::vec3(deltaTime * padVelocityX, 0.0f, 0.0f);
-    if (newPos.x > -9.0f && newPos.x < 9.0f) {
+    if (newPos.x > -0.5f * (widthEdges - widthPad)  && newPos.x < 0.5f * (widthEdges - widthPad)) {
         pad->getTransform().setPosition(newPos);
     }
 
