@@ -383,9 +383,9 @@ void initOpenGLProgram() {
     auto material_ptr = std::shared_ptr<Material>(new Material(shader));
     material_ptr->setAmbientColor(glm::vec3(0.25f));
     material_ptr->setDiffuseColor(glm::vec3(1.0f, 0.0f, 0.0f));
-    //material_ptr->setDiffuseTexture(diffTexture_ptr);
+    material_ptr->setDiffuseTexture(defaultTexture_ptr);
     material_ptr->setSpecularColor(glm::vec3(1.0f));
-    //material_ptr->setSpecularTexture(specTexture_ptr);
+    material_ptr->setSpecularTexture(defaultTexture_ptr);
     material_ptr->setShininess(32.0f);
     material_ptr->setEmissionActive(false);
 
@@ -435,7 +435,9 @@ void initOpenGLProgram() {
     material_ptr = std::shared_ptr<Material>(new Material(shader));
     material_ptr->setAmbientColor(glm::vec3(0.25f));
     material_ptr->setDiffuseColor(glm::vec3(0.0f, 0.0f, 1.0f));
+    material_ptr->setDiffuseTexture(defaultTexture_ptr);
     material_ptr->setSpecularColor(glm::vec3(1.0f));
+    material_ptr->setSpecularTexture(defaultTexture_ptr);
     material_ptr->setShininess(32.0f);
     material_ptr->setEmissionActive(false);
 
@@ -475,7 +477,9 @@ void initOpenGLProgram() {
     material_ptr = std::shared_ptr<Material>(new Material(shader));
     material_ptr->setAmbientColor(glm::vec3(0.25f));
     material_ptr->setDiffuseColor(glm::vec3(0.0f, 1.0f, 1.0f));
+    material_ptr->setDiffuseTexture(defaultTexture_ptr);
     material_ptr->setSpecularColor(glm::vec3(1.0f));
+    material_ptr->setSpecularTexture(defaultTexture_ptr);
     material_ptr->setShininess(32.0f);
     material_ptr->setEmissionActive(false);
 
