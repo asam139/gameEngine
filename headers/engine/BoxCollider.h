@@ -17,7 +17,7 @@ public:
     void setSize(glm::vec3 size);
     glm::vec3 getSize();
 
-    bool collision(Collider  *collider);
+    virtual bool collision(Collider  *collider);
 
     typedef struct {
         glm::vec3 minVec;

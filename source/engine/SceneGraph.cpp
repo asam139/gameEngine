@@ -46,8 +46,8 @@ void SceneGraph::update(float deltaTime) {
             if (gObject0 == gObject1) continue;
             if (!gObject0->isActive() || !gObject1->isActive()) continue;
 
-            auto boxCollider0 =  gObject0->GetComponent<BoxCollider>();
-            auto boxCollider1 =  gObject1->GetComponent<BoxCollider>();
+            auto boxCollider0 =  gObject0->GetComponent<Collider>();
+            auto boxCollider1 =  gObject1->GetComponent<Collider>();
             if (boxCollider0 == nullptr || boxCollider1 == nullptr) continue;
 
             bool collision = boxCollider0->collision(boxCollider1);

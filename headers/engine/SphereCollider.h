@@ -18,7 +18,7 @@ public:
     void setRadius(float radius);
     float getRadius();
 
-    bool collision(Collider  *collider);
+    virtual bool collision(Collider  *collider);
 
 protected:
     float _radius;

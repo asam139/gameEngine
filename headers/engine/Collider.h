@@ -19,6 +19,8 @@ public:
     void setCenter(glm::vec3 center);
     glm::vec3 getCenter();
 
+    virtual bool collision(Collider  *collider) = 0;
+
 protected:
     glm::vec3 _center;
 };

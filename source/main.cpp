@@ -463,7 +463,7 @@ void initOpenGLProgram() {
     ball_ptr->getTransform().setScale(glm::vec3(radiusBall));
     renderer = ball_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
-    ball_ptr->AddComponent<BoxCollider>("BoxCollider", ball_ptr.get());
+    ball_ptr->AddComponent<SphereCollider>("SphereCollider", ball_ptr.get());
 
     ball_ptr->setVelocity(ballVelocity);
     ball_ptr->upperWall = upperWall;
