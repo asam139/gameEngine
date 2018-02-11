@@ -44,7 +44,7 @@ enum class GameState: unsigned int {
     Lose = 3
 };
 
-GameState gameState = GameState::Game;
+GameState gameState = GameState::Menu;
 bool pause = false;
 
 const unsigned int ballCount = 1;
@@ -84,11 +84,10 @@ float lastY = (float)kScreenHeight / 2.f;
 //////////////////////////////////////
 // Declaration
 
-void menuKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode);
-void gameKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode);
-void winKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode);
-void loseKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode);
-//To test
+void menuKeyControl(GLFWwindow *window);
+void gameKeyControl(GLFWwindow *window);
+void winKeyControl(GLFWwindow *window);
+void loseKeyControl(GLFWwindow *window);
 void loopKeyControl(GLFWwindow *window);
 
 void freeOpenGLProgram();
@@ -99,24 +98,41 @@ void runGame(GLFWwindow *window);
 void drawMenu(GLFWwindow *window);
 void drawWin(GLFWwindow *window);
 void drawLose(GLFWwindow *window);
+void draw(GLFWwindow *window);
 
 //////////////////////////////////////
 
-
-void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode) {
+void loopKeyControl(GLFWwindow *window) {
     switch (gameState) {
         case GameState::Menu:
-            menuKeyControl(window, key, scancode, action, mode);
+            menuKeyControl(window);
             break;
         case GameState::Game:
 
-            gameKeyControl(window, key, scancode, action, mode);
+            gameKeyControl(window);
             break;
         case GameState::Win:
-            winKeyControl(window, key, scancode, action, mode);
+            winKeyControl(window);
             break;
         case GameState::Lose:
-            loseKeyControl(window, key, scancode, action, mode);
+            loseKeyControl(window);
+            break;
+    }
+}
+
+void draw(GLFWwindow *window) {
+    switch (gameState) {
+        case GameState::Menu:
+            drawMenu(window);
+            break;
+        case GameState::Game:
+            runGame(window);
+            break;
+        case GameState::Win:
+            drawWin(window);
+            break;
+        case GameState::Lose:
+            drawLose(window);
             break;
     }
 }
@@ -156,75 +172,32 @@ void scrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
 
 
 
-void menuKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode) {
-    if (action == GLFW_PRESS) {
-        if (key == GLFW_KEY_ESCAPE) {
-            glfwSetWindowShouldClose(window, GL_TRUE);
-            return;
-        }
+void menuKeyControl(GLFWwindow *window) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, GL_TRUE);
+        return;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
         gameState = GameState::Game;
         glfwSetTime(0);
     }
 }
 
-
-void gameKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode)
-{
-    if (action == GLFW_PRESS) {
-        if (key == GLFW_KEY_ESCAPE)  {
-            glfwSetWindowShouldClose(window, GL_TRUE);
-            return;
-        }
-        if (key == GLFW_KEY_LEFT) {
-            padVelocityX = -padVelocity;
-        }
-        if (key == GLFW_KEY_RIGHT) {
-            padVelocityX = padVelocity;
-        }
-        if (key == GLFW_KEY_P) {
-            pause = !pause;
-        }
-        if( key == GLFW_KEY_R) {
-            initOpenGLProgram();
-            glfwSetTime(0);
-        }
+void gameKeyControl(GLFWwindow *window) {
+    //Control
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)  {
+        glfwSetWindowShouldClose(window, GL_TRUE);
+        return;
     }
 
-    if (action == GLFW_RELEASE) {
-        padVelocityX = 0;
-    }
-}
-
-void winKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode) {
-    if (action == GLFW_PRESS) {
-        if (key == GLFW_KEY_ESCAPE) {
-            glfwSetWindowShouldClose(window, GL_TRUE);
-            return;
-        }
+    if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
         initOpenGLProgram();
-        gameState = GameState::Game;
         glfwSetTime(0);
+        return;
     }
-}
 
-void loseKeyControl(GLFWwindow *window, int key, int scancode, int action, int mode) {
-    if (action == GLFW_PRESS) {
-        if (key == GLFW_KEY_ESCAPE)
-        {
-            glfwSetWindowShouldClose(window, GL_TRUE);
-            return;
-        }
-        initOpenGLProgram();
-        gameState = GameState::Game;
-        glfwSetTime(0);
-    }
-}
-
-
-//////////////////////////////////
-
-// Handle Input
-void loopKeyControl(GLFWwindow *window) {
+    // Camera
     Movement movementMask = MovementNone;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         movementMask |= MovementForward;
@@ -233,13 +206,54 @@ void loopKeyControl(GLFWwindow *window) {
     }
 
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-    movementMask |= MovementRight;
+        movementMask |= MovementRight;
     } else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
         movementMask |= MovementLeft;
     }
-
     camera->handleKeyboard(movementMask, deltaTime);
+
+    // Pad
+    if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+        pause = !pause;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+        padVelocityX = -padVelocity;
+    } else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+        padVelocityX = padVelocity;
+    } else {
+        padVelocityX = 0.0f;
+    }
 }
+
+void winKeyControl(GLFWwindow *window) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, GL_TRUE);
+        return;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
+        initOpenGLProgram();
+        gameState = GameState::Game;
+        glfwSetTime(0);
+    }
+}
+
+void loseKeyControl(GLFWwindow *window) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, GL_TRUE);
+        return;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
+        initOpenGLProgram();
+        gameState = GameState::Game;
+        glfwSetTime(0);
+    }
+}
+
+
+//////////////////////////////////
 
 int main (int argc, char *argv[]) {
 
@@ -266,9 +280,6 @@ int main (int argc, char *argv[]) {
         return -1;
     }
 
-    // Key callback
-    glfwSetKeyCallback(window, keyCallback);
-
     // Resize callback
     glfwSetFramebufferSizeCallback(window, &framebufferSizeCallback);
 
@@ -294,22 +305,8 @@ int main (int argc, char *argv[]) {
             //////////////////////////////
             // Code here gets called with max FPS
             //////////////////////////////
-            switch (gameState) {
-                case GameState::Menu:
-                    drawMenu(window);
-                    break;
-                case GameState::Game:
-                    // Loop Key Control
-                    loopKeyControl(window);
-                    runGame(window);
-                    break;
-                case GameState::Win:
-                    drawWin(window);
-                    break;
-                case GameState::Lose:
-                    drawLose(window);
-                    break;
-            }
+            loopKeyControl(window);
+            draw(window);
 
             // Poll for and process events
             glfwPollEvents();
@@ -452,25 +449,6 @@ void initOpenGLProgram() {
     pad = pad_ptr.get();
     gameObjectRoot.AddChild(std::move(pad_ptr));
 
-    // Cube
-    /*auto cube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f, 0.0f, 0.0f), 1.f));
-    cube_ptr->getTransform().setPosition(glm::vec3(0.0f, 0.5f, 0.0f));
-    auto& cubeRenderer = cube_ptr->GetComponent<Renderer>();
-    cubeRenderer.setMaterial(material_ptr);
-
-
-    cube_ptr->AddComponent<BoxCollider>("BoxCollider", (GameObject *)cube_ptr.get());
-
-    auto subCube_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
-    subCube_ptr->getTransform().setPosition(glm::vec3(0.0f, 1.0f, 0.0f));
-    subCube_ptr->getTransform().setRotation(M_PI_4, glm::vec3(0.f, 1.f, 0.f));
-
-    auto& subCubeRenderer = subCube_ptr->GetComponent<Renderer>();
-    subCubeRenderer.setMaterial(material_ptr);
-    subCube_ptr->AddComponent<BoxCollider>("BoxCollider", (GameObject *)subCube_ptr.get());
-
-    cube_ptr->AddChild(std::move(subCube_ptr));
-    gameObjectRoot.AddChild(std::move(cube_ptr));*/
 
     //////////////////////////
     // Ball
@@ -580,7 +558,7 @@ void runGame(GLFWwindow *window) {
 void drawMenu(GLFWwindow *window) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    char string[] = "Press any key to start ...";
+    char string[] = "Press Enter key to start ...";
     printText2D(string , 130, 300, 20);
 
     glfwSwapBuffers(window);
@@ -590,7 +568,7 @@ void drawWin(GLFWwindow *window) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     printText2D("You win !", 100, 300, 60);
-    printText2D("Press any key to restart or esc to exit", 100, 250, 15);
+    printText2D("Press Enter key to restart or esc to exit", 100, 250, 15);
 
     glfwSwapBuffers(window);
 }
@@ -598,7 +576,7 @@ void drawLose(GLFWwindow *window) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     printText2D("You lose !", 100, 300, 60);
-    printText2D("Press any key to restart or esc to exit", 100, 250, 15);
+    printText2D("Press Enter key to restart or esc to exit", 100, 250, 15);
 
     glfwSwapBuffers(window);
 }
