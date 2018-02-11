@@ -3,6 +3,7 @@
 //
 
 #include "Renderer.h"
+#include "GameObject.h"
 
 CLASS_DEFINITION(Component, Renderer)
 
@@ -106,7 +107,23 @@ Material* Renderer::getMaterial() {
 }
 
 
-void Renderer::render() {
+void Renderer::render(const glm::mat4 projection, const glm::mat4 view, const glm::vec3 cameraPos, const glm::vec3 lightPos, const Light& light) {
+    Shader* shader = _material->getShader();
+
+    glm::mat4 model = _gameObject->getTransform().getModel();
+    glm::mat3 normalMat = glm::inverse(glm::transpose(glm::mat3(model)));
+
+    shader->use();
+    shader->set("view", view);
+    shader->set("projection", projection);
+    shader->set("model", model);
+    shader->set("normal_mat", normalMat);
+    shader->set("view_position", cameraPos);
+
+    shader->set("light.position", lightPos);
+    shader->set("light.ambient", light.getAmbientColor());
+    shader->set("light.diffuse", light.getDiffuseColor());
+    shader->set("light.specular", light.getSpecularColor());
     if (_material) {
         _material->configureShader();
     }

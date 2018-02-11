@@ -10,6 +10,7 @@
 
 #include "Component.h"
 #include "Material.h"
+#include "Light.h"
 
 
 class Renderer : public Component {
@@ -25,7 +26,7 @@ public:
     void setMaterial(std::shared_ptr<Material> material);
     Material* getMaterial();
 
-    void render();
+    void render(const glm::mat4 projection, const glm::mat4 view, const glm::vec3 cameraPos, const glm::vec3 lightPos, const Light& light);
 
 protected:
     uint32_t _indicesSize = 0;
