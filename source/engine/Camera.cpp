@@ -120,6 +120,10 @@ void Camera::handleMouseScroll(const float yOffset) {
 
 
 void Camera::render(GameObject& root, GameObject& lightObject) {
+    // Clear
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glm::mat4 projection = glm::perspective(glm::radians(getFOV()), _aspect, 0.1f, 100.f);
     glm::mat4 view = getViewMatrix();
     glm::vec3 cameraPos = getGameObject().getTransform().getWorldPosition();

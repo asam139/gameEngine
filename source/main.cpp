@@ -552,20 +552,26 @@ void generateLevelBlocks() {
 }
 
 void runGame(GLFWwindow *window) {
-    glm::vec3 newPos = pad->getTransform().getPosition() + glm::vec3(deltaTime * padVelocityX, 0.0f, 0.0f);
-    if (newPos.x > -0.5f * (widthEdges - widthPad)  && newPos.x < 0.5f * (widthEdges - widthPad)) {
-        pad->getTransform().setPosition(newPos);
+    if(!pause) {
+        glm::vec3 newPos = pad->getTransform().getPosition() + glm::vec3(deltaTime * padVelocityX, 0.0f, 0.0f);
+        if (newPos.x > -0.5f * (widthEdges - widthPad)  && newPos.x < 0.5f * (widthEdges - widthPad)) {
+            pad->getTransform().setPosition(newPos);
+        }
+
+        sceneGraph->update(deltaTime);
     }
 
-    sceneGraph->update(deltaTime);
-
-    // Clear
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     GameObject& root = *sceneGraph->getRoot();
     GameObject& lightObject = *lightGameObject;
     camera->render(root, lightObject);
+
+    if(pause) {
+        printText2D("PAUSE", 250, 300, 60);
+    }
+    printText2D("esc - exit", 10, 570, 20);
+    printText2D("p - pause", 10, 550, 20);
+    printText2D("r - restart", 10, 530, 20);
 
     //Swap front and back buffers
     glfwSwapBuffers(window);
