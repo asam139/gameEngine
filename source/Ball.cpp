@@ -6,6 +6,7 @@
 
 #include <glm/gtx/vector_angle.hpp>
 #include <iostream>
+#include <engine/BoxCollider.h>
 
 Ball::Ball() : Sphere(){
 
@@ -47,5 +48,15 @@ void Ball::collide(Collider *collider) {
         float direction = padPos.x > ballPos.x ? -1.0f : 1.0f;
         _velocity.x = direction * module * sinf(angle);
         _velocity.y = module * cosf(angle);
+    } else {
+        glm::vec3 ballPos = getTransform().getWorldPosition();
+        BoxCollider::AABB aabb = ((BoxCollider*)collider)->getAABB();
+        if (ballPos.x < aabb.minVec.x || ballPos.x > aabb.maxVec.x) {
+            _velocity.x = -_velocity.x;
+        } else {
+            _velocity.y = -_velocity.y;
+        }
+        
+        otherGO->setActive(false);
     }
 }
