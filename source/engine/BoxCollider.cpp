@@ -3,6 +3,7 @@
 //
 
 #include "BoxCollider.h"
+#include "SphereCollider.h"
 #include "GameObject.h"
 
 #include <iostream>
@@ -34,7 +35,7 @@ glm::vec3 BoxCollider::getSize(){
 }
 
 bool BoxCollider::collision(Collider *collider) {
-    if (IsClassType(this->Type)) {
+    if (collider->IsClassType(BoxCollider::Type)) {
         BoxCollider* otherBoxCollider = (BoxCollider*)collider;
 
         AABB target = getAABB();
@@ -43,13 +44,27 @@ bool BoxCollider::collision(Collider *collider) {
                (target.minVec.y <= other.maxVec.y && target.maxVec.y >= other.minVec.y) &&
                (target.minVec.z <= other.maxVec.z && target.maxVec.z >= other.minVec.z);
 
-        /*return(target.maxVec.x > other.minVec.x  &&
-               target.minVec.x < other.maxVec.x &&
-               target.maxVec.y > other.minVec.y &&
-               target.minVec.y < other.maxVec.y &&
-               target.maxVec.z > other.minVec.z &&
-               target.minVec.z < other.maxVec.z);*/
+    } else if (collider->IsClassType(SphereCollider::Type)) {
+        SphereCollider* otherCollider = (SphereCollider *)collider;
+        Transform& transform = getGameObject().getTransform();
+        glm::vec3 spherePos  = transform.getWorldPosition() + otherCollider->getCenter();
+        glm::vec3 sphereScale = transform.getScale();
+        float sRadius = fmaxf(fmaxf(sphereScale.x, sphereScale.y), sphereScale.z) * otherCollider->getRadius();
+
+        BoxCollider::AABB aabb = getAABB();
+        float x = fmaxf(aabb.minVec.x, fminf(spherePos.x, aabb.maxVec.x));
+        float y = fmaxf(aabb.minVec.y, fminf(spherePos.y, aabb.maxVec.y));
+        float z = fmaxf(aabb.minVec.z, fminf(spherePos.z, aabb.maxVec.z));
+
+        // this is the same as isPointInsideSphere
+        float distance = sqrtf((x - spherePos.x) * (x - spherePos.x) +
+                               (y - spherePos.y) * (y - spherePos.y) +
+                               (z - spherePos.z) * (z - spherePos.z));
+
+        return distance < sRadius;
     }
+
+
 
     return false;
 };

@@ -56,7 +56,7 @@ void Ball::collide(Collider *collider) {
         } else {
             _velocity.y = -_velocity.y;
         }
-        
+
         otherGO->setActive(false);
     }
 }

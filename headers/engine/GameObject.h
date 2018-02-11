@@ -13,6 +13,7 @@
 #include "Renderer.h"
 #include "Light.h"
 #include "BoxCollider.h"
+#include "SphereCollider.h"
 
 class GameObject {
 public:
