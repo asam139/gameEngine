@@ -62,16 +62,20 @@ BoxCollider::AABB BoxCollider::getAABB() {
     //std::cout << "FinalPos: x->" << finalPos.x << " FinalPos: y->" << finalPos.y << " FinalPos: z->" << finalPos.z << std::endl;
 
     // Get minVector and maxVector
-    glm::vec3 corner = finalPos + _corners[0] * otherHalfSize;
-    glm::vec3 minV = corner; glm::vec3 maxV = corner;
+    glm::vec3 corner = glm::vec3(0.0f);
+    glm::vec3 minV = finalPos + _corners[7] * otherHalfSize;
+    glm::vec3 maxV = finalPos + _corners[0] * otherHalfSize;
+    float l, lMin, lMax, lB;
     for (int i = 0; i < _cornersSize; ++i) {
-        glm::vec3 corner = finalPos + _corners[i] * otherHalfSize;
-        float l = glm::length2(corner);
-        if (l < glm::length2(minV)) {
-            minV = corner;
-        }
+        corner = finalPos + _corners[i] * otherHalfSize;
+        l = glm::length2(corner);
+        lMin = glm::length2(minV);
+        lMax = glm::length2(maxV);
+        lB = glm::length2(maxV-minV);
 
-        if (l > glm::length2(maxV)) {
+        if (l < lMin &&  glm::length2(maxV - corner) >  lB) {
+            minV = corner;
+        } else if (l > lMax && glm::length2(corner - minV) >  lB) {
             maxV = corner;
         }
     }
