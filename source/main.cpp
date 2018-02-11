@@ -181,7 +181,6 @@ void menuKeyControl(GLFWwindow *window) {
 
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
         gameState = GameState::Game;
-        glfwSetTime(0);
     }
 }
 
@@ -194,7 +193,6 @@ void gameKeyControl(GLFWwindow *window) {
 
     if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
         initOpenGLProgram();
-        glfwSetTime(0);
         return;
     }
 
@@ -236,7 +234,6 @@ void winKeyControl(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
         initOpenGLProgram();
         gameState = GameState::Game;
-        glfwSetTime(0);
     }
 }
 
@@ -249,7 +246,6 @@ void loseKeyControl(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
         initOpenGLProgram();
         gameState = GameState::Game;
-        glfwSetTime(0);
     }
 }
 
@@ -529,10 +525,12 @@ void generateLevelBlocks() {
             auto renderer = block_ptr->GetComponent<Renderer>();
             renderer->setMaterial(material_ptr);
             block_ptr->AddComponent<BoxCollider>("BoxCollider", block_ptr.get());
-            sceneGraph->getRoot()->AddChild(std::move(block_ptr));
 
-            //if(i%2 == 0 && j%2 != 0)levelBlock->show = false;
+            // Save ref
             levelBlocks[levelColumns * i + j] = block_ptr.get();
+
+            // Add to Root
+            sceneGraph->getRoot()->AddChild(std::move(block_ptr));
         }
     }
 }
@@ -545,6 +543,23 @@ void runGame(GLFWwindow *window) {
         }
 
         sceneGraph->update(deltaTime);
+
+        if (!ball->isActive()) {
+            gameState = GameState::Lose;
+        } else {
+            bool hasActiveBlocks = false;
+            for (int i = 0; i < blockCount; ++i) {
+                GameObject* block = levelBlocks[i];
+                if (block->isActive()){
+                    hasActiveBlocks = true;
+                    break;
+                }
+            }
+            if (!hasActiveBlocks) {
+                gameState = GameState::Win;
+            }
+
+        }
     }
 
 
