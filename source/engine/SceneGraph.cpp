@@ -53,7 +53,7 @@ void SceneGraph::update(float deltaTime) {
             //std::cout << "Collision: " << collision << std::endl;
             if (collision) {
                 gObject0->collide(boxCollider1);
-                gObject1->collide(boxCollider0);
+                //gObject1->collide(boxCollider0);
             }
         }
     }
