@@ -59,8 +59,9 @@ const float widthPad = 2.0f;
 const float widthBlock = 2.0f;
 const float radiusBall = 0.3f;
 
-float padVelocity = 5.0f;
+const float padVelocity = 15.0f;
 float padVelocityX = 0.0f;
+glm::vec3 ballVelocity = glm::vec3(7.5f, 7.5f, 0.0f);
 
 GameObject* leftWall;
 GameObject* rightWall;
@@ -397,15 +398,15 @@ void initOpenGLProgram() {
     leftWall = (GameObject *)leftWall_ptr.get();
     gameObjectRoot.AddChild(std::move(leftWall_ptr));
 
-
     auto rightWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
     rightWall_ptr->getTransform().setPosition(glm::vec3(0.5f * (widthEdges + widthWall), 0.0f, 0.0f));
     rightWall_ptr->getTransform().setScale(glm::vec3(widthWall, heightEdges, widthWall));
     renderer = rightWall_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
     rightWall_ptr->AddComponent<BoxCollider>("BoxCollider", rightWall_ptr.get());
-    gameObjectRoot.AddChild(std::move(rightWall_ptr));
+
     rightWall = (GameObject *)rightWall_ptr.get();
+    gameObjectRoot.AddChild(std::move(rightWall_ptr));
 
     auto upperWall_ptr = std::unique_ptr<Cube>(new Cube(glm::vec3(0.0f), 1.f));
     upperWall_ptr->getTransform().setPosition(glm::vec3(0.0f, 0.5f * (heightEdges + widthWall), 0.0f));
@@ -466,7 +467,14 @@ void initOpenGLProgram() {
     ball_ptr->getTransform().setScale(glm::vec3(radiusBall));
     renderer = ball_ptr->GetComponent<Renderer>();
     renderer->setMaterial(material_ptr);
-    //ball_ptr->AddComponent<BoxCollider>("BoxCollider", ball_ptr.get());
+    ball_ptr->AddComponent<BoxCollider>("BoxCollider", ball_ptr.get());
+
+    ball_ptr->setVelocity(ballVelocity);
+    ball_ptr->upperWall = upperWall;
+    ball_ptr->leftWall = leftWall;
+    ball_ptr->rightWall = rightWall;
+    ball_ptr->ground = ground;
+    ball_ptr->pad = pad;
 
     ball = ball_ptr.get();
     gameObjectRoot.AddChild(std::move(ball_ptr));

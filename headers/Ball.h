@@ -11,6 +11,23 @@ class Ball : public Sphere {
 public:
     Ball();
     Ball(const glm::vec3 center, const float radius);
+
+
+    void setVelocity(glm::vec3 velocity);
+    glm::vec3 getVelocity();
+
+    virtual void update(const float deltaTime);
+    virtual void collide(Collider* collider);
+
+
+    GameObject* leftWall;
+    GameObject* rightWall;
+    GameObject* upperWall;
+    GameObject* ground;
+    GameObject* pad;
+
+private:
+    glm::vec3 _velocity = glm::vec3(0.0f);
 };
 
 
