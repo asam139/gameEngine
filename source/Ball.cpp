@@ -21,7 +21,7 @@ void Ball::setVelocity(glm::vec3 velocity) {
 }
 
 glm::vec3 Ball::getVelocity() {
-
+    return _velocity;
 }
 
 void Ball::update(const float deltaTime) {
