@@ -7,6 +7,7 @@
 #include "GameObject.h"
 
 #include <iostream>
+#include <engine/SphereCollider.h>
 
 const unsigned int _cornersSize = 8;
 static glm::vec3 _corners[] = {
@@ -46,26 +47,21 @@ bool BoxCollider::collision(Collider *collider) {
 
     } else if (collider->IsClassType(SphereCollider::Type)) {
         SphereCollider* otherCollider = (SphereCollider *)collider;
-        Transform& transform = getGameObject().getTransform();
-        glm::vec3 spherePos  = transform.getWorldPosition() + otherCollider->getCenter();
-        glm::vec3 sphereScale = transform.getScale();
-        float sRadius = fmaxf(fmaxf(sphereScale.x, sphereScale.y), sphereScale.z) * otherCollider->getRadius();
+        SphereCollider::SSSS ssss = otherCollider->getSSSS();
 
         BoxCollider::AABB aabb = getAABB();
-        float x = fmaxf(aabb.minVec.x, fminf(spherePos.x, aabb.maxVec.x));
-        float y = fmaxf(aabb.minVec.y, fminf(spherePos.y, aabb.maxVec.y));
-        float z = fmaxf(aabb.minVec.z, fminf(spherePos.z, aabb.maxVec.z));
+        float x = fmaxf(aabb.minVec.x, fminf(ssss.pos.x, aabb.maxVec.x));
+        float y = fmaxf(aabb.minVec.y, fminf(ssss.pos.y, aabb.maxVec.y));
+        float z = fmaxf(aabb.minVec.z, fminf(ssss.pos.z, aabb.maxVec.z));
 
         // this is the same as isPointInsideSphere
-        float distance = sqrtf((x - spherePos.x) * (x - spherePos.x) +
-                               (y - spherePos.y) * (y - spherePos.y) +
-                               (z - spherePos.z) * (z - spherePos.z));
+        float distance = sqrtf((x - ssss.pos.x) * (x - ssss.pos.x) +
+                               (y - ssss.pos.y) * (y - ssss.pos.y) +
+                               (z - ssss.pos.z) * (z - ssss.pos.z));
 
-        return distance < sRadius;
+        return distance < ssss.radius;
     }
-
-
-
+    
     return false;
 };
 

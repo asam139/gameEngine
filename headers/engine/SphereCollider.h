@@ -20,6 +20,12 @@ public:
 
     virtual bool collision(Collider  *collider);
 
+    typedef struct {
+        glm::vec3 pos;
+        float radius;
+    } SSSS;
+    SphereCollider::SSSS getSSSS();
+
 protected:
     float _radius;
 };
