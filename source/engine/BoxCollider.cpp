@@ -61,7 +61,7 @@ bool BoxCollider::collision(Collider *collider) {
 
         return distance < ssss.radius;
     }
-    
+
     return false;
 };
 

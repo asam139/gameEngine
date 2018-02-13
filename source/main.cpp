@@ -47,6 +47,9 @@ enum class GameState: unsigned int {
 GameState gameState = GameState::Menu;
 bool pause = false;
 
+const unsigned int maxLives = 3;
+unsigned int lives = maxLives;
+
 const unsigned int ballCount = 1;
 const unsigned int levelColumns = 10;
 const unsigned int levelRows = 5;
@@ -333,6 +336,9 @@ void initOpenGLProgram() {
     glDepthFunc(GL_LESS);
     glEnable(GL_DEPTH_TEST);
 
+    ///////////////////////////
+    lives = maxLives;
+
 
     ///////////////////////////
     initText2D("../textures/text.png");
@@ -535,6 +541,15 @@ void generateLevelBlocks() {
     }
 }
 
+void newBall () {
+    const float heightPad = 0.5f * widthWall;
+    pad->getTransform().setPosition(glm::vec3(0.0f, -0.5 * (heightEdges - heightPad), 0.0f));
+
+    ball->getTransform().setPosition(glm::vec3(0.0f, -0.5 * (heightEdges - heightPad) + 0.5 * heightPad + radiusBall, 0.0f));
+    ball->setVelocity(ballVelocity);
+    ball->setActive(true);
+}
+
 void runGame(GLFWwindow *window) {
     if(!pause) {
         glm::vec3 newPos = pad->getTransform().getPosition() + glm::vec3(deltaTime * padVelocityX, 0.0f, 0.0f);
@@ -545,7 +560,13 @@ void runGame(GLFWwindow *window) {
         sceneGraph->update(deltaTime);
 
         if (!ball->isActive()) {
-            gameState = GameState::Lose;
+            if (lives > 1) {
+                lives--;
+                newBall();
+            } else {
+                gameState = GameState::Lose;
+            }
+
         } else {
             bool hasActiveBlocks = false;
             for (int i = 0; i < blockCount; ++i) {
@@ -566,6 +587,12 @@ void runGame(GLFWwindow *window) {
     GameObject& root = *sceneGraph->getRoot();
     GameObject& lightObject = *lightGameObject;
     camera->render(root, lightObject);
+
+    char string[100] = "Lives: ";
+    char buffer[100];
+    sprintf(buffer, "%d", lives);
+    strcat(string, buffer);
+    printText2D(string, 600, 570, 20);
 
     if(pause) {
         printText2D("PAUSE", 250, 300, 60);
