@@ -111,6 +111,11 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
             }
                 break;
             case GameManager::GameState::Game: {
+                if(key == GLFW_KEY_R) {
+                    initGame();
+                    return;
+                }
+
                 if (key == GLFW_KEY_P) {
                     gameManager->setPause(!(gameManager->getPause()));
                     return;
@@ -203,11 +208,6 @@ void scrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
 }
 
 void gameKeyControl(GLFWwindow *window) {
-    if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
-        initGame();
-        return;
-    }
-
     // Camera
     Movement movementMask = MovementNone;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
