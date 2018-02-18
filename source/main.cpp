@@ -77,7 +77,7 @@ float lastY = (float)kScreenHeight / 2.f;
 
 //////////////////////////////////////
 // Declaration
-
+void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
 void menuKeyControl(GLFWwindow *window);
 void gameKeyControl(GLFWwindow *window);
 void winKeyControl(GLFWwindow *window);
@@ -96,6 +96,34 @@ void drawLose(GLFWwindow *window);
 void draw(GLFWwindow *window);
 
 //////////////////////////////////////
+
+void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode) {
+    if (action == GLFW_PRESS) {
+        if (key == GLFW_KEY_ESCAPE) {
+            glfwSetWindowShouldClose(window, GL_TRUE);
+            return;
+        }
+
+
+        switch (gameManager->getGameState()) {
+            case GameManager::GameState::Menu:
+                break;
+            case GameManager::GameState::Game: {
+                    if (key == GLFW_KEY_P) {
+                        gameManager->setPause(!(gameManager->getPause()));
+                        return;
+                    }
+                }
+                break;
+            case GameManager::GameState::Win:
+
+                break;
+            case GameManager::GameState::Lose:
+                break;
+        }
+    }
+
+}
 
 void loopKeyControl(GLFWwindow *window) {
     switch (gameManager->getGameState()) {
@@ -170,14 +198,7 @@ void scrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
     }
 }
 
-
-
 void menuKeyControl(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        glfwSetWindowShouldClose(window, GL_TRUE);
-        return;
-    }
-
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
         initGame();
         gameManager->setGameState(GameManager::GameState::Game);
@@ -185,12 +206,6 @@ void menuKeyControl(GLFWwindow *window) {
 }
 
 void gameKeyControl(GLFWwindow *window) {
-    //Control
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)  {
-        glfwSetWindowShouldClose(window, GL_TRUE);
-        return;
-    }
-
     if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
         initGame();
         return;
@@ -215,10 +230,6 @@ void gameKeyControl(GLFWwindow *window) {
 
 
     // Pad
-    if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
-        gameManager->setPause(!gameManager->getPause());
-    }
-
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
         pad->setVelocityX(-padVelocity);
     } else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
@@ -229,11 +240,6 @@ void gameKeyControl(GLFWwindow *window) {
 }
 
 void winKeyControl(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        glfwSetWindowShouldClose(window, GL_TRUE);
-        return;
-    }
-
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
         initGame();
         gameManager->setGameState(GameManager::GameState::Game);
@@ -241,11 +247,6 @@ void winKeyControl(GLFWwindow *window) {
 }
 
 void loseKeyControl(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        glfwSetWindowShouldClose(window, GL_TRUE);
-        return;
-    }
-
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
         initGame();
         gameManager->setGameState(GameManager::GameState::Game);
@@ -288,6 +289,9 @@ int main (int argc, char *argv[]) {
 
     // Resize callback
     glfwSetFramebufferSizeCallback(window, &framebufferSizeCallback);
+
+    // Key callback
+    glfwSetKeyCallback(window, keyCallback);
 
     // Mouse callback
     glfwSetCursorPosCallback(window, mouseCallback);
