@@ -28,7 +28,7 @@ public:
     unsigned int getPoints();
 
 
-    void reset();
+    void resetGame();
 
 private:
     bool _pause = false;

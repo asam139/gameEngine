@@ -41,10 +41,6 @@ GameObject *lightGameObject;
 std::shared_ptr<GameManager> gameManager;
 
 ///////////////////////////////////////
-const unsigned int maxLives = 3;
-unsigned int lives = maxLives;
-unsigned int points = 0;
-
 const unsigned int ballCount = 1;
 const unsigned int levelColumns = 10;
 const unsigned int levelRows = 5;
@@ -90,6 +86,7 @@ void loopKeyControl(GLFWwindow *window);
 
 void freeOpenGLProgram();
 void generateLevelBlocks();
+void newBall();
 void initGame();
 
 void runGame(GLFWwindow *window);
@@ -285,7 +282,6 @@ int main (int argc, char *argv[]) {
 
     //GameManager
     gameManager = std::shared_ptr<GameManager>(new GameManager());
-    gameManager->reset();
 
     ///////////////////////////
     initText2D("../textures/text.png");
@@ -346,8 +342,7 @@ void initGame() {
     glEnable(GL_DEPTH_TEST);
 
     ///////////////////////////
-    lives = maxLives;
-    points = 0;
+    gameManager->resetGame();
 
     ///////////////////////////
     // SceneGraph
@@ -562,8 +557,10 @@ void runGame(GLFWwindow *window) {
         sceneGraph->update(deltaTime);
 
         if (!ball->isActive()) {
+            unsigned int lives = gameManager->getLives();
             if (lives > 1) {
                 lives--;
+                gameManager->setLives(lives);
                 newBall();
             } else {
                 gameManager->setGameState(GameManager::GameState::Lose);
@@ -592,7 +589,7 @@ void runGame(GLFWwindow *window) {
 
     char string[100] = "Lives: ";
     char buffer[100];
-    sprintf(buffer, "%d", lives);
+    sprintf(buffer, "%d", gameManager->getLives());
     strcat(string, buffer);
     printText2D(string, 600, 570, 20);
 

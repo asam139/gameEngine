@@ -36,9 +36,9 @@ unsigned int GameManager::getPoints() {
     return _points;
 }
 
-void GameManager::reset() {
+void GameManager::resetGame() {
     _pause = false;
-    _gameState = GameManager::GameState::Menu;
+    _gameState = GameManager::GameState::Game;
     _lives = maxLives;
     _points = 0;
 }
