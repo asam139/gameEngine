@@ -587,11 +587,17 @@ void runGame(GLFWwindow *window) {
     GameObject& lightObject = *lightGameObject;
     camera->render(root, lightObject);
 
-    char string[100] = "Lives: ";
-    char buffer[100];
-    sprintf(buffer, "%d", gameManager->getLives());
-    strcat(string, buffer);
-    printText2D(string, 600, 570, 20);
+    char livesString[100] = "Lives: ";
+    char livesBuffer[100];
+    sprintf(livesBuffer, "%d", gameManager->getLives());
+    strcat(livesString, livesBuffer);
+    printText2D(livesString, 600, 570, 20);
+
+    char pointsString[100] = "Points: ";
+    char pointsBuffer[100];
+    sprintf(pointsBuffer, "%d", gameManager->getPoints());
+    strcat(pointsString, pointsBuffer);
+    printText2D(pointsString, 600, 550, 20);
 
     if(gameManager->getPause()) {
         printText2D("PAUSE", 250, 300, 60);
