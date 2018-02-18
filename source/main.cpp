@@ -20,6 +20,8 @@
 #include "Pad.h"
 #include "Ball.h"
 
+#include "GameManager.h"
+
 unsigned int  kScreenWidth = 800, kScreenHeight = 800;
 
 ///////////////////////////////////////
@@ -35,6 +37,9 @@ Camera* camera;
 // Light
 GameObject *lightGameObject;
 
+//GameManager
+std::shared_ptr<GameManager> gameManager;
+
 ///////////////////////////////////////
 
 enum class GameState: unsigned int {
@@ -49,6 +54,7 @@ bool pause = false;
 
 const unsigned int maxLives = 3;
 unsigned int lives = maxLives;
+unsigned int points = 0;
 
 const unsigned int ballCount = 1;
 const unsigned int levelColumns = 10;
@@ -95,7 +101,7 @@ void loopKeyControl(GLFWwindow *window);
 
 void freeOpenGLProgram();
 void generateLevelBlocks();
-void initOpenGLProgram();
+void initGame();
 
 void runGame(GLFWwindow *window);
 void drawMenu(GLFWwindow *window);
@@ -144,7 +150,9 @@ void draw(GLFWwindow *window) {
 void framebufferSizeCallback(GLFWwindow* window, const GLint width, const int32_t height) {
     kScreenWidth = static_cast<float>(width);
     kScreenHeight = static_cast<float>(height);
-    camera->setAspect(kScreenWidth/kScreenHeight);
+    if (camera) {
+        camera->setAspect(kScreenWidth/kScreenHeight);
+    }
 
     glViewport(0, 0, width, height);
 }
@@ -165,12 +173,16 @@ void mouseCallback(GLFWwindow* window, double xpos, double ypos) {
     lastX = static_cast<float> (xpos);
     lastY = static_cast<float> (ypos);
 
-    camera->handleMouseMovement(xOffset, yOffset);
+    if (camera) {
+        camera->handleMouseMovement(xOffset, yOffset);
+    }
 }
 
 // Scroll callback
 void scrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
-    camera->handleMouseScroll(static_cast<const float>(yOffset));
+    if (camera) {
+        camera->handleMouseScroll(static_cast<const float>(yOffset));
+    }
 }
 
 
@@ -182,6 +194,7 @@ void menuKeyControl(GLFWwindow *window) {
     }
 
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
+        initGame();
         gameState = GameState::Game;
     }
 }
@@ -194,7 +207,7 @@ void gameKeyControl(GLFWwindow *window) {
     }
 
     if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
-        initOpenGLProgram();
+        initGame();
         return;
     }
 
@@ -211,7 +224,10 @@ void gameKeyControl(GLFWwindow *window) {
     } else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
         movementMask |= MovementLeft;
     }
-    camera->handleKeyboard(movementMask, deltaTime);
+    if (camera) {
+        camera->handleKeyboard(movementMask, deltaTime);
+    }
+
 
     // Pad
     if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
@@ -234,7 +250,7 @@ void winKeyControl(GLFWwindow *window) {
     }
 
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
-        initOpenGLProgram();
+        initGame();
         gameState = GameState::Game;
     }
 }
@@ -246,7 +262,7 @@ void loseKeyControl(GLFWwindow *window) {
     }
 
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
-        initOpenGLProgram();
+        initGame();
         gameState = GameState::Game;
     }
 }
@@ -290,7 +306,13 @@ int main (int argc, char *argv[]) {
     glfwSetScrollCallback(window, scrollCallback);
 
     ///////////////////////////
-    initOpenGLProgram();
+    initText2D("../textures/text.png");
+
+    //GameManager
+    std::shared_ptr<GameManager> gameManager = std::shared_ptr<GameManager>(new GameManager());
+    gameManager->reset();
+
+    ///////////////////////////
 
     // To control FPS
     const float maxFPS = 60.f;
@@ -319,7 +341,7 @@ int main (int argc, char *argv[]) {
 }
 
 
-void initOpenGLProgram() {
+void initGame() {
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -337,11 +359,7 @@ void initOpenGLProgram() {
 
     ///////////////////////////
     lives = maxLives;
-
-
-    ///////////////////////////
-    initText2D("../textures/text.png");
-
+    points = 0;
 
     ///////////////////////////
     // SceneGraph
