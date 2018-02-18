@@ -64,7 +64,10 @@ void Ball::collide(Collider *collider) {
         } else {
             _velocity.y = -_velocity.y;
         }
-
         otherGO->setActive(false);
+
+        unsigned int points = gameManager->getPoints();
+        points += 10;
+        gameManager->setPoints(points);
     }
 }

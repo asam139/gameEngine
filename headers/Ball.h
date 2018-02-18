@@ -6,6 +6,7 @@
 #define GAMEENGINE_BALL_H
 
 #include "Sphere.h"
+#include "GameManager.h"
 
 class Ball : public Sphere {
 public:
@@ -25,6 +26,7 @@ public:
     GameObject* upperWall;
     GameObject* ground;
     GameObject* pad;
+    GameManager* gameManager;
 
 private:
     glm::vec3 _velocity = glm::vec3(0.0f);
