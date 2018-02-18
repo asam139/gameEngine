@@ -78,10 +78,7 @@ float lastY = (float)kScreenHeight / 2.f;
 //////////////////////////////////////
 // Declaration
 void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
-void menuKeyControl(GLFWwindow *window);
 void gameKeyControl(GLFWwindow *window);
-void winKeyControl(GLFWwindow *window);
-void loseKeyControl(GLFWwindow *window);
 void loopKeyControl(GLFWwindow *window);
 
 void freeOpenGLProgram();
@@ -106,19 +103,33 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 
 
         switch (gameManager->getGameState()) {
-            case GameManager::GameState::Menu:
+            case GameManager::GameState::Menu: {
+                if (key == GLFW_KEY_ENTER) {
+                    initGame();
+                    gameManager->setGameState(GameManager::GameState::Game);
+                }
+            }
                 break;
             case GameManager::GameState::Game: {
-                    if (key == GLFW_KEY_P) {
-                        gameManager->setPause(!(gameManager->getPause()));
-                        return;
-                    }
+                if (key == GLFW_KEY_P) {
+                    gameManager->setPause(!(gameManager->getPause()));
+                    return;
                 }
+            }
                 break;
-            case GameManager::GameState::Win:
-
+            case GameManager::GameState::Win: {
+                if (key == GLFW_KEY_ENTER) {
+                    initGame();
+                    gameManager->setGameState(GameManager::GameState::Game);
+                }
+            }
                 break;
-            case GameManager::GameState::Lose:
+            case GameManager::GameState::Lose: {
+                if (key == GLFW_KEY_ENTER) {
+                    initGame();
+                    gameManager->setGameState(GameManager::GameState::Game);
+                }
+            }
                 break;
         }
     }
@@ -127,17 +138,10 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 
 void loopKeyControl(GLFWwindow *window) {
     switch (gameManager->getGameState()) {
-        case GameManager::GameState::Menu:
-            menuKeyControl(window);
-            break;
         case GameManager::GameState::Game:
             gameKeyControl(window);
             break;
-        case GameManager::GameState::Win:
-            winKeyControl(window);
-            break;
-        case GameManager::GameState::Lose:
-            loseKeyControl(window);
+        default:
             break;
     }
 }
@@ -198,13 +202,6 @@ void scrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
     }
 }
 
-void menuKeyControl(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
-        initGame();
-        gameManager->setGameState(GameManager::GameState::Game);
-    }
-}
-
 void gameKeyControl(GLFWwindow *window) {
     if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
         initGame();
@@ -238,21 +235,6 @@ void gameKeyControl(GLFWwindow *window) {
         pad->setVelocityX(0.0f);
     }
 }
-
-void winKeyControl(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
-        initGame();
-        gameManager->setGameState(GameManager::GameState::Game);
-    }
-}
-
-void loseKeyControl(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
-        initGame();
-        gameManager->setGameState(GameManager::GameState::Game);
-    }
-}
-
 
 //////////////////////////////////
 
