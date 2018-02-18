@@ -63,7 +63,6 @@ const float widthBlock = 2.0f;
 const float radiusBall = 0.3f;
 
 const float padVelocity = 15.0f;
-float padVelocityX = 0.0f;
 glm::vec3 ballVelocity = glm::vec3(7.5f, 7.5f, 0.0f);
 
 GameObject* leftWall;
@@ -220,11 +219,11 @@ void gameKeyControl(GLFWwindow *window) {
     }
 
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
-        padVelocityX = -padVelocity;
+        pad->setVelocityX(-padVelocity);
     } else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
-        padVelocityX = padVelocity;
+        pad->setVelocityX(padVelocity);
     } else {
-        padVelocityX = 0.0f;
+        pad->setVelocityX(0.0f);
     }
 }
 
@@ -449,9 +448,11 @@ void initOpenGLProgram() {
     renderer->setMaterial(material_ptr);
     pad_ptr->AddComponent<BoxCollider>("BoxCollider", pad_ptr.get());
 
+    pad_ptr->setMinX(-0.5f * (widthEdges - widthPad));
+    pad_ptr->setMaxX(0.5f * (widthEdges - widthPad));
+
     pad = pad_ptr.get();
     gameObjectRoot.AddChild(std::move(pad_ptr));
-
 
     //////////////////////////
     // Ball
@@ -552,11 +553,6 @@ void newBall () {
 
 void runGame(GLFWwindow *window) {
     if(!pause) {
-        glm::vec3 newPos = pad->getTransform().getPosition() + glm::vec3(deltaTime * padVelocityX, 0.0f, 0.0f);
-        if (newPos.x > -0.5f * (widthEdges - widthPad)  && newPos.x < 0.5f * (widthEdges - widthPad)) {
-            pad->getTransform().setPosition(newPos);
-        }
-
         sceneGraph->update(deltaTime);
 
         if (!ball->isActive()) {

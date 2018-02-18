@@ -51,8 +51,16 @@ void Ball::collide(Collider *collider) {
     } else {
         glm::vec3 ballPos = getTransform().getWorldPosition();
         BoxCollider::AABB aabb = ((BoxCollider*)collider)->getAABB();
-        if (ballPos.x < aabb.minVec.x || ballPos.x > aabb.maxVec.x) {
+        if (ballPos.x < aabb.minVec.x) {
             _velocity.x = -_velocity.x;
+            glm::vec3 rBallPos = getTransform().getPosition();
+            rBallPos.x = aabb.minVec.x - (ballPos.x + _radius);
+        } else if (ballPos.x > aabb.maxVec.x) {
+            _velocity.x = -_velocity.x;
+            glm::vec3 rBallPos = getTransform().getPosition();
+            rBallPos.x = aabb.maxVec.x - (ballPos.x - _radius);
+
+            getTransform().setPosition(ballPos);
         } else {
             _velocity.y = -_velocity.y;
         }
