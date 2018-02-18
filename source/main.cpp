@@ -541,6 +541,12 @@ void newBall () {
 
 void runGame(GLFWwindow *window) {
     if(!gameManager->getPause()) {
+        //Move light with ball
+        glm::vec3 ballPos = ball->getTransform().getPosition();
+        glm::vec3 lightPos = lightGameObject->getTransform().getPosition();
+        lightPos.x = ballPos.x; lightPos.y = ballPos.y;
+        lightGameObject->getTransform().setPosition(lightPos);
+
         sceneGraph->update(deltaTime);
 
         if (!ball->isActive()) {
