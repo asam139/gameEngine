@@ -41,17 +41,6 @@ GameObject *lightGameObject;
 std::shared_ptr<GameManager> gameManager;
 
 ///////////////////////////////////////
-
-enum class GameState: unsigned int {
-    Menu = 0,
-    Game = 1,
-    Win = 2,
-    Lose = 3
-};
-
-GameState gameState = GameState::Menu;
-bool pause = false;
-
 const unsigned int maxLives = 3;
 unsigned int lives = maxLives;
 unsigned int points = 0;
@@ -112,35 +101,34 @@ void draw(GLFWwindow *window);
 //////////////////////////////////////
 
 void loopKeyControl(GLFWwindow *window) {
-    switch (gameState) {
-        case GameState::Menu:
+    switch (gameManager->getGameState()) {
+        case GameManager::GameState::Menu:
             menuKeyControl(window);
             break;
-        case GameState::Game:
-
+        case GameManager::GameState::Game:
             gameKeyControl(window);
             break;
-        case GameState::Win:
+        case GameManager::GameState::Win:
             winKeyControl(window);
             break;
-        case GameState::Lose:
+        case GameManager::GameState::Lose:
             loseKeyControl(window);
             break;
     }
 }
 
 void draw(GLFWwindow *window) {
-    switch (gameState) {
-        case GameState::Menu:
+    switch (gameManager->getGameState()) {
+        case GameManager::GameState::Menu:
             drawMenu(window);
             break;
-        case GameState::Game:
+        case GameManager::GameState::Game:
             runGame(window);
             break;
-        case GameState::Win:
+        case GameManager::GameState::Win:
             drawWin(window);
             break;
-        case GameState::Lose:
+        case GameManager::GameState::Lose:
             drawLose(window);
             break;
     }
@@ -195,7 +183,7 @@ void menuKeyControl(GLFWwindow *window) {
 
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
         initGame();
-        gameState = GameState::Game;
+        gameManager->setGameState(GameManager::GameState::Game);
     }
 }
 
@@ -231,7 +219,7 @@ void gameKeyControl(GLFWwindow *window) {
 
     // Pad
     if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
-        pause = !pause;
+        gameManager->setPause(!gameManager->getPause());
     }
 
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
@@ -251,7 +239,7 @@ void winKeyControl(GLFWwindow *window) {
 
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
         initGame();
-        gameState = GameState::Game;
+        gameManager->setGameState(GameManager::GameState::Game);
     }
 }
 
@@ -263,7 +251,7 @@ void loseKeyControl(GLFWwindow *window) {
 
     if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
         initGame();
-        gameState = GameState::Game;
+        gameManager->setGameState(GameManager::GameState::Game);
     }
 }
 
@@ -295,6 +283,13 @@ int main (int argc, char *argv[]) {
         return -1;
     }
 
+    //GameManager
+    gameManager = std::shared_ptr<GameManager>(new GameManager());
+    gameManager->reset();
+
+    ///////////////////////////
+    initText2D("../textures/text.png");
+
     // Resize callback
     glfwSetFramebufferSizeCallback(window, &framebufferSizeCallback);
 
@@ -304,13 +299,6 @@ int main (int argc, char *argv[]) {
 
     //Scroll callback
     glfwSetScrollCallback(window, scrollCallback);
-
-    ///////////////////////////
-    initText2D("../textures/text.png");
-
-    //GameManager
-    std::shared_ptr<GameManager> gameManager = std::shared_ptr<GameManager>(new GameManager());
-    gameManager->reset();
 
     ///////////////////////////
 
@@ -570,7 +558,7 @@ void newBall () {
 }
 
 void runGame(GLFWwindow *window) {
-    if(!pause) {
+    if(!gameManager->getPause()) {
         sceneGraph->update(deltaTime);
 
         if (!ball->isActive()) {
@@ -578,7 +566,7 @@ void runGame(GLFWwindow *window) {
                 lives--;
                 newBall();
             } else {
-                gameState = GameState::Lose;
+                gameManager->setGameState(GameManager::GameState::Lose);
             }
 
         } else {
@@ -591,7 +579,7 @@ void runGame(GLFWwindow *window) {
                 }
             }
             if (!hasActiveBlocks) {
-                gameState = GameState::Win;
+                gameManager->setGameState(GameManager::GameState::Win);
             }
 
         }
@@ -608,7 +596,7 @@ void runGame(GLFWwindow *window) {
     strcat(string, buffer);
     printText2D(string, 600, 570, 20);
 
-    if(pause) {
+    if(gameManager->getPause()) {
         printText2D("PAUSE", 250, 300, 60);
     }
     printText2D("esc - exit", 10, 570, 20);

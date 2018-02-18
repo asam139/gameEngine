@@ -12,6 +12,10 @@ bool GameManager::getPause(){
     return _pause;
 }
 
+void GameManager::setGameState(GameManager::GameState state) {
+    _gameState = state;
+}
+
 GameManager::GameState GameManager::getGameState() {
     return _gameState;
 }
